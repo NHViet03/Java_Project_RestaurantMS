@@ -4,9 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Admin/Java_Project_RestaurantMS/src/RTDRestaurant/View/Main_Frame/Main_LoginAndRegister.java</file>
-            <file>file:/C:/Users/Admin/Java_Project_RestaurantMS/src/RTDRestaurant/View/Component/PanelCover.java</file>
-            <file>file:/C:/Users/Admin/Java_Project_RestaurantMS/src/RTDRestaurant/View/Main_Frame/Main.java</file>
-            <file>file:/C:/Users/Admin/Java_Project_RestaurantMS/src/RTDRestaurant/View/Component/PanelLoginAndRegister.java</file>
+            <file>file:/C:/Users/Admin/Java_Project_RestaurantMS/src/RTDRestaurant/View/Main_Frame/Main_Customer_Frame.java</file>
+            <file>file:/C:/Users/Admin/Java_Project_RestaurantMS/src/RTDRestaurant/View/Form/FoodMenu_Form.java</file>
+            <file>file:/C:/Users/Admin/Java_Project_RestaurantMS/src/RTDRestaurant/Controller/Service/ServiceUser.java</file>
+            <file>file:/C:/Users/Admin/Java_Project_RestaurantMS/src/RTDRestaurant/Controller/Service/ServiceMenu.java</file>
+            <file>file:/C:/Users/Admin/Java_Project_RestaurantMS/src/RTDRestaurant/View/Component/Card.java</file>
+            <file>file:/C:/Users/Admin/Java_Project_RestaurantMS/src/RTDRestaurant/View/Swing/PanelRound.java</file>
         </group>
     </open-files>
 </project-private>

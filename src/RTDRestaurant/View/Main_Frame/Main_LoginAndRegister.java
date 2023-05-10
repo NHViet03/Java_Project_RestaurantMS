@@ -42,7 +42,7 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
         initComponents();
         init();
         setTitle("Royal TheDreamers Restaurant");
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/pisces.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/restaurant (1).png")));
     }
 
     private void init(){
@@ -175,7 +175,7 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
             ModelUser user=service.login(data);
             if(user!=null){
                 this.dispose();
-                Main.main();
+                new Main_Customer_Frame().show();
             }else{
                 showMessage(Message.MessageType.ERROR, "Email hoặc mật khẩu không chính xác");
             }
@@ -303,7 +303,7 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
