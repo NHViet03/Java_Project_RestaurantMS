@@ -22,7 +22,15 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="img" alignment="0" max="32767" attributes="0"/>
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="lbTitle" max="32767" attributes="0"/>
+                  <Component id="lbValue" pref="160" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
               <EmptySpace pref="80" max="32767" attributes="0"/>
               <Component id="cmdMinus" min="-2" pref="28" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="32767" attributes="0"/>
@@ -31,14 +39,10 @@
               <Component id="cmdAdd" min="-2" pref="28" max="-2" attributes="0"/>
               <EmptySpace pref="80" max="32767" attributes="0"/>
           </Group>
-          <Group type="102" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="lbTitle" max="32767" attributes="0"/>
-                  <Component id="lbValue" max="32767" attributes="0"/>
-                  <Component id="cmdAccept" pref="160" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
+              <Component id="cmdAccept" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -56,8 +60,8 @@
                   <Component id="cmdAdd" alignment="1" min="-2" pref="26" max="-2" attributes="0"/>
                   <Component id="txtNum" min="-2" pref="26" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-              <Component id="cmdAccept" min="-2" pref="26" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+              <Component id="cmdAccept" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="16" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -93,6 +97,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/Icons/minus.png"/>
         </Property>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdMinusActionPerformed"/>
@@ -103,6 +108,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/Icons/add.png"/>
         </Property>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdAddActionPerformed"/>
@@ -118,6 +124,7 @@
         </Property>
         <Property name="text" type="java.lang.String" value="TH&#xca;M"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="focusable" type="boolean" value="false"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="SansSerif" size="14" style="1"/>
         </Property>

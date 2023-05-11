@@ -24,17 +24,19 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" pref="895" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="901" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lbTitle" min="-2" max="-2" attributes="0"/>
                           <Component id="txtSearch" min="-2" pref="400" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jComboBox1" min="-2" pref="230" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="orderby" min="-2" pref="130" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="header1" min="-2" pref="50" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
           </Group>
@@ -47,7 +49,8 @@
               <Component id="lbTitle" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jComboBox1" max="32767" attributes="0"/>
+                  <Component id="jLabel1" max="32767" attributes="0"/>
+                  <Component id="orderby" max="32767" attributes="0"/>
                   <Component id="txtSearch" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -102,6 +105,8 @@
           <Image iconType="3" name="/Icons/MenuBar/aries.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Menu/Arias - Ba&#x323;ch D&#x1b0;&#x1a1;ng"/>
+        <Property name="iconTextGap" type="int" value="10"/>
+        <Property name="inheritsPopupMenu" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="RTDRestaurant.View.Swing.MyTextField" name="txtSearch">
@@ -110,10 +115,14 @@
           <Image iconType="3" name="/Icons/loupe (1).png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtSearchMouseEntered"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtSearchActionPerformed"/>
+      </Events>
     </Component>
     <Component class="RTDRestaurant.View.Component.OrderBar" name="header1">
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox1">
+    <Component class="javax.swing.JComboBox" name="orderby">
       <Properties>
         <Property name="editable" type="boolean" value="true"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -123,14 +132,13 @@
           <Color blue="7b" green="5b" red="6c" type="rgb"/>
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="5">
-            <StringItem index="0" value="S&#x103;&#x301;p x&#xea;&#x301;p theo: T&#xea;n"/>
-            <StringItem index="1" value="S&#x103;&#x301;p x&#xea;&#x301;p theo: Gia&#x301; t&#x103;ng d&#xe2;&#x300;n"/>
-            <StringItem index="2" value="S&#x103;&#x301;p x&#xea;&#x301;p theo: Gia&#x301; gia&#x309;m d&#xe2;&#x300;n"/>
-            <StringItem index="3" value=" "/>
-            <StringItem index="4" value=" "/>
+          <StringArray count="3">
+            <StringItem index="0" value="T&#xea;n A-&gt;Z"/>
+            <StringItem index="1" value="Gia&#x301; t&#x103;ng d&#xe2;&#x300;n"/>
+            <StringItem index="2" value="Gia&#x301; gia&#x309;m d&#xe2;&#x300;n"/>
           </StringArray>
         </Property>
+        <Property name="selectedIndex" type="int" value="-1"/>
         <Property name="toolTipText" type="java.lang.String" value="S&#x103;&#x301;p x&#xea;&#x301;p"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -141,9 +149,23 @@
         </Property>
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="orderbyActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="0"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="7b" green="5b" red="6c" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="S&#x103;&#x301;p x&#xea;&#x301;p theo"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

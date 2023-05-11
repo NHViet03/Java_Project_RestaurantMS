@@ -2,7 +2,7 @@
 package RTDRestaurant.View.Form;
 
 import RTDRestaurant.Controller.Connection.DatabaseConnection;
-import RTDRestaurant.Controller.Service.ServiceMenu;
+import RTDRestaurant.Controller.Service.ServiceCustomer;
 import RTDRestaurant.Model.ModelCard;
 import RTDRestaurant.View.Component.Card;
 import RTDRestaurant.View.Swing.CustomScrollBar.ScrollBarCustom;
@@ -18,7 +18,7 @@ import javax.swing.ImageIcon;
 public class FoodMenu_Form extends javax.swing.JPanel {
 
     private final String type;
-    private ServiceMenu service;
+    private ServiceCustomer service;
     private ArrayList<ModelCard> list;
     public FoodMenu_Form(String type) {
         try {
@@ -27,7 +27,7 @@ public class FoodMenu_Form extends javax.swing.JPanel {
             e.printStackTrace();
         }
         this.type=type;
-        service=new ServiceMenu();
+        service=new ServiceCustomer();
         initComponents();
         init();
     }
@@ -96,13 +96,36 @@ public class FoodMenu_Form extends javax.swing.JPanel {
     public void initMenuFood(){
         try {
             list = service.MenuFood(type);
-            for(ModelCard data:list){
-               
+            for(ModelCard data:list){   
             panel.add(new Card(data));
             }
         }catch(SQLException ex) {
             ex.printStackTrace();
         }
+    }
+    public void searchFood(String txt){
+        panel.removeAll();
+        for(ModelCard data:list){
+            if(data.getTitle().toLowerCase().contains(txt.toLowerCase())){
+                panel.add(new Card(data));
+            }
+        }
+        panel.repaint();
+        panel.revalidate();
+    }
+    public void initMenuFoodOrderby(String txt){
+        try {
+            list=service.MenuFoodOrder(type,txt);
+            panel.removeAll();
+            for(ModelCard data:list){   
+            panel.add(new Card(data));
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(FoodMenu_Form.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        panel.repaint();
+        panel.revalidate();
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -113,7 +136,8 @@ public class FoodMenu_Form extends javax.swing.JPanel {
         lbTitle = new javax.swing.JLabel();
         txtSearch = new RTDRestaurant.View.Swing.MyTextField();
         header1 = new RTDRestaurant.View.Component.OrderBar();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        orderby = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -138,16 +162,38 @@ public class FoodMenu_Form extends javax.swing.JPanel {
         lbTitle.setForeground(new java.awt.Color(108, 91, 123));
         lbTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/MenuBar/aries.png"))); // NOI18N
         lbTitle.setText("Menu/Arias - Bạch Dương");
+        lbTitle.setIconTextGap(10);
+        lbTitle.setInheritsPopupMenu(false);
 
         txtSearch.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/loupe (1).png"))); // NOI18N
+        txtSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                txtSearchMouseEntered(evt);
+            }
+        });
+        txtSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchActionPerformed(evt);
+            }
+        });
 
-        jComboBox1.setEditable(true);
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(108, 91, 123));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sắp xếp theo: Tên", "Sắp xếp theo: Giá tăng dần", "Sắp xếp theo: Giá giảm dần", " ", " " }));
-        jComboBox1.setToolTipText("Sắp xếp");
-        jComboBox1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(164, 145, 145), 2));
-        jComboBox1.setFocusable(false);
+        orderby.setEditable(true);
+        orderby.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        orderby.setForeground(new java.awt.Color(108, 91, 123));
+        orderby.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tên A->Z", "Giá tăng dần", "Giá giảm dần" }));
+        orderby.setSelectedIndex(-1);
+        orderby.setToolTipText("Sắp xếp");
+        orderby.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(164, 145, 145), 2));
+        orderby.setFocusable(false);
+        orderby.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                orderbyActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(108, 91, 123));
+        jLabel1.setText("Sắp xếp theo");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -156,14 +202,16 @@ public class FoodMenu_Form extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 895, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 901, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbTitle)
                             .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(orderby, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(header1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
@@ -174,7 +222,8 @@ public class FoodMenu_Form extends javax.swing.JPanel {
                 .addComponent(lbTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBox1)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(orderby)
                     .addComponent(txtSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1)
@@ -183,12 +232,25 @@ public class FoodMenu_Form extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtSearchMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchMouseEntered
+        searchFood(txtSearch.getText().trim());
+    }//GEN-LAST:event_txtSearchMouseEntered
+
+    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
+        searchFood(txtSearch.getText().trim());
+    }//GEN-LAST:event_txtSearchActionPerformed
+
+    private void orderbyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderbyActionPerformed
+        initMenuFoodOrderby((String) orderby.getSelectedItem());
+    }//GEN-LAST:event_orderbyActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RTDRestaurant.View.Component.OrderBar header1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbTitle;
+    private javax.swing.JComboBox<String> orderby;
     private javax.swing.JPanel panel;
     private RTDRestaurant.View.Swing.MyTextField txtSearch;
     // End of variables declaration//GEN-END:variables

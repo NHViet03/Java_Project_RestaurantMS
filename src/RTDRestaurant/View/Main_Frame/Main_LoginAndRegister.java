@@ -138,8 +138,9 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
                 
                 try {
                     ModelUser user = loginAndRegister.getUser();
+                    String name=loginAndRegister.getName();
                     if(service.verifyCodeWithUser(user.getUserID(),verifyCode.getInputCode())){
-                        service.doneVerify(user.getUserID());
+                        service.doneVerify(user.getUserID(),name);
                         showMessage(Message.MessageType.SUCCESS, "Đăng ký thành công");
                         verifyCode.setVisible(false);
                     }else{
@@ -175,7 +176,7 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
             ModelUser user=service.login(data);
             if(user!=null){
                 this.dispose();
-                new Main_Customer_Frame().show();
+                Main_Customer_Frame.main();
             }else{
                 showMessage(Message.MessageType.ERROR, "Email hoặc mật khẩu không chính xác");
             }
@@ -303,7 +304,7 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
+                if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

@@ -10,6 +10,9 @@ import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Random;
 
 // Controller Đăng ký/Đăng nhập vào hệ thống
@@ -29,42 +32,47 @@ public class ServiceUser {
     */
     public ModelUser login(ModelLogin login) throws SQLException{
         ModelUser user=null;
-        String sql = "SELECT * FROM UserHT WHERE Email=? AND Password=? AND Status='Verified' FETCH FIRST 1 ROWS ONLY";
+        String sql = "SELECT * FROM NguoiDung WHERE Email=? AND Matkhau=? AND Trangthai='Verified' FETCH FIRST 1 ROWS ONLY";
         PreparedStatement p=con.prepareStatement(sql);
         p.setString(1, login.getEmail());
         p.setString(2, login.getPassword());
         ResultSet r= p.executeQuery();
         if(r.next()){
-            int UserID=r.getInt("UserID");
-            String UserName=r.getString("UserName");
+            int UserID=r.getInt("ID_ND");
             String email=r.getString("Email");
-            user=new ModelUser(UserID,UserName,email,"");
+            String password=r.getString("Matkhau");
+            String role=r.getString("Vaitro");
+            user=new ModelUser(UserID,email,password,role);
         }
         r.close();
         p.close();
         return user;
     }
-    
-    // Thêm thông tin người dùng đăng ký tài khoản vào DataBase
+    /*
+        Phần đăng ký chỉ dành cho khách hàng, sau khi đăng ký thành công:
+        Thêm thông tin Người dùng gồm email, mật khẩu, verifycode với
+          Vai trò mặc định là 'Khach Hang' xuống bảng NguoiDung.
+    */
     public void insertUser(ModelUser user)throws SQLException{
-        //Thêm Record gồm các trường UserName, Email, Password,VeriryCode xuống DB
-        String sql = "INSERT INTO UserHT (UserName, Email, Password, VerifyCode) VALUES (?, ?, ?, ?)";
-        PreparedStatement p=con.prepareStatement(sql);
+        //Thêm Người Dùng
+        String sql_ND = "INSERT INTO NguoiDung (Email, MatKhau, VerifyCode,Vaitro) VALUES (?, ?, ?,'Khach Hang')";
+        PreparedStatement p=con.prepareStatement(sql_ND);
         String code=generateVerifiyCode();
-        p.setString(1, user.getUserName());
-        p.setString(2, user.getEmail());
-        p.setString(3, user.getPassword());
-        p.setString(4, code);
+        p.setString(1, user.getEmail());
+        p.setString(2, user.getPassword());
+        p.setString(3, code);
         p.execute();
         //Lấy ID của User vừa thêm vào
-        PreparedStatement p1=con.prepareStatement("SELECT MAX(UserID) as UserID FROM UserHT");
+        PreparedStatement p1=con.prepareStatement("SELECT MAX(ID_ND) as ID_ND FROM NguoiDung");
         ResultSet r= p1.executeQuery();
         r.next();
-        int userID=r.getInt("UserID");
+        int userID=r.getInt("ID_ND");
         r.close();
         p.close();
+        
         user.setUserID(userID);
         user.setVerifyCode(code);
+        user.setRole("Khách Hàng");
     }
     
     //Tạo random Mã xác minh
@@ -81,7 +89,7 @@ public class ServiceUser {
     //Kiểm tra Mã trùng 
     private boolean checkDuplicateCode(String code) throws SQLException{
         boolean duplicate=false;
-        String sql="SELECT * FROM UserHT WHERE VerifyCode=? FETCH FIRST 1 ROWS ONLY";
+        String sql="SELECT * FROM NguoiDung WHERE VerifyCode=? FETCH FIRST 1 ROWS ONLY";
         PreparedStatement p = con.prepareStatement(sql);
         p.setString(1, code);
         ResultSet r=p.executeQuery();
@@ -100,7 +108,7 @@ public class ServiceUser {
     */
     public boolean checkDuplicateEmail(String email) throws SQLException{
         boolean duplicate=false;
-        String sql="SELECT * FROM UserHT WHERE Email=? AND Status='Verified' FETCH FIRST 1 ROWS ONLY";
+        String sql="SELECT * FROM NguoiDung WHERE Email=? AND Trangthai='Verified' FETCH FIRST 1 ROWS ONLY";
         PreparedStatement p = con.prepareStatement(sql);
         p.setString(1, email);
         ResultSet r=p.executeQuery();
@@ -112,14 +120,33 @@ public class ServiceUser {
         return duplicate;
     }
     /*
-        Hoàn tất xác minh tài khoản, Cập nhật VerifyCode= '' và Status của User thành Verified
+        Sau khi Hoàn tất xác minh tài khoản:
+        1.Cập nhật VerifyCode= '' và Trangthai của Người dùng thành Verified
+        2. Thêm mới một khách hàng vào bảng KhachHang với các thông tin:
+        - Tên KH : lấy từ phần đăng ký
+        - Ngày tham gia: ngày hiện tại đăng ký
+        - Doanh số, điểm tích lũy mặc định là 0
+        - ID_ND lấy từ Người dùng vừa tạo
+        
     */
-    public void doneVerify(int userID) throws SQLException{
-        String sql="UPDATE UserHT SET VerifyCode='', Status='Verified' WHERE UserID=?";
-        PreparedStatement p = con.prepareStatement(sql);
-        p.setInt(1, userID);
-        p.execute();
-        p.close();
+    public void doneVerify(int userID,String name) throws SQLException{
+        //Cập nhật NguoiDung
+        String sql_ND="UPDATE NguoiDung SET VerifyCode='', Trangthai='Verified' WHERE ID_ND=?";
+        PreparedStatement p1 = con.prepareStatement(sql_ND);
+        p1.setInt(1, userID);
+        p1.execute();
+        
+        //Thêm KH mới
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-YYYY");
+        String sql_KH="INSERT INTO KhachHang (TenKH, Ngaythamgia, Doanhso,Diemtichluy,ID_ND) VALUES (?,to_date(?, 'dd-mm-yyyy'),0,0,?)";
+        PreparedStatement p2=con.prepareStatement(sql_KH);
+        p2.setString(1, name);
+        p2.setString(2, simpleDateFormat.format(new Date()));
+        p2.setInt(3, userID);
+        p2.execute();
+        
+        p1.close();
+        p2.close();
     }
     
     /* 
@@ -130,7 +157,7 @@ public class ServiceUser {
     */
     public boolean verifyCodeWithUser(int userID,String code) throws SQLException{
         boolean verify=false;
-        String sql="SELECT COUNT(UserID) as CountID FROM UserHT WHERE UserID=? AND VerifyCode=?";
+        String sql="SELECT COUNT(ID_ND) as CountID FROM NguoiDung WHERE ID_ND=? AND VerifyCode=?";
         PreparedStatement p = con.prepareStatement(sql);
         p.setInt(1, userID);
         p.setString(2,code);

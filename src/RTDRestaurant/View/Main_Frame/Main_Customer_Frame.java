@@ -5,9 +5,11 @@ import RTDRestaurant.Controller.Connection.DatabaseConnection;
 import RTDRestaurant.Controller.Event.EventMenuSelected;
 import RTDRestaurant.View.Component.OrderBar;
 import RTDRestaurant.View.Component.Menu;
+import RTDRestaurant.View.Form.AboutUs_Form;
 import RTDRestaurant.View.Form.FoodMenu_Form;
 import RTDRestaurant.View.Form.Form2;
 import RTDRestaurant.View.Form.MainForm;
+import RTDRestaurant.View.Form.TableMenu_Form;
 import java.awt.Toolkit;
 import java.sql.SQLException;
 import net.miginfocom.swing.MigLayout;
@@ -51,8 +53,17 @@ public class Main_Customer_Frame extends javax.swing.JFrame {
                         case 11 -> main.showForm(new FoodMenu_Form("Pisces"));
                         default -> {
                         }
+                    }    
+                }else if(menuIndex==1){
+                    switch (subMenuIndex) {
+                        case 0 -> main.showForm(new TableMenu_Form("Tang 1"));
+                        case 1 -> main.showForm(new TableMenu_Form("Tang 2"));
+                        case 2 -> main.showForm(new TableMenu_Form("Tang 3"));
+                        default -> {
+                        }
                     }
-                    
+                }else if(menuIndex==2){
+                    main.showForm(new AboutUs_Form());
                 }
             }
         });
@@ -73,6 +84,9 @@ public class Main_Customer_Frame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        bg.setBackground(new java.awt.Color(153, 153, 153));
+        bg.setPreferredSize(new java.awt.Dimension(1321, 720));
+
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
@@ -88,11 +102,11 @@ public class Main_Customer_Frame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
         );
 
         pack();

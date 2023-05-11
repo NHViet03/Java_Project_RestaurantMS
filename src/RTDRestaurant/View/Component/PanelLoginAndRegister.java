@@ -23,12 +23,19 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
         return user;
     }
 
+    public String getName() {
+        return name;
+    }
+
     //Lấy thông tin đăng nhập
     public ModelLogin getDataLogin() {
         return dataLogin;
     }
 
+    
+    
     private ModelUser user; //Model Tài khoản người dùng
+    private String name; //Tên Khách Hàng
     private ModelLogin dataLogin; //Model thông tin đăng nhập
 
     public PanelLoginAndRegister(ActionListener eventRegister, ActionListener eventLogin) {
@@ -50,10 +57,10 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
         label.setFont(new Font("sansserif", 1, 30));
         label.setForeground(Color.decode("#6C5B7B"));
         register.add(label);
-        //TextField Tên người dùng
+        //TextField Tên Khách Hàng
         MyTextField txtUser = new MyTextField();
         txtUser.setPrefixIcon(new ImageIcon(getClass().getResource("/Icons/user (2).png")));
-        txtUser.setHint("Tên tài khoản ...");
+        txtUser.setHint("Tên Khách Hàng ...");
         register.add(txtUser, "w 60%");
         //TextField Email
         MyTextField txtEmail = new MyTextField();
@@ -77,10 +84,10 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
         cmd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String userName = txtUser.getText().trim();
+                name = txtUser.getText().trim();
                 String email = txtEmail.getText().trim();
                 String password = String.valueOf(txtPassword.getPassword());
-                user = new ModelUser(0, userName, email, password);
+                user = new ModelUser(0,email, password,"Khach Hang");
             }
         });
     }

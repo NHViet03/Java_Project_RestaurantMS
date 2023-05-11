@@ -12,14 +12,6 @@ public class ModelUser {
         this.userID = userID;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -44,26 +36,35 @@ public class ModelUser {
         this.verifyCode = verifyCode;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+    
+
     public ModelUser() {
     }
 
-    public ModelUser(int userID, String userName, String email, String password, String verifyCode) {
+    public ModelUser(int userID,String email, String password, String verifyCode,String role) {
         this.userID = userID;
-        this.userName = userName;
         this.email = email;
         this.password = password;
         this.verifyCode = verifyCode;
+        this.role=role;
     }
     
-    public ModelUser(int userID, String userName, String email, String password) {
+    public ModelUser(int userID, String email, String password,String role) {
         this.userID = userID;
-        this.userName = userName;
         this.email = email;
         this.password = password;
+        this.role=role;
     }
     int userID;  //ID tài khoản
-    String userName; //Tên Tài khoản
     String email;  // Email
     String password; //Mật khẩu
     String verifyCode; //Mã xác minh
+    String role; //Vai trò : Khách Hàng, Nhân Viên,Nhân viên Kho,Quản lý
 }
