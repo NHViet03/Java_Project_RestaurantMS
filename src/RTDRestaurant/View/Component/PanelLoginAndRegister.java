@@ -10,6 +10,9 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -32,19 +35,21 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
         return dataLogin;
     }
 
-    
-    
     private ModelUser user; //Model Tài khoản người dùng
     private String name; //Tên Khách Hàng
     private ModelLogin dataLogin; //Model thông tin đăng nhập
+    private Icon hide;
+    private Icon show;
+    private char def;
 
     public PanelLoginAndRegister(ActionListener eventRegister, ActionListener eventLogin) {
         initComponents();
+        hide = new ImageIcon(getClass().getResource("/Icons/hide.png"));
+        show = new ImageIcon(getClass().getResource("/Icons/view.png"));
         initLogin(eventLogin);
         initRegister(eventRegister);
         register.setVisible(true);
-        login.setVisible(false);
-
+        login.setVisible(false);    
     }
 
     //Khởi tạo màn hình đăng ký
@@ -69,9 +74,25 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
         register.add(txtEmail, "w 60%");
         //TextField Mật khẩu
         MyPasswordField txtPassword = new MyPasswordField();
+        def = txtPassword.getEchoChar();
         txtPassword.setPrefixIcon(new ImageIcon(getClass().getResource("/Icons/pass.png")));
         txtPassword.setHint("Mật khẩu ...");
+        txtPassword.setSuffixIcon(show);
         register.add(txtPassword, "w 60%");
+        txtPassword.addMouseListener(new MouseAdapter() {
+         
+            public void mouseClicked(MouseEvent e) {
+                if (txtPassword.getSuffixIcon().equals(hide)) {
+                    txtPassword.setSuffixIcon(show);
+                    txtPassword.setEchoChar((char) 0);
+
+                } else {
+                    txtPassword.setSuffixIcon(hide);
+                    txtPassword.setEchoChar(def);
+                }
+            }
+
+        });
         //Button Đăng ký
         Button cmd = new Button();
         cmd.setBackground(Color.decode("#6C5B7B"));
@@ -87,7 +108,7 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
                 name = txtUser.getText().trim();
                 String email = txtEmail.getText().trim();
                 String password = String.valueOf(txtPassword.getPassword());
-                user = new ModelUser(0,email, password,"Khach Hang");
+                user = new ModelUser(0, email, password, "Khach Hang");
             }
         });
     }
@@ -96,7 +117,6 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
     private void initLogin(ActionListener eventLogin) {
         //Set Layout
         login.setLayout(new MigLayout("wrap", "push[center]push", "push[]25[]10[]10[]25[]push"));
-
         JLabel label = new JLabel("ĐĂNG NHẬP");
         label.setFont(new Font("sansserif", 1, 30));
         label.setForeground(Color.decode("#6C5B7B"));
@@ -108,9 +128,25 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
         login.add(txtEmail, "w 60%");
         //TextField Mật khẩu
         MyPasswordField txtPassword = new MyPasswordField();
+        def = txtPassword.getEchoChar();
         txtPassword.setPrefixIcon(new ImageIcon(getClass().getResource("/Icons/pass.png")));
         txtPassword.setHint("Mật khẩu");
+        txtPassword.setSuffixIcon(show);
         login.add(txtPassword, "w 60%");
+        txtPassword.addMouseListener(new MouseAdapter() {
+         
+            public void mouseClicked(MouseEvent e) {
+                if (txtPassword.getSuffixIcon().equals(hide)) {
+                    txtPassword.setSuffixIcon(show);
+                    txtPassword.setEchoChar((char) 0);
+
+                } else {
+                    txtPassword.setSuffixIcon(hide);
+                    txtPassword.setEchoChar(def);
+                }
+            }
+
+        });
         //Button "Quên mật khẩu"
         JButton cmdForget = new JButton("Quên mật khẩu của bạn ?");
         cmdForget.setForeground(new Color(100, 100, 100));

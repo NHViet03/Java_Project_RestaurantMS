@@ -1,0 +1,157 @@
+package RTDRestaurant.View.Component;
+
+import RTDRestaurant.Model.ModelCard;
+import RTDRestaurant.Model.ModelVoucher;
+import RTDRestaurant.Model.Model_CardTable;
+import RTDRestaurant.View.Swing.ImageFood;
+import RTDRestaurant.View.Swing.ImageLogo;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import javax.swing.ImageIcon;
+
+public class CardVoucher extends javax.swing.JPanel {
+
+    private final ModelVoucher data;
+
+    public ModelVoucher getData() {
+        return data;
+    }
+
+    public CardVoucher(ModelVoucher data) {
+        this.data = data;
+        initComponents();
+        setPreferredSize(new Dimension(300, 325));
+        ibDescription.setText(data.getDescription());
+        lbQuantity.setText("Số lượng: " + data.getQuantity());
+        lbPoint.setText(data.getPoint() + " xu");
+        switch (data.getPercent()) {
+            case 20 -> {
+                img.setIcon(new ImageIcon(getClass().getResource("/Icons/Voucher/20off.jpg")));
+            }
+            case 30 -> {
+                img.setIcon(new ImageIcon(getClass().getResource("/Icons/Voucher/30off.jpg")));
+            }
+            case 50 -> {
+                img.setIcon(new ImageIcon(getClass().getResource("/Icons/Voucher/50off.jpg")));
+            }
+            case 60 -> {
+                img.setIcon(new ImageIcon(getClass().getResource("/Icons/Voucher/60off.jpg")));
+            }
+            case 100 -> {
+                img.setIcon(new ImageIcon(getClass().getResource("/Icons/Voucher/100off.jpg")));
+            }
+            default -> {
+            }
+        }
+        if (data.getQuantity() == 0) {
+            cmdAccept.setText("ĐÃ HẾT");
+            cmdAccept.setBackground(Color.decode("#232526"));
+            cmdAccept.setEnabled(false);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        panelRound1 = new RTDRestaurant.View.Swing.PanelRound();
+        img = new javax.swing.JLabel();
+        lbQuantity = new javax.swing.JLabel();
+        cmdAccept = new RTDRestaurant.View.Swing.Button();
+        ibDescription = new javax.swing.JLabel();
+        lbPoint = new javax.swing.JLabel();
+
+        panelRound1.setPreferredSize(new java.awt.Dimension(300, 300));
+
+        img.setBackground(new java.awt.Color(233, 228, 240));
+        img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/Voucher/20off.jpg"))); // NOI18N
+        img.setOpaque(true);
+
+        lbQuantity.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        lbQuantity.setForeground(new java.awt.Color(108, 91, 123));
+        lbQuantity.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbQuantity.setText("Quantity");
+
+        cmdAccept.setBackground(new java.awt.Color(108, 91, 123));
+        cmdAccept.setForeground(new java.awt.Color(255, 255, 255));
+        cmdAccept.setText("ĐỔI VOUCHER");
+        cmdAccept.setToolTipText("");
+        cmdAccept.setFocusable(false);
+        cmdAccept.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+
+        ibDescription.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        ibDescription.setForeground(new java.awt.Color(108, 91, 123));
+        ibDescription.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ibDescription.setText("Title");
+
+        lbPoint.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        lbPoint.setForeground(new java.awt.Color(108, 91, 123));
+        lbPoint.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbPoint.setText("Point");
+
+        javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
+        panelRound1.setLayout(panelRound1Layout);
+        panelRound1Layout.setHorizontalGroup(
+            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(img, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panelRound1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(ibDescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbQuantity, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                    .addComponent(lbPoint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                .addGap(84, 84, 84)
+                .addComponent(cmdAccept, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(83, 83, 83))
+        );
+        panelRound1Layout.setVerticalGroup(
+            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound1Layout.createSequentialGroup()
+                .addComponent(img, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(ibDescription)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbQuantity)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbPoint)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cmdAccept, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
+        );
+    }// </editor-fold>//GEN-END:initComponents
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setColor(getBackground());
+        g2.fillRoundRect(0, 0, getWidth(), getHeight(), 20, 20);
+        super.paintComponent(g);
+    }
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private RTDRestaurant.View.Swing.Button cmdAccept;
+    private javax.swing.JLabel ibDescription;
+    private javax.swing.JLabel img;
+    private javax.swing.JLabel lbPoint;
+    private javax.swing.JLabel lbQuantity;
+    private RTDRestaurant.View.Swing.PanelRound panelRound1;
+    // End of variables declaration//GEN-END:variables
+}

@@ -38,7 +38,7 @@ public class AboutUs_Form extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         header1 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(216, 216, 216));
+        setBackground(new java.awt.Color(222, 222, 222));
 
         panelRound1.setBackground(new java.awt.Color(255, 255, 255));
 

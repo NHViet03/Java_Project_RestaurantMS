@@ -21,11 +21,6 @@ public class FoodMenu_Form extends javax.swing.JPanel {
     private ServiceCustomer service;
     private ArrayList<ModelCard> list;
     public FoodMenu_Form(String type) {
-        try {
-            DatabaseConnection.getInstance().connectToDatabase();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         this.type=type;
         service=new ServiceCustomer();
         initComponents();

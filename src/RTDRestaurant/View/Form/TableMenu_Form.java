@@ -24,11 +24,6 @@ public class TableMenu_Form extends javax.swing.JPanel {
     private ServiceCustomer service;
     private ArrayList<Model_CardTable> list;
     public TableMenu_Form(String floor) {
-        try {
-            DatabaseConnection.getInstance().connectToDatabase();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         this.floor=floor;
         service=new ServiceCustomer();
         initComponents();
