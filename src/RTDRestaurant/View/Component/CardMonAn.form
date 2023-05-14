@@ -41,7 +41,7 @@
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
-              <Component id="cmdAccept" max="32767" attributes="0"/>
+              <Component id="cmdOrder" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -61,7 +61,7 @@
                   <Component id="txtNum" min="-2" pref="26" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-              <Component id="cmdAccept" min="-2" max="-2" attributes="0"/>
+              <Component id="cmdOrder" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="16" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -114,7 +114,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdAddActionPerformed"/>
       </Events>
     </Component>
-    <Component class="RTDRestaurant.View.Swing.Button" name="cmdAccept">
+    <Component class="RTDRestaurant.View.Swing.Button" name="cmdOrder">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="7b" green="5b" red="6c" type="rgb"/>

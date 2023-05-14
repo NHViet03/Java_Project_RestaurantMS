@@ -1,127 +1,158 @@
-
 package RTDRestaurant.View.Form;
 
-import RTDRestaurant.Controller.Connection.DatabaseConnection;
 import RTDRestaurant.Controller.Service.ServiceCustomer;
-import RTDRestaurant.Model.ModelCard;
-import RTDRestaurant.View.Component.Card;
+import RTDRestaurant.Model.ModelMonAn;
+import RTDRestaurant.Model.ModelCustomer;
+import RTDRestaurant.Model.ModelHoaDon;
+import RTDRestaurant.Model.ModelUser;
+import RTDRestaurant.View.Component.CardMonAn;
+import RTDRestaurant.View.Dialog.MS_WarningBook;
+import RTDRestaurant.View.Main_Frame.Main_Customer_Frame;
 import RTDRestaurant.View.Swing.CustomScrollBar.ScrollBarCustom;
 import RTDRestaurant.View.Swing.WrapLayout;
-import java.awt.Toolkit;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
-
 public class FoodMenu_Form extends javax.swing.JPanel {
 
     private final String type;
-    private ServiceCustomer service;
-    private ArrayList<ModelCard> list;
-    public FoodMenu_Form(String type) {
-        this.type=type;
-        service=new ServiceCustomer();
-        initComponents();
+    private final ServiceCustomer service;
+    private ArrayList<ModelMonAn> list;
+    private final ModelUser user;
+    private ModelCustomer customer;
+    private ModelHoaDon HoaDon;
+    private final MS_WarningBook warning;
+
+    public FoodMenu_Form(String type, ModelUser user) {
+        this.type = type;
+        this.user = user;
+        service = new ServiceCustomer();
+        warning = new MS_WarningBook(Main_Customer_Frame.getFrames()[0], true);
+        initComponents();    
         init();
+        //Kiểm tra Khách hàng đã đặt bàn trước khi gọi món hay chưa
+        if (HoaDon == null) {
+            warning.Warning();
+        } else {
+            txtTableName.setText(HoaDon.getIdBan() + "");
+        }
+        
     }
 
-    public void init(){
-        panel.setLayout(new WrapLayout(WrapLayout.LEADING,20,20));
-        txtSearch.setHint("Tìm kiếm món ăn . . .");
-        jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
-        //Thêm data cho Menu
-        initMenuFood();
-   
-        //Set Data cho Tiêu đề Menu     
-        switch (type) {
-            case "Arias" -> {
-                lbTitle.setText("Menu/"+type+" - Bạch Dương");
-                lbTitle.setIcon(new ImageIcon(getClass().getResource("/Icons/MenuBar/aries.png")));
+    public void init() {
+        try {
+            panel.setLayout(new WrapLayout(WrapLayout.LEADING, 20, 20));
+            txtSearch.setHint("Tìm kiếm món ăn . . .");
+            jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
+            customer = service.getCustomer(user.getUserID());
+            
+            //Tìm thông tin Hóa Đơn mà Khách Hàng vừa tạo
+            HoaDon = service.FindHoaDon(customer);
+            
+            //Thêm data cho Menu
+            initMenuFood();
+            
+            
+            //Set Data cho Tiêu đề Menu
+            switch (type) {
+                case "Arias" -> {
+                    lbTitle.setText("Menu/" + type + " - Bạch Dương");
+                    lbTitle.setIcon(new ImageIcon(getClass().getResource("/Icons/MenuBar/aries.png")));
+                }
+                case "Taurus" -> {
+                    lbTitle.setText("Menu/" + type + " - Kim Ngưu");
+                    lbTitle.setIcon(new ImageIcon(getClass().getResource("/Icons/MenuBar/taurus.png")));
+                }
+                case "Gemini" -> {
+                    lbTitle.setText("Menu/" + type + " - Song tử");
+                    lbTitle.setIcon(new ImageIcon(getClass().getResource("/Icons/MenuBar/gemini.png")));
+                }
+                case "Cancer" -> {
+                    lbTitle.setText("Menu/" + type + " - Cự Giải");
+                    lbTitle.setIcon(new ImageIcon(getClass().getResource("/Icons/MenuBar/cancer.png")));
+                }
+                case "Leo" -> {
+                    lbTitle.setText("Menu/" + type + " - Sư tử");
+                    lbTitle.setIcon(new ImageIcon(getClass().getResource("/Icons/MenuBar/leo.png")));
+                }
+                case "Virgo" -> {
+                    lbTitle.setText("Menu/" + type + " - Xử Nữ");
+                    lbTitle.setIcon(new ImageIcon(getClass().getResource("/Icons/MenuBar/virgo.png")));
+                }
+                case "Libra" -> {
+                    lbTitle.setText("Menu/" + type + " - Thiên Bình");
+                    lbTitle.setIcon(new ImageIcon(getClass().getResource("/Icons/MenuBar/libra.png")));
+                }
+                case "Scorpio" -> {
+                    lbTitle.setText("Menu/" + type + " - Bọ Cạp");
+                    lbTitle.setIcon(new ImageIcon(getClass().getResource("/Icons/MenuBar/scorpio.png")));
+                }
+                case "Sagittarius" -> {
+                    lbTitle.setText("Menu/" + type + " - Nhân Mã");
+                    lbTitle.setIcon(new ImageIcon(getClass().getResource("/Icons/MenuBar/sagittarius.png")));
+                }
+                case "Capricorn" -> {
+                    lbTitle.setText("Menu/" + type + " - Ma Kết");
+                    lbTitle.setIcon(new ImageIcon(getClass().getResource("/Icons/MenuBar/capricorn.png")));
+                }
+                case "Aquarius" -> {
+                    lbTitle.setText("Menu/" + type + " - Bảo Bình");
+                    lbTitle.setIcon(new ImageIcon(getClass().getResource("/Icons/MenuBar/aquarius.png")));
+                }
+                case "Pisces" -> {
+                    lbTitle.setText("Menu/" + type + " - Song Ngư");
+                    lbTitle.setIcon(new ImageIcon(getClass().getResource("/Icons/MenuBar/pisces.png")));
+                }
+                default -> {
+                }
             }
-            case "Taurus" -> {
-                lbTitle.setText("Menu/"+type+" - Kim Ngưu");
-                lbTitle.setIcon(new ImageIcon(getClass().getResource("/Icons/MenuBar/taurus.png")));
-            }
-            case "Gemini" -> {
-                lbTitle.setText("Menu/"+type+" - Song tử");
-                lbTitle.setIcon(new ImageIcon(getClass().getResource("/Icons/MenuBar/gemini.png")));
-            }
-            case "Cancer" -> {
-                lbTitle.setText("Menu/"+type+" - Cự Giải");
-                lbTitle.setIcon(new ImageIcon(getClass().getResource("/Icons/MenuBar/cancer.png")));
-            }
-            case "Leo" -> {
-                lbTitle.setText("Menu/"+type+" - Sư tử");
-                lbTitle.setIcon(new ImageIcon(getClass().getResource("/Icons/MenuBar/leo.png")));
-            }
-            case "Virgo" -> {
-                lbTitle.setText("Menu/"+type+" - Xử Nữ");
-                lbTitle.setIcon(new ImageIcon(getClass().getResource("/Icons/MenuBar/virgo.png")));
-            }
-            case "Libra" -> {
-                lbTitle.setText("Menu/"+type+" - Thiên Bình");
-                lbTitle.setIcon(new ImageIcon(getClass().getResource("/Icons/MenuBar/libra.png")));
-            }
-            case "Scorpio" -> {
-                lbTitle.setText("Menu/"+type+" - Bọ Cạp");
-                lbTitle.setIcon(new ImageIcon(getClass().getResource("/Icons/MenuBar/scorpio.png")));
-            }
-            case "Sagittarius" -> {
-                lbTitle.setText("Menu/"+type+" - Nhân Mã");
-                lbTitle.setIcon(new ImageIcon(getClass().getResource("/Icons/MenuBar/sagittarius.png")));
-            }
-            case "Capricorn" -> {
-                lbTitle.setText("Menu/"+type+" - Ma Kết");
-                lbTitle.setIcon(new ImageIcon(getClass().getResource("/Icons/MenuBar/capricorn.png")));
-            }
-            case "Aquarius" -> {
-                lbTitle.setText("Menu/"+type+" - Bảo Bình");
-                lbTitle.setIcon(new ImageIcon(getClass().getResource("/Icons/MenuBar/aquarius.png")));
-            }
-            case "Pisces" -> {
-                lbTitle.setText("Menu/"+type+" - Song Ngư");
-                lbTitle.setIcon(new ImageIcon(getClass().getResource("/Icons/MenuBar/pisces.png")));
-            }
-            default -> {
-            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(FoodMenu_Form.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void initMenuFood(){
+
+    public void initMenuFood() {
         try {
             list = service.MenuFood(type);
-            for(ModelCard data:list){   
-            panel.add(new Card(data));
+            for (ModelMonAn data : list) {
+                panel.add(new CardMonAn(data, HoaDon));
             }
-        }catch(SQLException ex) {
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
-    public void searchFood(String txt){
+
+    public void searchFood(String txt) {
         panel.removeAll();
-        for(ModelCard data:list){
-            if(data.getTitle().toLowerCase().contains(txt.toLowerCase())){
-                panel.add(new Card(data));
+        for (ModelMonAn data : list) {
+            if (data.getTitle().toLowerCase().contains(txt.toLowerCase())) {
+                panel.add(new CardMonAn(data, HoaDon));
             }
         }
         panel.repaint();
         panel.revalidate();
     }
-    public void initMenuFoodOrderby(String txt){
+
+    public void initMenuFoodOrderby(String txt) {
         try {
-            list=service.MenuFoodOrder(type,txt);
+            list = service.MenuFoodOrder(type, txt);
             panel.removeAll();
-            for(ModelCard data:list){   
-            panel.add(new Card(data));
+            for (ModelMonAn data : list) {
+                panel.add(new CardMonAn(data, HoaDon));
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(FoodMenu_Form.class.getName()).log(Level.SEVERE, null, ex);
         }
         panel.repaint();
         panel.revalidate();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -134,7 +165,9 @@ public class FoodMenu_Form extends javax.swing.JPanel {
         orderby = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         button1 = new RTDRestaurant.View.Swing.Button();
-        jSeparator1 = new javax.swing.JSeparator();
+        lbTable = new javax.swing.JLabel();
+        txtTableName = new RTDRestaurant.View.Swing.MyTextField();
+        jSeparator2 = new javax.swing.JSeparator();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -151,7 +184,7 @@ public class FoodMenu_Form extends javax.swing.JPanel {
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 536, Short.MAX_VALUE)
+            .addGap(0, 542, Short.MAX_VALUE)
         );
 
         jScrollPane1.setViewportView(panel);
@@ -200,7 +233,16 @@ public class FoodMenu_Form extends javax.swing.JPanel {
         button1.setFocusable(false);
         button1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jSeparator1.setBackground(new java.awt.Color(76, 76, 76));
+        lbTable.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbTable.setForeground(new java.awt.Color(89, 89, 89));
+        lbTable.setText("MÃ BÀN CỦA BẠN");
+
+        txtTableName.setEditable(false);
+        txtTableName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtTableName.setText("Chưa đặt bàn");
+        txtTableName.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+
+        jSeparator2.setBackground(new java.awt.Color(76, 76, 76));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -220,10 +262,14 @@ public class FoodMenu_Form extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lbTitle)
                                 .addGap(559, 559, 559)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(button1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(orderby, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jSeparator1))
+                        .addComponent(orderby, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lbTable)
+                        .addGap(38, 38, 38)
+                        .addComponent(txtTableName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSeparator2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(header1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
@@ -232,23 +278,23 @@ public class FoodMenu_Form extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(lbTitle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbTitle)
-                        .addGap(36, 36, 36))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 1, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbTable, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTableName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 1, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(orderby)
                     .addComponent(txtSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(header1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(header1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -270,10 +316,12 @@ public class FoodMenu_Form extends javax.swing.JPanel {
     private RTDRestaurant.View.Component.OrderBar header1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel lbTable;
     private javax.swing.JLabel lbTitle;
     private javax.swing.JComboBox<String> orderby;
     private javax.swing.JPanel panel;
     private RTDRestaurant.View.Swing.MyTextField txtSearch;
+    private RTDRestaurant.View.Swing.MyTextField txtTableName;
     // End of variables declaration//GEN-END:variables
 }

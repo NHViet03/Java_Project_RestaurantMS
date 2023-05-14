@@ -3,14 +3,21 @@ package RTDRestaurant.View.Form;
 
 import RTDRestaurant.Controller.Connection.DatabaseConnection;
 import RTDRestaurant.Controller.Service.ServiceCustomer;
-import RTDRestaurant.Model.ModelCard;
-import RTDRestaurant.Model.Model_CardTable;
-import RTDRestaurant.View.Component.Card;
-import RTDRestaurant.View.Component.CardTable;
+import RTDRestaurant.Model.ModelMonAn;
+import RTDRestaurant.Model.ModelCustomer;
+import RTDRestaurant.Model.ModelUser;
+import RTDRestaurant.Model.Model_Ban;
+import RTDRestaurant.View.Component.CardMonAn;
+import RTDRestaurant.View.Component.CardBan;
+import RTDRestaurant.View.Dialog.MS_ConfirmBook;
+import RTDRestaurant.View.Dialog.MS_ConfirmRename;
+import RTDRestaurant.View.Main_Frame.Main_Customer_Frame;
 import RTDRestaurant.View.Swing.CustomScrollBar.ScrollBarCustom;
 import RTDRestaurant.View.Swing.WrapLayout;
 import java.awt.Color;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -22,46 +29,62 @@ public class TableMenu_Form extends javax.swing.JPanel {
 
     private final String floor;
     private ServiceCustomer service;
-    private ArrayList<Model_CardTable> list;
+    private ArrayList<Model_Ban> list;
+    private ModelUser user;
+    private ModelCustomer customer;
+    
     public TableMenu_Form(String floor) {
         this.floor=floor;
         service=new ServiceCustomer();
         initComponents();
         init();
     }
+    
+    public TableMenu_Form(String floor,ModelUser user) {
+        this.floor=floor;
+        this.user=user;
+        service=new ServiceCustomer();
+        initComponents();
+        init();
+    }
 
     public void init(){
-        panel.setLayout(new WrapLayout(WrapLayout.LEADING,20,20));
-        txtSearch.setHint("Tìm kiếm bàn . . .");
-        jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
-        //Thêm data cho Menu
-        initMenuTable();
-        
-        switch (floor) {
-            case "Tang 1" -> {
-               lbTitle.setText("Đặt bàn/Tầng 1");
-               lbTitle.setIcon(new ImageIcon(getClass().getResource("/Icons/one.png")));
+        try {
+            customer=service.getCustomer(user.getUserID());
+            panel.setLayout(new WrapLayout(WrapLayout.LEADING,20,20));
+            txtSearch.setHint("Tìm kiếm bàn . . .");
+            jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
+            //Thêm data cho Menu
+            initMenuTable();
+            
+            switch (floor) {
+                case "Tang 1" -> {
+                    lbTitle.setText("Đặt bàn/Tầng 1");
+                    lbTitle.setIcon(new ImageIcon(getClass().getResource("/Icons/one.png")));
+                }
+                case "Tang 2" -> {
+                    lbTitle.setText("Đặt bàn/Tầng 2");
+                    lbTitle.setIcon(new ImageIcon(getClass().getResource("/Icons/two.png")));
+                }
+                case "Tang 3" -> {
+                    lbTitle.setText("Đặt bàn/Tầng 3");
+                    lbTitle.setIcon(new ImageIcon(getClass().getResource("/Icons/three.png")));
+                }
+                default -> {
+                }
             }
-            case "Tang 2" -> {
-               lbTitle.setText("Đặt bàn/Tầng 2");
-               lbTitle.setIcon(new ImageIcon(getClass().getResource("/Icons/two.png")));
-            }
-            case "Tang 3" -> {
-               lbTitle.setText("Đặt bàn/Tầng 3");
-               lbTitle.setIcon(new ImageIcon(getClass().getResource("/Icons/three.png")));
-            }
-            default -> {
-            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TableMenu_Form.class.getName()).log(Level.SEVERE, null, ex);
         }
           
  
     }
     public void initMenuTable(){
         try {
+            
             list = service.MenuTable(floor);
-            for(Model_CardTable data:list){
-               
-            panel.add(new CardTable(data));
+            for(Model_Ban data:list){
+            panel.add(new CardBan(data,customer));
             }
         }catch(SQLException ex) {
             ex.printStackTrace();
@@ -69,9 +92,9 @@ public class TableMenu_Form extends javax.swing.JPanel {
     }
     public void searchTable(String txt){
         panel.removeAll();
-        for(Model_CardTable data:list){
+        for(Model_Ban data:list){
             if(data.getName().toLowerCase().contains(txt.toLowerCase())){
-                panel.add(new CardTable(data));
+                panel.add(new CardBan(data,customer));
             }
         }
         panel.repaint();
@@ -81,8 +104,8 @@ public class TableMenu_Form extends javax.swing.JPanel {
         try {
             list=service.MenuTableState(floor,txt);
             panel.removeAll();
-            for(Model_CardTable data:list){   
-            panel.add(new CardTable(data));
+            for(Model_Ban data:list){   
+            panel.add(new CardBan(data,customer));
             }
             
         } catch (SQLException ex) {
@@ -91,6 +114,8 @@ public class TableMenu_Form extends javax.swing.JPanel {
         panel.repaint();
         panel.revalidate();
     }
+    
+   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

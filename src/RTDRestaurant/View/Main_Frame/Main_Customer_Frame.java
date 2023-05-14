@@ -9,7 +9,6 @@ import RTDRestaurant.View.Component.Menu;
 import RTDRestaurant.View.Form.AboutUs_Form;
 import RTDRestaurant.View.Form.Account_Form;
 import RTDRestaurant.View.Form.FoodMenu_Form;
-import RTDRestaurant.View.Form.Form2;
 import RTDRestaurant.View.Form.MainForm;
 import RTDRestaurant.View.Form.TableMenu_Form;
 import RTDRestaurant.View.Form.Voucher_Form;
@@ -54,27 +53,27 @@ public class Main_Customer_Frame extends javax.swing.JFrame {
                 switch (menuIndex) {
                     case 0 -> {
                         switch (subMenuIndex) {
-                            case 0 -> main.showForm(new FoodMenu_Form("Aries"));
-                            case 1 -> main.showForm(new FoodMenu_Form("Taurus"));
-                            case 2 -> main.showForm(new FoodMenu_Form("Gemini"));
-                            case 3 -> main.showForm(new FoodMenu_Form("Cancer"));
-                            case 4 -> main.showForm(new FoodMenu_Form("Leo"));
-                            case 5 -> main.showForm(new FoodMenu_Form("Virgo"));
-                            case 6 -> main.showForm(new FoodMenu_Form("Libra"));
-                            case 7 -> main.showForm(new FoodMenu_Form("Scorpio"));
-                            case 8 -> main.showForm(new FoodMenu_Form("Sagittarius"));
-                            case 9 -> main.showForm(new FoodMenu_Form("Capricorn"));
-                            case 10 -> main.showForm(new FoodMenu_Form("Aquarius"));
-                            case 11 -> main.showForm(new FoodMenu_Form("Pisces"));
+                            case 0 -> main.showForm(new FoodMenu_Form("Aries",user));
+                            case 1 -> main.showForm(new FoodMenu_Form("Taurus",user));
+                            case 2 -> main.showForm(new FoodMenu_Form("Gemini",user));
+                            case 3 -> main.showForm(new FoodMenu_Form("Cancer",user));
+                            case 4 -> main.showForm(new FoodMenu_Form("Leo",user));
+                            case 5 -> main.showForm(new FoodMenu_Form("Virgo",user));
+                            case 6 -> main.showForm(new FoodMenu_Form("Libra",user));
+                            case 7 -> main.showForm(new FoodMenu_Form("Scorpio",user));
+                            case 8 -> main.showForm(new FoodMenu_Form("Sagittarius",user));
+                            case 9 -> main.showForm(new FoodMenu_Form("Capricorn",user));
+                            case 10 -> main.showForm(new FoodMenu_Form("Aquarius",user));
+                            case 11 -> main.showForm(new FoodMenu_Form("Pisces",user));
                             default -> {
                             }
                         }
                     }
                     case 1 -> {
                         switch (subMenuIndex) {
-                            case 0 -> main.showForm(new TableMenu_Form("Tang 1"));
-                            case 1 -> main.showForm(new TableMenu_Form("Tang 2"));
-                            case 2 -> main.showForm(new TableMenu_Form("Tang 3"));
+                            case 0 -> main.showForm(new TableMenu_Form("Tang 1",user));
+                            case 1 -> main.showForm(new TableMenu_Form("Tang 2",user));
+                            case 2 -> main.showForm(new TableMenu_Form("Tang 3",user));
                             default -> {
                             }
                         }
@@ -100,7 +99,7 @@ public class Main_Customer_Frame extends javax.swing.JFrame {
         bg.add(menu,"w 265!, spany 2"); //Span Y 2cell
         bg.add(main,"w 100%, h 100%");
         //Form mặc định lúc đăng nhập
-        main.showForm(new FoodMenu_Form("Aries"));
+        main.showForm(new TableMenu_Form("Tang 1",user));
     }
   
     

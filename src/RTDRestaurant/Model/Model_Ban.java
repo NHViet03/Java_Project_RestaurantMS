@@ -2,7 +2,7 @@
 package RTDRestaurant.Model;
 
 //Class chứa thông tin về bàn gồm :ID Bàn, Tên Bàn, Loại bàn
-public class Model_CardTable {
+public class Model_Ban {
 
     public int getID() {
         return ID;
@@ -28,10 +28,15 @@ public class Model_CardTable {
         this.status = status;
     }
 
-    public Model_CardTable() {
+    public Model_Ban() {
     }
-
-    public Model_CardTable(int ID, String name, String status) {
+    
+    public Model_Ban(int ID, String name) {
+        this.ID = ID;
+        this.name = name;
+    }
+    
+    public Model_Ban(int ID, String name, String status) {
         this.ID = ID;
         this.name = name;
         this.status = status;

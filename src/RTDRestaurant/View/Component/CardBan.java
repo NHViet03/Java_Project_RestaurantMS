@@ -1,7 +1,12 @@
 package RTDRestaurant.View.Component;
 
-import RTDRestaurant.Model.ModelCard;
-import RTDRestaurant.Model.Model_CardTable;
+import RTDRestaurant.Model.ModelMonAn;
+import RTDRestaurant.Model.ModelCustomer;
+import RTDRestaurant.Model.ModelUser;
+import RTDRestaurant.Model.Model_Ban;
+import RTDRestaurant.View.Dialog.MS_ConfirmBook;
+import RTDRestaurant.View.Dialog.MS_ConfirmRename;
+import RTDRestaurant.View.Main_Frame.Main_Customer_Frame;
 import RTDRestaurant.View.Swing.ImageFood;
 import RTDRestaurant.View.Swing.ImageLogo;
 import java.awt.Color;
@@ -9,39 +14,55 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 
-public class CardTable extends javax.swing.JPanel {
+public class CardBan extends javax.swing.JPanel {
 
-    private final Model_CardTable data;
-
-    public CardTable(Model_CardTable data) {
+    private final Model_Ban data;
+    private final ModelCustomer customer;
+    private MS_ConfirmBook obj;
+   
+    public CardBan(Model_Ban data,ModelCustomer customer) {
         this.data = data;
+        this.customer=customer;
         initComponents();
+        init();
+    }
+    
+    public void init(){
+        MS_ConfirmBook obj = new MS_ConfirmBook(Main_Customer_Frame.getFrames()[0], true);
         setPreferredSize(new Dimension(300, 325));
-        lbTitle.setText(data.getName());
+        lbTitle.setText("Mã bàn: "+data.getID()+" - "+data.getName());
         lbValue.setText(data.getStatus());
         switch (data.getStatus()) {
             case "Con trong" -> {
                 img.setBackground(Color.decode("#E9E4F0"));
+                //Nếu bàn trống thì thêm event xử lý đặt bàn
+                cmdBook.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                       obj.ConfirmBook(data,customer);
+                    }
+                });
             }
             case "Dang dung bua" -> {
                 img.setBackground(Color.decode("#605C3C"));
-                cmdAccept.setText("KHÔNG THỂ ĐẶT");
-                cmdAccept.setBackground(Color.decode("#232526"));
-                cmdAccept.setEnabled(false);
+                cmdBook.setText("KHÔNG THỂ ĐẶT");
+                cmdBook.setBackground(Color.decode("#232526"));
+                cmdBook.setEnabled(false);
             }
             case "Da dat truoc" -> {
                 img.setBackground(Color.decode("#FFE000"));
-                cmdAccept.setText("KHÔNG THỂ ĐẶT");
-                cmdAccept.setBackground(Color.decode("#232526"));
-                cmdAccept.setEnabled(false);
+                cmdBook.setText("KHÔNG THỂ ĐẶT");
+                cmdBook.setBackground(Color.decode("#232526"));
+                cmdBook.setEnabled(false);
             }
             default -> {
             }
         }
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -49,7 +70,7 @@ public class CardTable extends javax.swing.JPanel {
         panelRound1 = new RTDRestaurant.View.Swing.PanelRound();
         img = new javax.swing.JLabel();
         lbValue = new javax.swing.JLabel();
-        cmdAccept = new RTDRestaurant.View.Swing.Button();
+        cmdBook = new RTDRestaurant.View.Swing.Button();
         lbTitle = new javax.swing.JLabel();
 
         panelRound1.setPreferredSize(new java.awt.Dimension(300, 300));
@@ -63,14 +84,14 @@ public class CardTable extends javax.swing.JPanel {
         lbValue.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbValue.setText("Value");
 
-        cmdAccept.setBackground(new java.awt.Color(108, 91, 123));
-        cmdAccept.setForeground(new java.awt.Color(255, 255, 255));
-        cmdAccept.setText("ĐẶT BÀN");
-        cmdAccept.setToolTipText("");
-        cmdAccept.setFocusable(false);
-        cmdAccept.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        cmdBook.setBackground(new java.awt.Color(108, 91, 123));
+        cmdBook.setForeground(new java.awt.Color(255, 255, 255));
+        cmdBook.setText("ĐẶT BÀN");
+        cmdBook.setToolTipText("");
+        cmdBook.setFocusable(false);
+        cmdBook.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
 
-        lbTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lbTitle.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         lbTitle.setForeground(new java.awt.Color(108, 91, 123));
         lbTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbTitle.setText("Title");
@@ -88,7 +109,7 @@ public class CardTable extends javax.swing.JPanel {
             .addComponent(img, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(panelRound1Layout.createSequentialGroup()
                 .addGap(94, 94, 94)
-                .addComponent(cmdAccept, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cmdBook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(93, 93, 93))
         );
         panelRound1Layout.setVerticalGroup(
@@ -100,8 +121,8 @@ public class CardTable extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbValue)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cmdAccept, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addComponent(cmdBook, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -127,7 +148,7 @@ public class CardTable extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private RTDRestaurant.View.Swing.Button cmdAccept;
+    private RTDRestaurant.View.Swing.Button cmdBook;
     private javax.swing.JLabel img;
     private javax.swing.JLabel lbTitle;
     private javax.swing.JLabel lbValue;

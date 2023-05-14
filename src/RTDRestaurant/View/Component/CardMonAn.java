@@ -1,27 +1,44 @@
 package RTDRestaurant.View.Component;
 
-import RTDRestaurant.Model.ModelCard;
-import RTDRestaurant.View.Swing.ImageFood;
-import RTDRestaurant.View.Swing.ImageLogo;
-import java.awt.Color;
+import RTDRestaurant.Model.ModelHoaDon;
+import RTDRestaurant.Model.ModelMonAn;
+import RTDRestaurant.View.Dialog.MS_ConfirmOrderFood;
+import RTDRestaurant.View.Main_Frame.Main_Customer_Frame;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import javax.swing.ImageIcon;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
+import javax.swing.Action;
 
-public class Card extends javax.swing.JPanel {
+public class CardMonAn extends javax.swing.JPanel {
 
-    private final ModelCard data;
-
-    public Card(ModelCard data) {
+    private final ModelMonAn data;
+    private MS_ConfirmOrderFood obj;
+    private final ModelHoaDon HoaDon;
+    public CardMonAn(ModelMonAn data,ModelHoaDon HoaDon) {
+        this.HoaDon=HoaDon;
         this.data = data;
         initComponents();
+        init();
+    }
+
+    public void init() {
+        obj = new MS_ConfirmOrderFood(Main_Customer_Frame.getFrames()[0], true);
         setPreferredSize(new Dimension(300, 300));
         img.setIcon(data.getIcon());
         lbTitle.setText(data.getTitle());
-        lbValue.setText(data.getValue());
-
+        DecimalFormat df = new DecimalFormat("##,###,###");
+        lbValue.setText(df.format(data.getValue()) + "đ");
+        cmdOrder.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                obj.ConfirmOrder(data, Integer.parseInt(txtNum.getText()),HoaDon.getIdHoaDon());
+                txtNum.setText("0");
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -32,7 +49,7 @@ public class Card extends javax.swing.JPanel {
         lbValue = new javax.swing.JLabel();
         cmdMinus = new RTDRestaurant.View.Swing.ButtonOutLine();
         cmdAdd = new RTDRestaurant.View.Swing.ButtonOutLine();
-        cmdAccept = new RTDRestaurant.View.Swing.Button();
+        cmdOrder = new RTDRestaurant.View.Swing.Button();
         txtNum = new RTDRestaurant.View.Swing.MyTextField();
         img = new javax.swing.JLabel();
 
@@ -64,12 +81,12 @@ public class Card extends javax.swing.JPanel {
             }
         });
 
-        cmdAccept.setBackground(new java.awt.Color(108, 91, 123));
-        cmdAccept.setForeground(new java.awt.Color(242, 242, 242));
-        cmdAccept.setText("THÊM");
-        cmdAccept.setToolTipText("");
-        cmdAccept.setFocusable(false);
-        cmdAccept.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        cmdOrder.setBackground(new java.awt.Color(108, 91, 123));
+        cmdOrder.setForeground(new java.awt.Color(242, 242, 242));
+        cmdOrder.setText("THÊM");
+        cmdOrder.setToolTipText("");
+        cmdOrder.setFocusable(false);
+        cmdOrder.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
 
         txtNum.setBorder(null);
         txtNum.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -97,7 +114,7 @@ public class Card extends javax.swing.JPanel {
                 .addContainerGap(80, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(95, 95, 95)
-                .addComponent(cmdAccept, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cmdOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(94, 94, 94))
         );
         layout.setVerticalGroup(
@@ -114,7 +131,7 @@ public class Card extends javax.swing.JPanel {
                     .addComponent(cmdAdd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNum, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
-                .addComponent(cmdAccept, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmdOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(16, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -139,14 +156,14 @@ public class Card extends javax.swing.JPanel {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setColor(getBackground());
         g2.fillRoundRect(0, 0, getWidth(), getHeight(), 20, 20);
-        super.paintComponent(g); 
+        super.paintComponent(g);
     }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private RTDRestaurant.View.Swing.Button cmdAccept;
     private RTDRestaurant.View.Swing.ButtonOutLine cmdAdd;
     private RTDRestaurant.View.Swing.ButtonOutLine cmdMinus;
+    private RTDRestaurant.View.Swing.Button cmdOrder;
     private javax.swing.JLabel img;
     private javax.swing.JLabel lbTitle;
     private javax.swing.JLabel lbValue;

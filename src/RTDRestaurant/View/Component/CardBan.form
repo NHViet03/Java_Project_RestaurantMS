@@ -47,7 +47,7 @@
               <Component id="img" alignment="1" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
-                  <Component id="cmdAccept" max="32767" attributes="0"/>
+                  <Component id="cmdBook" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -61,8 +61,8 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="lbValue" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="cmdAccept" min="-2" pref="35" max="-2" attributes="0"/>
-                  <EmptySpace pref="9" max="32767" attributes="0"/>
+                  <Component id="cmdBook" min="-2" pref="35" max="-2" attributes="0"/>
+                  <EmptySpace pref="14" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -91,7 +91,7 @@
             <Property name="text" type="java.lang.String" value="Value"/>
           </Properties>
         </Component>
-        <Component class="RTDRestaurant.View.Swing.Button" name="cmdAccept">
+        <Component class="RTDRestaurant.View.Swing.Button" name="cmdBook">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="7b" green="5b" red="6c" type="rgb"/>
@@ -110,7 +110,7 @@
         <Component class="javax.swing.JLabel" name="lbTitle">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="24" style="1"/>
+              <Font name="Segoe UI" size="20" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="7b" green="5b" red="6c" type="rgb"/>

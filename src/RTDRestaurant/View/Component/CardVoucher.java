@@ -1,8 +1,8 @@
 package RTDRestaurant.View.Component;
 
-import RTDRestaurant.Model.ModelCard;
+import RTDRestaurant.Model.ModelMonAn;
 import RTDRestaurant.Model.ModelVoucher;
-import RTDRestaurant.Model.Model_CardTable;
+import RTDRestaurant.Model.Model_Ban;
 import RTDRestaurant.View.Swing.ImageFood;
 import RTDRestaurant.View.Swing.ImageLogo;
 import java.awt.Color;
