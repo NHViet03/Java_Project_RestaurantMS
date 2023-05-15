@@ -4,14 +4,15 @@ package RTDRestaurant.View.Main_Frame;
 import RTDRestaurant.Controller.Connection.DatabaseConnection;
 import RTDRestaurant.Controller.Event.EventMenuSelected;
 import RTDRestaurant.Model.ModelUser;
-import RTDRestaurant.View.Component.OrderBar;
-import RTDRestaurant.View.Component.Menu;
-import RTDRestaurant.View.Form.AboutUs_Form;
-import RTDRestaurant.View.Form.Account_Form;
-import RTDRestaurant.View.Form.FoodMenu_Form;
+import RTDRestaurant.View.Component.Customer_Component.OrderBar;
+import RTDRestaurant.View.Component.Customer_Component.Menu;
+import RTDRestaurant.View.Form.Customer_Form.AboutUs_Form;
+import RTDRestaurant.View.Form.Customer_Form.Account_Form;
+import RTDRestaurant.View.Form.Customer_Form.Bill_Form;
+import RTDRestaurant.View.Form.Customer_Form.FoodMenu_Form;
 import RTDRestaurant.View.Form.MainForm;
-import RTDRestaurant.View.Form.TableMenu_Form;
-import RTDRestaurant.View.Form.Voucher_Form;
+import RTDRestaurant.View.Form.Customer_Form.TableMenu_Form;
+import RTDRestaurant.View.Form.Customer_Form.Voucher_Form;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.sql.SQLException;
@@ -84,6 +85,7 @@ public class Main_Customer_Frame extends javax.swing.JFrame {
                         main.showForm(new Voucher_Form(user));
                     }
                     case 8 -> {
+                        main.showForm(new Bill_Form(user));
                     }
                     case 9 -> {
                         dispose();

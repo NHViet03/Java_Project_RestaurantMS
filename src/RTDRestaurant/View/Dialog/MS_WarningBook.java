@@ -75,6 +75,8 @@ public class MS_WarningBook extends javax.swing.JDialog {
         setUndecorated(true);
 
         panelRound1.setBackground(new java.awt.Color(244, 244, 244));
+        panelRound1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 102, 102), 2));
+        panelRound1.setFocusCycleRoot(true);
         panelRound1.setOpaque(true);
 
         lbTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N

@@ -89,6 +89,7 @@ public class MS_ConfirmBook extends javax.swing.JDialog {
         setUndecorated(true);
 
         panelRound1.setBackground(new java.awt.Color(244, 244, 244));
+        panelRound1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(134, 168, 231), 2));
         panelRound1.setOpaque(true);
 
         lbTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -157,7 +158,7 @@ public class MS_ConfirmBook extends javax.swing.JDialog {
                 .addComponent(lbTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(lbMessage)
-                .addGap(20, 20, 20)
+                .addGap(25, 25, 25)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmdOK, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmdCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))

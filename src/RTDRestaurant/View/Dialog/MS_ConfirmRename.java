@@ -2,7 +2,7 @@ package RTDRestaurant.View.Dialog;
 
 import RTDRestaurant.Controller.Service.ServiceCustomer;
 import RTDRestaurant.Model.ModelCustomer;
-import RTDRestaurant.View.Form.Account_Form;
+import RTDRestaurant.View.Form.Customer_Form.Account_Form;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.GradientPaint;
@@ -19,8 +19,7 @@ import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 
 public class MS_ConfirmRename extends javax.swing.JDialog {
-    
-    private boolean ok;
+
     private final Animator animator;
     private boolean show = true;
     private Frame frame;
@@ -42,23 +41,23 @@ public class MS_ConfirmRename extends javax.swing.JDialog {
                     setOpacity(1f - fraction);
                 }
             }
-            
+
             @Override
             public void end() {
                 if (show == false) {
                     setVisible(false);
                 }
             }
-            
+
         };
         animator = new Animator(200, target);
         animator.setResolution(0);
         animator.setAcceleration(0.5f);
     }
-    
+
     public void reNameCustomer(String newName, ModelCustomer data) {
         setLocationRelativeTo(frame);
-        lbMessage.setText("Bạn có chắc đổi tên KH thành "+newName+" không ?");
+        lbMessage.setText("Bạn có chắc đổi tên KH thành " + newName + " không ?");
         animator.start();
         cmdOK.addActionListener(new ActionListener() {
             @Override
@@ -70,11 +69,11 @@ public class MS_ConfirmRename extends javax.swing.JDialog {
                     Logger.getLogger(Account_Form.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            
+
         });
         setVisible(true);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -91,6 +90,7 @@ public class MS_ConfirmRename extends javax.swing.JDialog {
         setUndecorated(true);
 
         panelRound1.setBackground(new java.awt.Color(244, 244, 244));
+        panelRound1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(134, 168, 231), 2));
         panelRound1.setOpaque(true);
 
         lbTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -159,7 +159,7 @@ public class MS_ConfirmRename extends javax.swing.JDialog {
                 .addComponent(lbTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(lbMessage)
-                .addGap(20, 20, 20)
+                .addGap(25, 25, 25)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmdOK, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmdCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -191,10 +191,9 @@ public class MS_ConfirmRename extends javax.swing.JDialog {
     }//GEN-LAST:event_cmdOKActionPerformed
 
     private void cmdCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCancelActionPerformed
-        ok = true;
         closeMenu();
     }//GEN-LAST:event_cmdCancelActionPerformed
-    
+
     private void closeMenu() {
         if (animator.isRunning()) {
             animator.stop();
@@ -202,7 +201,7 @@ public class MS_ConfirmRename extends javax.swing.JDialog {
         show = false;
         animator.start();
     }
-    
+
     public void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -210,7 +209,7 @@ public class MS_ConfirmRename extends javax.swing.JDialog {
         g2.setPaint(gp);
         g2.fillRoundRect(0, 0, getWidth(), getHeight(), 15, 15);
         g2.fillRect(0, 0, getWidth(), getHeight());
-        super.paintComponents(g);        
+        super.paintComponents(g);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

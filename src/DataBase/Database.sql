@@ -344,6 +344,7 @@ ALTER TABLE CTHD
  (ID_MonAn) REFERENCES MonAn(ID_MonAn);
  
 
+SELECT ID_HoaDon,CTHD.ID_MonAn, TenMon,SoLuong,Thanhtien FROM CTHD JOIN MonAn ON MonAn.ID_MonAn=CTHD.ID_MonAn WHERE ID_HoaDon=140
 
 
 
@@ -354,31 +355,66 @@ ALTER TABLE CTHD
 
 --- Tao Trigger
 
--- Thanh tien o CTHD bang SoLuong x Dongia cua mon an do
+-- Khi khach hang them mon an da co trong CTHD, tang so luong cua CTHD len de tranh vi pham rang buoc khoa chinh
+-- Neu chua co, cap nhat thay doi Thanh tien = So luong x Don gia
+
 CREATE OR REPLACE TRIGGER CTHD_Thanhtien
-BEFORE INSERT OR UPDATE ON CTHD
+BEFORE INSERT OR UPDATE OF SoLuong ON CTHD
 FOR EACH ROW
 DECLARE 
-    gia MonAn.Dongia%TYPE;
+    gia MonAn.DonGia%TYPE;
 BEGIN
     SELECT DonGia
     INTO gia
     FROM MonAn
-    Where MonAn.ID_MonAn=:new.ID_MonAn;
+    WHERE MonAn.ID_MonAn = :new.ID_MonAn;
     
-    :new.Thanhtien := :new.SoLuong * gia;
+    :new.ThanhTien := :new.SoLuong * gia;
+    
 END;
+/
+-- Thanh tien o CTHD bang SoLuong x Dongia cua mon an do
+--drop trigger CTHD_Thanhtien;
+--
+--CREATE OR REPLACE TRIGGER CTHD_Thanhtien
+--BEFORE INSERT OR UPDATE ON CTHD
+--FOR EACH ROW
+--DECLARE 
+--    gia MonAn.DonGia%TYPE;
+--BEGIN
+--    SELECT DonGia
+--    INTO gia
+--    FROM MonAn
+--    WHERE MonAn.ID_MonAn = :new.ID_MonAn;
+--    
+--    :new.ThanhTien := :new.SoLuong * gia;
+--END;
+/
+
+
+
 --- Tien mon an o Hoa Don bang tong thanh tien o CTHD
 CREATE OR REPLACE TRIGGER HD_TienMonAn
-AFTER INSERT OR UPDATE ON CTHD
+AFTER INSERT OR UPDATE OR DELETE ON CTHD
 FOR EACH ROW
 BEGIN
-    UPDATE HoaDon SET TienMonAn = TienMonAn + :new.ThanhTien WHERE HoaDon.ID_HoaDon=:new.ID_HoaDon;
+    IF INSERTING THEN    
+        UPDATE HoaDon SET TienMonAn = TienMonAn + :new.ThanhTien WHERE HoaDon.ID_HoaDon=:new.ID_HoaDon;
+    END IF;
+    
+    IF UPDATING THEN    
+        UPDATE HoaDon SET TienMonAn = TienMonAn + :new.ThanhTien - :old.ThanhTien WHERE HoaDon.ID_HoaDon=:new.ID_HoaDon;
+    END IF;
+    
+    IF DELETING THEN    
+        UPDATE HoaDon SET TienMonAn = TienMonAn - :old.ThanhTien WHERE HoaDon.ID_HoaDon=:new.ID_HoaDon;
+    END IF;
 END;
+
 
 -- Tong tien o Hoa Don = Tien mon an - Tien giam
 CREATE OR REPLACE TRIGGER HD_Tongtien
-BEFORE INSERT OR UPDATE ON HoaDon
+BEFORE INSERT OR UPDATE OF TienMonAn,TienGiam ON HoaDon
 FOR EACH ROW
 BEGIN
     :new.Tongtien := :new.TienMonAn-:new.TienGiam;

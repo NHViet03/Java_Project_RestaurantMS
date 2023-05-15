@@ -3,7 +3,7 @@ package RTDRestaurant.View.Dialog;
 import RTDRestaurant.Controller.Service.ServiceCustomer;
 import RTDRestaurant.Model.ModelCustomer;
 import RTDRestaurant.Model.ModelMonAn;
-import RTDRestaurant.View.Form.Account_Form;
+import RTDRestaurant.View.Form.Customer_Form.Account_Form;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.GradientPaint;
@@ -92,6 +92,7 @@ public class MS_ConfirmOrderFood extends javax.swing.JDialog {
         setUndecorated(true);
 
         panelRound1.setBackground(new java.awt.Color(244, 244, 244));
+        panelRound1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(134, 168, 231), 2, true));
         panelRound1.setOpaque(true);
 
         lbTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -166,7 +167,7 @@ public class MS_ConfirmOrderFood extends javax.swing.JDialog {
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(30, 30, 30)
                 .addComponent(lbIcon)
                 .addGap(20, 20, 20)
                 .addComponent(lbTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -174,11 +175,11 @@ public class MS_ConfirmOrderFood extends javax.swing.JDialog {
                 .addComponent(lbMessage)
                 .addGap(18, 18, 18)
                 .addComponent(lbTotal)
-                .addGap(25, 25, 25)
+                .addGap(30, 30, 30)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmdOK, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmdCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(30, Short.MAX_VALUE))
+                    .addComponent(cmdOK, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                    .addComponent(cmdCancel, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE))
+                .addGap(30, 30, 30))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

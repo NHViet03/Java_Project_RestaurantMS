@@ -1,10 +1,10 @@
 package RTDRestaurant.Controller.Service;
 
 import RTDRestaurant.Controller.Connection.DatabaseConnection;
+import RTDRestaurant.Model.ModelCTHD;
 import RTDRestaurant.Model.ModelMonAn;
 import RTDRestaurant.Model.ModelCustomer;
 import RTDRestaurant.Model.ModelHoaDon;
-import RTDRestaurant.Model.ModelUser;
 import RTDRestaurant.Model.ModelVoucher;
 import RTDRestaurant.Model.Model_Ban;
 import java.sql.Connection;
@@ -135,12 +135,12 @@ public class ServiceCustomer {
         p.setInt(1, userID);
         ResultSet r = p.executeQuery();
         while (r.next()) {
-            DecimalFormat df = new DecimalFormat("###,###,###");
+            
             int id = r.getInt("ID_KH");
             String name = r.getString("TenKH");
             String date = r.getString("NgayTG");
-            String sales = df.format(r.getInt("Doanhso"));
-            String points = df.format(r.getInt("Diemtichluy"));
+            int sales = r.getInt("Doanhso");
+            int points = r.getInt("Diemtichluy");
             data = new ModelCustomer(id, name, date, sales, points);
         }
         r.close();
@@ -242,32 +242,96 @@ public class ServiceCustomer {
         p.setInt(1, customer.getID_KH());
         ResultSet r = p.executeQuery();
         while (r.next()) {
-            int idHoaDon=r.getInt(1);
-            int idKH=r.getInt(2);
-            int idBan=r.getInt(3);
-            String ngayHD=r.getString(4);
-            int tienMonAn=r.getInt(5);
-            String code_voucher=r.getString(6);
-            int tienGiam=r.getInt(7);
-            int tongtien=r.getInt(8);
-            String trangthai=r.getString(9);
-            hoadon= new ModelHoaDon(idHoaDon, idKH, idBan, ngayHD, tienMonAn, code_voucher, tienGiam, tongtien, trangthai);
+            int idHoaDon = r.getInt(1);
+            int idKH = r.getInt(2);
+            int idBan = r.getInt(3);
+            String ngayHD = r.getString(4);
+            int tienMonAn = r.getInt(5);
+            String code_voucher = r.getString(6);
+            int tienGiam = r.getInt(7);
+            int tongtien = r.getInt(8);
+            String trangthai = r.getString(9);
+            hoadon = new ModelHoaDon(idHoaDon, idKH, idBan, ngayHD, tienMonAn, code_voucher, tienGiam, tongtien, trangthai);
         }
         r.close();
         p.close();
         return hoadon;
     }
-    
+
     //Thêm món ăn mới khách hàng vừa đặt vào CTHD
-    public void InsertCTHD(int ID_HoaDon,int ID_MonAn,int soluong) throws SQLException {
-        //Thêm Hoá Đơn mới
-        String sql = "INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (?,?,?)";
+    public void InsertCTHD(int ID_HoaDon, int ID_MonAn, int soluong) throws SQLException {
+        //Kiểm tra món ăn đã có trong CTHD hay chưa, nếu đã có cập nhật số lượng, nếu chưa thì thêm CTHD mới
+        String sql = "SELECT 1 FROM CTHD WHERE ID_HoaDon=? AND ID_MonAn=?";
         PreparedStatement p = con.prepareStatement(sql);
         p.setInt(1, ID_HoaDon);
         p.setInt(2, ID_MonAn);
-        p.setInt(3, soluong);
-        p.execute();
+        ResultSet r = p.executeQuery();
+        if (r.next()) {
+            // Nếu tồn tại 
+            String sql_update = "UPDATE CTHD SET SoLuong=SoLuong+? WHERE ID_HoaDon=? AND ID_MonAn=?";
+            PreparedStatement p1 = con.prepareStatement(sql_update);
+            p1.setInt(1, soluong);
+            p1.setInt(2, ID_HoaDon);
+            p1.setInt(3, ID_MonAn);
+            p1.execute();
+            p1.close();
+        } else {
+            //Nếu không tồn tại
+            String sql_insert = "INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (?,?,?)";
+            PreparedStatement p1 = con.prepareStatement(sql_insert);
+            p1.setInt(1, ID_HoaDon);
+            p1.setInt(2, ID_MonAn);
+            p1.setInt(3, soluong);
+            p1.execute();
+            p1.close();
+        }
         p.close();
+        r.close();
+    }
 
+    // Lấy danh sách CTHD từ ID_HoaDon
+    public ArrayList<ModelCTHD> getCTHD(int ID_HoaDon) throws SQLException {
+        ArrayList<ModelCTHD> list = new ArrayList<>();
+        String sql = "SELECT ID_HoaDon,CTHD.ID_MonAn, TenMon,SoLuong,Thanhtien FROM CTHD "
+                + "JOIN MonAn ON MonAn.ID_MonAn=CTHD.ID_MonAn WHERE ID_HoaDon=?";
+        PreparedStatement p = con.prepareStatement(sql);
+        p.setInt(1, ID_HoaDon);
+        ResultSet r = p.executeQuery();
+        while (r.next()) {
+            int ID_HD=r.getInt(1);
+            int ID_MonAn=r.getInt(2);
+            String tenMonAn=r.getString(3);
+            int soluong=r.getInt(4);
+            int thanhTien=r.getInt(5);
+            ModelCTHD data=new ModelCTHD(ID_HD, ID_MonAn, tenMonAn, soluong, thanhTien);
+            list.add(data);
+        }
+        r.close();
+        p.close();
+        return list;
+    }
+    public ArrayList<ModelHoaDon> getListHD(int ID_KH) throws SQLException {
+        ArrayList<ModelHoaDon> list = new ArrayList<>();
+        String sql = "SELECT ID_HoaDon,ID_KH,ID_Ban,to_char(NgayHD,'dd-mm-yyyy') AS Ngay,TienMonAn,Code_Voucher,TienGiam,Tongtien,Trangthai FROM HoaDon "
+                + "WHERE ID_KH=?";
+        PreparedStatement p = con.prepareStatement(sql);
+        p.setInt(1, ID_KH);
+        ResultSet r = p.executeQuery();
+        while (r.next()) {
+            int idHoaDon = r.getInt(1);
+            int idKH = r.getInt(2);
+            int idBan = r.getInt(3);
+            String ngayHD = r.getString(4);
+            int tienMonAn = r.getInt(5);
+            String code_voucher = r.getString(6);
+            int tienGiam = r.getInt(7);
+            int tongtien = r.getInt(8);
+            String trangthai = r.getString(9);
+            ModelHoaDon hoadon = new ModelHoaDon(idHoaDon, idKH, idBan, ngayHD, tienMonAn, code_voucher, tienGiam, tongtien, trangthai);
+            list.add(hoadon);
+        }
+        r.close();
+        p.close();
+        return list;
     }
 }

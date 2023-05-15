@@ -6,10 +6,6 @@ public class ModelCustomer {
         return ID_KH;
     }
 
-    public void setID_KH(int ID_KH) {
-        this.ID_KH = ID_KH;
-    }
-
     public String getName() {
         return name;
     }
@@ -22,30 +18,18 @@ public class ModelCustomer {
         return dateJoin;
     }
 
-    public void setDateJoin(String dateJoin) {
-        this.dateJoin = dateJoin;
-    }
-
-    public String getSales() {
+    public int getSales() {
         return sales;
     }
 
-    public void setSales(String sales) {
-        this.sales = sales;
-    }
-
-    public String getPoints() {
+    public int getPoints() {
         return points;
-    }
-
-    public void setPoints(String points) {
-        this.points = points;
     }
 
     public ModelCustomer() {
     }
 
-    public ModelCustomer(int ID_KH, String name, String dateJoin, String sales, String points) {
+    public ModelCustomer(int ID_KH, String name, String dateJoin, int sales, int points) {
         this.ID_KH = ID_KH;
         this.name = name;
         this.dateJoin = dateJoin;
@@ -53,12 +37,10 @@ public class ModelCustomer {
         this.points = points;
     }
 
-    
-
     private int ID_KH;
     private String name;
     private String dateJoin;
-    private String sales;
-    private String points;
+    private int sales;
+    private int points;
 
 }
