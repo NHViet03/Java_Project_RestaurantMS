@@ -1,23 +1,13 @@
 
 package RTDRestaurant.View.Form.Customer_Form;
 
-import RTDRestaurant.Controller.Connection.DatabaseConnection;
 import RTDRestaurant.Controller.Service.ServiceCustomer;
-import RTDRestaurant.Model.ModelMonAn;
 import RTDRestaurant.Model.ModelCustomer;
 import RTDRestaurant.Model.ModelUser;
 import RTDRestaurant.Model.Model_Ban;
-import RTDRestaurant.View.Component.Customer_Component.CardMonAn;
 import RTDRestaurant.View.Component.Customer_Component.CardBan;
-import RTDRestaurant.View.Dialog.MS_ConfirmBook;
-import RTDRestaurant.View.Dialog.MS_ConfirmRename;
-import RTDRestaurant.View.Main_Frame.Main_Customer_Frame;
 import RTDRestaurant.View.Swing.CustomScrollBar.ScrollBarCustom;
 import RTDRestaurant.View.Swing.WrapLayout;
-import java.awt.Color;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;

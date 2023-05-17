@@ -6,9 +6,8 @@ import RTDRestaurant.Model.ModelCustomer;
 import RTDRestaurant.Model.ModelHoaDon;
 import RTDRestaurant.Model.ModelUser;
 import RTDRestaurant.View.Component.Customer_Component.CardMonAn;
-import RTDRestaurant.View.Dialog.MS_ConfirmOrderFood;
 import RTDRestaurant.View.Dialog.MS_PayBill;
-import RTDRestaurant.View.Dialog.MS_WarningBook;
+import RTDRestaurant.View.Dialog.MS_Warning;
 import RTDRestaurant.View.Main_Frame.Main_Customer_Frame;
 import RTDRestaurant.View.Swing.CustomScrollBar.ScrollBarCustom;
 import RTDRestaurant.View.Swing.WrapLayout;
@@ -26,20 +25,20 @@ public class FoodMenu_Form extends javax.swing.JPanel {
     private final ModelUser user;
     private ModelCustomer customer;
     private ModelHoaDon HoaDon;
-    private final MS_WarningBook warning;
+    private final MS_Warning warning;
     private MS_PayBill obj;
 
     public FoodMenu_Form(String type, ModelUser user) {
         this.type = type;
         this.user = user;
         service = new ServiceCustomer();
-        warning = new MS_WarningBook(Main_Customer_Frame.getFrames()[0], true);
+        warning = new MS_Warning(Main_Customer_Frame.getFrames()[0], true);
         obj = new MS_PayBill(Main_Customer_Frame.getFrames()[0], true);
         initComponents();    
         init();
         //Kiểm tra Khách hàng đã đặt bàn trước khi gọi món hay chưa
         if (HoaDon == null) {
-            warning.Warning();
+            warning.WarningBook();
         } else {
             txtTableName.setText(HoaDon.getIdBan() + "");
         }
@@ -165,7 +164,6 @@ public class FoodMenu_Form extends javax.swing.JPanel {
         panel = new javax.swing.JPanel();
         lbTitle = new javax.swing.JLabel();
         txtSearch = new RTDRestaurant.View.Swing.MyTextField();
-        header1 = new RTDRestaurant.View.Component.Customer_Component.OrderBar();
         orderby = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         cmdShowBill = new RTDRestaurant.View.Swing.Button();
@@ -184,7 +182,7 @@ public class FoodMenu_Form extends javax.swing.JPanel {
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 907, Short.MAX_VALUE)
+            .addGap(0, 963, Short.MAX_VALUE)
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -279,9 +277,7 @@ public class FoodMenu_Form extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cmdShowBill, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jSeparator2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(header1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -303,7 +299,6 @@ public class FoodMenu_Form extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1)
                 .addContainerGap())
-            .addComponent(header1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -331,7 +326,6 @@ public class FoodMenu_Form extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RTDRestaurant.View.Swing.Button cmdShowBill;
-    private RTDRestaurant.View.Component.Customer_Component.OrderBar header1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator2;

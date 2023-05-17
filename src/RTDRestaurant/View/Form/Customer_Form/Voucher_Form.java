@@ -3,6 +3,7 @@ package RTDRestaurant.View.Form.Customer_Form;
 
 import RTDRestaurant.Controller.Service.ServiceCustomer;
 import RTDRestaurant.Model.ModelCustomer;
+import RTDRestaurant.Model.ModelHoaDon;
 import RTDRestaurant.Model.ModelUser;
 import RTDRestaurant.Model.ModelVoucher;
 import RTDRestaurant.View.Component.Customer_Component.CardVoucher;
@@ -19,7 +20,8 @@ public class Voucher_Form extends javax.swing.JPanel {
     private ModelUser user;
     private ServiceCustomer service;
     private ArrayList<ModelVoucher> list;
-
+    private ModelCustomer customer;
+    private ModelHoaDon hoadon;
     public Voucher_Form() {
         service=new ServiceCustomer();
         initComponents();
@@ -37,13 +39,16 @@ public class Voucher_Form extends javax.swing.JPanel {
         panel.setLayout(new WrapLayout(WrapLayout.LEADING,20,20));
         txtSearch.setHint("Tìm kiếm Voucher . . .");
         jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
+        
+        getCustomerAndBill();
         //Thêm data cho Menu
         initMenuVoucher();
-        getUserPoint();
+        
     }
-    public void getUserPoint(){
+    public void getCustomerAndBill(){
         try {
-            ModelCustomer customer=service.getCustomer(user.getUserID());
+            customer=service.getCustomer(user.getUserID());
+            hoadon=service.FindHoaDon(customer);
             txtPoint.setText(customer.getPoints()+" xu");
         } catch (SQLException ex) {
             Logger.getLogger(Voucher_Form.class.getName()).log(Level.SEVERE, null, ex);
@@ -53,7 +58,7 @@ public class Voucher_Form extends javax.swing.JPanel {
         try {
             list = service.MenuVoucher();
             for(ModelVoucher data:list){  
-            panel.add(new CardVoucher(data));
+            panel.add(new CardVoucher(data,customer,hoadon));
             }
         }catch(SQLException ex) {
             ex.printStackTrace();
@@ -63,7 +68,7 @@ public class Voucher_Form extends javax.swing.JPanel {
         panel.removeAll();
         for(ModelVoucher data:list){
             if(data.getDescription().toLowerCase().contains(txt.toLowerCase())){
-                panel.add(new CardVoucher(data));
+                panel.add(new CardVoucher(data,customer,hoadon));
             }
         }
         panel.repaint();
@@ -74,7 +79,7 @@ public class Voucher_Form extends javax.swing.JPanel {
             list=service.MenuVoucherbyPoint(bypoint);
             panel.removeAll();
             for(ModelVoucher data:list){   
-            panel.add(new CardVoucher(data));
+            panel.add(new CardVoucher(data,customer,hoadon));
             }
             
         } catch (SQLException ex) {

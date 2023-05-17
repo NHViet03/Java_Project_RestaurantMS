@@ -407,16 +407,76 @@ BEGIN
     END IF;
     
     IF DELETING THEN    
-        UPDATE HoaDon SET TienMonAn = TienMonAn - :old.ThanhTien WHERE HoaDon.ID_HoaDon=:new.ID_HoaDon;
+        UPDATE HoaDon SET TienMonAn = TienMonAn - :old.ThanhTien WHERE HoaDon.ID_HoaDon=:old.ID_HoaDon;
     END IF;
 END;
 
 
 -- Tong tien o Hoa Don = Tien mon an - Tien giam
 CREATE OR REPLACE TRIGGER HD_Tongtien
-BEFORE INSERT OR UPDATE OF TienMonAn,TienGiam ON HoaDon
-FOR EACH ROW
+AFTER INSERT OR UPDATE OF TienMonAn,TienGiam ON HoaDon
 BEGIN
-    :new.Tongtien := :new.TienMonAn-:new.TienGiam;
+    UPDATE HoaDon SET Tongtien= TienMonAn - TienGiam;
 END;
+
+
+-- Procedure giam Diem tich luy cua KH khi doi Voucher
+
+CREATE OR REPLACE PROCEDURE KH_TruDTL(ID KHACHHANG.ID_KH%TYPE,diemdoi NUMBER)
+IS 
+BEGIN 
+    UPDATE KHACHHANG SET Diemtichluy = Diemtichluy - diemdoi WHERE ID_KH=ID;
+END;
+
+-- Procedure giam So Luong cua Voucher di 1 khi KH doi Voucher
+
+CREATE OR REPLACE PROCEDURE Voucher_GiamSL(code Voucher.Code_Voucher%TYPE)
+IS 
+BEGIN 
+    UPDATE Voucher SET SoLuong = SoLuong - 1 WHERE Code_Voucher=code;
+END;
+
+-- Khi cap nhat Code_Voucher o HoaDon, Tinh tien giam theo thong tin cua Voucher do va giam Diem tich luy cua KH
+CREATE OR REPLACE TRIGGER HD_DoiVoucher
+BEFORE UPDATE OF Code_Voucher ON HoaDon
+FOR EACH ROW
+DECLARE 
+    TongtienLoaiMonAnduocgiam number(8,0);
+    v_Diemdoi number;
+    v_Phantram number;
+    v_LoaiMA Voucher.LoaiMA%TYPE;
+    
+BEGIN
+    IF(:new.Code_Voucher is not null) THEN
+        SELECT Diem,Phantram,LoaiMA
+        INTO v_Diemdoi,v_Phantram,v_LoaiMA
+        FROM Voucher
+        WHERE Code_Voucher=:new.Code_Voucher;
+        
+        KH_TruDTL(:new.ID_KH,v_diemdoi);
+        Voucher_GiamSL(:new.Code_Voucher);
+        
+        IF(v_LoaiMA='All') THEN
+            TongtienLoaiMonAnduocgiam := :new.TienMonAn;
+        ELSE 
+            SELECT SUM(Thanhtien)
+            INTO TongtienLoaiMonAnduocgiam
+            FROM CTHD 
+            JOIN MonAn ON MonAn.ID_MonAn = CTHD.ID_MonAn
+            WHERE ID_HoaDon = :new.ID_HoaDon AND LOAI = v_LoaiMA;
+        END IF;
+        
+        :new.Tiengiam := ROUND(TongtienLoaiMonAnduocgiam*v_Phantram/100);
+    ELSE
+        :new.Tiengiam := 0;
+    END IF;
+    
+END;
+
+
+update hoadon
+set code_voucher='loQy'
+where id_hoadon =161;
+
+
  

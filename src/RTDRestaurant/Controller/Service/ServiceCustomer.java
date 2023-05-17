@@ -11,7 +11,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -310,10 +309,11 @@ public class ServiceCustomer {
         p.close();
         return list;
     }
+    //Lấy toàn bộ danh sách hóa đơn của một khách hàng
     public ArrayList<ModelHoaDon> getListHD(int ID_KH) throws SQLException {
         ArrayList<ModelHoaDon> list = new ArrayList<>();
         String sql = "SELECT ID_HoaDon,ID_KH,ID_Ban,to_char(NgayHD,'dd-mm-yyyy') AS Ngay,TienMonAn,Code_Voucher,TienGiam,Tongtien,Trangthai FROM HoaDon "
-                + "WHERE ID_KH=?";
+                + "WHERE ID_KH=? ORDER BY ID_HoaDon";
         PreparedStatement p = con.prepareStatement(sql);
         p.setInt(1, ID_KH);
         ResultSet r = p.executeQuery();
@@ -333,5 +333,62 @@ public class ServiceCustomer {
         r.close();
         p.close();
         return list;
+    }
+    
+    //Lấy toàn bộ danh sách hóa đơn của một khách hàng theo mốc Tổng tiền Hóa Đơn
+    public ArrayList<ModelHoaDon> getListHDOrder(int ID_KH,String order) throws SQLException {
+        ArrayList<ModelHoaDon> list = new ArrayList<>();
+        String sql = "SELECT ID_HoaDon,ID_KH,ID_Ban,to_char(NgayHD,'dd-mm-yyyy') AS Ngay,TienMonAn,Code_Voucher,TienGiam,Tongtien,Trangthai FROM HoaDon "
+                + "WHERE ID_KH=? ORDER BY ID_HoaDon";
+        switch (order) {
+            case "Tất cả":
+                sql = "SELECT ID_HoaDon,ID_KH,ID_Ban,to_char(NgayHD,'dd-mm-yyyy') AS Ngay,TienMonAn,Code_Voucher,TienGiam,Tongtien,Trangthai FROM HoaDon "
+                        + "WHERE ID_KH=? ORDER BY ID_HoaDon";
+                break;
+            case "Dưới 1.000.000đ":
+                sql = "SELECT ID_HoaDon,ID_KH,ID_Ban,to_char(NgayHD,'dd-mm-yyyy') AS Ngay,TienMonAn,Code_Voucher,TienGiam,Tongtien,Trangthai FROM HoaDon "
+                        + "WHERE ID_KH=? AND Tongtien <1000000 ORDER BY ID_HoaDon";
+                break;
+            case "Từ 1 đến 5.000.000đ":
+                sql = "SELECT ID_HoaDon,ID_KH,ID_Ban,to_char(NgayHD,'dd-mm-yyyy') AS Ngay,TienMonAn,Code_Voucher,TienGiam,Tongtien,Trangthai FROM HoaDon "
+                        + "WHERE ID_KH=? AND Tongtien BETWEEN 1000000 AND 5000001 ORDER BY ID_HoaDon";
+                break;
+            case "Trên 5.000.000đ":
+                sql = "SELECT ID_HoaDon,ID_KH,ID_Ban,to_char(NgayHD,'dd-mm-yyyy') AS Ngay,TienMonAn,Code_Voucher,TienGiam,Tongtien,Trangthai FROM HoaDon "
+                        + "WHERE ID_KH=? AND Tongtien >5000000 ORDER BY ID_HoaDon";
+                break;
+            default:
+                break;
+        }
+        PreparedStatement p = con.prepareStatement(sql);
+        p.setInt(1, ID_KH);
+        ResultSet r = p.executeQuery();
+        while (r.next()) {
+            int idHoaDon = r.getInt(1);
+            int idKH = r.getInt(2);
+            int idBan = r.getInt(3);
+            String ngayHD = r.getString(4);
+            int tienMonAn = r.getInt(5);
+            String code_voucher = r.getString(6);
+            int tienGiam = r.getInt(7);
+            int tongtien = r.getInt(8);
+            String trangthai = r.getString(9);
+            ModelHoaDon hoadon = new ModelHoaDon(idHoaDon, idKH, idBan, ngayHD, tienMonAn, code_voucher, tienGiam, tongtien, trangthai);
+            list.add(hoadon);
+        }
+        r.close();
+        p.close();
+        return list;
+    }
+    
+    //Sau khi khách hàng đổi Voucher ở phần Điểm tích lũy, áp dụng trực tiếp lên hóa đơn mà khách hàng đang sử dụng
+    //Thực hiện Trigger giảm Điểm tích lũy của Khách hàng và tính Tiền Giảm giá
+    public void exchangeVoucher(int ID_HoaDon, String Code_Voucher) throws SQLException{
+        String sql = "UPDATE HoaDon SET Code_Voucher=? WHERE ID_HoaDon=?";
+        PreparedStatement p = con.prepareStatement(sql);
+        p.setString(1, Code_Voucher);
+        p.setInt(2, ID_HoaDon);
+        p.execute();
+        p.close();
     }
 }

@@ -60,13 +60,29 @@ public class Bill_Form extends javax.swing.JPanel {
         }
     }
     public void searchTable(String txt){
-        
-        
-        
+        tableHD.removeAllRow();
+        for(ModelHoaDon data:list){
+            if((data.getIdHoaDon()+"").toLowerCase().contains(txt.toLowerCase())){
+                tableHD.addRow(new Object[]{data.getIdHoaDon(),data.getNgayHD(),df.format(data.getTienMonAn())+"đ"
+                               ,data.getCode_voucher(),df.format(data.getTienGiam())+"đ"
+                               ,df.format(data.getTongtien())+"đ"});
+            }
+        }
+        tableHD.repaint();
+        tableHD.revalidate();
     }
-    public void initMenuVoucherbyPoint(String bypoint){
-        
-        
+    public void initTableHDbyTotal(String byTotal){
+        try {
+            list=service.getListHDOrder(user.getUserID(),byTotal);
+            tableHD.removeAllRow();
+            for(ModelHoaDon data:list){  
+                tableHD.addRow(new Object[]{data.getIdHoaDon(),data.getNgayHD(),df.format(data.getTienMonAn())+"đ"
+                               ,data.getCode_voucher(),df.format(data.getTienGiam())+"đ"
+                               ,df.format(data.getTongtien())+"đ"});
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Bill_Form.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -122,7 +138,6 @@ public class Bill_Form extends javax.swing.JPanel {
 
         lbDso.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lbDso.setForeground(new java.awt.Color(89, 89, 89));
-        lbDso.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbDso.setText("Doanh số của bạn");
 
         txtPoint.setEditable(false);
@@ -215,15 +230,17 @@ public class Bill_Form extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
+       
         searchTable(txtSearch.getText().trim());
     }//GEN-LAST:event_txtSearchActionPerformed
 
     private void txtSearchMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchMouseEntered
+        
         searchTable(txtSearch.getText().trim());
     }//GEN-LAST:event_txtSearchMouseEntered
 
     private void cbboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbboxActionPerformed
-        initMenuVoucherbyPoint(cbbox.getSelectedItem().toString());
+        initTableHDbyTotal(cbbox.getSelectedItem().toString());
     }//GEN-LAST:event_cbboxActionPerformed
 
 

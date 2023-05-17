@@ -48,7 +48,7 @@
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
-                  <Component id="cmdAccept" max="32767" attributes="0"/>
+                  <Component id="cmdExchange" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -64,7 +64,7 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="lbPoint" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="cmdAccept" min="-2" pref="35" max="-2" attributes="0"/>
+                  <Component id="cmdExchange" min="-2" pref="35" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -94,7 +94,7 @@
             <Property name="text" type="java.lang.String" value="Quantity"/>
           </Properties>
         </Component>
-        <Component class="RTDRestaurant.View.Swing.Button" name="cmdAccept">
+        <Component class="RTDRestaurant.View.Swing.Button" name="cmdExchange">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="7b" green="5b" red="6c" type="rgb"/>

@@ -1,28 +1,54 @@
 package RTDRestaurant.View.Component.Customer_Component;
 
-import RTDRestaurant.Model.ModelMonAn;
+import RTDRestaurant.Model.ModelCustomer;
+import RTDRestaurant.Model.ModelHoaDon;
 import RTDRestaurant.Model.ModelVoucher;
-import RTDRestaurant.Model.Model_Ban;
-import RTDRestaurant.View.Swing.ImageFood;
-import RTDRestaurant.View.Swing.ImageLogo;
+import RTDRestaurant.View.Dialog.MS_ConfirmExchangeVoucher;
+import RTDRestaurant.View.Dialog.MS_Warning;
+import RTDRestaurant.View.Main_Frame.Main_Customer_Frame;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 
 public class CardVoucher extends javax.swing.JPanel {
 
     private final ModelVoucher data;
-
+    private final ModelCustomer customer;
+    private final ModelHoaDon hoadon;
+    private MS_Warning warning;
+    private MS_ConfirmExchangeVoucher exchange;
     public ModelVoucher getData() {
         return data;
     }
 
-    public CardVoucher(ModelVoucher data) {
+    public CardVoucher(ModelVoucher data,ModelCustomer customer,ModelHoaDon hoadon) {
         this.data = data;
+        this.customer=customer;
+        this.hoadon=hoadon;
+        warning  = new MS_Warning(Main_Customer_Frame.getFrames()[0], true);
+        exchange  = new MS_ConfirmExchangeVoucher(Main_Customer_Frame.getFrames()[0], true);
         initComponents();
+        init();
+        cmdExchange.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int Vpoint=data.getPoint();
+                if(customer.getPoints()<Vpoint){
+                    warning.WarningExchange(Vpoint-customer.getPoints());
+                }else{
+                    exchange.ConfirmExchange(hoadon, data);
+                }
+            }
+        });
+    }
+    
+    public void init(){
+        
         setPreferredSize(new Dimension(300, 325));
         ibDescription.setText(data.getDescription());
         lbQuantity.setText("Số lượng: " + data.getQuantity());
@@ -47,12 +73,11 @@ public class CardVoucher extends javax.swing.JPanel {
             }
         }
         if (data.getQuantity() == 0) {
-            cmdAccept.setText("ĐÃ HẾT");
-            cmdAccept.setBackground(Color.decode("#232526"));
-            cmdAccept.setEnabled(false);
+            cmdExchange.setText("ĐÃ HẾT");
+            cmdExchange.setBackground(Color.decode("#232526"));
+            cmdExchange.setEnabled(false);
         }
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -60,7 +85,7 @@ public class CardVoucher extends javax.swing.JPanel {
         panelRound1 = new RTDRestaurant.View.Swing.PanelRound();
         img = new javax.swing.JLabel();
         lbQuantity = new javax.swing.JLabel();
-        cmdAccept = new RTDRestaurant.View.Swing.Button();
+        cmdExchange = new RTDRestaurant.View.Swing.Button();
         ibDescription = new javax.swing.JLabel();
         lbPoint = new javax.swing.JLabel();
 
@@ -75,12 +100,12 @@ public class CardVoucher extends javax.swing.JPanel {
         lbQuantity.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbQuantity.setText("Quantity");
 
-        cmdAccept.setBackground(new java.awt.Color(108, 91, 123));
-        cmdAccept.setForeground(new java.awt.Color(255, 255, 255));
-        cmdAccept.setText("ĐỔI VOUCHER");
-        cmdAccept.setToolTipText("");
-        cmdAccept.setFocusable(false);
-        cmdAccept.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        cmdExchange.setBackground(new java.awt.Color(108, 91, 123));
+        cmdExchange.setForeground(new java.awt.Color(255, 255, 255));
+        cmdExchange.setText("ĐỔI VOUCHER");
+        cmdExchange.setToolTipText("");
+        cmdExchange.setFocusable(false);
+        cmdExchange.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
 
         ibDescription.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         ibDescription.setForeground(new java.awt.Color(108, 91, 123));
@@ -106,7 +131,7 @@ public class CardVoucher extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
                 .addGap(84, 84, 84)
-                .addComponent(cmdAccept, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cmdExchange, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(83, 83, 83))
         );
         panelRound1Layout.setVerticalGroup(
@@ -120,7 +145,7 @@ public class CardVoucher extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbPoint)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cmdAccept, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmdExchange, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
         );
 
@@ -147,7 +172,7 @@ public class CardVoucher extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private RTDRestaurant.View.Swing.Button cmdAccept;
+    private RTDRestaurant.View.Swing.Button cmdExchange;
     private javax.swing.JLabel ibDescription;
     private javax.swing.JLabel img;
     private javax.swing.JLabel lbPoint;

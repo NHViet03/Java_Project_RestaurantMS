@@ -26,6 +26,11 @@ public class ModelCustomer {
         return points;
     }
 
+    public void setPoints(int points) {
+        this.points = points;
+    }
+    
+
     public ModelCustomer() {
     }
 

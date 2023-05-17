@@ -1,8 +1,8 @@
 package RTDRestaurant.View.Dialog;
 
 import RTDRestaurant.Controller.Service.ServiceCustomer;
-import RTDRestaurant.Model.ModelCustomer;
-import RTDRestaurant.Model.Model_Ban;
+import RTDRestaurant.Model.ModelHoaDon;
+import RTDRestaurant.Model.ModelVoucher;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.GradientPaint;
@@ -18,16 +18,17 @@ import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 
-public class MS_WarningBook extends javax.swing.JDialog {
+public class MS_ConfirmExchangeVoucher extends javax.swing.JDialog {
 
     private final Animator animator;
     private boolean show = true;
     private Frame frame;
-    
+    private ServiceCustomer service;
 
-    public MS_WarningBook(java.awt.Frame parent, boolean modal) {
+    public MS_ConfirmExchangeVoucher(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        service = new ServiceCustomer();
         this.frame = parent;
         setOpacity(0f);
         getContentPane().setBackground(Color.WHITE);
@@ -54,9 +55,21 @@ public class MS_WarningBook extends javax.swing.JDialog {
         animator.setAcceleration(0.5f);
     }
 
-    public void Warning() {
+    public void ConfirmExchange(ModelHoaDon hoadon, ModelVoucher voucher) {
         setLocationRelativeTo(frame);
+        lbMessage.setText("Bạn có chắc đổi Voucher (Code:" + voucher.getCode() + ") vào Hóa Đơn (ID_HD:"+hoadon.getIdHoaDon()+") không ?");
         animator.start();
+        cmdOK.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    service.exchangeVoucher(hoadon.getIdHoaDon(),voucher.getCode());
+                } catch (SQLException ex) {
+                    Logger.getLogger(MS_ConfirmExchangeVoucher.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+        });
         setVisible(true);
     }
 
@@ -66,69 +79,88 @@ public class MS_WarningBook extends javax.swing.JDialog {
 
         panelRound1 = new RTDRestaurant.View.Swing.PanelRound();
         lbTitle = new javax.swing.JLabel();
+        cmdOK = new RTDRestaurant.View.Swing.ButtonOutLine();
+        cmdCancel = new RTDRestaurant.View.Swing.ButtonOutLine();
         lbMessage = new javax.swing.JLabel();
         lbIcon = new javax.swing.JLabel();
-        cmdClose = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(215, 215, 215));
         setUndecorated(true);
 
         panelRound1.setBackground(new java.awt.Color(244, 244, 244));
-        panelRound1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 102, 102), 2));
-        panelRound1.setFocusCycleRoot(true);
+        panelRound1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(134, 168, 231), 2));
         panelRound1.setOpaque(true);
 
         lbTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lbTitle.setForeground(new java.awt.Color(108, 91, 123));
         lbTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbTitle.setText("QUÝ KHÁCH CHƯA ĐẶT BÀN !!!");
+        lbTitle.setText("BẠN ĐÃ CHẮC CHƯA ?\n");
+
+        cmdOK.setBackground(new java.awt.Color(17, 153, 142));
+        cmdOK.setForeground(new java.awt.Color(108, 91, 123));
+        cmdOK.setText("Xác nhận");
+        cmdOK.setFocusable(false);
+        cmdOK.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cmdOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdOKActionPerformed(evt);
+            }
+        });
+
+        cmdCancel.setBackground(new java.awt.Color(237, 33, 58));
+        cmdCancel.setForeground(new java.awt.Color(108, 91, 123));
+        cmdCancel.setText("Hủy");
+        cmdCancel.setFocusable(false);
+        cmdCancel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cmdCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdCancelActionPerformed(evt);
+            }
+        });
 
         lbMessage.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbMessage.setForeground(new java.awt.Color(108, 91, 123));
         lbMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbMessage.setText("Quý khách vui lòng đặt bàn trước khi gọi món.");
+        lbMessage.setText("Message");
 
-        lbIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/warning (2).png"))); // NOI18N
-
-        cmdClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/close (2).png"))); // NOI18N
-        cmdClose.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cmdCloseMouseClicked(evt);
-            }
-        });
+        lbIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/ask (1).png"))); // NOI18N
 
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
         panelRound1Layout.setHorizontalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(35, 35, 35))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                .addContainerGap(135, Short.MAX_VALUE)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lbMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(30, 30, 30))
-            .addGroup(panelRound1Layout.createSequentialGroup()
-                .addGap(217, 217, 217)
-                .addComponent(lbIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(189, 189, 189)
-                .addComponent(cmdClose)
-                .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                        .addComponent(cmdOK, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(76, 76, 76)
+                        .addComponent(cmdCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(129, 129, 129))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                        .addComponent(lbIcon)
+                        .addGap(239, 239, 239))))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound1Layout.createSequentialGroup()
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(lbIcon))
-                    .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(cmdClose)))
+                .addGap(20, 20, 20)
+                .addComponent(lbIcon)
                 .addGap(20, 20, 20)
                 .addComponent(lbTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(lbMessage)
+                .addGap(25, 25, 25)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmdOK, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmdCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -136,25 +168,29 @@ public class MS_WarningBook extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 6, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmdCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdCloseMouseClicked
+    private void cmdOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdOKActionPerformed
         closeMenu();
-    }//GEN-LAST:event_cmdCloseMouseClicked
+    }//GEN-LAST:event_cmdOKActionPerformed
+
+    private void cmdCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCancelActionPerformed
+        closeMenu();
+    }//GEN-LAST:event_cmdCancelActionPerformed
 
     private void closeMenu() {
         if (animator.isRunning()) {
@@ -175,7 +211,8 @@ public class MS_WarningBook extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel cmdClose;
+    private RTDRestaurant.View.Swing.ButtonOutLine cmdCancel;
+    private RTDRestaurant.View.Swing.ButtonOutLine cmdOK;
     private javax.swing.JLabel lbIcon;
     private javax.swing.JLabel lbMessage;
     private javax.swing.JLabel lbTitle;
