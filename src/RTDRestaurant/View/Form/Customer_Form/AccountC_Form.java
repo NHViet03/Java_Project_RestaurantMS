@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
-public class Account_Form extends javax.swing.JPanel {
+public class AccountC_Form extends javax.swing.JPanel {
 
     private ModelUser user;
     private ModelCustomer customer;
@@ -20,13 +20,13 @@ public class Account_Form extends javax.swing.JPanel {
     private Icon show;
     private char def;
 
-    public Account_Form() {
+    public AccountC_Form() {
         service = new ServiceCustomer();
         initComponents();
 
     }
 
-    public Account_Form(ModelUser user) {
+    public AccountC_Form(ModelUser user) {
         this.user = user;
         initComponents();
         init();
@@ -57,7 +57,7 @@ public class Account_Form extends javax.swing.JPanel {
             txtdso.setText(customer.getSales() + "đ");
             txtdiemtl.setText(customer.getPoints() + " xu");
         } catch (SQLException ex) {
-            Logger.getLogger(Account_Form.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AccountC_Form.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

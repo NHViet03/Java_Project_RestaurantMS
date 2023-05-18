@@ -3,7 +3,7 @@ package RTDRestaurant.View.Dialog;
 import RTDRestaurant.Controller.Service.ServiceCustomer;
 import RTDRestaurant.Model.ModelCustomer;
 import RTDRestaurant.Model.ModelMonAn;
-import RTDRestaurant.View.Form.Customer_Form.Account_Form;
+import RTDRestaurant.View.Form.Customer_Form.AccountC_Form;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.GradientPaint;
@@ -67,7 +67,7 @@ public class MS_ConfirmOrderFood extends javax.swing.JDialog {
                 try {
                     service.InsertCTHD(ID_HoaDon, monan.getId(), soluong);
                 } catch (SQLException ex) {
-                    Logger.getLogger(Account_Form.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(AccountC_Form.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             

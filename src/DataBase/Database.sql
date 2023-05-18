@@ -18,7 +18,49 @@ alter table NguoiDung
 alter table NguoiDung
     add constraint NguoiDung_PK PRIMARY KEY (ID_ND);
     
-insert into NguoiDung(email,matkhau,vaitro) values ('11','22','Khach Hang');    
+--Them data cho Bang NguoiDung
+INSERT INTO NguoiDung(Email,MatKhau,Trangthai,Vaitro) VALUES ('NVHoangViet@gmail.com','123','Verified','Quan Ly');
+INSERT INTO NguoiDung(Email,MatKhau,Trangthai,Vaitro) VALUES ('NVHoangPhuc@gmail.com','123','Verified','Nhan Vien');
+INSERT INTO NguoiDung(Email,MatKhau,Trangthai,Vaitro) VALUES ('NVAnhHong@gmail.com','123','Verified','Nhan Vien Kho');
+
+
+--Tao bang NhanVien
+drop table NhanVien;
+create table NhanVien(
+    ID_NV NUMBER(8,0) GENERATED ALWAYS as IDENTITY(START with 100 INCREMENT by 1) ,
+    TenNV VARCHAR2(50),
+    NgayVL DATE ,
+    SDT VARCHAR2(50),
+    Chucvu VARCHAR2(50),
+    ID_ND NUMBER(8,0) DEFAULT NULL,
+    ID_NQL NUMBER(8,0)
+);
+--Them rang buoc cho bang NhanVien
+--Them Check Constraint
+alter table NhanVien
+    add constraint NV_TenNV_NNULL check ('TenNV' is not null)
+    add constraint NV_SDT_NNULL check ('SDT' is not null)
+    add constraint NV_NgayVL_NNULL check ('NgayVL' is not null)
+    add constraint NV_Chucvu_Thuoc check (Chucvu IN ('Phuc vu','Tiep tan','Thu ngan','Bep','Kho','Quan ly'));
+
+--Them khoa chinh
+alter table NhanVien
+    add constraint NV_PK PRIMARY KEY (ID_NV);
+
+--Them khoa ngoai
+ALTER TABLE NhanVien
+ ADD CONSTRAINT NV_fk_idND FOREIGN KEY 
+ (ID_ND) REFERENCES NguoiDung(ID_ND)
+ ADD CONSTRAINT NV_fk_idNQL FOREIGN KEY 
+ (ID_NQL) REFERENCES NhanVien(ID_NV);
+ 
+
+--Them data cho bang Nhan Vien
+INSERT INTO NhanVien(TenNV,NgayVL,SDT,Chucvu,ID_ND,ID_NQL) VALUES ('Nguyen Hoang Viet','10/05/2023','0848044725','Quan ly',43,100);
+INSERT INTO NhanVien(TenNV,NgayVL,SDT,Chucvu,ID_ND,ID_NQL) VALUES ('Le Thi Anh Hong','19/05/2023','0838033234','Kho',45,100);
+
+SELECT ID_NV, TenNV, to_char(NgayVL, 'dd-mm-yyyy') AS NgayVL, SDT, Chucvu, ID_NQL FROM NhanVien WHERE ID_ND=45;
+
 --Tao bang KhachHang
 drop table KhachHang;
 ALTER SESSION SET NLS_DATE_FORMAT = 'dd-MM-YYYY';
@@ -182,8 +224,7 @@ insert into MonAn(TenMon,Dongia,Loai) values('KARIN:Sashimi Ca Ngu', 149000,'Pis
 insert into MonAn(TenMon,Dongia,Loai) values('KEIKO:Sashimi Ca Hoi', 199000,'Pisces');
 insert into MonAn(TenMon,Dongia,Loai) values('CHIYO:Sashimi Bung Ca Hoi', 219000,'Pisces');
 
-SELECT * FROM MonAn WHERE UPPER(TenMon) like '%E%'
-Order by tenmon asc;
+
 
 
 --Tao bang Ban
@@ -344,7 +385,6 @@ ALTER TABLE CTHD
  (ID_MonAn) REFERENCES MonAn(ID_MonAn);
  
 
-SELECT ID_HoaDon,CTHD.ID_MonAn, TenMon,SoLuong,Thanhtien FROM CTHD JOIN MonAn ON MonAn.ID_MonAn=CTHD.ID_MonAn WHERE ID_HoaDon=140
 
 
 
@@ -497,6 +537,33 @@ END;
 --cua khach hang do
 -- Diem tich luy cua Khach hang duoc tinh bang 0.005% Tong tien cua hoa don (1.000.000d tuong duong 50 diem)
 CREATE OR REPLACE TRIGGER KH_DoanhsovaDTL
+AFTER UPDATE OF Trangthai ON HoaDon
+FOR EACH ROW
+BEGIN
+    UPDATE KhachHang SET Doanhso = Doanhso + :new.Tongtien;
+    UPDATE KhachHang SET Diemtichluy = Diemtichluy + ROUND(:new.Tongtien*0.00005);
+END;
+
+--Trigger khi khach hang them hoa don moi, trang thai ban chuyen tu 'Con trong' sang 'Dang dung bua'
+-- Khi trang thai don hang tro thanh 'Da thanh toan' trang thai ban chuyen tu 'Dang dung bua' sang 'Con trong'
+
+CREATE OR REPLACE TRIGGER Tg_TrangthaiBan
+AFTER INSERT OR UPDATE OF Trangthai ON HoaDon
+BEGIN
+    FOR cur IN (
+        SELECT ID_Ban,Trangthai  
+        FROM HoaDon
+    )    
+    LOOP
+        IF(cur.Trangthai='Chua thanh toan') THEN 
+            UPDATE Ban SET Trangthai='Dang dung bua' WHERE ID_Ban=cur.ID_Ban;
+        ELSE 
+            UPDATE Ban SET Trangthai='Con trong' WHERE ID_Ban=cur.ID_Ban;
+        END IF;
+    END LOOP; 
+END;
+
+CREATE OR REPLACE TRIGGER Tg_Trangthaiban
 AFTER UPDATE OF Trangthai ON HoaDon
 FOR EACH ROW
 BEGIN

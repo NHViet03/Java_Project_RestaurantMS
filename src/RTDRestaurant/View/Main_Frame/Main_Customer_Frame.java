@@ -4,10 +4,9 @@ package RTDRestaurant.View.Main_Frame;
 import RTDRestaurant.Controller.Connection.DatabaseConnection;
 import RTDRestaurant.Controller.Event.EventMenuSelected;
 import RTDRestaurant.Model.ModelUser;
-import RTDRestaurant.View.Component.Customer_Component.OrderBar;
 import RTDRestaurant.View.Component.Customer_Component.Menu;
 import RTDRestaurant.View.Form.Customer_Form.AboutUs_Form;
-import RTDRestaurant.View.Form.Customer_Form.Account_Form;
+import RTDRestaurant.View.Form.Customer_Form.AccountC_Form;
 import RTDRestaurant.View.Form.Customer_Form.Bill_Form;
 import RTDRestaurant.View.Form.Customer_Form.FoodMenu_Form;
 import RTDRestaurant.View.Form.MainForm;
@@ -23,7 +22,6 @@ public class Main_Customer_Frame extends javax.swing.JFrame {
 
     private MigLayout layout;
     private Menu menu;
-    private OrderBar header;
     private MainForm main;
     private ModelUser user;
 
@@ -46,7 +44,6 @@ public class Main_Customer_Frame extends javax.swing.JFrame {
         layout = new MigLayout("fill","0[]0[100%, fill]0","0[fill, top]0");
         bg.setLayout(layout);
         menu=new Menu();
-        header= new OrderBar();
         main= new MainForm();
         menu.addEvent(new EventMenuSelected(){
             @Override
@@ -80,7 +77,7 @@ public class Main_Customer_Frame extends javax.swing.JFrame {
                         }
                     }
                     case 2 -> main.showForm(new AboutUs_Form());
-                    case 6 -> main.showForm(new Account_Form(user));
+                    case 6 -> main.showForm(new AccountC_Form(user));
                     case 7 -> {
                         main.showForm(new Voucher_Form(user));
                     }
@@ -96,7 +93,6 @@ public class Main_Customer_Frame extends javax.swing.JFrame {
                 }
             }
         });
-        Menu menu1=new Menu();
         menu.initMenuItem();
         bg.add(menu,"w 265!, spany 2"); //Span Y 2cell
         bg.add(main,"w 100%, h 100%");

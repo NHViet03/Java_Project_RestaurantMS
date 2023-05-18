@@ -38,10 +38,15 @@ public class CardVoucher extends javax.swing.JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int Vpoint=data.getPoint();
-                if(customer.getPoints()<Vpoint){
+                if(hoadon==null){
+                    
+                }
+                else{
+                    if(customer.getPoints()<Vpoint){
                     warning.WarningExchange(Vpoint-customer.getPoints());
-                }else{
-                    exchange.ConfirmExchange(hoadon, data);
+                    }else{
+                        exchange.ConfirmExchange(hoadon, data);
+                    }
                 }
             }
         });

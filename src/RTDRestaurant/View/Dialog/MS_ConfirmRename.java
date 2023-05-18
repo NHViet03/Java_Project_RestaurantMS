@@ -2,7 +2,8 @@ package RTDRestaurant.View.Dialog;
 
 import RTDRestaurant.Controller.Service.ServiceCustomer;
 import RTDRestaurant.Model.ModelCustomer;
-import RTDRestaurant.View.Form.Customer_Form.Account_Form;
+import RTDRestaurant.Model.ModelStaff;
+import RTDRestaurant.View.Form.Customer_Form.AccountC_Form;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.GradientPaint;
@@ -55,22 +56,28 @@ public class MS_ConfirmRename extends javax.swing.JDialog {
         animator.setAcceleration(0.5f);
     }
 
-    public void reNameCustomer(String newName, ModelCustomer data) {
+    public void reNameCustomer(String newName, Object data) {
         setLocationRelativeTo(frame);
+        if(data instanceof ModelCustomer){   
+        ModelCustomer cus=(ModelCustomer)data;
         lbMessage.setText("Bạn có chắc đổi tên KH thành " + newName + " không ?");
         animator.start();
         cmdOK.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    data.setName(newName);
-                    service.reNameCustomer(data);
+                    cus.setName(newName);
+                    service.reNameCustomer(cus);
                 } catch (SQLException ex) {
-                    Logger.getLogger(Account_Form.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(AccountC_Form.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
 
         });
+        }else if(data instanceof ModelStaff){
+            
+        }
+        
         setVisible(true);
     }
 

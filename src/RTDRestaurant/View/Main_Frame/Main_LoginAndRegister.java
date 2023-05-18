@@ -176,7 +176,21 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
             ModelUser user=service.login(data);
             if(user!=null){
                 this.dispose();
-                Main_Customer_Frame.main(user);
+                switch (user.getRole()) {
+                    case "Khach Hang" -> {
+                        Main_Customer_Frame.main(user);
+                    }
+                    case "Nhan Vien Kho" -> {
+                        Main_WarehouseStaff_Frame.main(user);
+                    }
+                    case "Nhan Vien" -> {
+                    }
+                    case "Quan Ly" -> {
+                    }
+                    default -> {
+                    }
+                }
+                
             }else{
                 showMessage(Message.MessageType.ERROR, "Email hoặc mật khẩu không chính xác");
             }
@@ -293,9 +307,7 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
+  
     public static void main() {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
