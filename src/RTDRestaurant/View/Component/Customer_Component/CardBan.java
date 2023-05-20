@@ -1,9 +1,9 @@
 package RTDRestaurant.View.Component.Customer_Component;
 
 import RTDRestaurant.Model.ModelMonAn;
-import RTDRestaurant.Model.ModelCustomer;
-import RTDRestaurant.Model.ModelUser;
-import RTDRestaurant.Model.Model_Ban;
+import RTDRestaurant.Model.ModelKhachHang;
+import RTDRestaurant.Model.ModelNguoiDung;
+import RTDRestaurant.Model.ModelBan;
 import RTDRestaurant.View.Dialog.MS_ConfirmBook;
 import RTDRestaurant.View.Dialog.MS_ConfirmRename;
 import RTDRestaurant.View.Main_Frame.Main_Customer_Frame;
@@ -20,11 +20,11 @@ import javax.swing.ImageIcon;
 
 public class CardBan extends javax.swing.JPanel {
 
-    private final Model_Ban data;
-    private final ModelCustomer customer;
+    private final ModelBan data;
+    private final ModelKhachHang customer;
     private MS_ConfirmBook obj;
    
-    public CardBan(Model_Ban data,ModelCustomer customer) {
+    public CardBan(ModelBan data,ModelKhachHang customer) {
         this.data = data;
         this.customer=customer;
         initComponents();

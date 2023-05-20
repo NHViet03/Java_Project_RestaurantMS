@@ -2,9 +2,9 @@
 package RTDRestaurant.View.Form.Customer_Form;
 
 import RTDRestaurant.Controller.Service.ServiceCustomer;
-import RTDRestaurant.Model.ModelCustomer;
-import RTDRestaurant.Model.ModelUser;
-import RTDRestaurant.Model.Model_Ban;
+import RTDRestaurant.Model.ModelKhachHang;
+import RTDRestaurant.Model.ModelNguoiDung;
+import RTDRestaurant.Model.ModelBan;
 import RTDRestaurant.View.Component.Customer_Component.CardBan;
 import RTDRestaurant.View.Swing.CustomScrollBar.ScrollBarCustom;
 import RTDRestaurant.View.Swing.WrapLayout;
@@ -19,9 +19,9 @@ public class TableMenu_Form extends javax.swing.JPanel {
 
     private final String floor;
     private ServiceCustomer service;
-    private ArrayList<Model_Ban> list;
-    private ModelUser user;
-    private ModelCustomer customer;
+    private ArrayList<ModelBan> list;
+    private ModelNguoiDung user;
+    private ModelKhachHang customer;
     
     public TableMenu_Form(String floor) {
         this.floor=floor;
@@ -30,7 +30,7 @@ public class TableMenu_Form extends javax.swing.JPanel {
         init();
     }
     
-    public TableMenu_Form(String floor,ModelUser user) {
+    public TableMenu_Form(String floor,ModelNguoiDung user) {
         this.floor=floor;
         this.user=user;
         service=new ServiceCustomer();
@@ -73,7 +73,7 @@ public class TableMenu_Form extends javax.swing.JPanel {
         try {
             
             list = service.MenuTable(floor);
-            for(Model_Ban data:list){
+            for(ModelBan data:list){
             panel.add(new CardBan(data,customer));
             }
         }catch(SQLException ex) {
@@ -82,7 +82,7 @@ public class TableMenu_Form extends javax.swing.JPanel {
     }
     public void searchTable(String txt){
         panel.removeAll();
-        for(Model_Ban data:list){
+        for(ModelBan data:list){
             if(data.getName().toLowerCase().contains(txt.toLowerCase())){
                 panel.add(new CardBan(data,customer));
             }
@@ -94,7 +94,7 @@ public class TableMenu_Form extends javax.swing.JPanel {
         try {
             list=service.MenuTableState(floor,txt);
             panel.removeAll();
-            for(Model_Ban data:list){   
+            for(ModelBan data:list){   
             panel.add(new CardBan(data,customer));
             }
             

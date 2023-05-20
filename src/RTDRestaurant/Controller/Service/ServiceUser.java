@@ -4,7 +4,7 @@ package RTDRestaurant.Controller.Service;
 
 import RTDRestaurant.Controller.Connection.DatabaseConnection;
 import RTDRestaurant.Model.ModelLogin;
-import RTDRestaurant.Model.ModelUser;
+import RTDRestaurant.Model.ModelNguoiDung;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
@@ -28,10 +28,10 @@ public class ServiceUser {
     /*
         Kiểm tra thông tin đăng nhập
         Trả về : null <- Nếu Thông tin đăng nhập sai
-                 ModelUser <- Nếu thông tin đăng nhập đúng
+                 ModelNguoiDung <- Nếu thông tin đăng nhập đúng
     */
-    public ModelUser login(ModelLogin login) throws SQLException{
-        ModelUser user=null;
+    public ModelNguoiDung login(ModelLogin login) throws SQLException{
+        ModelNguoiDung user=null;
         String sql = "SELECT * FROM NguoiDung WHERE Email=? AND Matkhau=? AND Trangthai='Verified' FETCH FIRST 1 ROWS ONLY";
         PreparedStatement p=con.prepareStatement(sql);
         p.setString(1, login.getEmail());
@@ -42,7 +42,7 @@ public class ServiceUser {
             String email=r.getString("Email");
             String password=r.getString("Matkhau");
             String role=r.getString("Vaitro");
-            user=new ModelUser(UserID,email,password,role);
+            user=new ModelNguoiDung(UserID,email,password,role);
         }
         r.close();
         p.close();
@@ -53,7 +53,7 @@ public class ServiceUser {
         Thêm thông tin Người dùng gồm email, mật khẩu, verifycode với
           Vai trò mặc định là 'Khach Hang' xuống bảng NguoiDung.
     */
-    public void insertUser(ModelUser user)throws SQLException{
+    public void insertUser(ModelNguoiDung user)throws SQLException{
         //Thêm Người Dùng
         String sql_ND = "INSERT INTO NguoiDung (Email, MatKhau, VerifyCode,Vaitro) VALUES (?, ?, ?,'Khach Hang')";
         PreparedStatement p=con.prepareStatement(sql_ND);

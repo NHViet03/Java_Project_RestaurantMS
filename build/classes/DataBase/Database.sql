@@ -368,7 +368,7 @@ create table CTHD(
     ID_MonAn number(8,0),
     SoLuong number(3,0),
     Thanhtien number(10,0)
-)
+);
 
 --Them Check Constraint
 alter table CTHD
@@ -385,14 +385,204 @@ ALTER TABLE CTHD
  (ID_MonAn) REFERENCES MonAn(ID_MonAn);
  
 
+--Tao bang Nguyenlieu
+drop table NguyenLieu;
+create table NguyenLieu(
+    ID_NL NUMBER(8,0),
+    TenNL VARCHAR2(50), 
+    Dongia NUMBER(8,0), 
+    Donvitinh VARCHAR2(50)
+);
+--Them Check Constraint
+alter table NguyenLieu
+    add constraint NL_TenNL_NNULL check ('TenNL' is not null)
+    add constraint NL_Dongia_NNULL check ('Dongia' is not null)
+    add constraint NL_DVT_Thuoc check (Donvitinh in ('g','kg','ml','l'));
+
+--Them khoa chinh
+alter table NguyenLieu
+    add constraint NL_PK PRIMARY KEY (ID_NL);
+
+--Them data
+INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(100,'Thit ga',40000,'kg');
+INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(101,'Thit heo',50000,'kg');
+INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(102,'Thit bo',80000,'kg');
+INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(103,'Tom',100000,'kg');
+INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(104,'Ca hoi',500000,'kg');
+INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(105,'Gao',40000,'kg');
+INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(106,'Sua tuoi',40000,'l');
+INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(107,'Bot mi',20000,'kg');
+INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(108,'Dau ca hoi',1000000,'l');
+INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(109,'Dau dau nanh',150000,'l');
+INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(110,'Muoi',20000,'kg');
+INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(111,'Duong',20000,'kg');
+INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(112,'Hanh tay',50000,'kg');
+INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(113,'Toi',30000,'kg');
+INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(114,'Dam',50000,'l');
+
+--Tao bang Kho
+drop table Kho;
+create table Kho(
+    ID_NL NUMBER(8,0),
+    SLTon NUMBER(3,0) DEFAULT 0
+);
+--Them Check Constraint
 
 
+--Them khoa chinh
+ALTER TABLE Kho
+    ADD CONSTRAINT Kho_pk PRIMARY KEY (ID_NL);
+
+--Them khoa ngoai
+ALTER TABLE Kho
+ ADD CONSTRAINT Kho_fk_idNL FOREIGN KEY 
+ (ID_NL) REFERENCES NguyenLieu(ID_NL);
+ 
+--Khoi tao du lieu ban dau cho kho
+BEGIN
+    Kho_Khoitao();
+END;
+
+--Tao bang PhieuNK
+drop table PhieuNK;
+create table PhieuNK(
+    ID_NK NUMBER(8,0),
+    ID_NV number(8,0),
+    NgayNK date,
+    Tongtien number(10,0) DEFAULT 0
+);
+
+--Them Check Constraint
+alter table PhieuNK
+    add constraint PNK_NgayNK_NNULL check ('NgayNK' is not null);
+
+--Them khoa chinh
+alter table PhieuNK
+    add constraint PNK_PK PRIMARY KEY (ID_NK);
+
+ALTER TABLE PhieuNK
+ ADD CONSTRAINT PNK_fk_idNV FOREIGN KEY 
+ (ID_NV) REFERENCES NhanVien(ID_NV);
 
 
+--Them data cho PhieuNK
+ALTER SESSION SET NLS_DATE_FORMAT = 'dd-MM-YYYY';
+INSERT INTO PhieuNK(ID_NK,ID_NV,NgayNK) VALUES (100,101,'10-05-2023');
+INSERT INTO PhieuNK(ID_NK,ID_NV,NgayNK) VALUES (101,101,'11-05-2023');
+INSERT INTO PhieuNK(ID_NK,ID_NV,NgayNK) VALUES (102,101,'12-05-2023');
+
+--Them bang CTNK
+drop table CTNK;
+create table CTNK(
+    ID_NK NUMBER(8,0),
+    ID_NL number(8,0),
+    SoLuong number(3,0),
+    Thanhtien number(10,0)
+);
+
+--Them Check Constraint
+alter table CTNK
+    add constraint CTNK_SL_NNULL check ('SoLuong' is not null);
+
+--Them khoa chinh
+alter table CTNK
+    add constraint CTNK_PK PRIMARY KEY (ID_NK,ID_NL);
+    
+--Them khoa ngoai
+ALTER TABLE CTNK
+ ADD CONSTRAINT CTNK_fk_idNK FOREIGN KEY 
+ (ID_NK) REFERENCES PhieuNK(ID_NK)
+ ADD CONSTRAINT CTNK_fk_idNL FOREIGN KEY 
+ (ID_NL) REFERENCES NguyenLieu(ID_NL);
+
+--Them data cho CTNK
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (100,100,10);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (100,101,20);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (100,102,15);
+
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (101,101,10);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (101,103,20);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (101,104,10);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (101,105,10);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (101,106,20);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (101,107,5);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (101,108,5);
+
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (102,109,10);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (102,110,20);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (102,112,15);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (102,113,15);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (102,114,15);
 
 
+--Tao bang PhieuXK
+create table PhieuXK(
+    ID_XK NUMBER(8,0),
+    ID_NV number(8,0),
+    NgayXK date
+);
+
+--Them Check Constraint
+alter table PhieuXK
+    add constraint PXK_NgayXK_NNULL check ('NgayXK' is not null);
+
+--Them khoa chinh
+alter table PhieuXK
+    add constraint PXK_PK PRIMARY KEY (ID_XK);
+
+ALTER TABLE PhieuXK
+ ADD CONSTRAINT PXK_fk_idNV FOREIGN KEY 
+ (ID_NV) REFERENCES NhanVien(ID_NV);
 
 
+--Them data cho PhieuXK
+INSERT INTO PhieuXK(ID_XK,ID_NV,NgayXK) VALUES (100,101,'10-05-2023');
+INSERT INTO PhieuXK(ID_XK,ID_NV,NgayXK) VALUES (101,101,'11-05-2023');
+INSERT INTO PhieuXK(ID_XK,ID_NV,NgayXK) VALUES (102,101,'12-05-2023');
+
+--Them bang CTXK
+drop table CTXK;
+create table CTXK(
+    ID_XK NUMBER(8,0),
+    ID_NL number(8,0),
+    SoLuong number(3,0)
+);
+
+--Them Check Constraint
+alter table CTXK
+    add constraint CTXK_SL_NNULL check ('SoLuong' is not null);
+
+--Them khoa chinh
+alter table CTXK
+    add constraint CTXK_PK PRIMARY KEY (ID_XK,ID_NL);
+
+
+--Them khoa ngoai
+ALTER TABLE CTXK
+ ADD CONSTRAINT CTNK_fk_idXK FOREIGN KEY 
+ (ID_XK) REFERENCES PhieuXK(ID_XK)
+ ADD CONSTRAINT CTXK_fk_idNL FOREIGN KEY 
+ (ID_NL) REFERENCES NguyenLieu(ID_NL);
+
+--Them data cho CTXK
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (100,100,5);
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (100,101,5);
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (100,102,5);
+
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (101,101,7);
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (101,103,10);
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (101,104,5);
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (101,105,5);
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (101,106,10);
+
+
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (102,109,5);
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (102,110,5);
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (102,112,10);
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (102,113,8);
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (102,114,5);
+
+SELECT SUM(Tongtien) FROM PhieuNK WHERE NgayNK=to_date('10/05/2023', 'dd-mm-yyyy');
 --- Tao Trigger
 
 --
@@ -563,13 +753,85 @@ BEGIN
     END LOOP; 
 END;
 
-CREATE OR REPLACE TRIGGER Tg_Trangthaiban
-AFTER UPDATE OF Trangthai ON HoaDon
+--  Trigger Thanh tien o CTNK bang SoLuong x Dongia cua nguyen lieu do
+
+CREATE OR REPLACE TRIGGER CTNK_Thanhtien
+BEFORE INSERT OR UPDATE OF SoLuong ON CTNK
+FOR EACH ROW
+DECLARE 
+    gia NguyenLieu.DonGia%TYPE;
+BEGIN
+    SELECT DonGia
+    INTO gia
+    FROM NguyenLieu
+    WHERE NguyenLieu.ID_NL = :new.ID_NL;
+    
+    :new.ThanhTien := :new.SoLuong * gia;
+    
+END;
+
+--Trigger Tong tien o PhieuNK bang tong thanh tien cua CTNK
+CREATE OR REPLACE TRIGGER PNK_Tongtien
+AFTER INSERT OR UPDATE OR DELETE ON CTNK
 FOR EACH ROW
 BEGIN
-    UPDATE KhachHang SET Doanhso = Doanhso + :new.Tongtien;
-    UPDATE KhachHang SET Diemtichluy = Diemtichluy + ROUND(:new.Tongtien*0.00005);
+    IF INSERTING THEN    
+        UPDATE PhieuNK SET Tongtien = Tongtien + :new.ThanhTien WHERE PhieuNK.ID_NK = :new.ID_NK;
+    END IF;
+    
+    IF UPDATING THEN    
+        UPDATE PhieuNK SET Tongtien = Tongtien + :new.ThanhTien - :old.ThanhTien WHERE PhieuNK.ID_NK = :new.ID_NK;
+    END IF;
+    
+    IF DELETING THEN    
+        UPDATE PhieuNK SET Tongtien = Tongtien - :old.ThanhTien WHERE PhieuNK.ID_NK = :old.ID_NK;
+    END IF;
 END;
+
+--Trigger khi them CTNK tang So luong ton cua nguyen lieu trong kho
+CREATE OR REPLACE TRIGGER Kho_ThemSLTon
+AFTER INSERT OR DELETE OR UPDATE OF SoLuong ON CTNK
+FOR EACH ROW
+BEGIN
+    IF INSERTING THEN    
+        UPDATE Kho SET SLTon = SLTon + :new.SoLuong WHERE Kho.ID_NL = :new.ID_NL;
+    END IF;
+    
+    IF UPDATING THEN    
+        UPDATE Kho SET SLTon = SLTon + :new.SoLuong - :old.SoLuong WHERE Kho.ID_NL = :new.ID_NL;
+    END IF;
+    
+    IF DELETING THEN    
+        UPDATE Kho SET SLTon = SLTon - :old.SoLuong WHERE Kho.ID_NL = :old.ID_NL;
+    END IF;
+END;
+
+--Trigger khi them CTXK giam So luong ton cua nguyen lieu trong kho
+CREATE OR REPLACE TRIGGER Kho_GiamSLTon
+AFTER INSERT OR DELETE OR UPDATE OF SoLuong ON CTXK
+FOR EACH ROW
+BEGIN
+    IF INSERTING THEN    
+        UPDATE Kho SET SLTon = SLTon - :new.SoLuong WHERE Kho.ID_NL = :new.ID_NL;
+    END IF;
+    
+    IF UPDATING THEN    
+        UPDATE Kho SET SLTon = SLTon - :new.SoLuong + :old.SoLuong WHERE Kho.ID_NL = :new.ID_NL;
+    END IF;
+    
+    IF DELETING THEN    
+        UPDATE Kho SET SLTon = SLTon + :old.SoLuong WHERE Kho.ID_NL = :old.ID_NL;
+    END IF;
+END;
+
+--Trigger khi them mot Nguyen Lieu moi, them NL do vao Kho
+CREATE OR REPLACE TRIGGER Kho_ThemNL
+AFTER INSERT ON NguyenLieu
+FOR EACH ROW
+BEGIN
+    INSERT INTO Kho(ID_NL) VALUES(:new.ID_NL);
+END;
+
 
 --Procedure
 -- Procedure giam Diem tich luy cua KH khi doi Voucher
@@ -588,7 +850,18 @@ BEGIN
     UPDATE Voucher SET SoLuong = SoLuong - 1 WHERE Code_Voucher=code;
 END;
 
-
+--Procedure khoi tao du lieu ban dau cho Kho
+CREATE OR REPLACE PROCEDURE Kho_Khoitao
+IS 
+BEGIN 
+    FOR cur IN (
+        SELECT ID_NL 
+        FROM NguyenLieu
+    )    
+    LOOP
+        INSERT INTO Kho(ID_NL) VALUES (cur.ID_NL);
+    END LOOP;
+END;
 
 --Fuction 
 --Fuction Tinh tien mon an duoc giam khi them mot CTHD moi
@@ -607,11 +880,9 @@ BEGIN
 END;
  
  
- 
- 
 
- 
- 
+
+
  
  
  

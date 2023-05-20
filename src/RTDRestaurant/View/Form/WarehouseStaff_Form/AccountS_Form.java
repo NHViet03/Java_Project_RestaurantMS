@@ -1,8 +1,8 @@
 package RTDRestaurant.View.Form.WarehouseStaff_Form;
 
 import RTDRestaurant.Controller.Service.ServiceStaff;
-import RTDRestaurant.Model.ModelStaff;
-import RTDRestaurant.Model.ModelUser;
+import RTDRestaurant.Model.ModelNhanVien;
+import RTDRestaurant.Model.ModelNguoiDung;
 import RTDRestaurant.View.Dialog.MS_ConfirmRename;
 import RTDRestaurant.View.Main_Frame.Main_Customer_Frame;
 import java.sql.SQLException;
@@ -13,8 +13,8 @@ import javax.swing.ImageIcon;
 
 public class AccountS_Form extends javax.swing.JPanel {
 
-    private ModelUser user;
-    private ModelStaff staff;
+    private ModelNguoiDung user;
+    private ModelNhanVien staff;
     private ServiceStaff service;
     private Icon hide;
     private Icon show;
@@ -25,7 +25,7 @@ public class AccountS_Form extends javax.swing.JPanel {
         initComponents();
     }
 
-    public AccountS_Form(ModelUser user) {
+    public AccountS_Form(ModelNguoiDung user) {
         this.user = user;
         initComponents();
         init();
@@ -102,7 +102,7 @@ public class AccountS_Form extends javax.swing.JPanel {
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
 
-        pic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/Jiyeon.jpg"))); // NOI18N
+        pic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/parkbogum.jpg"))); // NOI18N
 
         lbmaNV.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lbmaNV.setForeground(new java.awt.Color(89, 89, 89));

@@ -1,8 +1,8 @@
 package RTDRestaurant.View.Form.Customer_Form;
 
 import RTDRestaurant.Controller.Service.ServiceCustomer;
-import RTDRestaurant.Model.ModelCustomer;
-import RTDRestaurant.Model.ModelUser;
+import RTDRestaurant.Model.ModelKhachHang;
+import RTDRestaurant.Model.ModelNguoiDung;
 import RTDRestaurant.View.Dialog.MS_ConfirmRename;
 import RTDRestaurant.View.Main_Frame.Main_Customer_Frame;
 import java.sql.SQLException;
@@ -13,8 +13,8 @@ import javax.swing.ImageIcon;
 
 public class AccountC_Form extends javax.swing.JPanel {
 
-    private ModelUser user;
-    private ModelCustomer customer;
+    private ModelNguoiDung user;
+    private ModelKhachHang customer;
     private ServiceCustomer service;
     private Icon hide;
     private Icon show;
@@ -26,7 +26,7 @@ public class AccountC_Form extends javax.swing.JPanel {
 
     }
 
-    public AccountC_Form(ModelUser user) {
+    public AccountC_Form(ModelNguoiDung user) {
         this.user = user;
         initComponents();
         init();

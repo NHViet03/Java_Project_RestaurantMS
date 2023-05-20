@@ -3,10 +3,10 @@ package RTDRestaurant.Controller.Service;
 import RTDRestaurant.Controller.Connection.DatabaseConnection;
 import RTDRestaurant.Model.ModelCTHD;
 import RTDRestaurant.Model.ModelMonAn;
-import RTDRestaurant.Model.ModelCustomer;
+import RTDRestaurant.Model.ModelKhachHang;
 import RTDRestaurant.Model.ModelHoaDon;
 import RTDRestaurant.Model.ModelVoucher;
-import RTDRestaurant.Model.Model_Ban;
+import RTDRestaurant.Model.ModelBan;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
@@ -79,8 +79,8 @@ public class ServiceCustomer {
     }
 
     //Lấy toàn bộ danh sách bàn theo tầng
-    public ArrayList<Model_Ban> MenuTable(String floor) throws SQLException {
-        ArrayList<Model_Ban> list = new ArrayList<>();
+    public ArrayList<ModelBan> MenuTable(String floor) throws SQLException {
+        ArrayList<ModelBan> list = new ArrayList<>();
         String sql = "SELECT ID_Ban,TenBan,Trangthai FROM Ban WHERE Vitri=?";
         PreparedStatement p = con.prepareStatement(sql);
         p.setString(1, floor);
@@ -89,7 +89,7 @@ public class ServiceCustomer {
             int id = r.getInt("ID_Ban");
             String name = r.getString("TenBan");
             String status = r.getString("Trangthai");
-            Model_Ban data = new Model_Ban(id, name, status);
+            ModelBan data = new ModelBan(id, name, status);
             list.add(data);
         }
         r.close();
@@ -98,8 +98,8 @@ public class ServiceCustomer {
     }
     //Lấy danh sách bàn theo trạng thái bàn Tất cả/Còn trống/Đã đặt trước/Đang dùng bữa
 
-    public ArrayList<Model_Ban> MenuTableState(String floor, String state) throws SQLException {
-        ArrayList<Model_Ban> list = new ArrayList<>();
+    public ArrayList<ModelBan> MenuTableState(String floor, String state) throws SQLException {
+        ArrayList<ModelBan> list = new ArrayList<>();
         String sql = "SELECT ID_Ban,TenBan,Trangthai FROM Ban WHERE Vitri=?";
         switch (state) {
             case "Tất cả" ->
@@ -118,7 +118,7 @@ public class ServiceCustomer {
             int id = r.getInt("ID_Ban");
             String name = r.getString("TenBan");
             String status = r.getString("Trangthai");
-            Model_Ban data = new Model_Ban(id, name, status);
+            ModelBan data = new ModelBan(id, name, status);
             list.add(data);
         }
         r.close();
@@ -127,8 +127,8 @@ public class ServiceCustomer {
     }
 
     //Lấy thông tin khách hàng từ ID người dùng
-    public ModelCustomer getCustomer(int userID) throws SQLException {
-        ModelCustomer data = null;
+    public ModelKhachHang getCustomer(int userID) throws SQLException {
+        ModelKhachHang data = null;
         String sql = "SELECT ID_KH, TenKH, to_char(Ngaythamgia, 'dd-mm-yyyy') AS NgayTG, Doanhso,Diemtichluy FROM KhachHang WHERE ID_ND=?";
         PreparedStatement p = con.prepareStatement(sql);
         p.setInt(1, userID);
@@ -140,7 +140,7 @@ public class ServiceCustomer {
             String date = r.getString("NgayTG");
             int sales = r.getInt("Doanhso");
             int points = r.getInt("Diemtichluy");
-            data = new ModelCustomer(id, name, date, sales, points);
+            data = new ModelKhachHang(id, name, date, sales, points);
         }
         r.close();
         p.close();
@@ -148,7 +148,7 @@ public class ServiceCustomer {
     }
 
     // Đổi tên Khách hàng 
-    public void reNameCustomer(ModelCustomer data) throws SQLException {
+    public void reNameCustomer(ModelKhachHang data) throws SQLException {
         String sql = "UPDATE KhachHang SET TenKH=? WHERE ID_KH=?";
         PreparedStatement p = con.prepareStatement(sql);
         p.setString(1, data.getName());
@@ -218,7 +218,7 @@ public class ServiceCustomer {
         Tiền món ăn và Tiền giảm mặc định là 0
         Trạng thái Hóa đơn mặc định là Chưa thanh toán
      */
-    public void InsertHoaDon(Model_Ban table, ModelCustomer customer) throws SQLException {
+    public void InsertHoaDon(ModelBan table, ModelKhachHang customer) throws SQLException {
         //Thêm Hoá Đơn mới
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-YYYY");
         String sql = "INSERT INTO HoaDon(ID_KH,ID_Ban,NgayHD,TienMonAn,TienGiam,Trangthai)"
@@ -233,7 +233,7 @@ public class ServiceCustomer {
     }
 
     //Lấy thông tin HoaDon mà Khách hàng vừa đặt, Hóa Đơn có trạng thái 'Chưa thanh toán'
-    public ModelHoaDon FindHoaDon(ModelCustomer customer) throws SQLException {
+    public ModelHoaDon FindHoaDon(ModelKhachHang customer) throws SQLException {
         ModelHoaDon hoadon = null;
         String sql = "SELECT ID_HoaDon,ID_KH,ID_Ban,to_char(NgayHD,'dd-mm-yyyy') AS Ngay,TienMonAn,Code_Voucher,TienGiam,Tongtien,Trangthai FROM HoaDon "
                 + "WHERE ID_KH=? AND Trangthai='Chua thanh toan'";

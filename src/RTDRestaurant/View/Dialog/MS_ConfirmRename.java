@@ -1,8 +1,8 @@
 package RTDRestaurant.View.Dialog;
 
 import RTDRestaurant.Controller.Service.ServiceCustomer;
-import RTDRestaurant.Model.ModelCustomer;
-import RTDRestaurant.Model.ModelStaff;
+import RTDRestaurant.Model.ModelKhachHang;
+import RTDRestaurant.Model.ModelNhanVien;
 import RTDRestaurant.View.Form.Customer_Form.AccountC_Form;
 import java.awt.Color;
 import java.awt.Frame;
@@ -58,8 +58,8 @@ public class MS_ConfirmRename extends javax.swing.JDialog {
 
     public void reNameCustomer(String newName, Object data) {
         setLocationRelativeTo(frame);
-        if(data instanceof ModelCustomer){   
-        ModelCustomer cus=(ModelCustomer)data;
+        if(data instanceof ModelKhachHang){   
+        ModelKhachHang cus=(ModelKhachHang)data;
         lbMessage.setText("Bạn có chắc đổi tên KH thành " + newName + " không ?");
         animator.start();
         cmdOK.addActionListener(new ActionListener() {
@@ -74,7 +74,7 @@ public class MS_ConfirmRename extends javax.swing.JDialog {
             }
 
         });
-        }else if(data instanceof ModelStaff){
+        }else if(data instanceof ModelNhanVien){
             
         }
         

@@ -2,9 +2,9 @@
 package RTDRestaurant.View.Form.Customer_Form;
 
 import RTDRestaurant.Controller.Service.ServiceCustomer;
-import RTDRestaurant.Model.ModelCustomer;
+import RTDRestaurant.Model.ModelKhachHang;
 import RTDRestaurant.Model.ModelHoaDon;
-import RTDRestaurant.Model.ModelUser;
+import RTDRestaurant.Model.ModelNguoiDung;
 import RTDRestaurant.Model.ModelVoucher;
 import RTDRestaurant.View.Component.Customer_Component.CardVoucher;
 import RTDRestaurant.View.Swing.CustomScrollBar.ScrollBarCustom;
@@ -17,10 +17,10 @@ import java.util.logging.Logger;
 
 public class Voucher_Form extends javax.swing.JPanel {
 
-    private ModelUser user;
+    private ModelNguoiDung user;
     private ServiceCustomer service;
     private ArrayList<ModelVoucher> list;
-    private ModelCustomer customer;
+    private ModelKhachHang customer;
     private ModelHoaDon hoadon;
     public Voucher_Form() {
         service=new ServiceCustomer();
@@ -28,7 +28,7 @@ public class Voucher_Form extends javax.swing.JPanel {
         init();
     }
     
-    public Voucher_Form(ModelUser user) {
+    public Voucher_Form(ModelNguoiDung user) {
         this.user=user;
         service=new ServiceCustomer();
         initComponents();

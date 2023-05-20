@@ -1,8 +1,8 @@
 package RTDRestaurant.View.Dialog;
 
 import RTDRestaurant.Controller.Service.ServiceCustomer;
-import RTDRestaurant.Model.ModelCustomer;
-import RTDRestaurant.Model.Model_Ban;
+import RTDRestaurant.Model.ModelKhachHang;
+import RTDRestaurant.Model.ModelBan;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.GradientPaint;
@@ -55,7 +55,7 @@ public class MS_ConfirmBook extends javax.swing.JDialog {
         animator.setAcceleration(0.5f);
     }
 
-    public void ConfirmBook(Model_Ban table, ModelCustomer customer) {
+    public void ConfirmBook(ModelBan table, ModelKhachHang customer) {
         setLocationRelativeTo(frame);
         lbMessage.setText("Bạn có chắc đặt bàn " + table.getName() + " không ?");
         animator.start();

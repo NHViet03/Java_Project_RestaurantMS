@@ -3,7 +3,7 @@ package RTDRestaurant.View.Main_Frame;
 
 import RTDRestaurant.Controller.Connection.DatabaseConnection;
 import RTDRestaurant.Controller.Event.EventMenuSelected;
-import RTDRestaurant.Model.ModelUser;
+import RTDRestaurant.Model.ModelNguoiDung;
 import RTDRestaurant.View.Component.Customer_Component.Menu;
 import RTDRestaurant.View.Form.Customer_Form.AboutUs_Form;
 import RTDRestaurant.View.Form.Customer_Form.AccountC_Form;
@@ -23,7 +23,7 @@ public class Main_Customer_Frame extends javax.swing.JFrame {
     private MigLayout layout;
     private Menu menu;
     private MainForm main;
-    private ModelUser user;
+    private ModelNguoiDung user;
 
     public Main_Customer_Frame() throws HeadlessException {
         initComponents();
@@ -32,7 +32,7 @@ public class Main_Customer_Frame extends javax.swing.JFrame {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/restaurant (1).png")));
     }
     
-    public Main_Customer_Frame(ModelUser user) {
+    public Main_Customer_Frame(ModelNguoiDung user) {
         this.user=user;
         initComponents();
         init();
@@ -175,7 +175,7 @@ public class Main_Customer_Frame extends javax.swing.JFrame {
             }
         });
     }
-    public static void main(ModelUser user) {
+    public static void main(ModelNguoiDung user) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

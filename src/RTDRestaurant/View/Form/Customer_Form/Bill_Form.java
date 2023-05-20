@@ -2,13 +2,10 @@
 package RTDRestaurant.View.Form.Customer_Form;
 
 import RTDRestaurant.Controller.Service.ServiceCustomer;
-import RTDRestaurant.Model.ModelCustomer;
+import RTDRestaurant.Model.ModelKhachHang;
 import RTDRestaurant.Model.ModelHoaDon;
-import RTDRestaurant.Model.ModelUser;
-import RTDRestaurant.Model.ModelVoucher;
-import RTDRestaurant.View.Component.Customer_Component.CardVoucher;
+import RTDRestaurant.Model.ModelNguoiDung;
 import RTDRestaurant.View.Swing.CustomScrollBar.ScrollBarCustom;
-import RTDRestaurant.View.Swing.WrapLayout;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -18,13 +15,13 @@ import java.util.logging.Logger;
 
 public class Bill_Form extends javax.swing.JPanel {
 
-    private ModelUser user;
-    private ModelCustomer customer;
+    private ModelNguoiDung user;
+    private ModelKhachHang customer;
     private ServiceCustomer service;
     private ArrayList<ModelHoaDon> list;
     DecimalFormat df;
 
-    public Bill_Form(ModelUser user) {
+    public Bill_Form(ModelNguoiDung user) {
         this.user=user;
         service=new ServiceCustomer();
         initComponents();

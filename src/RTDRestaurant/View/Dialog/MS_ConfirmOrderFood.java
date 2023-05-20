@@ -1,7 +1,7 @@
 package RTDRestaurant.View.Dialog;
 
 import RTDRestaurant.Controller.Service.ServiceCustomer;
-import RTDRestaurant.Model.ModelCustomer;
+import RTDRestaurant.Model.ModelKhachHang;
 import RTDRestaurant.Model.ModelMonAn;
 import RTDRestaurant.View.Form.Customer_Form.AccountC_Form;
 import java.awt.Color;

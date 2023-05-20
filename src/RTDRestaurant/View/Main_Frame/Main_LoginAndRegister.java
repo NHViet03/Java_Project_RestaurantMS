@@ -6,7 +6,7 @@ import RTDRestaurant.Controller.Service.ServiceMail;
 import RTDRestaurant.Controller.Service.ServiceUser;
 import RTDRestaurant.Model.ModelLogin;
 import RTDRestaurant.Model.ModelMessage;
-import RTDRestaurant.Model.ModelUser;
+import RTDRestaurant.Model.ModelNguoiDung;
 import RTDRestaurant.View.Component.LoginAndRegister_Component.Message;
 import RTDRestaurant.View.Component.LoginAndRegister_Component.PanelCover;
 import RTDRestaurant.View.Component.LoginAndRegister_Component.PanelLoading;
@@ -137,7 +137,7 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent ae) {
                 
                 try {
-                    ModelUser user = loginAndRegister.getUser();
+                    ModelNguoiDung user = loginAndRegister.getUser();
                     String name=loginAndRegister.getName();
                     if(service.verifyCodeWithUser(user.getUserID(),verifyCode.getInputCode())){
                         service.doneVerify(user.getUserID(),name);
@@ -155,7 +155,7 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
         });
     }
     private void register(){
-        ModelUser user=loginAndRegister.getUser();
+        ModelNguoiDung user=loginAndRegister.getUser();
         //loading.setVisible(true);
         //verifyCode.setVisible(true);
         try {
@@ -173,7 +173,7 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
     private void login(){
         ModelLogin data=loginAndRegister.getDataLogin();
         try {
-            ModelUser user=service.login(data);
+            ModelNguoiDung user=service.login(data);
             if(user!=null){
                 this.dispose();
                 switch (user.getRole()) {
@@ -198,7 +198,7 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
             showMessage(Message.MessageType.ERROR, "Lỗi đăng nhập");
         }
     }
-    private void sendMail(ModelUser user){
+    private void sendMail(ModelNguoiDung user){
         new Thread(new Runnable() {
             @Override
             public void run() {

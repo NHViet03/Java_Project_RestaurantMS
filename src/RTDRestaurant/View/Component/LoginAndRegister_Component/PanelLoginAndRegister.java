@@ -1,7 +1,7 @@
 package RTDRestaurant.View.Component.LoginAndRegister_Component;
 
 import RTDRestaurant.Model.ModelLogin;
-import RTDRestaurant.Model.ModelUser;
+import RTDRestaurant.Model.ModelNguoiDung;
 import RTDRestaurant.View.Swing.Button;
 import RTDRestaurant.View.Swing.MyPasswordField;
 import RTDRestaurant.View.Swing.MyTextField;
@@ -22,7 +22,7 @@ import net.miginfocom.swing.MigLayout;
 public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
 
     //Lấy tài khoản đăng ký
-    public ModelUser getUser() {
+    public ModelNguoiDung getUser() {
         return user;
     }
 
@@ -35,7 +35,7 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
         return dataLogin;
     }
 
-    private ModelUser user; //Model Tài khoản người dùng
+    private ModelNguoiDung user; //Model Tài khoản người dùng
     private String name; //Tên Khách Hàng
     private ModelLogin dataLogin; //Model thông tin đăng nhập
     private Icon hide;
@@ -108,7 +108,7 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
                 name = txtUser.getText().trim();
                 String email = txtEmail.getText().trim();
                 String password = String.valueOf(txtPassword.getPassword());
-                user = new ModelUser(0, email, password, "Khach Hang");
+                user = new ModelNguoiDung(0, email, password, "Khach Hang");
             }
         });
     }

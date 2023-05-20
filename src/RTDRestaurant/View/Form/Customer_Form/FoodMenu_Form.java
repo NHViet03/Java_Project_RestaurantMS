@@ -2,9 +2,9 @@ package RTDRestaurant.View.Form.Customer_Form;
 
 import RTDRestaurant.Controller.Service.ServiceCustomer;
 import RTDRestaurant.Model.ModelMonAn;
-import RTDRestaurant.Model.ModelCustomer;
+import RTDRestaurant.Model.ModelKhachHang;
 import RTDRestaurant.Model.ModelHoaDon;
-import RTDRestaurant.Model.ModelUser;
+import RTDRestaurant.Model.ModelNguoiDung;
 import RTDRestaurant.View.Component.Customer_Component.CardMonAn;
 import RTDRestaurant.View.Dialog.MS_PayBill;
 import RTDRestaurant.View.Dialog.MS_Warning;
@@ -22,13 +22,13 @@ public class FoodMenu_Form extends javax.swing.JPanel {
     private final String type;
     private final ServiceCustomer service;
     private ArrayList<ModelMonAn> list;
-    private final ModelUser user;
-    private ModelCustomer customer;
+    private final ModelNguoiDung user;
+    private ModelKhachHang customer;
     private ModelHoaDon HoaDon;
     private final MS_Warning warning;
     private MS_PayBill obj;
 
-    public FoodMenu_Form(String type, ModelUser user) {
+    public FoodMenu_Form(String type, ModelNguoiDung user) {
         this.type = type;
         this.user = user;
         service = new ServiceCustomer();

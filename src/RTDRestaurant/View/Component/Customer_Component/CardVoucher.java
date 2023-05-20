@@ -1,6 +1,6 @@
 package RTDRestaurant.View.Component.Customer_Component;
 
-import RTDRestaurant.Model.ModelCustomer;
+import RTDRestaurant.Model.ModelKhachHang;
 import RTDRestaurant.Model.ModelHoaDon;
 import RTDRestaurant.Model.ModelVoucher;
 import RTDRestaurant.View.Dialog.MS_ConfirmExchangeVoucher;
@@ -18,7 +18,7 @@ import javax.swing.ImageIcon;
 public class CardVoucher extends javax.swing.JPanel {
 
     private final ModelVoucher data;
-    private final ModelCustomer customer;
+    private final ModelKhachHang customer;
     private final ModelHoaDon hoadon;
     private MS_Warning warning;
     private MS_ConfirmExchangeVoucher exchange;
@@ -26,7 +26,7 @@ public class CardVoucher extends javax.swing.JPanel {
         return data;
     }
 
-    public CardVoucher(ModelVoucher data,ModelCustomer customer,ModelHoaDon hoadon) {
+    public CardVoucher(ModelVoucher data,ModelKhachHang customer,ModelHoaDon hoadon) {
         this.data = data;
         this.customer=customer;
         this.hoadon=hoadon;

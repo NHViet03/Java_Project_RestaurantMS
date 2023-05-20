@@ -52,4 +52,11 @@ public class Table extends JTable {
         dm.getDataVector().removeAllElements();
         revalidate();
     }
+    public int getFirstCol_RowSelected(int row){
+        row=Math.max(row, 0);
+        int id;
+        DefaultTableModel dm = (DefaultTableModel) getModel();
+        id=(Integer)dm.getValueAt(row, 0);
+        return id;
+    }
 }
