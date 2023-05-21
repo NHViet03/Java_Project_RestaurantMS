@@ -6,6 +6,7 @@ import RTDRestaurant.Model.ModelNguoiDung;
 import RTDRestaurant.Model.ModelPNK;
 import RTDRestaurant.View.Form.MainForm;
 import RTDRestaurant.View.Swing.CustomScrollBar.ScrollBarCustom;
+import java.awt.Color;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ public class CTNK_Form extends javax.swing.JPanel {
     public void init() {
         txtSearch.setHint("Tìm kiếm NL . . .");
         jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
+        jScrollPane1.getViewport().setBackground(Color.WHITE);
         df = new DecimalFormat("##,###,###");
         //Thêm data cho Menu
         initTable();
@@ -152,7 +154,7 @@ public class CTNK_Form extends javax.swing.JPanel {
         lbDate.setIconTextGap(20);
 
         cmdReturn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        cmdReturn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/left-arrow.png"))); // NOI18N
+        cmdReturn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/back.png"))); // NOI18N
         cmdReturn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cmdReturnMouseClicked(evt);

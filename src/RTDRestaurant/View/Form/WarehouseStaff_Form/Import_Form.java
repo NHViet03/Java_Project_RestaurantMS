@@ -6,6 +6,7 @@ import RTDRestaurant.Model.ModelNguoiDung;
 import RTDRestaurant.Model.ModelPNK;
 import RTDRestaurant.View.Form.MainForm;
 import RTDRestaurant.View.Swing.CustomScrollBar.ScrollBarCustom;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -41,6 +42,7 @@ public class Import_Form extends javax.swing.JPanel {
     public void init() {
         txtSearch.setHint("Tìm kiếm Phiếu NK . . .");
         jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
+        jScrollPane1.getViewport().setBackground(Color.WHITE);
         df = new DecimalFormat("##,###,###");
         //Thêm data cho Menu
         initTable();

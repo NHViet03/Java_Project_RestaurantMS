@@ -28,9 +28,6 @@ public class ModelKho {
         this.dvt = dvt;
         this.slTon = slTon;
     }
-
-    
-
     
     private int idNL;   //Mã nguyên liệu
     private String tenNL; //Tên nguyên liệu

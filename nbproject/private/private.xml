@@ -6,9 +6,9 @@
             <file>file:/C:/Users/Admin/Java_Project_RestaurantMS/src/RTDRestaurant/View/Form/WarehouseStaff_Form/Ingredient_Form.java</file>
             <file>file:/C:/Users/Admin/Java_Project_RestaurantMS/src/RTDRestaurant/Controller/Service/ServiceStaff.java</file>
             <file>file:/C:/Users/Admin/Java_Project_RestaurantMS/src/RTDRestaurant/View/Form/WarehouseStaff_Form/CTNK_Form.java</file>
-            <file>file:/C:/Users/Admin/Java_Project_RestaurantMS/src/RTDRestaurant/Model/ModelCTNK.java</file>
-            <file>file:/C:/Users/Admin/Java_Project_RestaurantMS/src/RTDRestaurant/Controller/Service/ServiceCustomer.java</file>
-            <file>file:/C:/Users/Admin/Java_Project_RestaurantMS/src/RTDRestaurant/View/Form/WarehouseStaff_Form/Import_Form.java</file>
+            <file>file:/C:/Users/Admin/Java_Project_RestaurantMS/src/RTDRestaurant/View/Form/WarehouseStaff_Form/InsertAndUpdate_Ingredient_Form.java</file>
+            <file>file:/C:/Users/Admin/Java_Project_RestaurantMS/src/RTDRestaurant/Model/ModelKho.java</file>
+            <file>file:/C:/Users/Admin/Java_Project_RestaurantMS/src/RTDRestaurant/View/Main_Frame/Main_WarehouseStaff_Frame.java</file>
         </group>
     </open-files>
 </project-private>

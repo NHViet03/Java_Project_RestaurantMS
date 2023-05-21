@@ -6,6 +6,7 @@ import RTDRestaurant.Model.ModelNguyenLieu;
 import RTDRestaurant.Model.ModelNguoiDung;
 import RTDRestaurant.View.Form.MainForm;
 import RTDRestaurant.View.Swing.CustomScrollBar.ScrollBarCustom;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -32,6 +33,7 @@ public class Ingredient_Form extends javax.swing.JPanel {
     public void init(){
         txtSearch.setHint("Tìm kiếm Nguyên Liệu . . .");
         jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
+        jScrollPane1.getViewport().setBackground(Color.WHITE);
         df = new DecimalFormat("##,###,###");
         //Thêm data cho Menu
         initTable();
@@ -98,7 +100,7 @@ public class Ingredient_Form extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        lbTitle.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbTitle.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         lbTitle.setForeground(new java.awt.Color(108, 91, 123));
         lbTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/food.png"))); // NOI18N
         lbTitle.setText("Quản lý nguyên liệu");

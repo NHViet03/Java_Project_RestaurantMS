@@ -222,7 +222,7 @@
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Icons/left-arrow.png"/>
+          <Image iconType="3" name="/Icons/back.png"/>
         </Property>
       </Properties>
       <Events>

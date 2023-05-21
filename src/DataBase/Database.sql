@@ -883,7 +883,7 @@ END;
 
 
 
- 
+SELECT Kho.ID_NL,TenNL,Donvitinh,SLTon FROM Kho JOIN NguyenLieu ON NguyenLieu.ID_NL=Kho.ID_NL; 
  
  
  

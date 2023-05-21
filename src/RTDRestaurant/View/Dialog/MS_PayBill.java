@@ -33,6 +33,7 @@ public class MS_PayBill extends javax.swing.JDialog {
         this.frame = parent;
         setOpacity(0f);
         jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
+        jScrollPane1.getViewport().setBackground(Color.WHITE);
         getContentPane().setBackground(Color.WHITE);
         TimingTarget target = new TimingTargetAdapter() {
             @Override

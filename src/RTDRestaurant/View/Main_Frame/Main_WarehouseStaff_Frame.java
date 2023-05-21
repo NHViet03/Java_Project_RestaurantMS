@@ -9,6 +9,7 @@ import RTDRestaurant.View.Form.WarehouseStaff_Form.AccountS_Form;
 import RTDRestaurant.View.Form.WarehouseStaff_Form.Export_Form;
 import RTDRestaurant.View.Form.WarehouseStaff_Form.Import_Form;
 import RTDRestaurant.View.Form.WarehouseStaff_Form.Ingredient_Form;
+import RTDRestaurant.View.Form.WarehouseStaff_Form.Warehouse_Form;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.sql.SQLException;
@@ -50,7 +51,7 @@ public class Main_WarehouseStaff_Frame extends javax.swing.JFrame {
                         main.showForm(new Ingredient_Form(main));
                     }
                     case 1 -> {
-
+                        main.showForm(new Warehouse_Form(main));
                     }
                     case 2 -> {
                         main.showForm(new Import_Form(user,main));

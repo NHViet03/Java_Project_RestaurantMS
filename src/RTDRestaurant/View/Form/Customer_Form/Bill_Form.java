@@ -6,6 +6,7 @@ import RTDRestaurant.Model.ModelKhachHang;
 import RTDRestaurant.Model.ModelHoaDon;
 import RTDRestaurant.Model.ModelNguoiDung;
 import RTDRestaurant.View.Swing.CustomScrollBar.ScrollBarCustom;
+import java.awt.Color;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ public class Bill_Form extends javax.swing.JPanel {
     public void init(){
         txtSearch.setHint("Tìm kiếm Hóa Đơn . . .");
         jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
+        jScrollPane1.getViewport().setBackground(Color.WHITE);
         df = new DecimalFormat("##,###,###");
         //Thêm data cho Menu
         initTable();

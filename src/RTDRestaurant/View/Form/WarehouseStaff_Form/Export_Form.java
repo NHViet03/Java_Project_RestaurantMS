@@ -3,9 +3,10 @@ package RTDRestaurant.View.Form.WarehouseStaff_Form;
 import RTDRestaurant.Controller.Service.ServiceStaff;
 import RTDRestaurant.Model.ModelNhanVien;
 import RTDRestaurant.Model.ModelNguoiDung;
-import RTDRestaurant.Model.ModelPNK;
+import RTDRestaurant.Model.ModelPXK;
 import RTDRestaurant.View.Form.MainForm;
 import RTDRestaurant.View.Swing.CustomScrollBar.ScrollBarCustom;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -19,7 +20,7 @@ import java.util.logging.Logger;
 public class Export_Form extends javax.swing.JPanel {
 
     private ServiceStaff service;
-    private ArrayList<ModelPNK> list;
+    private ArrayList<ModelPXK> list;
     private final MainForm main;
     private final ModelNguoiDung user;
     private ModelNhanVien staff;
@@ -39,12 +40,14 @@ public class Export_Form extends javax.swing.JPanel {
     }
 
     public void init() {
-        txtSearch.setHint("Tìm kiếm Phiếu NK . . .");
+        txtSearch.setHint("Tìm kiếm Phiếu XK . . .");
         jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
+        jScrollPane1.getViewport().setBackground(Color.WHITE);
         df = new DecimalFormat("##,###,###");
         //Thêm data cho Menu
         initTable();
-        setTongtienNK();
+        //Lấy số lượng phiếu xuất trong trong ngày hôm nay
+        setSL_PNK();
         setCurrentDate();
         //Them event cho Button ThemPNK
         cmdAdd.addActionListener(new ActionListener() {
@@ -57,7 +60,12 @@ public class Export_Form extends javax.swing.JPanel {
         cmdCT.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                try {
+                    ModelPXK pxk= service.getPXKbyID(tablePXK.getFirstCol_RowSelected(tablePXK.getSelectedRow()));
+                    main.showForm(new CTXK_Form(user,pxk,main));
+                } catch (SQLException ex) {
+                    Logger.getLogger(Export_Form.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
 
@@ -65,12 +73,12 @@ public class Export_Form extends javax.swing.JPanel {
 
     public void setCurrentDate() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-YYYY");
-        lbDate.setText(simpleDateFormat.format(new Date()));
+        lbDate.setText("Ngày hiện tại: "+simpleDateFormat.format(new Date()));
     }
 
-    public void setTongtienNK() {
+    public void setSL_PNK() {
         try {
-            txtTong.setText(df.format(service.getTongtienNK()) +"đ" );
+            txtslPXK.setText(service.getSLPXK()+"");
         } catch (SQLException ex) {
             Logger.getLogger(Export_Form.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -78,9 +86,9 @@ public class Export_Form extends javax.swing.JPanel {
 
     public void initTable() {
         try {
-            list = service.MenuPNK();
-            for (ModelPNK data : list) {
-                tablePNK.addRow(new Object[]{data.getIdNK(), data.getIdNV(),data.getNgayNK(), df.format(data.getTongTien()) + "đ"});
+            list = service.MenuPXK();
+            for (ModelPXK data : list) {
+                tablePXK.addRow(new Object[]{data.getIdXK(), data.getIdNV(),data.getNgayXK()});
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -88,14 +96,14 @@ public class Export_Form extends javax.swing.JPanel {
     }
 
     public void searchTable(String txt) {
-        tablePNK.removeAllRow();
-        for (ModelPNK data : list) {
-            if ((data.getIdNK()+"").toLowerCase().contains(txt.toLowerCase())) {
-                tablePNK.addRow(new Object[]{data.getIdNK(), data.getIdNV(),data.getNgayNK(), df.format(data.getTongTien()) + "đ"});
+        tablePXK.removeAllRow();
+        for (ModelPXK data : list) {
+            if ((data.getIdXK()+"").toLowerCase().contains(txt.toLowerCase())) {
+                tablePXK.addRow(new Object[]{data.getIdXK(), data.getIdNV(),data.getNgayXK()});
             }
         }
-        tablePNK.repaint();
-        tablePNK.revalidate();
+        tablePXK.repaint();
+        tablePXK.revalidate();
     }
 
     @SuppressWarnings("unchecked")
@@ -104,22 +112,22 @@ public class Export_Form extends javax.swing.JPanel {
 
         lbTitle = new javax.swing.JLabel();
         txtSearch = new RTDRestaurant.View.Swing.MyTextField();
-        lbTong = new javax.swing.JLabel();
-        txtTong = new RTDRestaurant.View.Swing.MyTextField();
-        lbPNK = new javax.swing.JLabel();
+        lbSL = new javax.swing.JLabel();
+        txtslPXK = new RTDRestaurant.View.Swing.MyTextField();
+        lbPXK = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablePNK = new RTDRestaurant.View.Swing.Table();
+        tablePXK = new RTDRestaurant.View.Swing.Table();
         cmdAdd = new RTDRestaurant.View.Swing.Button();
         cmdCT = new RTDRestaurant.View.Swing.Button();
         lbDate = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        lbTitle.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbTitle.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         lbTitle.setForeground(new java.awt.Color(108, 91, 123));
-        lbTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/import (1).png"))); // NOI18N
-        lbTitle.setText("Quản lý nhập kho");
+        lbTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/export.png"))); // NOI18N
+        lbTitle.setText("Quản lý xuất kho");
         lbTitle.setIconTextGap(10);
 
         txtSearch.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/loupe (1).png"))); // NOI18N
@@ -134,67 +142,62 @@ public class Export_Form extends javax.swing.JPanel {
             }
         });
 
-        lbTong.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lbTong.setForeground(new java.awt.Color(89, 89, 89));
-        lbTong.setText("Tổng tiền nhập kho hôm nay");
+        lbSL.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbSL.setForeground(new java.awt.Color(89, 89, 89));
+        lbSL.setText("Số Phiếu xuất kho hôm nay");
 
-        txtTong.setEditable(false);
-        txtTong.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtTong.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        txtslPXK.setEditable(false);
+        txtslPXK.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtslPXK.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
 
-        lbPNK.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lbPNK.setForeground(new java.awt.Color(89, 89, 89));
-        lbPNK.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lbPNK.setText("Danh sách Phiếu Nhập Kho");
+        lbPXK.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbPXK.setForeground(new java.awt.Color(89, 89, 89));
+        lbPXK.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbPXK.setText("Danh sách Phiếu Xuất Kho");
 
         jSeparator2.setBackground(new java.awt.Color(76, 76, 76));
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        tablePNK.setModel(new javax.swing.table.DefaultTableModel(
+        tablePXK.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Mã NK", "Mã NV", "Ngày NK", "Tổng tiền"
+                "Mã XK", "Mã NV", "Ngày XK"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tablePNK);
-        if (tablePNK.getColumnModel().getColumnCount() > 0) {
-            tablePNK.getColumnModel().getColumn(0).setMinWidth(150);
-            tablePNK.getColumnModel().getColumn(0).setMaxWidth(150);
-            tablePNK.getColumnModel().getColumn(1).setMinWidth(150);
-            tablePNK.getColumnModel().getColumn(1).setPreferredWidth(30);
-            tablePNK.getColumnModel().getColumn(1).setMaxWidth(150);
-            tablePNK.getColumnModel().getColumn(2).setPreferredWidth(100);
+        jScrollPane1.setViewportView(tablePXK);
+        if (tablePXK.getColumnModel().getColumnCount() > 0) {
+            tablePXK.getColumnModel().getColumn(1).setPreferredWidth(30);
+            tablePXK.getColumnModel().getColumn(2).setPreferredWidth(100);
         }
 
         cmdAdd.setBackground(new java.awt.Color(108, 91, 123));
         cmdAdd.setForeground(new java.awt.Color(255, 255, 255));
-        cmdAdd.setText("Thêm PNK");
+        cmdAdd.setText("Thêm PXK");
         cmdAdd.setFocusable(false);
         cmdAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         cmdCT.setBackground(new java.awt.Color(108, 91, 123));
         cmdCT.setForeground(new java.awt.Color(255, 255, 255));
-        cmdCT.setText("Chi tiết PNK");
+        cmdCT.setText("Chi tiết PXK");
         cmdCT.setFocusable(false);
         cmdCT.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
-        lbDate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbDate.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         lbDate.setForeground(new java.awt.Color(108, 91, 123));
-        lbDate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/calendar.png"))); // NOI18N
         lbDate.setText("Ngày hiện tại");
-        lbDate.setIconTextGap(10);
+        lbDate.setIconTextGap(20);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -203,7 +206,7 @@ public class Export_Form extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
                     .addComponent(jSeparator2)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -212,17 +215,17 @@ public class Export_Form extends javax.swing.JPanel {
                         .addGap(20, 20, 20)
                         .addComponent(cmdCT, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbTitle)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbDate, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbTong, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lbSL)
                                 .addGap(50, 50, 50)
-                                .addComponent(txtTong, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lbPNK))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(txtslPXK, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lbPXK))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lbTitle)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbDate, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -232,14 +235,14 @@ public class Export_Form extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbDate, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbTong, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(lbSL, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtslPXK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 1, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbPNK, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbPXK, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -268,11 +271,11 @@ public class Export_Form extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lbDate;
-    private javax.swing.JLabel lbPNK;
+    private javax.swing.JLabel lbPXK;
+    private javax.swing.JLabel lbSL;
     private javax.swing.JLabel lbTitle;
-    private javax.swing.JLabel lbTong;
-    private RTDRestaurant.View.Swing.Table tablePNK;
+    private RTDRestaurant.View.Swing.Table tablePXK;
     private RTDRestaurant.View.Swing.MyTextField txtSearch;
-    private RTDRestaurant.View.Swing.MyTextField txtTong;
+    private RTDRestaurant.View.Swing.MyTextField txtslPXK;
     // End of variables declaration//GEN-END:variables
 }
