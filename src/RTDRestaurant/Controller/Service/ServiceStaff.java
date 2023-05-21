@@ -1,7 +1,6 @@
 package RTDRestaurant.Controller.Service;
 
 import RTDRestaurant.Controller.Connection.DatabaseConnection;
-import RTDRestaurant.Model.ModelCTHD;
 import RTDRestaurant.Model.ModelCTNK;
 import RTDRestaurant.Model.ModelCTXK;
 import RTDRestaurant.Model.ModelKho;
@@ -141,7 +140,7 @@ public class ServiceStaff {
         p.close();
         return list;
     }
-    
+
     //Lấy thông tin của Phiếu nhập kho theo ID
     public ModelPNK getPNKbyID(int id) throws SQLException {
         ModelPNK data = null;
@@ -186,20 +185,20 @@ public class ServiceStaff {
         p.setInt(1, idnk);
         ResultSet r = p.executeQuery();
         while (r.next()) {
-            int ID_NK=r.getInt(1);
-            int ID_NL=r.getInt(2);
-            String tenNL=r.getString(3);
-            String dvt=r.getString(4);
-            int soluong=r.getInt(5);
-            int thanhTien=r.getInt(6);
-            ModelCTNK data=new ModelCTNK(ID_NK, ID_NL, tenNL, dvt,soluong , thanhTien);
+            int ID_NK = r.getInt(1);
+            int ID_NL = r.getInt(2);
+            String tenNL = r.getString(3);
+            String dvt = r.getString(4);
+            int soluong = r.getInt(5);
+            int thanhTien = r.getInt(6);
+            ModelCTNK data = new ModelCTNK(ID_NK, ID_NL, tenNL, dvt, soluong, thanhTien);
             list.add(data);
         }
         r.close();
         p.close();
         return list;
     }
-    
+
     //Lấy toàn bộ danh sách Phiếu xuất kho
     public ArrayList<ModelPXK> MenuPXK() throws SQLException {
         ArrayList<ModelPXK> list = new ArrayList<>();
@@ -217,7 +216,7 @@ public class ServiceStaff {
         p.close();
         return list;
     }
-    
+
     //Lấy thông tin của Phiếu xuất kho theo ID
     public ModelPXK getPXKbyID(int id) throws SQLException {
         ModelPXK data = null;
@@ -228,13 +227,14 @@ public class ServiceStaff {
         while (r.next()) {
             int idXK = r.getInt(1);
             int idNV = r.getInt(2);
-            String ngayXK = r.getString(3);           
+            String ngayXK = r.getString(3);
             data = new ModelPXK(idXK, idNV, ngayXK);
         }
         r.close();
         p.close();
         return data;
     }
+
     //Lấy số lượng phiếu xuất kho trong ngày hiện tại
     public int getSLPXK() throws SQLException {
         int sl = 0;
@@ -250,7 +250,7 @@ public class ServiceStaff {
         p.close();
         return sl;
     }
-    
+
     //Lấy danh sách chi tiết Xuất kho theo ID_XK
     public ArrayList<ModelCTXK> getCTXK(int idxk) throws SQLException {
         ArrayList<ModelCTXK> list = new ArrayList<>();
@@ -260,19 +260,19 @@ public class ServiceStaff {
         p.setInt(1, idxk);
         ResultSet r = p.executeQuery();
         while (r.next()) {
-            int ID_NK=r.getInt(1);
-            int ID_NL=r.getInt(2);
-            String tenNL=r.getString(3);
-            String dvt=r.getString(4);
-            int soluong=r.getInt(5);
-            ModelCTXK data=new ModelCTXK(ID_NK, ID_NL, tenNL, dvt, soluong);
+            int ID_NK = r.getInt(1);
+            int ID_NL = r.getInt(2);
+            String tenNL = r.getString(3);
+            String dvt = r.getString(4);
+            int soluong = r.getInt(5);
+            ModelCTXK data = new ModelCTXK(ID_NK, ID_NL, tenNL, dvt, soluong);
             list.add(data);
         }
         r.close();
         p.close();
         return list;
     }
-    
+
     //Lấy toàn bộ danh sách nguyên liệu trong kho
     public ArrayList<ModelKho> MenuKhoNL() throws SQLException {
         ArrayList<ModelKho> list = new ArrayList<>();
@@ -284,7 +284,7 @@ public class ServiceStaff {
             int id = r.getInt(1);  //Mã nguyên liệu
             String tenNL = r.getString(2); //Tên nguyên liệu
             String dvt = r.getString(3); //Đơn vị tính của nguyên liệu
-            int slTon =r.getInt(4);
+            int slTon = r.getInt(4);
             ModelKho data = new ModelKho(id, tenNL, dvt, slTon);
             list.add(data);
         }
@@ -292,16 +292,94 @@ public class ServiceStaff {
         p.close();
         return list;
     }
+
     //Lấy số lượng nguyên liệu còn trong kho  (Số lượng tồn >0)
-    public int getSLNL_TonKho() throws SQLException{
-        int sl=0;
+    public int getSLNL_TonKho() throws SQLException {
+        int sl = 0;
         String sql = "SELECT COUNT(*) FROM Kho WHERE SLTon>0";
         PreparedStatement p = con.prepareStatement(sql);
         ResultSet r = p.executeQuery();
         while (r.next()) {
-            sl=r.getInt(1);
+            sl = r.getInt(1);
         }
         return sl;
     }
 
+    //Lấy ID của Phiếu nhập kho tiếp theo được thêm
+    public int getNextID_NK() throws SQLException {
+        int nextID = 0;
+        String sql = "SELECT MAX(ID_NK) as ID FROM PhieuNK";
+        PreparedStatement p = con.prepareStatement(sql);
+        ResultSet r = p.executeQuery();
+        while (r.next()) {
+            nextID = r.getInt("ID") + 1;
+        }
+        r.close();
+        p.close();
+        return nextID;
+    }
+
+    //Lấy ID của Phiếu xuất kho tiếp theo được thêm
+    public int getNextID_XK() throws SQLException {
+        int nextID = 0;
+        String sql = "SELECT MAX(ID_XK) as ID FROM PhieuXK";
+        PreparedStatement p = con.prepareStatement(sql);
+        ResultSet r = p.executeQuery();
+        while (r.next()) {
+            nextID = r.getInt("ID") + 1;
+        }
+        r.close();
+        p.close();
+        return nextID;
+    }
+
+    //Thêm phiếu nhập kho và chi tiết Nhập kho
+    public void InsertPNK_CTNK(ModelPNK pnk, ArrayList<ModelKho> list) throws SQLException {
+        //Thêm phiếu nhập kho
+        String sql = "INSERT INTO PhieuNK(ID_NK,ID_NV,NgayNK) VALUES (?,?,to_date(?, 'dd-mm-yyyy'))";
+        PreparedStatement p = con.prepareStatement(sql);
+        p.setInt(1, pnk.getIdNK());
+        p.setInt(2, pnk.getIdNV());
+        p.setString(3, pnk.getNgayNK());
+        p.execute();
+        //Thêm chi tiết nhập kho
+        String sql_ct;
+        for (ModelKho data : list) {
+            if(data.getSlTon()>0){
+                sql_ct = "INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (?,?,?)";
+                PreparedStatement p_ct = con.prepareStatement(sql_ct);
+                p_ct.setInt(1, pnk.getIdNK());
+                p_ct.setInt(2, data.getIdNL());
+                p_ct.setInt(3, data.getSlTon());
+                p_ct.execute();
+                p_ct.close();
+            }
+        }
+        p.close();
+    }
+    
+    //Thêm phiếu xuất kho và chi tiết Xuất kho
+    public void InsertPXK_CTXK(ModelPXK pxk, ArrayList<ModelKho> list) throws SQLException {
+        //Thêm phiếu nhập kho
+        String sql = "INSERT INTO PhieuXK(ID_XK,ID_NV,NgayXK) VALUES (?,?,to_date(?, 'dd-mm-yyyy'))";
+        PreparedStatement p = con.prepareStatement(sql);
+        p.setInt(1, pxk.getIdXK());
+        p.setInt(2, pxk.getIdNV());
+        p.setString(3, pxk.getNgayXK());
+        p.execute();
+        //Thêm chi tiết nhập kho
+        String sql_ct;
+        for (ModelKho data : list) {
+            if(data.getSlTon()>0){
+                sql_ct = "INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (?,?,?)";
+                PreparedStatement p_ct = con.prepareStatement(sql_ct);
+                p_ct.setInt(1, pxk.getIdXK());
+                p_ct.setInt(2, data.getIdNL());
+                p_ct.setInt(3, data.getSlTon());
+                p_ct.execute();
+                p_ct.close();
+            }
+        }
+        p.close();
+    }
 }

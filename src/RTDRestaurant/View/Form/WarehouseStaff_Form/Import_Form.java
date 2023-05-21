@@ -52,7 +52,7 @@ public class Import_Form extends javax.swing.JPanel {
         cmdAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                main.showForm(new InsertPNK_Form(user,staff,main));
             }
         });
         //Them event cho Button ChitietPNK
@@ -126,7 +126,7 @@ public class Import_Form extends javax.swing.JPanel {
         lbTitle.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         lbTitle.setForeground(new java.awt.Color(108, 91, 123));
         lbTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/import (1).png"))); // NOI18N
-        lbTitle.setText("Quản lý nhập kho");
+        lbTitle.setText("Quản lý Nhập Kho");
         lbTitle.setIconTextGap(10);
 
         txtSearch.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/loupe (1).png"))); // NOI18N

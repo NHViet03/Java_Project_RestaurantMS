@@ -15,6 +15,11 @@ public class ModelKho {
         return dvt;
     }
 
+    public void setSlTon(int slTon) {
+        this.slTon = slTon;
+    }
+    
+    
     public int getSlTon() {
         return slTon;
     }

@@ -146,7 +146,7 @@ public class Warehouse_Form extends javax.swing.JPanel {
             tableNL.getColumnModel().getColumn(2).setPreferredWidth(100);
         }
 
-        lbDate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbDate.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         lbDate.setForeground(new java.awt.Color(108, 91, 123));
         lbDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/calendar.png"))); // NOI18N
         lbDate.setText("Ngày hiện tại");

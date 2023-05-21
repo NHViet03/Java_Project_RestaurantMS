@@ -1,19 +1,11 @@
 package RTDRestaurant.View.Dialog;
 
-import RTDRestaurant.Controller.Service.ServiceCustomer;
-import RTDRestaurant.Model.ModelKhachHang;
-import RTDRestaurant.Model.ModelBan;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
