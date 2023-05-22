@@ -1,13 +1,13 @@
-DROP table NguoiDung;
+--DROP table NguoiDung;
 --Tao bang NguoiDung
 create table NguoiDung(
-    ID_ND NUMBER(8,0) GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
+    ID_ND NUMBER(8,0),
     Email varchar2(50),
     Matkhau varchar2(20),
     VerifyCode varchar2(10)DEFAULT NULL,
     Trangthai varchar2(10) DEFAULT '',
     Vaitro varchar2(20)
-)
+);
 ---Them rang buoc
 alter table NguoiDung
     add constraint ND_Email_NNULL check ('Email' is not null)
@@ -19,15 +19,28 @@ alter table NguoiDung
     add constraint NguoiDung_PK PRIMARY KEY (ID_ND);
     
 --Them data cho Bang NguoiDung
-INSERT INTO NguoiDung(Email,MatKhau,Trangthai,Vaitro) VALUES ('NVHoangViet@gmail.com','123','Verified','Quan Ly');
-INSERT INTO NguoiDung(Email,MatKhau,Trangthai,Vaitro) VALUES ('NVHoangPhuc@gmail.com','123','Verified','Nhan Vien');
-INSERT INTO NguoiDung(Email,MatKhau,Trangthai,Vaitro) VALUES ('NVAnhHong@gmail.com','123','Verified','Nhan Vien Kho');
+--Nhan vien
+INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (100,'NVHoangViet@gmail.com','123','Verified','Quan Ly');
+INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (101,'NVHoangPhuc@gmail.com','123','Verified','Nhan Vien');
+INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (102,'NVAnhHong@gmail.com','123','Verified','Nhan Vien Kho');
+INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (103,'NVQuangDinh@gmail.com','123','Verified','Nhan Vien');
+--Khach Hang
+INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (104,'KHThaoDuong@gmail.com','123','Verified','Khach Hang');
+INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (105,'KHTanHieu@gmail.com','123','Verified','Khach Hang');
+INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (106,'KHQuocThinh@gmail.com','123','Verified','Khach Hang');
+INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (107,'KHNhuMai@gmail.com','123','Verified','Khach Hang');
+INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (108,'KHBichHao@gmail.com','123','Verified','Khach Hang');
+INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (109,'KHMaiQuynh@gmail.com','123','Verified','Khach Hang');
+INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (110,'KHMinhQuang@gmail.com','123','Verified','Khach Hang');
+INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (111,'KHThanhHang@gmail.com','123','Verified','Khach Hang');
+INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (112,'KHThanhNhan@gmail.com','123','Verified','Khach Hang');
+INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (113,'KHPhucNguyen@gmail.com','123','Verified','Khach Hang');
 
 
 --Tao bang NhanVien
-drop table NhanVien;
+--drop table NhanVien;
 create table NhanVien(
-    ID_NV NUMBER(8,0) GENERATED ALWAYS as IDENTITY(START with 100 INCREMENT by 1) ,
+    ID_NV NUMBER(8,0),
     TenNV VARCHAR2(50),
     NgayVL DATE ,
     SDT VARCHAR2(50),
@@ -56,22 +69,32 @@ ALTER TABLE NhanVien
  
 
 --Them data cho bang Nhan Vien
-INSERT INTO NhanVien(TenNV,NgayVL,SDT,Chucvu,ID_ND,ID_NQL) VALUES ('Nguyen Hoang Viet','10/05/2023','0848044725','Quan ly',43,100);
-INSERT INTO NhanVien(TenNV,NgayVL,SDT,Chucvu,ID_ND,ID_NQL) VALUES ('Le Thi Anh Hong','19/05/2023','0838033234','Kho',45,100);
+ALTER SESSION SET NLS_DATE_FORMAT = 'dd-MM-YYYY';
+--Co tai khoan
+INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_ND,ID_NQL) VALUES (100,'Nguyen Hoang Viet','10/05/2023','0848044725','Quan ly',100,100);
+INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_ND,ID_NQL) VALUES (101,'Nguyen Hoang Phuc','20/05/2023','0838033334','Tiep tan',101,100);
+INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_ND,ID_NQL) VALUES (102,'Le Thi Anh Hong','19/05/2023','0838033234','Kho',102,100);
+INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_ND,ID_NQL) VALUES (103,'Ho Quang Dinh','19/05/2023','0838033234','Tiep tan',103,100);
+--Khong co tai khoan
+INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_NQL) VALUES (104,'Ha Thao Duong','10/05/2023','0838033232','Phuc vu',100);
+INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_NQL) VALUES (105,'Nguyen Quoc Thinh','11/05/2023','0838033734','Phuc vu',100);
+INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_NQL) VALUES (106,'Truong Tan Hieu','12/05/2023','0838033834','Phuc vu',100);
+INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_NQL) VALUES (107,'Nguyen Thai Bao','10/05/2023','0838093234','Phuc vu',100);
+INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_NQL) VALUES (108,'Tran Nhat Khang','11/05/2023','0838133234','Thu ngan',100);
+INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_NQL) VALUES (109,'Nguyen Ngoc Luong','12/05/2023','0834033234','Bep',100);
 
-SELECT ID_NV, TenNV, to_char(NgayVL, 'dd-mm-yyyy') AS NgayVL, SDT, Chucvu, ID_NQL FROM NhanVien WHERE ID_ND=45;
 
 --Tao bang KhachHang
-drop table KhachHang;
+--drop table KhachHang;
 ALTER SESSION SET NLS_DATE_FORMAT = 'dd-MM-YYYY';
 create table KhachHang(
-    ID_KH NUMBER(8,0) GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
+    ID_KH NUMBER(8,0),
     TenKH varchar2(50), 
     Ngaythamgia date, 
-    Doanhso number(10,0), 
-    Diemtichluy number(5,0),
+    Doanhso number(10,0) DEFAULT 0, 
+    Diemtichluy number(5,0) DEFAULT 0,
     ID_ND NUMBER(8,0)
-)
+);
 --Them Check Constraint
 alter table KhachHang
     add constraint KH_TenKH_NNULL check ('TenKH' is not null)
@@ -89,15 +112,28 @@ ALTER TABLE KhachHang
  ADD CONSTRAINT KH_fk_idND FOREIGN KEY 
  (ID_ND) REFERENCES NguoiDung(ID_ND);
 
---
-drop table MonAn;
+--Them data cho bang KhachHang
+INSERT INTO KhachHang(ID_KH,TenKH,Ngaythamgia,ID_ND) VALUES (100,'Ha Thao Duong','10/05/2023',104);
+INSERT INTO KhachHang(ID_KH,TenKH,Ngaythamgia,ID_ND) VALUES (101,'Truong Tan Hieu','10/05/2023',105);
+INSERT INTO KhachHang(ID_KH,TenKH,Ngaythamgia,ID_ND) VALUES (102,'Nguyen Quoc Thinh','10/05/2023',106);
+INSERT INTO KhachHang(ID_KH,TenKH,Ngaythamgia,ID_ND) VALUES (103,'Tran Nhu Mai','10/05/2023',107);
+INSERT INTO KhachHang(ID_KH,TenKH,Ngaythamgia,ID_ND) VALUES (104,'Nguyen Thi Bich Hao','10/05/2023',108);
+INSERT INTO KhachHang(ID_KH,TenKH,Ngaythamgia,ID_ND) VALUES (105,'Nguyen Mai Quynh','11/05/2023',109);
+INSERT INTO KhachHang(ID_KH,TenKH,Ngaythamgia,ID_ND) VALUES (106,'Hoang Minh Quang','11/05/2023',110);
+INSERT INTO KhachHang(ID_KH,TenKH,Ngaythamgia,ID_ND) VALUES (107,'Nguyen Thanh Hang','12/05/2023',111);
+INSERT INTO KhachHang(ID_KH,TenKH,Ngaythamgia,ID_ND) VALUES (108,'Nguyen Ngoc Thanh Nhan','11/05/2023',112);
+INSERT INTO KhachHang(ID_KH,TenKH,Ngaythamgia,ID_ND) VALUES (109,'Hoang Thi Phuc Nguyen','12/05/2023',113);
+
+
+
 --Tao bang MonAn
+--drop table MonAn;
 create table MonAn(
     ID_MonAn NUMBER(8,0) GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
     TenMon varchar2(50), 
     DonGia number(8,0),
     Loai varchar2(50)
-)
+);
 --Them Check Constraint
 alter table MonAn
     add constraint MA_TenMon_NNULL check ('TenMon' is not null)
@@ -228,18 +264,18 @@ insert into MonAn(TenMon,Dongia,Loai) values('CHIYO:Sashimi Bung Ca Hoi', 219000
 
 
 --Tao bang Ban
-drop table Ban;
+--drop table Ban;
 create table Ban(
     ID_Ban NUMBER(8,0) GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
     TenBan varchar2(50), 
     Vitri varchar2(50), 
     Trangthai varchar2(50)
-)
+);
 --Them Check Constraint
 alter table Ban
     add constraint Ban_TenBan_NNULL check ('TenBan' is not null)
     add constraint Ban_Vitri_NNULL check ('Vitri' is not null)
-    add constraint Ban_Trangthai_Ten check (Trangthai in ('Con trong','Dang dung bua','Da dat truoc'));
+    add constraint Ban_Trangthai_Ten check (Trangthai in ('Con trong','Con trong','Con trong'));
 
 --Them khoa chinh
 alter table Ban
@@ -248,41 +284,41 @@ alter table Ban
 
 --Them data cho Ban
 --Tang 1
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T1.1','Tang 1','Dang dung bua');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T1.2','Tang 1','Dang dung bua');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T1.3','Tang 1','Dang dung bua');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T1.4','Tang 1','Dang dung bua');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T1.5','Tang 1','Dang dung bua');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T1.6','Tang 1','Da dat truoc');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T1.7','Tang 1','Dang dung bua');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T1.8','Tang 1','Dang dung bua');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T1.9','Tang 1','Da dat truoc');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T1.10','Tang 1','Dang dung bua');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T1.11','Tang 1','Da dat truoc');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T1.12','Tang 1','Dang dung bua');
+insert into Ban(TenBan,Vitri,Trangthai) values('Ban T1.1','Tang 1','Con trong');
+insert into Ban(TenBan,Vitri,Trangthai) values('Ban T1.2','Tang 1','Con trong');
+insert into Ban(TenBan,Vitri,Trangthai) values('Ban T1.3','Tang 1','Con trong');
+insert into Ban(TenBan,Vitri,Trangthai) values('Ban T1.4','Tang 1','Con trong');
+insert into Ban(TenBan,Vitri,Trangthai) values('Ban T1.5','Tang 1','Con trong');
+insert into Ban(TenBan,Vitri,Trangthai) values('Ban T1.6','Tang 1','Con trong');
+insert into Ban(TenBan,Vitri,Trangthai) values('Ban T1.7','Tang 1','Con trong');
+insert into Ban(TenBan,Vitri,Trangthai) values('Ban T1.8','Tang 1','Con trong');
+insert into Ban(TenBan,Vitri,Trangthai) values('Ban T1.9','Tang 1','Con trong');
+insert into Ban(TenBan,Vitri,Trangthai) values('Ban T1.10','Tang 1','Con trong');
+insert into Ban(TenBan,Vitri,Trangthai) values('Ban T1.11','Tang 1','Con trong');
+insert into Ban(TenBan,Vitri,Trangthai) values('Ban T1.12','Tang 1','Con trong');
 --Tang 2
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T2.1','Tang 2','Dang dung bua');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T2.2','Tang 2','Dang dung bua');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T2.3','Tang 2','Dang dung bua');
+insert into Ban(TenBan,Vitri,Trangthai) values('Ban T2.1','Tang 2','Con trong');
+insert into Ban(TenBan,Vitri,Trangthai) values('Ban T2.2','Tang 2','Con trong');
+insert into Ban(TenBan,Vitri,Trangthai) values('Ban T2.3','Tang 2','Con trong');
 insert into Ban(TenBan,Vitri,Trangthai) values('Ban T2.4','Tang 2','Con trong');
 insert into Ban(TenBan,Vitri,Trangthai) values('Ban T2.5','Tang 2','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T2.6','Tang 2','Da dat truoc');
+insert into Ban(TenBan,Vitri,Trangthai) values('Ban T2.6','Tang 2','Con trong');
 insert into Ban(TenBan,Vitri,Trangthai) values('Ban T2.7','Tang 2','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T2.8','Tang 2','Dang dung bua');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T2.9','Tang 2','Da dat truoc');
+insert into Ban(TenBan,Vitri,Trangthai) values('Ban T2.8','Tang 2','Con trong');
+insert into Ban(TenBan,Vitri,Trangthai) values('Ban T2.9','Tang 2','Con trong');
 insert into Ban(TenBan,Vitri,Trangthai) values('Ban T2.10','Tang 2','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T2.11','Tang 2','Da dat truoc');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T2.12','Tang 2','Dang dung bua');
+insert into Ban(TenBan,Vitri,Trangthai) values('Ban T2.11','Tang 2','Con trong');
+insert into Ban(TenBan,Vitri,Trangthai) values('Ban T2.12','Tang 2','Con trong');
 --Tang 3
 insert into Ban(TenBan,Vitri,Trangthai) values('Ban T3.1','Tang 3','Con trong');
 insert into Ban(TenBan,Vitri,Trangthai) values('Ban T3.1','Tang 3','Con trong');
 insert into Ban(TenBan,Vitri,Trangthai) values('Ban T3.1','Tang 3','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T3.1','Tang 3','Dang dung bua');
 insert into Ban(TenBan,Vitri,Trangthai) values('Ban T3.1','Tang 3','Con trong');
 insert into Ban(TenBan,Vitri,Trangthai) values('Ban T3.1','Tang 3','Con trong');
 insert into Ban(TenBan,Vitri,Trangthai) values('Ban T3.1','Tang 3','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T3.1','Tang 3','Dang dung bua');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T3.1','Tang 3','Dang dung bua');
+insert into Ban(TenBan,Vitri,Trangthai) values('Ban T3.1','Tang 3','Con trong');
+insert into Ban(TenBan,Vitri,Trangthai) values('Ban T3.1','Tang 3','Con trong');
+insert into Ban(TenBan,Vitri,Trangthai) values('Ban T3.1','Tang 3','Con trong');
 insert into Ban(TenBan,Vitri,Trangthai) values('Ban T3.1','Tang 3','Con trong');
 insert into Ban(TenBan,Vitri,Trangthai) values('Ban T3.1','Tang 3','Con trong');
 insert into Ban(TenBan,Vitri,Trangthai) values('Ban T3.1','Tang 3','Con trong');
@@ -291,7 +327,7 @@ insert into Ban(TenBan,Vitri,Trangthai) values('Ban T3.1','Tang 3','Con trong');
 --Tao bang Voucher
 
 --Tao bang Voucher
-drop table Voucher;
+--drop table Voucher;
 
 create table Voucher(
     Code_Voucher varchar2(10),
@@ -300,7 +336,7 @@ create table Voucher(
     LoaiMA varchar2(50),
     SoLuong number(3,0),
     Diem number(8,0)
-)
+);
 --Them Check Constraint
 alter table Voucher
     add constraint V_Code_NNULL check ('Code_Voucher' is not null)
@@ -328,7 +364,7 @@ insert into Voucher(Code_Voucher, Phantram,LoaiMA,SoLuong,Diem) values ('GTsC','
 
 
 --Tao bang HoaDon
-drop table HoaDon;
+--drop table HoaDon;
 
 create table HoaDon(
     ID_HoaDon NUMBER(8,0) GENERATED ALWAYS as IDENTITY(START with 100 INCREMENT by 1),
@@ -340,7 +376,7 @@ create table HoaDon(
     TienGiam number(8,0),
     Tongtien number(10,0),
     Trangthai varchar2(50)
-)
+);
 
 --Them Check Constraint
 alter table HoaDon
@@ -358,11 +394,8 @@ ALTER TABLE HoaDon
  (ID_Ban) REFERENCES Ban(ID_Ban);
  
  
- 
-SELECT Ban.ID_Ban,TenBan FROM HoaDon JOIN Ban ON HoaDon.ID_Ban=Ban.ID_Ban WHERE ID_KH=42;
- 
 --Tao bang CTHD
-drop table CTHD;
+--drop table CTHD;
 create table CTHD(
     ID_HoaDon NUMBER(8,0),
     ID_MonAn number(8,0),
@@ -386,7 +419,7 @@ ALTER TABLE CTHD
  
 
 --Tao bang Nguyenlieu
-drop table NguyenLieu;
+--drop table NguyenLieu;
 create table NguyenLieu(
     ID_NL NUMBER(8,0),
     TenNL VARCHAR2(50), 
@@ -421,7 +454,7 @@ INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(113,'Toi',30000,'kg'
 INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(114,'Dam',50000,'l');
 
 --Tao bang Kho
-drop table Kho;
+--drop table Kho;
 create table Kho(
     ID_NL NUMBER(8,0),
     SLTon NUMBER(3,0) DEFAULT 0
@@ -444,7 +477,7 @@ BEGIN
 END;
 
 --Tao bang PhieuNK
-drop table PhieuNK;
+--drop table PhieuNK;
 create table PhieuNK(
     ID_NK NUMBER(8,0),
     ID_NV number(8,0),
@@ -465,14 +498,8 @@ ALTER TABLE PhieuNK
  (ID_NV) REFERENCES NhanVien(ID_NV);
 
 
---Them data cho PhieuNK
-ALTER SESSION SET NLS_DATE_FORMAT = 'dd-MM-YYYY';
-INSERT INTO PhieuNK(ID_NK,ID_NV,NgayNK) VALUES (100,101,'10-05-2023');
-INSERT INTO PhieuNK(ID_NK,ID_NV,NgayNK) VALUES (101,101,'11-05-2023');
-INSERT INTO PhieuNK(ID_NK,ID_NV,NgayNK) VALUES (102,101,'12-05-2023');
-
 --Them bang CTNK
-drop table CTNK;
+--drop table CTNK;
 create table CTNK(
     ID_NK NUMBER(8,0),
     ID_NL number(8,0),
@@ -495,27 +522,9 @@ ALTER TABLE CTNK
  ADD CONSTRAINT CTNK_fk_idNL FOREIGN KEY 
  (ID_NL) REFERENCES NguyenLieu(ID_NL);
 
---Them data cho CTNK
-INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (100,100,10);
-INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (100,101,20);
-INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (100,102,15);
-
-INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (101,101,10);
-INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (101,103,20);
-INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (101,104,10);
-INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (101,105,10);
-INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (101,106,20);
-INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (101,107,5);
-INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (101,108,5);
-
-INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (102,109,10);
-INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (102,110,20);
-INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (102,112,15);
-INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (102,113,15);
-INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (102,114,15);
-
 
 --Tao bang PhieuXK
+--drop table PhieuXK;
 create table PhieuXK(
     ID_XK NUMBER(8,0),
     ID_NV number(8,0),
@@ -535,13 +544,8 @@ ALTER TABLE PhieuXK
  (ID_NV) REFERENCES NhanVien(ID_NV);
 
 
---Them data cho PhieuXK
-INSERT INTO PhieuXK(ID_XK,ID_NV,NgayXK) VALUES (100,101,'10-05-2023');
-INSERT INTO PhieuXK(ID_XK,ID_NV,NgayXK) VALUES (101,101,'11-05-2023');
-INSERT INTO PhieuXK(ID_XK,ID_NV,NgayXK) VALUES (102,101,'12-05-2023');
-
 --Them bang CTXK
-drop table CTXK;
+--drop table CTXK;
 create table CTXK(
     ID_XK NUMBER(8,0),
     ID_NL number(8,0),
@@ -556,7 +560,6 @@ alter table CTXK
 alter table CTXK
     add constraint CTXK_PK PRIMARY KEY (ID_XK,ID_NL);
 
-
 --Them khoa ngoai
 ALTER TABLE CTXK
  ADD CONSTRAINT CTNK_fk_idXK FOREIGN KEY 
@@ -564,28 +567,9 @@ ALTER TABLE CTXK
  ADD CONSTRAINT CTXK_fk_idNL FOREIGN KEY 
  (ID_NL) REFERENCES NguyenLieu(ID_NL);
 
---Them data cho CTXK
-INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (100,100,5);
-INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (100,101,5);
-INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (100,102,5);
 
-INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (101,101,7);
-INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (101,103,10);
-INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (101,104,5);
-INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (101,105,5);
-INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (101,106,10);
-
-
-INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (102,109,5);
-INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (102,110,5);
-INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (102,112,10);
-INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (102,113,8);
-INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (102,114,5);
-
-SELECT SUM(Tongtien) FROM PhieuNK WHERE NgayNK=to_date('10/05/2023', 'dd-mm-yyyy');
 --- Tao Trigger
 
---
 --  Trigger Thanh tien o CTHD bang SoLuong x Dongia cua mon an do
 
 CREATE OR REPLACE TRIGGER CTHD_Thanhtien
@@ -600,12 +584,9 @@ BEGIN
     WHERE MonAn.ID_MonAn = :new.ID_MonAn;
     
     :new.ThanhTien := :new.SoLuong * gia;
-    
 END;
-/
 
 --- Trigger Tien mon an o Hoa Don bang tong thanh tien o CTHD
-
 CREATE OR REPLACE TRIGGER HD_TienMonAn
 AFTER INSERT OR UPDATE OR DELETE ON CTHD
 FOR EACH ROW
@@ -720,7 +701,6 @@ BEGIN
     ELSE
         :new.Tiengiam := 0;
     END IF;
-    
 END;
 
 --Trigger Doanh so cua Khach hang bang tong tien cua tat ca hoa don co trang thai 'Da thanh toan' 
@@ -734,8 +714,8 @@ BEGIN
     UPDATE KhachHang SET Diemtichluy = Diemtichluy + ROUND(:new.Tongtien*0.00005);
 END;
 
---Trigger khi khach hang them hoa don moi, trang thai ban chuyen tu 'Con trong' sang 'Dang dung bua'
--- Khi trang thai don hang tro thanh 'Da thanh toan' trang thai ban chuyen tu 'Dang dung bua' sang 'Con trong'
+--Trigger khi khach hang them hoa don moi, trang thai ban chuyen tu 'Con trong' sang 'Con trong'
+-- Khi trang thai don hang tro thanh 'Da thanh toan' trang thai ban chuyen tu 'Con trong' sang 'Con trong'
 
 CREATE OR REPLACE TRIGGER Tg_TrangthaiBan
 AFTER INSERT OR UPDATE OF Trangthai ON HoaDon
@@ -746,7 +726,7 @@ BEGIN
     )    
     LOOP
         IF(cur.Trangthai='Chua thanh toan') THEN 
-            UPDATE Ban SET Trangthai='Dang dung bua' WHERE ID_Ban=cur.ID_Ban;
+            UPDATE Ban SET Trangthai='Con trong' WHERE ID_Ban=cur.ID_Ban;
         ELSE 
             UPDATE Ban SET Trangthai='Con trong' WHERE ID_Ban=cur.ID_Ban;
         END IF;
@@ -881,12 +861,53 @@ END;
  
  
 
+--Them data cho PhieuNK
+ALTER SESSION SET NLS_DATE_FORMAT = 'dd-MM-YYYY';
+INSERT INTO PhieuNK(ID_NK,ID_NV,NgayNK) VALUES (100,102,'10-05-2023');
+INSERT INTO PhieuNK(ID_NK,ID_NV,NgayNK) VALUES (101,102,'11-05-2023');
+INSERT INTO PhieuNK(ID_NK,ID_NV,NgayNK) VALUES (102,102,'12-05-2023');
 
+--Them data cho CTNK
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (100,100,10);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (100,101,20);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (100,102,15);
 
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (101,101,10);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (101,103,20);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (101,104,10);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (101,105,10);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (101,106,20);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (101,107,5);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (101,108,5);
 
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (102,109,10);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (102,110,20);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (102,112,15);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (102,113,15);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (102,114,15);
+
+--Them data cho PhieuXK
+INSERT INTO PhieuXK(ID_XK,ID_NV,NgayXK) VALUES (100,102,'10-05-2023');
+INSERT INTO PhieuXK(ID_XK,ID_NV,NgayXK) VALUES (101,102,'11-05-2023');
+INSERT INTO PhieuXK(ID_XK,ID_NV,NgayXK) VALUES (102,102,'12-05-2023');
  
- 
- 
+--Them data cho CTXK
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (100,100,5);
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (100,101,5);
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (100,102,5);
+
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (101,101,7);
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (101,103,10);
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (101,104,5);
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (101,105,5);
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (101,106,10);
+
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (102,109,5);
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (102,110,5);
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (102,112,10);
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (102,113,8);
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (102,114,5);
+
  
  
  

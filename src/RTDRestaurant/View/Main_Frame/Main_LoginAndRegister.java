@@ -12,7 +12,6 @@ import RTDRestaurant.View.Component.LoginAndRegister_Component.PanelCover;
 import RTDRestaurant.View.Component.LoginAndRegister_Component.PanelLoading;
 import RTDRestaurant.View.Component.LoginAndRegister_Component.PanelLoginAndRegister;
 import RTDRestaurant.View.Component.LoginAndRegister_Component.PanelVerifyCode;
-import com.sun.tools.javac.Main;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -156,8 +155,6 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
     }
     private void register(){
         ModelNguoiDung user=loginAndRegister.getUser();
-        //loading.setVisible(true);
-        //verifyCode.setVisible(true);
         try {
             if(service.checkDuplicateEmail(user.getEmail())){
                 showMessage(Message.MessageType.ERROR,"Email đã tồn tại");
@@ -166,6 +163,7 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
                 sendMail(user);
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             showMessage(Message.MessageType.ERROR, "Lỗi đăng ký");
             
         }
@@ -184,6 +182,7 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
                         Main_WarehouseStaff_Frame.main(user);
                     }
                     case "Nhan Vien" -> {
+                        Main_Staff_Frame.main(user);
                     }
                     case "Quan Ly" -> {
                     }

@@ -3,6 +3,7 @@ package RTDRestaurant.Controller.Service;
 import RTDRestaurant.Controller.Connection.DatabaseConnection;
 import RTDRestaurant.Model.ModelCTNK;
 import RTDRestaurant.Model.ModelCTXK;
+import RTDRestaurant.Model.ModelKhachHang;
 import RTDRestaurant.Model.ModelKho;
 import RTDRestaurant.Model.ModelNguyenLieu;
 import RTDRestaurant.Model.ModelNhanVien;
@@ -345,7 +346,7 @@ public class ServiceStaff {
         //Thêm chi tiết nhập kho
         String sql_ct;
         for (ModelKho data : list) {
-            if(data.getSlTon()>0){
+            if (data.getSlTon() > 0) {
                 sql_ct = "INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (?,?,?)";
                 PreparedStatement p_ct = con.prepareStatement(sql_ct);
                 p_ct.setInt(1, pnk.getIdNK());
@@ -357,7 +358,7 @@ public class ServiceStaff {
         }
         p.close();
     }
-    
+
     //Thêm phiếu xuất kho và chi tiết Xuất kho
     public void InsertPXK_CTXK(ModelPXK pxk, ArrayList<ModelKho> list) throws SQLException {
         //Thêm phiếu nhập kho
@@ -370,7 +371,7 @@ public class ServiceStaff {
         //Thêm chi tiết nhập kho
         String sql_ct;
         for (ModelKho data : list) {
-            if(data.getSlTon()>0){
+            if (data.getSlTon() > 0) {
                 sql_ct = "INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (?,?,?)";
                 PreparedStatement p_ct = con.prepareStatement(sql_ct);
                 p_ct.setInt(1, pxk.getIdXK());
@@ -381,5 +382,25 @@ public class ServiceStaff {
             }
         }
         p.close();
+    }
+
+    //Lấy toàn bộ danh sách Khách Hàng
+    public ArrayList<ModelKhachHang> MenuKH() throws SQLException {
+        ArrayList<ModelKhachHang> list = new ArrayList<>();
+        String sql = "SELECT ID_KH, TenKH, to_char(Ngaythamgia,'dd-mm-yyyy') AS Ngay, Doanhso, Diemtichluy FROM KhachHang";
+        PreparedStatement p = con.prepareStatement(sql);
+        ResultSet r = p.executeQuery();
+        while (r.next()) {
+            int ID_KH=r.getInt(1);
+            String name=r.getString(2);
+            String dateJoin=r.getString(3);
+            int sales=r.getInt(4);
+            int points=r.getInt(5);
+            ModelKhachHang data=new ModelKhachHang(ID_KH, name, dateJoin, sales, points);
+            list.add(data);
+        }
+        r.close();
+        p.close();
+        return list;
     }
 }

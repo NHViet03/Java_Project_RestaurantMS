@@ -1,14 +1,9 @@
 package RTDRestaurant.View.Component.Customer_Component;
 
-import RTDRestaurant.Model.ModelMonAn;
 import RTDRestaurant.Model.ModelKhachHang;
-import RTDRestaurant.Model.ModelNguoiDung;
 import RTDRestaurant.Model.ModelBan;
 import RTDRestaurant.View.Dialog.MS_ConfirmBook;
-import RTDRestaurant.View.Dialog.MS_ConfirmRename;
 import RTDRestaurant.View.Main_Frame.Main_Customer_Frame;
-import RTDRestaurant.View.Swing.ImageFood;
-import RTDRestaurant.View.Swing.ImageLogo;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -16,7 +11,6 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.ImageIcon;
 
 public class CardBan extends javax.swing.JPanel {
 

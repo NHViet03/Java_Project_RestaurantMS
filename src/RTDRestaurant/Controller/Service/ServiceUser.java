@@ -11,7 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Random;
 
@@ -54,21 +53,25 @@ public class ServiceUser {
           Vai trò mặc định là 'Khach Hang' xuống bảng NguoiDung.
     */
     public void insertUser(ModelNguoiDung user)throws SQLException{
-        //Thêm Người Dùng
-        String sql_ND = "INSERT INTO NguoiDung (Email, MatKhau, VerifyCode,Vaitro) VALUES (?, ?, ?,'Khach Hang')";
-        PreparedStatement p=con.prepareStatement(sql_ND);
-        String code=generateVerifiyCode();
-        p.setString(1, user.getEmail());
-        p.setString(2, user.getPassword());
-        p.setString(3, code);
-        p.execute();
-        //Lấy ID của User vừa thêm vào
+        //Lấy ID của User tiếp theo 
         PreparedStatement p1=con.prepareStatement("SELECT MAX(ID_ND) as ID_ND FROM NguoiDung");
         ResultSet r= p1.executeQuery();
         r.next();
-        int userID=r.getInt("ID_ND");
+        int userID=r.getInt("ID_ND")+1;
+        
+        //Thêm Người Dùng
+        String sql_ND = "INSERT INTO NguoiDung (ID_ND,Email, MatKhau, VerifyCode,Vaitro) VALUES (?,?, ?, ?,'Khach Hang')";
+        PreparedStatement p=con.prepareStatement(sql_ND);
+        String code=generateVerifiyCode();
+        p.setInt(1, userID);
+        p.setString(2, user.getEmail());
+        p.setString(3, user.getPassword());
+        p.setString(4, code);
+        p.execute();
+        
         r.close();
         p.close();
+        p1.close();
         
         user.setUserID(userID);
         user.setVerifyCode(code);
@@ -135,17 +138,27 @@ public class ServiceUser {
         PreparedStatement p1 = con.prepareStatement(sql_ND);
         p1.setInt(1, userID);
         p1.execute();
+        //Lấy id của Khách Hàng tiếp theo
+        int id=0;
+        String sql_ID="SELECT MAX(ID_KH) as ID FROM KhachHang";
+        PreparedStatement p_id = con.prepareStatement(sql_ID);
+        ResultSet r=p_id.executeQuery();
+        if(r.next()){
+            id=r.getInt("ID")+1;
+        }
         
         //Thêm KH mới
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-YYYY");
-        String sql_KH="INSERT INTO KhachHang (TenKH, Ngaythamgia, Doanhso,Diemtichluy,ID_ND) VALUES (?,to_date(?, 'dd-mm-yyyy'),0,0,?)";
+        String sql_KH="INSERT INTO KhachHang (ID_KH,TenKH, Ngaythamgia,ID_ND) VALUES (?,?,to_date(?, 'dd-mm-yyyy'),?)";
         PreparedStatement p2=con.prepareStatement(sql_KH);
-        p2.setString(1, name);
-        p2.setString(2, simpleDateFormat.format(new Date()));
-        p2.setInt(3, userID);
+        p2.setInt(1, id);
+        p2.setString(2, name);
+        p2.setString(3, simpleDateFormat.format(new Date()));
+        p2.setInt(4, userID);
         p2.execute();
         
         p1.close();
+        p_id.close();
         p2.close();
     }
     
