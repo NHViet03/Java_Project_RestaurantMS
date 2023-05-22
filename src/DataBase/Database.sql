@@ -714,8 +714,8 @@ BEGIN
     UPDATE KhachHang SET Diemtichluy = Diemtichluy + ROUND(:new.Tongtien*0.00005);
 END;
 
---Trigger khi khach hang them hoa don moi, trang thai ban chuyen tu 'Con trong' sang 'Con trong'
--- Khi trang thai don hang tro thanh 'Da thanh toan' trang thai ban chuyen tu 'Con trong' sang 'Con trong'
+--Trigger khi khach hang them hoa don moi, trang thai ban chuyen tu 'Con trong' sang 'Dang dung bua'
+-- Khi trang thai don hang tro thanh 'Da thanh toan' trang thai ban chuyen tu 'Dang dung bua' sang 'Con trong'
 
 CREATE OR REPLACE TRIGGER Tg_TrangthaiBan
 AFTER INSERT OR UPDATE OF Trangthai ON HoaDon
@@ -726,7 +726,7 @@ BEGIN
     )    
     LOOP
         IF(cur.Trangthai='Chua thanh toan') THEN 
-            UPDATE Ban SET Trangthai='Con trong' WHERE ID_Ban=cur.ID_Ban;
+            UPDATE Ban SET Trangthai='Dang dung bua' WHERE ID_Ban=cur.ID_Ban;
         ELSE 
             UPDATE Ban SET Trangthai='Con trong' WHERE ID_Ban=cur.ID_Ban;
         END IF;
