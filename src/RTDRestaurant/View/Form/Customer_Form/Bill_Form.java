@@ -34,9 +34,10 @@ public class Bill_Form extends javax.swing.JPanel {
         jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
         jScrollPane1.getViewport().setBackground(Color.WHITE);
         df = new DecimalFormat("##,###,###");
+        getUserSales();
         //Thêm data cho Menu
         initTable();
-        getUserSales();
+        
     }
     public void getUserSales(){
         try {
@@ -48,7 +49,7 @@ public class Bill_Form extends javax.swing.JPanel {
     }
     public void initTable(){
         try {
-            list = service.getListHD(user.getUserID());
+            list = service.getListHD(customer.getID_KH());
             for(ModelHoaDon data:list){  
                 tableHD.addRow(new Object[]{data.getIdHoaDon(),data.getNgayHD(),df.format(data.getTienMonAn())+"đ"
                                ,data.getCode_voucher(),df.format(data.getTienGiam())+"đ"
@@ -72,7 +73,7 @@ public class Bill_Form extends javax.swing.JPanel {
     }
     public void initTableHDbyTotal(String byTotal){
         try {
-            list=service.getListHDOrder(user.getUserID(),byTotal);
+            list=service.getListHDOrder(customer.getID_KH(),byTotal);
             tableHD.removeAllRow();
             for(ModelHoaDon data:list){  
                 tableHD.addRow(new Object[]{data.getIdHoaDon(),data.getNgayHD(),df.format(data.getTienMonAn())+"đ"

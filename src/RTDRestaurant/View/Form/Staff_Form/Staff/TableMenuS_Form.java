@@ -21,7 +21,7 @@ import javax.swing.ImageIcon;
 public class TableMenuS_Form extends javax.swing.JPanel {
 
     private final String floor;
-    private ServiceCustomer service;
+    private ServiceCustomer serviceC;
     private ServiceStaff serviceS;
     private ArrayList<ModelBan> list;
     private final ModelNguoiDung user;
@@ -32,7 +32,7 @@ public class TableMenuS_Form extends javax.swing.JPanel {
         this.floor=floor;
         this.user=user;
         this.main=main;
-        service=new ServiceCustomer();
+        serviceC=new ServiceCustomer();
         serviceS=new ServiceStaff();
         initComponents();
         init();
@@ -49,15 +49,15 @@ public class TableMenuS_Form extends javax.swing.JPanel {
             
             switch (floor) {
                 case "Tang 1" -> {
-                    lbTitle.setText("Đặt bàn/Tầng 1");
+                    lbTitle.setText("Quản lý Bàn/Tầng 1");
                     lbTitle.setIcon(new ImageIcon(getClass().getResource("/Icons/one.png")));
                 }
                 case "Tang 2" -> {
-                    lbTitle.setText("Đặt bàn/Tầng 2");
+                    lbTitle.setText("Quản lý Bàn/Tầng 2");
                     lbTitle.setIcon(new ImageIcon(getClass().getResource("/Icons/two.png")));
                 }
                 case "Tang 3" -> {
-                    lbTitle.setText("Đặt bàn/Tầng 3");
+                    lbTitle.setText("Quản lý Bàn/Tầng 3");
                     lbTitle.setIcon(new ImageIcon(getClass().getResource("/Icons/three.png")));
                 }
                 default -> {
@@ -71,9 +71,9 @@ public class TableMenuS_Form extends javax.swing.JPanel {
     }
     public void initMenuTable(){
         try {           
-            list = service.MenuTable(floor);
+            list = serviceC.MenuTable(floor);
             for(ModelBan data:list){
-            panel.add(new CardBanS(data));
+            panel.add(new CardBanS(user,staff,data,main));
             }
         }catch(SQLException ex) {
             ex.printStackTrace();
@@ -83,7 +83,7 @@ public class TableMenuS_Form extends javax.swing.JPanel {
         panel.removeAll();
         for(ModelBan data:list){
             if(data.getName().toLowerCase().contains(txt.toLowerCase())){
-                panel.add(new CardBanS(data));
+                panel.add(new CardBanS(user,staff,data,main));
             }
         }
         panel.repaint();
@@ -91,10 +91,10 @@ public class TableMenuS_Form extends javax.swing.JPanel {
     }
     public void initMenuTableState(String txt){
         try {
-            list=service.MenuTableState(floor,txt);
+            list=serviceC.MenuTableState(floor,txt);
             panel.removeAll();
             for(ModelBan data:list){   
-            panel.add(new CardBanS(data));
+            panel.add(new CardBanS(user,staff,data,main));
             }
             
         } catch (SQLException ex) {
@@ -157,7 +157,7 @@ public class TableMenuS_Form extends javax.swing.JPanel {
         state.setEditable(true);
         state.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         state.setForeground(new java.awt.Color(108, 91, 123));
-        state.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Còn trống", "Đang dùng bữa", "Đã đặt trước", " " }));
+        state.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Còn trống", "Đang dùng bữa", "Đã đặt trước" }));
         state.setToolTipText("Sắp xếp");
         state.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(164, 145, 145), 2));
         state.setFocusable(false);

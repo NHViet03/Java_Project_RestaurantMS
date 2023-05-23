@@ -3,12 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Admin/Java_Project_RestaurantMS/src/RTDRestaurant/View/Form/Staff_Form/AccountS_Form.java</file>
-            <file>file:/C:/Users/Admin/Java_Project_RestaurantMS/src/RTDRestaurant/View/Component/Staff_Component/CardBanS.java</file>
+            <file>file:/C:/Users/Admin/Java_Project_RestaurantMS/src/RTDRestaurant/Controller/Service/ServiceStaff.java</file>
+            <file>file:/C:/Users/Admin/Java_Project_RestaurantMS/src/RTDRestaurant/View/Dialog/MS_PayBill.java</file>
+            <file>file:/C:/Users/Admin/Java_Project_RestaurantMS/src/RTDRestaurant/View/Form/Staff_Form/Staff/BillS_Form.java</file>
             <file>file:/C:/Users/Admin/Java_Project_RestaurantMS/src/RTDRestaurant/View/Main_Frame/Main_Staff_Frame.java</file>
-            <file>file:/C:/Users/Admin/Java_Project_RestaurantMS/src/RTDRestaurant/View/Form/Staff_Form/CusInformation_Form.java</file>
-            <file>file:/C:/Users/Admin/Java_Project_RestaurantMS/src/RTDRestaurant/View/Form/Staff_Form/WarehouseStaff/Warehouse_Form.java</file>
-            <file>file:/C:/Users/Admin/Java_Project_RestaurantMS/src/RTDRestaurant/View/Form/Staff_Form/Staff/TableMenuS_Form.java</file>
+            <file>file:/C:/Users/Admin/Java_Project_RestaurantMS/src/RTDRestaurant/View/Form/Staff_Form/Staff/OrderFood_Form.java</file>
+            <file>file:/C:/Users/Admin/Java_Project_RestaurantMS/src/RTDRestaurant/View/Form/Customer_Form/Bill_Form.java</file>
             <file>file:/C:/Users/Admin/Java_Project_RestaurantMS/src/RTDRestaurant/Controller/Service/ServiceCustomer.java</file>
             <file>file:/C:/Users/Admin/Java_Project_RestaurantMS/src/RTDRestaurant/View/Component/Staff_Component/MenuS.java</file>
         </group>

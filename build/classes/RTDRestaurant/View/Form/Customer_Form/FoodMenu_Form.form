@@ -195,7 +195,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/Icons/clipboard.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="THANH TOA&#x301;N"/>
+        <Property name="text" type="java.lang.String" value="XEM HO&#x301;A &#x110;&#x1a0;N"/>
         <Property name="focusable" type="boolean" value="false"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="14" style="0"/>

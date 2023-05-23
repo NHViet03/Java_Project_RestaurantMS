@@ -275,7 +275,8 @@ create table Ban(
 alter table Ban
     add constraint Ban_TenBan_NNULL check ('TenBan' is not null)
     add constraint Ban_Vitri_NNULL check ('Vitri' is not null)
-    add constraint Ban_Trangthai_Ten check (Trangthai in ('Con trong','Con trong','Con trong'));
+    add constraint Ban_Trangthai_Ten check (Trangthai in ('Con trong','Dang dung bua','Da dat truoc'));
+
 
 --Them khoa chinh
 alter table Ban
@@ -710,8 +711,8 @@ CREATE OR REPLACE TRIGGER KH_DoanhsovaDTL
 AFTER UPDATE OF Trangthai ON HoaDon
 FOR EACH ROW
 BEGIN
-    UPDATE KhachHang SET Doanhso = Doanhso + :new.Tongtien;
-    UPDATE KhachHang SET Diemtichluy = Diemtichluy + ROUND(:new.Tongtien*0.00005);
+    UPDATE KhachHang SET Doanhso = Doanhso + :new.Tongtien WHERE ID_KH=:new.ID_KH;
+    UPDATE KhachHang SET Diemtichluy = Diemtichluy + ROUND(:new.Tongtien*0.00005) WHERE ID_KH=:new.ID_KH;
 END;
 
 --Trigger khi khach hang them hoa don moi, trang thai ban chuyen tu 'Con trong' sang 'Dang dung bua'
@@ -871,7 +872,6 @@ INSERT INTO PhieuNK(ID_NK,ID_NV,NgayNK) VALUES (102,102,'12-05-2023');
 INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (100,100,10);
 INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (100,101,20);
 INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (100,102,15);
-
 INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (101,101,10);
 INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (101,103,20);
 INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (101,104,10);
@@ -879,7 +879,6 @@ INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (101,105,10);
 INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (101,106,20);
 INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (101,107,5);
 INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (101,108,5);
-
 INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (102,109,10);
 INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (102,110,20);
 INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (102,112,15);
@@ -895,13 +894,11 @@ INSERT INTO PhieuXK(ID_XK,ID_NV,NgayXK) VALUES (102,102,'12-05-2023');
 INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (100,100,5);
 INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (100,101,5);
 INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (100,102,5);
-
 INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (101,101,7);
 INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (101,103,10);
 INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (101,104,5);
 INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (101,105,5);
 INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (101,106,10);
-
 INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (102,109,5);
 INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (102,110,5);
 INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (102,112,10);
@@ -909,6 +906,7 @@ INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (102,113,8);
 INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (102,114,5);
 
  
- 
+SELECT ID_HoaDon,ID_KH,ID_Ban,to_char(NgayHD,'dd-mm-yyyy') AS Ngay,TienMonAn,Code_Voucher,TienGiam,Tongtien,Trangthai FROM HoaDon 
+where id_kh=100 ORDER BY ID_HoaDon; 
  
  

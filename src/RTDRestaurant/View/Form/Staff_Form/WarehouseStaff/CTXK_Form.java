@@ -92,11 +92,6 @@ public class CTXK_Form extends javax.swing.JPanel {
         lbTitle.setIconTextGap(10);
 
         txtSearch.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/loupe (1).png"))); // NOI18N
-        txtSearch.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                txtSearchMouseEntered(evt);
-            }
-        });
         txtSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSearchActionPerformed(evt);
@@ -211,10 +206,6 @@ public class CTXK_Form extends javax.swing.JPanel {
     private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
         searchTable(txtSearch.getText().trim());
     }//GEN-LAST:event_txtSearchActionPerformed
-
-    private void txtSearchMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchMouseEntered
-        searchTable(txtSearch.getText().trim());
-    }//GEN-LAST:event_txtSearchMouseEntered
 
     private void cmdReturnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdReturnMouseClicked
         main.showForm(new Export_Form(user, main));

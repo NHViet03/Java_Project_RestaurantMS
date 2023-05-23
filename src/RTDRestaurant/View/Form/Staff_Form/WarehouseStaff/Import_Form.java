@@ -47,6 +47,7 @@ public class Import_Form extends javax.swing.JPanel {
         //Thêm data cho Menu
         initTable();
         setTongtienNK();
+        //Lấy ngày hiện tại
         setCurrentDate();
         //Them event cho Button ThemPNK
         cmdAdd.addActionListener(new ActionListener() {
@@ -85,6 +86,7 @@ public class Import_Form extends javax.swing.JPanel {
 
     public void initTable() {
         try {
+            //Lấy danh sách phiếu Nhập Kho
             list = service.MenuPNK();
             for (ModelPNK data : list) {
                 tablePNK.addRow(new Object[]{data.getIdNK(), data.getIdNV(),data.getNgayNK(), df.format(data.getTongTien()) + "đ"});

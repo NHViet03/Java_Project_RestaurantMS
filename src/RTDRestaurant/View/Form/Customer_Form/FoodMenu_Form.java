@@ -231,7 +231,7 @@ public class FoodMenu_Form extends javax.swing.JPanel {
         cmdShowBill.setBackground(new java.awt.Color(108, 91, 123));
         cmdShowBill.setForeground(new java.awt.Color(255, 255, 255));
         cmdShowBill.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/clipboard.png"))); // NOI18N
-        cmdShowBill.setText("THANH TOÁN");
+        cmdShowBill.setText("XEM HÓA ĐƠN");
         cmdShowBill.setFocusable(false);
         cmdShowBill.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cmdShowBill.addActionListener(new java.awt.event.ActionListener() {
