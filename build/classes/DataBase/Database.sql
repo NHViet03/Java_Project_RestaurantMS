@@ -46,7 +46,8 @@ create table NhanVien(
     SDT VARCHAR2(50),
     Chucvu VARCHAR2(50),
     ID_ND NUMBER(8,0) DEFAULT NULL,
-    ID_NQL NUMBER(8,0)
+    ID_NQL NUMBER(8,0),
+    Tinhtrang VARCHAR2(20)
 );
 --Them rang buoc cho bang NhanVien
 --Them Check Constraint
@@ -54,7 +55,8 @@ alter table NhanVien
     add constraint NV_TenNV_NNULL check ('TenNV' is not null)
     add constraint NV_SDT_NNULL check ('SDT' is not null)
     add constraint NV_NgayVL_NNULL check ('NgayVL' is not null)
-    add constraint NV_Chucvu_Thuoc check (Chucvu IN ('Phuc vu','Tiep tan','Thu ngan','Bep','Kho','Quan ly'));
+    add constraint NV_Chucvu_Thuoc check (Chucvu IN ('Phuc vu','Tiep tan','Thu ngan','Bep','Kho','Quan ly'))
+    add constraint NV_Tinhtrang_Thuoc check (Tinhtrang IN ('Dang lam viec','Da nghi viec'));
 
 --Them khoa chinh
 alter table NhanVien
@@ -71,17 +73,17 @@ ALTER TABLE NhanVien
 --Them data cho bang Nhan Vien
 ALTER SESSION SET NLS_DATE_FORMAT = 'dd-MM-YYYY';
 --Co tai khoan
-INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_ND,ID_NQL) VALUES (100,'Nguyen Hoang Viet','10/05/2023','0848044725','Quan ly',100,100);
-INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_ND,ID_NQL) VALUES (101,'Nguyen Hoang Phuc','20/05/2023','0838033334','Tiep tan',101,100);
-INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_ND,ID_NQL) VALUES (102,'Le Thi Anh Hong','19/05/2023','0838033234','Kho',102,100);
-INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_ND,ID_NQL) VALUES (103,'Ho Quang Dinh','19/05/2023','0838033234','Tiep tan',103,100);
+INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_ND,ID_NQL,Tinhtrang) VALUES (100,'Nguyen Hoang Viet','10/05/2023','0848044725','Quan ly',100,100,'Dang lam viec');
+INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_ND,ID_NQL,Tinhtrang) VALUES (101,'Nguyen Hoang Phuc','20/05/2023','0838033334','Tiep tan',101,100,'Dang lam viec');
+INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_ND,ID_NQL,Tinhtrang) VALUES (102,'Le Thi Anh Hong','19/05/2023','0838033234','Kho',102,100,'Dang lam viec');
+INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_ND,ID_NQL,Tinhtrang) VALUES (103,'Ho Quang Dinh','19/05/2023','0838033234','Tiep tan',103,100,'Dang lam viec');
 --Khong co tai khoan
-INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_NQL) VALUES (104,'Ha Thao Duong','10/05/2023','0838033232','Phuc vu',100);
-INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_NQL) VALUES (105,'Nguyen Quoc Thinh','11/05/2023','0838033734','Phuc vu',100);
-INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_NQL) VALUES (106,'Truong Tan Hieu','12/05/2023','0838033834','Phuc vu',100);
-INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_NQL) VALUES (107,'Nguyen Thai Bao','10/05/2023','0838093234','Phuc vu',100);
-INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_NQL) VALUES (108,'Tran Nhat Khang','11/05/2023','0838133234','Thu ngan',100);
-INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_NQL) VALUES (109,'Nguyen Ngoc Luong','12/05/2023','0834033234','Bep',100);
+INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_NQL,Tinhtrang) VALUES (104,'Ha Thao Duong','10/05/2023','0838033232','Phuc vu',100,'Dang lam viec');
+INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_NQL,Tinhtrang) VALUES (105,'Nguyen Quoc Thinh','11/05/2023','0838033734','Phuc vu',100,'Dang lam viec');
+INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_NQL,Tinhtrang) VALUES (106,'Truong Tan Hieu','12/05/2023','0838033834','Phuc vu',100,'Dang lam viec');
+INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_NQL,Tinhtrang) VALUES (107,'Nguyen Thai Bao','10/05/2023','0838093234','Phuc vu',100,'Dang lam viec');
+INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_NQL,Tinhtrang) VALUES (108,'Tran Nhat Khang','11/05/2023','0838133234','Thu ngan',100,'Dang lam viec');
+INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_NQL,Tinhtrang) VALUES (109,'Nguyen Ngoc Luong','12/05/2023','0834033234','Bep',100,'Dang lam viec');
 
 
 --Tao bang KhachHang
@@ -905,8 +907,6 @@ INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (102,112,10);
 INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (102,113,8);
 INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (102,114,5);
 
- 
-SELECT ID_HoaDon,ID_KH,ID_Ban,to_char(NgayHD,'dd-mm-yyyy') AS Ngay,TienMonAn,Code_Voucher,TienGiam,Tongtien,Trangthai FROM HoaDon 
-where id_kh=100 ORDER BY ID_HoaDon; 
+SELECT MIN(ID_NV) +1 FROM NhanVien WHERE ID_NV + 1 NOT IN (SELECT ID_NV FROM NhanVien);
  
  

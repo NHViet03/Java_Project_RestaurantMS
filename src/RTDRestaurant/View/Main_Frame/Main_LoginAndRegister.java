@@ -185,6 +185,7 @@ public class Main_LoginAndRegister extends javax.swing.JFrame {
                         Main_Staff_Frame.main(user);
                     }
                     case "Quan Ly" -> {
+                        Main_Admin_Frame.main(user);
                     }
                     default -> {
                     }

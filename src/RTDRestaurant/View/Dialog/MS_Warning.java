@@ -61,7 +61,22 @@ public class MS_Warning extends javax.swing.JDialog {
         animator.start();
         setVisible(true);
     }
-
+    //Thông báo nhập thiếu thông tin
+    public void WarningLackofInfo() {
+        setLocationRelativeTo(frame);
+        lbTitle.setText("THIẾU THÔNG TIN !!!");
+        lbMessage.setText("Vui lòng nhập đủ thông tin trước khi thực hiện.");
+        animator.start();
+        setVisible(true);
+    }
+    //Thông báo không thể sa thải Quản lý
+    public void WarningFireAdmin() {
+        setLocationRelativeTo(frame);
+        lbTitle.setText("KHÔNG ĐỦ QUYỀN HẠN !!!");
+        lbMessage.setText("Bạn không đủ quyền hạn để sa thải Quản Lý.");
+        animator.start();
+        setVisible(true);
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
