@@ -1,4 +1,3 @@
-
 package RTDRestaurant.Model;
 
 import javax.swing.Icon;
@@ -42,6 +41,11 @@ public class ModelMonAn {
         this.type = type;
     }
 
+    public String getState() {
+        return state;
+    }
+    
+
     public ModelMonAn() {
     }
 
@@ -53,12 +57,20 @@ public class ModelMonAn {
         this.type = type;
     }
 
-    
+    public ModelMonAn(Icon icon, int id, String title, int value, String type,String state) {
+        this.icon = icon;
+        this.id = id;
+        this.title = title;
+        this.value = value;
+        this.type = type;
+        this.state=state;
+    }
     
     private Icon icon;  //Hình ảnh
     private int id;
     private String title; //Tên món ăn 
     private int value; //Đơn giá
     String type;       //Loại món ăn trong 12 loại
-    
+    String state;      //Trạng thái của món ăn (Đang/Ngừng Kinh Doanh)
+
 }

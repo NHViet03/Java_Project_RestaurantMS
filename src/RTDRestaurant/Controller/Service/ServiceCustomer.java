@@ -25,10 +25,10 @@ public class ServiceCustomer {
         con = DatabaseConnection.getInstance().getConnection();
     }
 
-    //Lấy toàn bộ danh sách Món ăn theo loại Món Ăn
+    //Lấy toàn bộ danh sách Món ăn theo loại Món Ăn đang kinh doanh
     public ArrayList<ModelMonAn> MenuFood(String type) throws SQLException {
         ArrayList<ModelMonAn> list = new ArrayList<>();
-        String sql = "SELECT ID_MonAn,TenMon,DonGia FROM MonAn WHERE Loai=?";
+        String sql = "SELECT ID_MonAn,TenMon,DonGia FROM MonAn WHERE Loai=? AND TrangThai='Dang kinh doanh'";
         PreparedStatement p = con.prepareStatement(sql);
         p.setString(1, type);
         ResultSet r = p.executeQuery();
@@ -36,8 +36,12 @@ public class ServiceCustomer {
             int id = r.getInt("ID_MonAn");
             String name = r.getString("TenMon");
             int value = r.getInt("DonGia");
-
-            ModelMonAn data = new ModelMonAn(new ImageIcon(getClass().getResource("/Icons/Food/" + type + "/" + id + ".jpg")), id, name, value, type);
+            ModelMonAn data;
+            if (id < 90) {
+                data = new ModelMonAn(new ImageIcon(getClass().getResource("/Icons/Food/" + type + "/" + id + ".jpg")), id, name, value, type);
+            } else {
+                data = new ModelMonAn(new ImageIcon(getClass().getResource("/Icons/Food/Unknown/unknown.jpg")), id, name, value, type);
+            }
             list.add(data);
         }
         r.close();
@@ -45,20 +49,20 @@ public class ServiceCustomer {
         return list;
     }
 
-    //Lấy danh sách Món ăn theo loại món ăn và thứ tự Tên/Giá tăng dần/Giá giảm dần
+    //Lấy danh sách Món ăn theo loại món ăn và thứ tự Tên/Giá tăng dần/Giá giảm dần đang kinh doanh
     public ArrayList<ModelMonAn> MenuFoodOrder(String type, String orderBy) throws SQLException {
         ArrayList<ModelMonAn> list = new ArrayList<>();
 
-        String sql = "SELECT ID_MonAn,TenMon,DonGia FROM MonAn WHERE Loai=?";
+        String sql = "SELECT ID_MonAn,TenMon,DonGia FROM MonAn WHERE Loai=? AND TrangThai='Dang kinh doanh'";
         switch (orderBy) {
             case "Tên A->Z" -> {
-                sql = "SELECT ID_MonAn,TenMon,DonGia FROM MonAn WHERE Loai=? ORDER BY TenMon";
+                sql = "SELECT ID_MonAn,TenMon,DonGia FROM MonAn WHERE Loai=? AND TrangThai='Dang kinh doanh' ORDER BY TenMon";
             }
             case "Giá tăng dần" -> {
-                sql = "SELECT ID_MonAn,TenMon,DonGia FROM MonAn WHERE Loai=? ORDER BY DonGia";
+                sql = "SELECT ID_MonAn,TenMon,DonGia FROM MonAn WHERE Loai=? AND TrangThai='Dang kinh doanh' ORDER BY DonGia";
             }
             case "Giá giảm dần" -> {
-                sql = "SELECT ID_MonAn,TenMon,DonGia FROM MonAn WHERE Loai=? ORDER BY DonGia DESC";
+                sql = "SELECT ID_MonAn,TenMon,DonGia FROM MonAn WHERE Loai=? AND TrangThai='Dang kinh doanh' ORDER BY DonGia DESC";
             }
         }
         PreparedStatement p = con.prepareStatement(sql);
@@ -69,8 +73,12 @@ public class ServiceCustomer {
             int id = r.getInt("ID_MonAn");
             String name = r.getString("TenMon");
             int value = r.getInt("DonGia");
-
-            ModelMonAn data = new ModelMonAn(new ImageIcon(getClass().getResource("/Icons/Food/" + type + "/" + id + ".jpg")), id, name, value, type);
+            ModelMonAn data;
+            if (id < 90) {
+                data = new ModelMonAn(new ImageIcon(getClass().getResource("/Icons/Food/" + type + "/" + id + ".jpg")), id, name, value, type);
+            } else {
+                data = new ModelMonAn(new ImageIcon(getClass().getResource("/Icons/Food/Unknown/unknown.jpg")), id, name, value, type);
+            }
             list.add(data);
         }
         r.close();
@@ -134,7 +142,7 @@ public class ServiceCustomer {
         p.setInt(1, userID);
         ResultSet r = p.executeQuery();
         while (r.next()) {
-            
+
             int id = r.getInt("ID_KH");
             String name = r.getString("TenKH");
             String date = r.getString("NgayTG");
@@ -297,18 +305,19 @@ public class ServiceCustomer {
         p.setInt(1, ID_HoaDon);
         ResultSet r = p.executeQuery();
         while (r.next()) {
-            int ID_HD=r.getInt(1);
-            int ID_MonAn=r.getInt(2);
-            String tenMonAn=r.getString(3);
-            int soluong=r.getInt(4);
-            int thanhTien=r.getInt(5);
-            ModelCTHD data=new ModelCTHD(ID_HD, ID_MonAn, tenMonAn, soluong, thanhTien);
+            int ID_HD = r.getInt(1);
+            int ID_MonAn = r.getInt(2);
+            String tenMonAn = r.getString(3);
+            int soluong = r.getInt(4);
+            int thanhTien = r.getInt(5);
+            ModelCTHD data = new ModelCTHD(ID_HD, ID_MonAn, tenMonAn, soluong, thanhTien);
             list.add(data);
         }
         r.close();
         p.close();
         return list;
     }
+
     //Lấy toàn bộ danh sách hóa đơn của một khách hàng
     public ArrayList<ModelHoaDon> getListHD(int ID_KH) throws SQLException {
         ArrayList<ModelHoaDon> list = new ArrayList<>();
@@ -334,9 +343,9 @@ public class ServiceCustomer {
         p.close();
         return list;
     }
-    
+
     //Lấy toàn bộ danh sách hóa đơn của một khách hàng theo mốc Tổng tiền Hóa Đơn
-    public ArrayList<ModelHoaDon> getListHDOrder(int ID_KH,String order) throws SQLException {
+    public ArrayList<ModelHoaDon> getListHDOrder(int ID_KH, String order) throws SQLException {
         ArrayList<ModelHoaDon> list = new ArrayList<>();
         String sql = "SELECT ID_HoaDon,ID_KH,ID_Ban,to_char(NgayHD,'dd-mm-yyyy') AS Ngay,TienMonAn,Code_Voucher,TienGiam,Tongtien,Trangthai FROM HoaDon "
                 + "WHERE ID_KH=? ORDER BY ID_HoaDon";
@@ -380,10 +389,10 @@ public class ServiceCustomer {
         p.close();
         return list;
     }
-    
+
     //Sau khi khách hàng đổi Voucher ở phần Điểm tích lũy, áp dụng trực tiếp lên hóa đơn mà khách hàng đang sử dụng
     //Thực hiện Trigger giảm Điểm tích lũy của Khách hàng và tính Tiền Giảm giá
-    public void exchangeVoucher(int ID_HoaDon, String Code_Voucher) throws SQLException{
+    public void exchangeVoucher(int ID_HoaDon, String Code_Voucher) throws SQLException {
         String sql = "UPDATE HoaDon SET Code_Voucher=? WHERE ID_HoaDon=?";
         PreparedStatement p = con.prepareStatement(sql);
         p.setString(1, Code_Voucher);

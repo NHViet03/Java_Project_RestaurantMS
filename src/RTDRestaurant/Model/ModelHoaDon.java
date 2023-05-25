@@ -41,6 +41,16 @@ public class ModelHoaDon {
     public ModelHoaDon() {
     }
 
+    public ModelHoaDon(int idHoaDon, int idKH, int idBan, String ngayHD, int tienMonAn, int tienGiam, int tongtien){
+        this.idHoaDon = idHoaDon;
+        this.idKH = idKH;
+        this.idBan = idBan;
+        this.ngayHD = ngayHD;
+        this.tienMonAn = tienMonAn;
+        this.tienGiam = tienGiam;
+        this.tongtien = tongtien;
+    }
+    
     public ModelHoaDon(int idHoaDon, int idKH, int idBan, String ngayHD, int tienMonAn, String code_voucher, int tienGiam, int tongtien, String trangthai) {
         this.idHoaDon = idHoaDon;
         this.idKH = idKH;

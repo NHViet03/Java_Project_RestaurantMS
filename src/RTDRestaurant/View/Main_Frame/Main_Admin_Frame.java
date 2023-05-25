@@ -6,6 +6,8 @@ import RTDRestaurant.Model.ModelNguoiDung;
 import RTDRestaurant.View.Component.Admin_Component.MenuA;
 import RTDRestaurant.View.Form.MainForm;
 import RTDRestaurant.View.Form.Staff_Form.AccountS_Form;
+import RTDRestaurant.View.Form.Staff_Form.Admin.BillInformation_Form;
+import RTDRestaurant.View.Form.Staff_Form.Admin.MenuManagement_Form;
 import RTDRestaurant.View.Form.Staff_Form.Admin.StaffManagement_Form;
 import RTDRestaurant.View.Form.Staff_Form.CusInformation_Form;
 import RTDRestaurant.View.Form.Staff_Form.Staff.TableMenuS_Form;
@@ -47,7 +49,7 @@ public class Main_Admin_Frame extends javax.swing.JFrame {
             public void menuSelected(int menuIndex, int subMenuIndex) {
                 switch (menuIndex) {
                     case 0 -> {
-                        
+                        main.showForm(new MenuManagement_Form(main));
                     }
                     case 1 -> {
                        main.showForm(new StaffManagement_Form(user,main));
@@ -57,7 +59,7 @@ public class Main_Admin_Frame extends javax.swing.JFrame {
                         
                     }
                     case 3 -> {
-                        
+                        main.showForm(new BillInformation_Form(main));
                     }
                     case 4 -> {
                         main.showForm(new CusInformation_Form(main));
@@ -78,7 +80,7 @@ public class Main_Admin_Frame extends javax.swing.JFrame {
         bg.add(menu, "w 265!, spany 2"); //Span Y 2cell
         bg.add(main, "w 100%, h 100%");
         //Form mặc định lúc đăng nhập
-        main.showForm(new TableMenuS_Form("Tang 1",user,main));
+        main.showForm(new MenuManagement_Form(main));
     }
 
     @SuppressWarnings("unchecked")
