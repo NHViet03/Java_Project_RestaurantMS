@@ -171,7 +171,7 @@ public class FoodMenu_Form extends javax.swing.JPanel {
         txtTableName = new RTDRestaurant.View.Swing.MyTextField();
         jSeparator2 = new javax.swing.JSeparator();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(247, 247, 247));
 
         jScrollPane1.setBorder(null);
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);

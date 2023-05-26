@@ -43,8 +43,9 @@ public class MenuA extends javax.swing.JPanel {
     public void initMenuItem() {
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/Icons/MenuBar/menu.png")), "Quản lý Thực Đơn"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/Icons/MenuBar/staff.png")), "Quản lý Nhân Sự"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/Icons/MenuBar/analytics.png")), "Thống kê Doanh Thu"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/Icons/MenuBar/bill.png")), "Thông tin Hóa Đơn"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/Icons/MenuBar/analytics.png")), "Báo cáo Doanh Thu"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/Icons/MenuBar/bill.png")), "Thống kê Hóa Đơn"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/Icons/MenuBar/inventory.png")), "Thống kê Nhập Kho"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/Icons/MenuBar/customer.png")), "Thông tin Khách Hàng"));
         addMenu(new ModelMenu(null, ""));
         addMenu(new ModelMenu(null, "Thông tin cá nhân"));

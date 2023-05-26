@@ -102,7 +102,7 @@ public class BillS_Form extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(222, 222, 222));
 
-        bg.setBackground(new java.awt.Color(255, 255, 255));
+        bg.setBackground(new java.awt.Color(247, 247, 247));
 
         lbTitle.setBackground(new java.awt.Color(255, 255, 255));
         lbTitle.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N

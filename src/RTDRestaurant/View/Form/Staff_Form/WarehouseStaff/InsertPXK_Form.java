@@ -130,7 +130,7 @@ public class InsertPXK_Form extends javax.swing.JPanel {
         cmdCancel = new RTDRestaurant.View.Swing.ButtonOutLine();
         jSeparator2 = new javax.swing.JSeparator();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(247, 247, 247));
 
         lbTitle.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
         lbTitle.setForeground(new java.awt.Color(108, 91, 123));

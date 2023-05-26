@@ -117,7 +117,7 @@ public class TableMenu_Form extends javax.swing.JPanel {
         state = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(247, 247, 247));
 
         jScrollPane1.setBorder(null);
 

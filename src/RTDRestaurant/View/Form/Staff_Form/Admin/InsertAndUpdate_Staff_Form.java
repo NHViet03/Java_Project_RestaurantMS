@@ -49,8 +49,7 @@ public class InsertAndUpdate_Staff_Form extends javax.swing.JPanel {
         simpleDateFormat = new SimpleDateFormat("dd-MM-YYYY");
         if (data == null) {
             insert = true;
-            lbTitle.setText("Thêm NHÂN VIÊN");
-            pic.setIcon(new ImageIcon(getClass().getResource("/Icons/karina1.jpg")));
+            lbTitle.setText("Thêm NHÂN VIÊN"); 
             data = new ModelNhanVien();
             initID();
             txtNVL.setDate(new Date());
@@ -58,7 +57,6 @@ public class InsertAndUpdate_Staff_Form extends javax.swing.JPanel {
         } else {
             insert = false;
             lbTitle.setText("Sửa THÔNG TIN");
-            pic.setIcon(new ImageIcon(getClass().getResource("/Icons/karina.jpg")));
             if(data.getTinhTrang().equals("Dang lam viec")){
             cmdKick.addActionListener(new ActionListener() {
                 @Override
@@ -383,6 +381,7 @@ public class InsertAndUpdate_Staff_Form extends javax.swing.JPanel {
                 } catch (SQLException ex) {
                     Logger.getLogger(InsertAndUpdate_Staff_Form.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                main.showForm(new StaffManagement_Form(user, main));
             }
         } else {
             try {
@@ -391,11 +390,12 @@ public class InsertAndUpdate_Staff_Form extends javax.swing.JPanel {
                 data.setSdt(txttSDT.getText());
                 data.setChucvu(cbboxCvu.getSelectedItem().toString());
                 service.UpdateNV(data);
+                main.showForm(new StaffManagement_Form(user, main));
             } catch (SQLException ex) {
                 Logger.getLogger(InsertAndUpdate_Staff_Form.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        main.showForm(new StaffManagement_Form(user, main));
+        
     }//GEN-LAST:event_cmdOKActionPerformed
 
     private void cmdCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCancelActionPerformed

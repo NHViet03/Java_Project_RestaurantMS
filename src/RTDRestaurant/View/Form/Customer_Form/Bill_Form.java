@@ -99,7 +99,7 @@ public class Bill_Form extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableHD = new RTDRestaurant.View.Swing.Table();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(247, 247, 247));
 
         lbTitle.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbTitle.setForeground(new java.awt.Color(108, 91, 123));

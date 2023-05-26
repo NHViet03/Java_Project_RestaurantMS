@@ -40,7 +40,7 @@ public class AboutUs_Form extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(222, 222, 222));
 
-        panelRound1.setBackground(new java.awt.Color(255, 255, 255));
+        panelRound1.setBackground(new java.awt.Color(247, 247, 247));
 
         img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/aboutus.jpg"))); // NOI18N
 

@@ -21,7 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
-public class BillInformation_Form extends javax.swing.JPanel {
+public class BillStatistic_Form extends javax.swing.JPanel {
 
     private ServiceAdmin serviceA;
     private ArrayList<ModelHoaDon> list;
@@ -30,7 +30,7 @@ public class BillInformation_Form extends javax.swing.JPanel {
     private SimpleDateFormat simpleDateFormat;
     private MS_Success obj;
 
-    public BillInformation_Form(MainForm main) {
+    public BillStatistic_Form(MainForm main) {
         this.main = main;
         serviceA = new ServiceAdmin();
         initComponents();
@@ -53,7 +53,7 @@ public class BillInformation_Form extends javax.swing.JPanel {
         try {
             txtprofit.setText(df.format(serviceA.getProfitHD()) + "đ");
         } catch (SQLException ex) {
-            Logger.getLogger(BillInformation_Form.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BillStatistic_Form.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -90,7 +90,7 @@ public class BillInformation_Form extends javax.swing.JPanel {
         try {
             list = serviceA.getListHDIn(txt);
         } catch (SQLException ex) {
-            Logger.getLogger(BillInformation_Form.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BillStatistic_Form.class.getName()).log(Level.SEVERE, null, ex);
         }
         for (ModelHoaDon data : list) {
             tableHD.addRow(new Object[]{data.getIdHoaDon(), data.getIdKH(), data.getIdBan(), data.getNgayHD(), df.format(data.getTienMonAn()) + "đ", df.format(data.getTienGiam()) + "đ", df.format(data.getTongtien()) + "đ"});
@@ -117,7 +117,7 @@ public class BillInformation_Form extends javax.swing.JPanel {
         cmdCTHD = new RTDRestaurant.View.Swing.Button();
         cmdExcel = new RTDRestaurant.View.Swing.Button();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(247, 247, 247));
 
         lbTitle.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         lbTitle.setForeground(new java.awt.Color(108, 91, 123));
@@ -134,7 +134,7 @@ public class BillInformation_Form extends javax.swing.JPanel {
 
         lbprofit.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lbprofit.setForeground(new java.awt.Color(89, 89, 89));
-        lbprofit.setText("Tổng thu Hóa Đơn trong ngày");
+        lbprofit.setText("Doanh thu Hóa Đơn trong ngày");
 
         txtprofit.setEditable(false);
         txtprofit.setHorizontalAlignment(javax.swing.JTextField.CENTER);

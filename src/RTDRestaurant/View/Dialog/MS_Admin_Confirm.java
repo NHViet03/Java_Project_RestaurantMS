@@ -1,6 +1,7 @@
-package RTDRestaurant.View.Dialog;
+    package RTDRestaurant.View.Dialog;
 
 import RTDRestaurant.Controller.Service.ServiceAdmin;
+import RTDRestaurant.Model.ModelMonAn;
 import RTDRestaurant.Model.ModelNhanVien;
 import java.awt.Color;
 import java.awt.Frame;
@@ -53,7 +54,46 @@ public class MS_Admin_Confirm extends javax.swing.JDialog {
         animator.setResolution(0);
         animator.setAcceleration(0.5f);
     }
+    //Xác nhận ngưng kinh doanh món ăn
+    public void ConfirmStop(ModelMonAn data) {
+        setLocationRelativeTo(frame);
+        lbTitle.setText("XÁC NHẬN NGƯNG KINH DOANH ?");
+        lbMessage.setText("Bạn có chắc ngưng kinh doanh món ID: " + data.getId() + " - " + data.getTitle() + " không ?");
+        animator.start();
+        cmdOK.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    service.StopSell(data.getId());
+                } catch (SQLException ex) {
+                    Logger.getLogger(MS_Admin_Confirm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } 
+        });
+        setVisible(true);
+    }
     
+    //Xác nhận kinh doanh trở lại món ăn
+    public void ConfirmBack(ModelMonAn data) {
+        setLocationRelativeTo(frame);
+        lbTitle.setText("XÁC NHẬN KINH DOANH TRỞ LẠI ?");
+        lbMessage.setText("Bạn có chắc kinh doanh lại món ID: " + data.getId() + " - " + data.getTitle() + " không ?");
+        animator.start();
+        cmdOK.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    service.BackSell(data.getId());
+                } catch (SQLException ex) {
+                    Logger.getLogger(MS_Admin_Confirm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } 
+        });
+        setVisible(true);
+    }
+    
+    
+    //Xác nhận sa thải nhân viên
     public void ConfirmFire(ModelNhanVien data) {
         setLocationRelativeTo(frame);
         lbTitle.setText("XÁC NHẬN SA THẢI NHÂN VIÊN ?");
@@ -130,30 +170,30 @@ public class MS_Admin_Confirm extends javax.swing.JDialog {
         panelRound1Layout.setHorizontalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound1Layout.createSequentialGroup()
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cmdOK, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(80, 80, 80)
-                        .addComponent(cmdCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(77, 77, 77))
-                    .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lbMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(30, 30, 30)
+                .addComponent(lbTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(30, 30, 30))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbIcon)
+                .addGap(222, 222, 222))
             .addGroup(panelRound1Layout.createSequentialGroup()
-                .addGap(217, 217, 217)
-                .addComponent(lbIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(219, 219, 219))
+                .addGap(85, 85, 85)
+                .addComponent(cmdOK, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
+                .addComponent(cmdCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(87, 87, 87))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(lbIcon)
-                .addGap(18, 18, 18)
+                .addGap(20, 20, 20)
                 .addComponent(lbTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(lbMessage)
@@ -168,10 +208,7 @@ public class MS_Admin_Confirm extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

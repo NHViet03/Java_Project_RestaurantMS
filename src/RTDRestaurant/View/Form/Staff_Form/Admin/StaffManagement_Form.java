@@ -111,7 +111,7 @@ public class StaffManagement_Form extends javax.swing.JPanel {
         cmdAdd = new RTDRestaurant.View.Swing.Button();
         cmdUpdate = new RTDRestaurant.View.Swing.Button();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(247, 247, 247));
 
         lbTitle.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         lbTitle.setForeground(new java.awt.Color(108, 91, 123));

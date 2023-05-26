@@ -131,17 +131,19 @@ INSERT INTO KhachHang(ID_KH,TenKH,Ngaythamgia,ID_ND) VALUES (109,'Hoang Thi Phuc
 --Tao bang MonAn
 --drop table MonAn;
 create table MonAn(
-    ID_MonAn NUMBER(8,0) GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
+    ID_MonAn NUMBER(8,0),
     TenMon varchar2(50), 
     DonGia number(8,0),
-    Loai varchar2(50)
+    Loai varchar2(50),
+    TrangThai varchar2(30)
 );
 --Them Check Constraint
 alter table MonAn
     add constraint MA_TenMon_NNULL check ('TenMon' is not null)
     add constraint MA_DonGia_NNULL check ('Dongia' is not null)
     add constraint MA_Loai_Ten check (Loai in ('Aries','Taurus','Gemini','Cancer','Leo','Virgo'
-                                                 ,'Libra','Scorpio','Sagittarius','Capricorn','Aquarius','Pisces'));
+                                                 ,'Libra','Scorpio','Sagittarius','Capricorn','Aquarius','Pisces'))
+    add constraint MA_TrangThai_Thuoc check (TrangThai in('Dang kinh doanh','Ngung kinh doanh'));                                             
 
 --Them khoa chinh
 alter table MonAn
@@ -150,117 +152,117 @@ alter table MonAn
 
 --Them data
 --Aries
-insert into MonAn(TenMon,Dongia,Loai) values('DUI CUU NUONG XE NHO', 250000,'Aries');
-insert into MonAn(TenMon,Dongia,Loai) values('BE SUON CUU NUONG GIAY BAC MONG CO', 230000,'Aries');
-insert into MonAn(TenMon,Dongia,Loai) values('DUI CUU NUONG TRUNG DONG', 350000,'Aries');
-insert into MonAn(TenMon,Dongia,Loai) values('CUU XOC LA CA RI', 129000,'Aries');
-insert into MonAn(TenMon,Dongia,Loai) values('CUU KUNGBAO', 250000,'Aries');
-insert into MonAn(TenMon,Dongia,Loai) values('BAP CUU NUONG CAY', 250000,'Aries');
-insert into MonAn(TenMon,Dongia,Loai) values('CUU VIEN HAM CAY', 19000,'Aries');
-insert into MonAn(TenMon,Dongia,Loai) values('SUON CONG NUONG MONG CO', 250000,'Aries');
-insert into MonAn(TenMon,Dongia,Loai) values('DUI CUU LON NUONG TAI BAN', 750000,'Aries');
-insert into MonAn(TenMon,Dongia,Loai) values('SUONG CUU NUONG SOT NAM', 450000,'Aries');
-insert into MonAn(TenMon,Dongia,Loai) values('DUI CUU NUONG TIEU XANH', 285000,'Aries');
-insert into MonAn(TenMon,Dongia,Loai) values('SUON CUU SOT PHO MAI', 450000,'Aries');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(1,'DUI CUU NUONG XE NHO', 250000,'Aries','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(2,'BE SUON CUU NUONG GIAY BAC MONG CO', 230000,'Aries','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(3,'DUI CUU NUONG TRUNG DONG', 350000,'Aries','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(4,'CUU XOC LA CA RI', 129000,'Aries','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(5,'CUU KUNGBAO', 250000,'Aries','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(6,'BAP CUU NUONG CAY', 250000,'Aries','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(7,'CUU VIEN HAM CAY', 19000,'Aries','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(8,'SUON CONG NUONG MONG CO', 250000,'Aries','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(9,'DUI CUU LON NUONG TAI BAN', 750000,'Aries','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(10,'SUONG CUU NUONG SOT NAM', 450000,'Aries','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(11,'DUI CUU NUONG TIEU XANH', 285000,'Aries','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(12,'SUON CUU SOT PHO MAI', 450000,'Aries','Dang kinh doanh');
 
 --Taurus
-insert into MonAn(TenMon,Dongia,Loai) values('Bit tet bo My khoai tay', 179000,'Taurus');
-insert into MonAn(TenMon,Dongia,Loai) values('Bo bit tet Uc',169000,'Taurus');
-insert into MonAn(TenMon,Dongia,Loai) values('Bit tet bo My BASIC', 179000,'Taurus');
-insert into MonAn(TenMon,Dongia,Loai) values('My Y bo bam', 169000,'Taurus');
-insert into MonAn(TenMon,Dongia,Loai) values('Thit suon Wagyu', 1180000,'Taurus');
-insert into MonAn(TenMon,Dongia,Loai) values('Steak Thit Vai Wagyu', 1290000,'Taurus');
-insert into MonAn(TenMon,Dongia,Loai) values('Steak Thit Bung Bo', 550000,'Taurus');
-insert into MonAn(TenMon,Dongia,Loai) values('Tomahawk', 2390000,'Taurus');
-insert into MonAn(TenMon,Dongia,Loai) values('Salad Romaine Nuong', 180000,'Taurus');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(13,'Bit tet bo My khoai tay', 179000,'Taurus','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(14,'Bo bit tet Uc',169000,'Taurus','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(15,'Bit tet bo My BASIC', 179000,'Taurus','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(16,'My Y bo bam', 169000,'Taurus','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(17,'Thit suon Wagyu', 1180000,'Taurus','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(18,'Steak Thit Vai Wagyu', 1290000,'Taurus','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(19,'Steak Thit Bung Bo', 550000,'Taurus','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(20,'Tomahawk', 2390000,'Taurus','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(21,'Salad Romaine Nuong', 180000,'Taurus','Dang kinh doanh');
 
 --Gemini
-insert into MonAn(TenMon,Dongia,Loai) values('Combo Happy', 180000,'Gemini');
-insert into MonAn(TenMon,Dongia,Loai) values('Combo Fantastic', 190000,'Gemini');
-insert into MonAn(TenMon,Dongia,Loai) values('Combo Dreamer', 230000,'Gemini');
-insert into MonAn(TenMon,Dongia,Loai) values('Combo Cupid', 180000,'Gemini');
-insert into MonAn(TenMon,Dongia,Loai) values('Combo Poseidon', 190000,'Gemini');
-insert into MonAn(TenMon,Dongia,Loai) values('Combo LUANG PRABANG', 490000,'Gemini');
-insert into MonAn(TenMon,Dongia,Loai) values('Combo VIENTIANE', 620000,'Gemini');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(22,'Combo Happy', 180000,'Gemini','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(23,'Combo Fantastic', 190000,'Gemini','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(24,'Combo Dreamer', 230000,'Gemini','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(25,'Combo Cupid', 180000,'Gemini','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(26,'Combo Poseidon', 190000,'Gemini','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(27,'Combo LUANG PRABANG', 490000,'Gemini','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(28,'Combo VIENTIANE', 620000,'Gemini','Dang kinh doanh');
 
 --Cancer
-insert into MonAn(TenMon,Dongia,Loai) values('Cua KingCrab Duc sot', 3650000,'Cancer');
-insert into MonAn(TenMon,Dongia,Loai) values('Mai Cua KingCrab Topping Pho Mai', 2650000,'Cancer');
-insert into MonAn(TenMon,Dongia,Loai) values('Cua KingCrab sot Tu Xuyen', 2300000,'Cancer');
-insert into MonAn(TenMon,Dongia,Loai) values('Cua KingCrab Nuong Tu Nhien', 2550000,'Cancer');
-insert into MonAn(TenMon,Dongia,Loai) values('Cua KingCrab Nuong Bo Toi', 2650000,'Cancer');
-insert into MonAn(TenMon,Dongia,Loai) values('Com Mai Cua KingCrab Chien', 1850000,'Cancer');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(29,'Cua KingCrab Duc sot', 3650000,'Cancer','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(30,'Mai Cua KingCrab Topping Pho Mai', 2650000,'Cancer','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(31,'Cua KingCrab sot Tu Xuyen', 2300000,'Cancer','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(32,'Cua KingCrab Nuong Tu Nhien', 2550000,'Cancer','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(33,'Cua KingCrab Nuong Bo Toi', 2650000,'Cancer','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(34,'Com Mai Cua KingCrab Chien', 1850000,'Cancer','Dang kinh doanh');
 
 --Leo
-insert into MonAn(TenMon,Dongia,Loai) values('BOSSAM', 650000,'Leo');
-insert into MonAn(TenMon,Dongia,Loai) values('KIMCHI PANCAKE', 350000,'Leo');
-insert into MonAn(TenMon,Dongia,Loai) values('SPICY RICE CAKE', 250000,'Leo');
-insert into MonAn(TenMon,Dongia,Loai) values('SPICY SAUSAGE HOTPOT', 650000,'Leo');
-insert into MonAn(TenMon,Dongia,Loai) values('SPICY PORK', 350000,'Leo');
-insert into MonAn(TenMon,Dongia,Loai) values('MUSHROOM SPICY SILKY TOFU STEW', 350000,'Leo');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(35,'BOSSAM', 650000,'Leo','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(36,'KIMCHI PANCAKE', 350000,'Leo','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(37,'SPICY RICE CAKE', 250000,'Leo','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(38,'SPICY SAUSAGE HOTPOT', 650000,'Leo','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(39,'SPICY PORK', 350000,'Leo','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(40,'MUSHROOM SPICY SILKY TOFU STEW', 350000,'Leo','Dang kinh doanh');
 --Virgo
-insert into MonAn(TenMon,Dongia,Loai) values('Pavlova', 150000,'Virgo');
-insert into MonAn(TenMon,Dongia,Loai) values('Kesutera', 120000,'Virgo');
-insert into MonAn(TenMon,Dongia,Loai) values('Cremeschnitte', 250000,'Virgo');
-insert into MonAn(TenMon,Dongia,Loai) values('Sachertorte', 150000,'Virgo');
-insert into MonAn(TenMon,Dongia,Loai) values('Schwarzwalder Kirschtorte', 250000,'Virgo');
-insert into MonAn(TenMon,Dongia,Loai) values('New York-Style Cheesecake', 250000,'Virgo');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(41,'Pavlova', 150000,'Virgo','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(42,'Kesutera', 120000,'Virgo','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(43,'Cremeschnitte', 250000,'Virgo','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(44,'Sachertorte', 150000,'Virgo','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(45,'Schwarzwalder Kirschtorte', 250000,'Virgo','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(46,'New York-Style Cheesecake', 250000,'Virgo','Dang kinh doanh');
 
 --Libra
-insert into MonAn(TenMon,Dongia,Loai) values('Cobb Salad', 150000,'Libra');
-insert into MonAn(TenMon,Dongia,Loai) values('Salad Israeli', 120000,'Libra');
-insert into MonAn(TenMon,Dongia,Loai) values('Salad Dau den', 120000,'Libra');
-insert into MonAn(TenMon,Dongia,Loai) values('Waldorf Salad', 160000,'Libra');
-insert into MonAn(TenMon,Dongia,Loai) values('Salad Gado-Gado', 200000,'Libra');
-insert into MonAn(TenMon,Dongia,Loai) values('Nicoise Salad', 250000,'Libra');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(47,'Cobb Salad', 150000,'Libra','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(48,'Salad Israeli', 120000,'Libra','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(49,'Salad Dau den', 120000,'Libra','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(50,'Waldorf Salad', 160000,'Libra','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(51,'Salad Gado-Gado', 200000,'Libra','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(52,'Nicoise Salad', 250000,'Libra','Dang kinh doanh');
 
 --Scorpio
-insert into MonAn(TenMon,Dongia,Loai) values('BULGOGI LUNCHBOX', 250000,'Scorpio');
-insert into MonAn(TenMon,Dongia,Loai) values('CHICKEN TERIYAKI LUNCHBOX', 350000,'Scorpio');
-insert into MonAn(TenMon,Dongia,Loai) values('SPICY PORK LUNCHBOX', 350000,'Scorpio');
-insert into MonAn(TenMon,Dongia,Loai) values('TOFU TERIYAKI LUNCHBOX', 250000,'Scorpio');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(53,'BULGOGI LUNCHBOX', 250000,'Scorpio','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(54,'CHICKEN TERIYAKI LUNCHBOX', 350000,'Scorpio','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(55,'SPICY PORK LUNCHBOX', 350000,'Scorpio','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(56,'TOFU TERIYAKI LUNCHBOX', 250000,'Scorpio','Dang kinh doanh');
 
 --Sagittarius
-insert into MonAn(TenMon,Dongia,Loai) values('Thit ngua do tuoi', 250000,'Sagittarius');
-insert into MonAn(TenMon,Dongia,Loai) values('Steak Thit ngua', 350000,'Sagittarius');
-insert into MonAn(TenMon,Dongia,Loai) values('Thit ngua ban gang', 350000,'Sagittarius');
-insert into MonAn(TenMon,Dongia,Loai) values('Long ngua xao dua', 150000,'Sagittarius');
-insert into MonAn(TenMon,Dongia,Loai) values('Thit ngua xao sa ot', 250000,'Sagittarius');
-insert into MonAn(TenMon,Dongia,Loai) values('Ngua tang', 350000,'Sagittarius');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(57,'Thit ngua do tuoi', 250000,'Sagittarius','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(58,'Steak Thit ngua', 350000,'Sagittarius','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(59,'Thit ngua ban gang', 350000,'Sagittarius','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(60,'Long ngua xao dua', 150000,'Sagittarius','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(61,'Thit ngua xao sa ot', 250000,'Sagittarius','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(62,'Ngua tang', 350000,'Sagittarius','Dang kinh doanh');
 
 --Capricorn
-insert into MonAn(TenMon,Dongia,Loai) values('Thit de xong hoi', 229000,'Capricorn');
-insert into MonAn(TenMon,Dongia,Loai) values('Thit de xao rau ngo', 199000,'Capricorn');
-insert into MonAn(TenMon,Dongia,Loai) values('Thit de nuong tang', 229000,'Capricorn');
-insert into MonAn(TenMon,Dongia,Loai) values('Thit de chao', 199000,'Capricorn');
-insert into MonAn(TenMon,Dongia,Loai) values('Thit de nuong xien', 199000,'Capricorn');
-insert into MonAn(TenMon,Dongia,Loai) values('Nam de nuong/chao', 199000,'Capricorn');
-insert into MonAn(TenMon,Dongia,Loai) values('Thit de xao lan', 19000,'Capricorn');
-insert into MonAn(TenMon,Dongia,Loai) values('Dui de tan thuoc bac', 199000,'Capricorn');
-insert into MonAn(TenMon,Dongia,Loai) values('Canh de ham duong quy', 199000,'Capricorn');
-insert into MonAn(TenMon,Dongia,Loai) values('Chao de dau xanh', 50000,'Capricorn');
-insert into MonAn(TenMon,Dongia,Loai) values('Thit de nhung me', 229000,'Capricorn');
-insert into MonAn(TenMon,Dongia,Loai) values('Lau de nhu', 499000,'Capricorn');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(63,'Thit de xong hoi', 229000,'Capricorn','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(64,'Thit de xao rau ngo', 199000,'Capricorn','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(65,'Thit de nuong tang', 229000,'Capricorn','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(66,'Thit de chao', 199000,'Capricorn','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(67,'Thit de nuong xien', 199000,'Capricorn','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(68,'Nam de nuong/chao', 199000,'Capricorn','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(69,'Thit de xao lan', 19000,'Capricorn','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(70,'Dui de tan thuoc bac', 199000,'Capricorn','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(71,'Canh de ham duong quy', 199000,'Capricorn','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(72,'Chao de dau xanh', 50000,'Capricorn','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(73,'Thit de nhung me', 229000,'Capricorn','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(74,'Lau de nhu', 499000,'Capricorn','Dang kinh doanh');
 
 
 --Aquarius
-insert into MonAn(TenMon,Dongia,Loai) values('SIGNATURE WINE', 3290000,'Aquarius');
-insert into MonAn(TenMon,Dongia,Loai) values('CHILEAN WINE', 3990000,'Aquarius');
-insert into MonAn(TenMon,Dongia,Loai) values('ARGENTINA WINE', 2890000,'Aquarius');
-insert into MonAn(TenMon,Dongia,Loai) values('ITALIAN WINE', 5590000,'Aquarius');
-insert into MonAn(TenMon,Dongia,Loai) values('AMERICAN WINE', 4990000,'Aquarius');
-insert into MonAn(TenMon,Dongia,Loai) values('CLASSIC COCKTAIL', 200000,'Aquarius');
-insert into MonAn(TenMon,Dongia,Loai) values('SIGNATURE COCKTAIL', 250000,'Aquarius');
-insert into MonAn(TenMon,Dongia,Loai) values('MOCKTAIL', 160000,'Aquarius');
-insert into MonAn(TenMon,Dongia,Loai) values('JAPANESE SAKE', 1490000,'Aquarius');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(75,'SIGNATURE WINE', 3290000,'Aquarius','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(76,'CHILEAN WINE', 3990000,'Aquarius','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(77,'ARGENTINA WINE', 2890000,'Aquarius','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(78,'ITALIAN WINE', 5590000,'Aquarius','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(79,'AMERICAN WINE', 4990000,'Aquarius','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(80,'CLASSIC COCKTAIL', 200000,'Aquarius','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(81,'SIGNATURE COCKTAIL', 250000,'Aquarius','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(82,'MOCKTAIL', 160000,'Aquarius','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(83,'JAPANESE SAKE', 1490000,'Aquarius','Dang kinh doanh');
 
 --Pisces
-insert into MonAn(TenMon,Dongia,Loai) values('Ca Hoi Ngam Tuong', 289000,'Pisces');
-insert into MonAn(TenMon,Dongia,Loai) values('Ca Ngu Ngam Tuong', 289000,'Pisces');
-insert into MonAn(TenMon,Dongia,Loai) values('IKURA:Trung ca hoi', 189000,'Pisces');
-insert into MonAn(TenMon,Dongia,Loai) values('KARIN:Sashimi Ca Ngu', 149000,'Pisces');
-insert into MonAn(TenMon,Dongia,Loai) values('KEIKO:Sashimi Ca Hoi', 199000,'Pisces');
-insert into MonAn(TenMon,Dongia,Loai) values('CHIYO:Sashimi Bung Ca Hoi', 219000,'Pisces');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(84,'Ca Hoi Ngam Tuong', 289000,'Pisces','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(85,'Ca Ngu Ngam Tuong', 289000,'Pisces','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(86,'IKURA:Trung ca hoi', 189000,'Pisces','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(87,'KARIN:Sashimi Ca Ngu', 149000,'Pisces','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(88,'KEIKO:Sashimi Ca Hoi', 199000,'Pisces','Dang kinh doanh');
+insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(89,'CHIYO:Sashimi Bung Ca Hoi', 219000,'Pisces','Dang kinh doanh');
 
 
 
@@ -420,7 +422,7 @@ ALTER TABLE CTHD
  ADD CONSTRAINT CTHD_fk_idMonAn FOREIGN KEY 
  (ID_MonAn) REFERENCES MonAn(ID_MonAn);
  
-
+ 
 --Tao bang Nguyenlieu
 --drop table NguyenLieu;
 create table NguyenLieu(

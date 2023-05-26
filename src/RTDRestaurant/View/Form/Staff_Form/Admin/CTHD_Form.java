@@ -75,7 +75,7 @@ public class CTHD_Form extends javax.swing.JPanel {
         lbDate = new javax.swing.JLabel();
         cmdReturn = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(247, 247, 247));
 
         lbTitle.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         lbTitle.setForeground(new java.awt.Color(108, 91, 123));
@@ -202,7 +202,7 @@ public class CTHD_Form extends javax.swing.JPanel {
     }//GEN-LAST:event_txtSearchActionPerformed
 
     private void cmdReturnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdReturnMouseClicked
-        main.showForm(new BillInformation_Form(main));
+        main.showForm(new BillStatistic_Form(main));
     }//GEN-LAST:event_cmdReturnMouseClicked
 
 

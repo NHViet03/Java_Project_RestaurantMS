@@ -1,7 +1,6 @@
 package RTDRestaurant.Controller.Service;
 
 import RTDRestaurant.Controller.Connection.DatabaseConnection;
-import RTDRestaurant.Model.ModelBan;
 import RTDRestaurant.Model.ModelHoaDon;
 import RTDRestaurant.Model.ModelMonAn;
 import RTDRestaurant.Model.ModelNhanVien;
@@ -221,5 +220,53 @@ public class ServiceAdmin {
         }
         return number;
     }
-    
+    //Lấy Mã Món Ăn tiếp theo được thêm
+    public int getNextID_MA() throws SQLException {
+        int id = 0;
+        String sql = "SELECT MIN(ID_MonAn) +1 FROM MonAn WHERE ID_MonAn + 1 NOT IN (SELECT ID_MonAn FROM MonAn)";
+        PreparedStatement p = con.prepareStatement(sql);
+        ResultSet r = p.executeQuery();
+        if (r.next()) {
+            id = r.getInt(1);
+        }
+        return id;
+    }
+    //Thêm mới một Món Ăn
+    public void insertMA(ModelMonAn data) throws SQLException {
+        String sql = "insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(?,?, ?,?,'Dang kinh doanh')";
+        PreparedStatement p = con.prepareStatement(sql);
+        p.setInt(1, data.getId());
+        p.setString(2, data.getTitle());
+        p.setInt(3, data.getValue());
+        p.setString(4, data.getType());
+        p.execute();
+        p.close();
+    }
+    //Ngưng kinh doanh một món ăn (Cập nhật TrangThai='Ngung kinh doanh')
+    public void StopSell(int idMA) throws SQLException {
+        String sql = "UPDATE MonAn SET TrangThai = 'Ngung kinh doanh' WHERE ID_MonAn=?";
+        PreparedStatement p = con.prepareStatement(sql);
+        p.setInt(1, idMA);
+        p.execute();
+        p.close();
+    }
+    //Kinh doanh trở lại một món ăn (Cập nhật TrangThai='Dang kinh doanh')
+    public void BackSell(int idMA) throws SQLException {
+        String sql = "UPDATE MonAn SET TrangThai = 'Dang kinh doanh' WHERE ID_MonAn=?";
+        PreparedStatement p = con.prepareStatement(sql);
+        p.setInt(1, idMA);
+        p.execute();
+        p.close();
+    }
+    //Cập nhật thông tin của một Món ăn
+    public void UpdateMonAn(ModelMonAn data) throws SQLException {
+        String sql = "UPDATE MonAn SET TenMon=?,Dongia=?,Loai=? WHERE ID_MonAn=?";
+        PreparedStatement p = con.prepareStatement(sql);
+        p.setString(1, data.getTitle());
+        p.setInt(2, data.getValue());
+        p.setString(3, data.getType());
+        p.setInt(4, data.getId());
+        p.execute();
+        p.close();
+    }
 }

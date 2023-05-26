@@ -42,14 +42,22 @@ public class MenuManagement_Form extends javax.swing.JPanel {
         cmdAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                main.showForm(new InsertAndUpdate_Food_Form(null,main));
             }
         });
 
         cmdUpdate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                int idMA =tableMA.getFirstCol_RowSelected(tableMA.getSelectedRow());
+                ModelMonAn food=null;
+                for(ModelMonAn data:list){
+                    if(data.getId()==idMA){
+                        food=data;
+                        break;
+                    }
+                }
+                main.showForm(new InsertAndUpdate_Food_Form(food,main));
             }
         });
 
@@ -67,7 +75,7 @@ public class MenuManagement_Form extends javax.swing.JPanel {
         try {
             list = serviceA.getMenuFood();
             for (ModelMonAn data : list) {
-                tableMA.addRow(new Object[]{data.getId(), data.getTitle(), df.format(data.getValue()) + "đ",data.getType(), data.getState()});
+                tableMA.addRow(new Object[]{data.getId(), data.getTitle(), df.format(data.getValue()) + "đ", data.getType(), data.getState()});
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -78,7 +86,7 @@ public class MenuManagement_Form extends javax.swing.JPanel {
         tableMA.removeAllRow();
         for (ModelMonAn data : list) {
             if ((data.getTitle()).toLowerCase().contains(txt.toLowerCase())) {
-                tableMA.addRow(new Object[]{data.getId(), data.getTitle(), df.format(data.getValue()) + "đ",data.getType(), data.getState()});
+                tableMA.addRow(new Object[]{data.getId(), data.getTitle(), df.format(data.getValue()) + "đ", data.getType(), data.getState()});
             }
         }
         tableMA.repaint();
@@ -100,7 +108,7 @@ public class MenuManagement_Form extends javax.swing.JPanel {
         cmdAdd = new RTDRestaurant.View.Swing.Button();
         cmdUpdate = new RTDRestaurant.View.Swing.Button();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(247, 247, 247));
 
         lbTitle.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         lbTitle.setForeground(new java.awt.Color(108, 91, 123));
@@ -152,9 +160,11 @@ public class MenuManagement_Form extends javax.swing.JPanel {
         if (tableMA.getColumnModel().getColumnCount() > 0) {
             tableMA.getColumnModel().getColumn(0).setMinWidth(100);
             tableMA.getColumnModel().getColumn(0).setMaxWidth(100);
-            tableMA.getColumnModel().getColumn(1).setMinWidth(300);
-            tableMA.getColumnModel().getColumn(1).setMaxWidth(300);
+            tableMA.getColumnModel().getColumn(1).setMinWidth(330);
+            tableMA.getColumnModel().getColumn(1).setMaxWidth(330);
             tableMA.getColumnModel().getColumn(2).setPreferredWidth(100);
+            tableMA.getColumnModel().getColumn(3).setMinWidth(120);
+            tableMA.getColumnModel().getColumn(3).setMaxWidth(120);
         }
 
         cmdAdd.setBackground(new java.awt.Color(108, 91, 123));

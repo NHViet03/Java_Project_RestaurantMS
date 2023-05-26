@@ -6,11 +6,12 @@ import RTDRestaurant.Model.ModelNguoiDung;
 import RTDRestaurant.View.Component.Admin_Component.MenuA;
 import RTDRestaurant.View.Form.MainForm;
 import RTDRestaurant.View.Form.Staff_Form.AccountS_Form;
-import RTDRestaurant.View.Form.Staff_Form.Admin.BillInformation_Form;
+import RTDRestaurant.View.Form.Staff_Form.Admin.BillStatistic_Form;
+import RTDRestaurant.View.Form.Staff_Form.Admin.ImportStatistic_Form;
 import RTDRestaurant.View.Form.Staff_Form.Admin.MenuManagement_Form;
+import RTDRestaurant.View.Form.Staff_Form.Admin.RevenueReport_Form;
 import RTDRestaurant.View.Form.Staff_Form.Admin.StaffManagement_Form;
 import RTDRestaurant.View.Form.Staff_Form.CusInformation_Form;
-import RTDRestaurant.View.Form.Staff_Form.Staff.TableMenuS_Form;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.sql.SQLException;
@@ -56,12 +57,15 @@ public class Main_Admin_Frame extends javax.swing.JFrame {
                     }
                     
                     case 2 -> {
-                        
+                        main.showForm(new RevenueReport_Form());
                     }
                     case 3 -> {
-                        main.showForm(new BillInformation_Form(main));
+                        main.showForm(new BillStatistic_Form(main));
                     }
                     case 4 -> {
+                        main.showForm(new ImportStatistic_Form(main));
+                    }
+                    case 5 -> {
                         main.showForm(new CusInformation_Form(main));
                     }
                     case 8 -> {

@@ -83,7 +83,7 @@ public class Warehouse_Form extends javax.swing.JPanel {
         tableNL = new RTDRestaurant.View.Swing.Table();
         lbDate = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(247, 247, 247));
 
         lbTitle.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         lbTitle.setForeground(new java.awt.Color(108, 91, 123));
