@@ -1,9 +1,11 @@
 package RTDRestaurant.Controller.Service;
 
 import RTDRestaurant.Controller.Connection.DatabaseConnection;
+import RTDRestaurant.Model.ModelChart;
 import RTDRestaurant.Model.ModelHoaDon;
 import RTDRestaurant.Model.ModelMonAn;
 import RTDRestaurant.Model.ModelNhanVien;
+import RTDRestaurant.Model.ModelPNK;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -113,43 +115,21 @@ public class ServiceAdmin {
         p.close();
     }
 
-    //Lấy toàn bộ danh sách hóa đơn
-    public ArrayList<ModelHoaDon> getListHD() throws SQLException {
-        ArrayList<ModelHoaDon> list = new ArrayList();
-        String sql = "SELECT ID_HoaDon,ID_KH,ID_Ban,to_char(NgayHD,'dd-mm-YYYY') as Ngay,Tienmonan,Tiengiam,Tongtien FROM HoaDon";
-        PreparedStatement p = con.prepareStatement(sql);
-        ResultSet r = p.executeQuery();
-        while (r.next()) {
-            int idHoaDon = r.getInt(1);
-            int idKH = r.getInt(2);
-            int idBan = r.getInt(3);
-            String ngayHD = r.getString(4);
-            int tienMonAn = r.getInt(5);
-            int tienGiam = r.getInt(6);
-            int tongtien = r.getInt(7);
-            ModelHoaDon data = new ModelHoaDon(idHoaDon, idKH, idBan, ngayHD, tienMonAn, tienGiam, tongtien);
-            list.add(data);
-        }
-        p.close();
-        r.close();
-        return list;
-    }
-
-    //Lấy toàn bộ danh sách hóa đơn trong ngày/tháng/năm
+    //Lấy toàn bộ danh sách hóa đơn trong Tất cả/ngày/tháng/năm
     public ArrayList<ModelHoaDon> getListHDIn(String txt) throws SQLException {
         ArrayList<ModelHoaDon> list = new ArrayList();
         String sql = "SELECT ID_HoaDon,ID_KH,ID_Ban,to_char(NgayHD,'dd-mm-YYYY') as Ngay,Tienmonan,Tiengiam,Tongtien FROM HoaDon";
         if (txt.equals("Tất cả")) {
             sql = "SELECT ID_HoaDon,ID_KH,ID_Ban,to_char(NgayHD,'dd-mm-YYYY') as Ngay,Tienmonan,Tiengiam,Tongtien FROM HoaDon";
-        } else if (txt.equals("Trong ngày")) {
+        } else if (txt.equals("Hôm nay")) {
             sql = "SELECT ID_HoaDon,ID_KH,ID_Ban,to_char(NgayHD,'dd-mm-YYYY') as Ngay,Tienmonan,Tiengiam,Tongtien FROM HoaDon "
                     + "WHERE TO_DATE(NgayHD,'dd-mm-YYYY')=TO_DATE(CURRENT_DATE,'dd-mm-YYYY')";
-        } else if (txt.equals("Trong tháng")) {
+        } else if (txt.equals("Tháng này")) {
             sql = "SELECT ID_HoaDon,ID_KH,ID_Ban,to_char(NgayHD,'dd-mm-YYYY') as Ngay,Tienmonan,Tiengiam,Tongtien FROM HoaDon "
-                    + "WHERE EXTRACT(MONTH FROM NgayHD)=EXTRACT(MONTH FROM CURRENT_DATE)";
-        } else if (txt.equals("Trong năm")) {
+                    + "WHERE EXTRACT(MONTH FROM NgayHD)=EXTRACT(MONTH FROM CURRENT_DATE) AND EXTRACT(YEAR FROM NgayHD)=EXTRACT(YEAR FROM CURRENT_DATE)";
+        } else if (txt.equals("Năm này")) {
             sql = "SELECT ID_HoaDon,ID_KH,ID_Ban,to_char(NgayHD,'dd-mm-YYYY') as Ngay,Tienmonan,Tiengiam,Tongtien FROM HoaDon "
-                    + "WHERE EXTRACT(YEAR FROM NgayHD)=EXTRACT(YEAR FROM CURRENT_DATE) AND EXTRACT(YEAR FROM NgayHD)=EXTRACT(YEAR FROM CURRENT_DATE)";
+                    + "WHERE EXTRACT(YEAR FROM NgayHD)=EXTRACT(YEAR FROM CURRENT_DATE) ";
         }
         PreparedStatement p = con.prepareStatement(sql);
         ResultSet r = p.executeQuery();
@@ -169,22 +149,134 @@ public class ServiceAdmin {
         return list;
     }
 
-    //Lấy tổng doanh thu Hóa Đơn trong ngày
-    public int getProfitHD() throws SQLException {
-        int profit = 0;
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-YYYY");
-        String sql = "SELECT SUM(Tongtien) FROM HoaDon WHERE NgayHD=to_date(?,'dd-mm-YYYY')";
+    //Lấy tổng doanh thu Hóa Đơn trong ngày/tháng/năm
+    public int getRevenueHD(String filter) throws SQLException {
+        int revenue = 0;
+        
+        String sql = "SELECT SUM(Tongtien) FROM HoaDon WHERE TO_DATE(NgayHD,'dd-mm-YYYY')=TO_DATE(CURRENT_DATE,'dd-mm-YYYY')";
+        if(filter.equals("Hôm nay")){
+            sql = "SELECT SUM(Tongtien) FROM HoaDon WHERE TO_DATE(NgayHD,'dd-mm-YYYY')=TO_DATE(CURRENT_DATE,'dd-mm-YYYY')";
+        }else if(filter.equals("Tháng này")){
+            sql = "SELECT SUM(Tongtien) FROM HoaDon WHERE EXTRACT(MONTH FROM NgayHD)=EXTRACT(MONTH FROM CURRENT_DATE) "
+                    + "AND EXTRACT(YEAR FROM NgayHD)=EXTRACT(YEAR FROM CURRENT_DATE)";
+        }else if((filter.equals("Năm này"))){
+            sql = "SELECT SUM(Tongtien) FROM HoaDon WHERE EXTRACT(YEAR FROM NgayHD)=EXTRACT(YEAR FROM CURRENT_DATE)";
+        }
         PreparedStatement p = con.prepareStatement(sql);
-        p.setString(1, simpleDateFormat.format(new Date()));
         ResultSet r = p.executeQuery();
         if (r.next()) {
-            profit = r.getInt(1);
+            revenue = r.getInt(1);
         }
         p.close();
         r.close();
-        return profit;
+        return revenue;
+    }
+    //Lấy tổng doanh thu Hóa Đơn của tháng trước
+    public int getPreMonthRevenueHD() throws SQLException {
+        int Pre_revenue = 0;  
+        String sql =  "SELECT SUM(Tongtien) FROM HoaDon WHERE EXTRACT(MONTH FROM NgayHD)=(EXTRACT(MONTH FROM CURRENT_DATE)-1) "
+                    + "AND EXTRACT(YEAR FROM NgayHD)=EXTRACT(YEAR FROM CURRENT_DATE)";
+        
+        PreparedStatement p = con.prepareStatement(sql);
+        ResultSet r = p.executeQuery();
+        if (r.next()) {
+            Pre_revenue = r.getInt(1);
+        }
+        p.close();
+        r.close();
+        return Pre_revenue;
+    }
+    
+
+    //Lấy toàn bộ danh sách Phiếu Nhập Kho trong Tất cả/ngày/tháng/năm
+    public ArrayList<ModelPNK> getListPNKIn(String txt) throws SQLException {
+        ArrayList<ModelPNK> list = new ArrayList();
+        String sql = "SELECT ID_NK,ID_NV,to_char(NgayNK,'dd-mm-yyyy') AS Ngay,Tongtien FROM PhieuNK ORDER BY ID_NK";
+        if (txt.equals("Tất cả")) {
+            sql = "SELECT ID_NK,ID_NV,to_char(NgayNK,'dd-mm-yyyy') AS Ngay,Tongtien FROM PhieuNK ORDER BY ID_NK";
+        } else if (txt.equals("Hôm nay")) {
+            sql = "SELECT ID_NK,ID_NV,to_char(NgayNK,'dd-mm-yyyy') AS Ngay,Tongtien FROM PhieuNK "
+                    + "WHERE TO_DATE(NgayNK,'dd-mm-YYYY')=TO_DATE(CURRENT_DATE,'dd-mm-YYYY') ORDER BY ID_NK";
+        } else if (txt.equals("Tháng này")) {
+            sql = "SELECT ID_NK,ID_NV,to_char(NgayNK,'dd-mm-yyyy') AS Ngay,Tongtien FROM PhieuNK "
+                    + "WHERE EXTRACT(MONTH FROM NgayNK)=EXTRACT(MONTH FROM CURRENT_DATE) AND EXTRACT(YEAR FROM NgayNK)=EXTRACT(YEAR FROM CURRENT_DATE) ORDER BY ID_NK";
+        } else if (txt.equals("Năm này")) {
+            sql = "SELECT ID_NK,ID_NV,to_char(NgayNK,'dd-mm-yyyy') AS Ngay,Tongtien FROM PhieuNK "
+                    + "WHERE EXTRACT(YEAR FROM NgayNK)=EXTRACT(YEAR FROM CURRENT_DATE) ORDER BY ID_NK";
+        }
+        PreparedStatement p = con.prepareStatement(sql);
+        ResultSet r = p.executeQuery();
+        while (r.next()) {
+            int idNK = r.getInt(1);
+            int idNV = r.getInt(2);
+            String ngayNK = r.getString(3);
+            int tongTien = r.getInt(4);
+            ModelPNK data = new ModelPNK(idNK, idNV, ngayNK, tongTien);
+            list.add(data);
+        }
+        p.close();
+        r.close();
+        return list;
     }
 
+    //Lấy tổng chi phí Nhập kho trong ngày/tháng/năm
+    public int getCostNK(String filter) throws SQLException {
+        int revenue = 0;
+        
+        String sql = "SELECT SUM(Tongtien) FROM PhieuNK WHERE TO_DATE(NgayNK,'dd-mm-YYYY')=TO_DATE(CURRENT_DATE,'dd-mm-YYYY')";
+        if(filter.equals("Hôm nay")){
+            sql = "SELECT SUM(Tongtien) FROM PhieuNK WHERE TO_DATE(NgayNK,'dd-mm-YYYY')=TO_DATE(CURRENT_DATE,'dd-mm-YYYY')";
+        }else if(filter.equals("Tháng này")){
+            sql = "SELECT SUM(Tongtien) FROM PhieuNK WHERE EXTRACT(MONTH FROM NgayNK)=EXTRACT(MONTH FROM CURRENT_DATE) "
+                    + "AND EXTRACT(YEAR FROM NgayNK)=EXTRACT(YEAR FROM CURRENT_DATE)";
+        }else if((filter.equals("Năm này"))){
+            sql = "SELECT SUM(Tongtien) FROM PhieuNK WHERE EXTRACT(YEAR FROM NgayNK)=EXTRACT(YEAR FROM CURRENT_DATE)";
+        }
+        PreparedStatement p = con.prepareStatement(sql);
+        ResultSet r = p.executeQuery();
+        if (r.next()) {
+            revenue = r.getInt(1);
+        }
+        p.close();
+        r.close();
+        return revenue;
+    }
+    //Lấy tổng chi phí Nhập Kho của tháng trước
+    public int getPreMonthCostNK() throws SQLException {
+        int Pre_Cost = 0;  
+        String sql =  "SELECT SUM(Tongtien) FROM PhieuNK WHERE EXTRACT(MONTH FROM NgayNK)=(EXTRACT(MONTH FROM CURRENT_DATE)-1) "
+                    + "AND EXTRACT(YEAR FROM NgayNK)=EXTRACT(YEAR FROM CURRENT_DATE)";
+        
+        PreparedStatement p = con.prepareStatement(sql);
+        ResultSet r = p.executeQuery();
+        if (r.next()) {
+            Pre_Cost = r.getInt(1);
+        }
+        p.close();
+        r.close();
+        return Pre_Cost;
+    }
+
+    //Lấy toàn bộ doanh thu, chi phí, lợi nhuận của từng tháng trong năm
+    public ArrayList<ModelChart> getRevenueCostProfit_byMonth() throws SQLException{
+        ArrayList<ModelChart> list=new ArrayList<>();
+        String sql_Revenue="SELECT EXTRACT(MONTH FROM NgayHD) as Thang, SUM(TONGTIEN) FROM HoaDon WHERE EXTRACT(YEAR FROM NgayHD)=EXTRACT(YEAR FROM CURRENT_DATE) "
+                + "GROUP BY EXTRACT(MONTH FROM NgayHD) ORDER BY Thang";
+        String sql_Cost="SELECT EXTRACT(MONTH FROM NgayNK) as Thang, SUM(TONGTIEN) FROM PhieuNK WHERE EXTRACT(YEAR FROM NgayNK)=EXTRACT(YEAR FROM CURRENT_DATE) "
+                + "GROUP BY EXTRACT(MONTH FROM NgayNK) ORDER BY Thang";
+        PreparedStatement p_R = con.prepareStatement(sql_Revenue);
+        PreparedStatement p_C = con.prepareStatement(sql_Cost);
+        ResultSet r_R=p_R.executeQuery();
+        ResultSet r_C=p_C.executeQuery();
+        while(r_R.next() && r_C.next()){
+            int revenue=r_R.getInt(2);
+            int expenses=r_C.getInt(2);
+            int profit=revenue-expenses;
+            ModelChart data=new ModelChart("Tháng "+r_R.getInt(1), new double[]{revenue,expenses,profit});
+            list.add(data);
+        }
+        return list;
+    }
     //Lấy toàn bộ danh sách Món ăn theo loại Món Ăn
     public ArrayList<ModelMonAn> getMenuFood() throws SQLException {
         ArrayList<ModelMonAn> list = new ArrayList<>();

@@ -5,7 +5,7 @@ import EasyXLS.ExcelDocument;
 import EasyXLS.ExcelTable;
 import EasyXLS.ExcelWorksheet;
 import RTDRestaurant.Controller.Service.ServiceAdmin;
-import RTDRestaurant.Model.ModelHoaDon;
+import RTDRestaurant.Model.ModelPNK;
 import RTDRestaurant.View.Dialog.MS_Success;
 import RTDRestaurant.View.Form.MainForm;
 import RTDRestaurant.View.Main_Frame.Main_Admin_Frame;
@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
 public class ImportStatistic_Form extends javax.swing.JPanel {
 
     private ServiceAdmin serviceA;
-    private ArrayList<ModelHoaDon> list;
+    private ArrayList<ModelPNK> list;
     private final MainForm main;
     private DecimalFormat df;
     private SimpleDateFormat simpleDateFormat;
@@ -38,20 +38,20 @@ public class ImportStatistic_Form extends javax.swing.JPanel {
     }
 
     public void init() {
-        txtSearch.setHint("Tìm kiếm Hóa Đơn . . .");
+        txtSearch.setHint("Tìm kiếm Phiếu NK . . .");
         jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
         jScrollPane1.getViewport().setBackground(Color.WHITE);
         df = new DecimalFormat("##,###,###");
         obj=new MS_Success(Main_Admin_Frame.getFrames()[0], true);
         //Thêm data cho Menu
         initTable();
-        getProfit();
+        getCost();
         setCurrentDate();
     }
-
-    public void getProfit() {
+    //Lấy chi phí nhập kho trong ngày
+    public void getCost() {
         try {
-            txtprofit.setText(df.format(serviceA.getProfitHD()) + "đ");
+            txtprofit.setText(df.format(serviceA.getCostNK("Hôm nay")) + "đ");
         } catch (SQLException ex) {
             Logger.getLogger(ImportStatistic_Form.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -64,9 +64,9 @@ public class ImportStatistic_Form extends javax.swing.JPanel {
 
     public void initTable() {
         try {
-            list = serviceA.getListHD();
-            for (ModelHoaDon data : list) {
-                tableHD.addRow(new Object[]{data.getIdHoaDon(), data.getIdKH(), data.getIdBan(), data.getNgayHD(), df.format(data.getTienMonAn()) + "đ", df.format(data.getTienGiam()) + "đ", df.format(data.getTongtien()) + "đ"});
+            list = serviceA.getListPNKIn("Tất cả");
+            for (ModelPNK data : list) {
+                tablePNK.addRow(new Object[]{data.getIdNK(),data.getIdNV(),data.getNgayNK(),df.format(data.getTongTien())+"đ"});
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -74,29 +74,29 @@ public class ImportStatistic_Form extends javax.swing.JPanel {
     }
 
     public void searchTable(String txt) {
-        tableHD.removeAllRow();
-        for (ModelHoaDon data : list) {
-            if ((data.getIdHoaDon() + "").toLowerCase().contains(txt.toLowerCase())) {
-                tableHD.addRow(new Object[]{data.getIdHoaDon(), data.getIdKH(), data.getIdBan(), data.getNgayHD(), df.format(data.getTienMonAn()) + "đ", df.format(data.getTienGiam()) + "đ", df.format(data.getTongtien()) + "đ"});
+        tablePNK.removeAllRow();
+        for (ModelPNK data : list) {
+            if ((data.getIdNK() + "").toLowerCase().contains(txt.toLowerCase())) {
+                tablePNK.addRow(new Object[]{data.getIdNK(),data.getIdNV(),data.getNgayNK(),df.format(data.getTongTien())+"đ"});
             }
         }
-        tableHD.repaint();
-        tableHD.revalidate();
+        tablePNK.repaint();
+        tablePNK.revalidate();
     }
 
     public void FilterTable(String txt) {
-        tableHD.removeAllRow();
+        tablePNK.removeAllRow();
         list.clear();
         try {
-            list = serviceA.getListHDIn(txt);
+            list = serviceA.getListPNKIn(txt);
         } catch (SQLException ex) {
             Logger.getLogger(ImportStatistic_Form.class.getName()).log(Level.SEVERE, null, ex);
         }
-        for (ModelHoaDon data : list) {
-            tableHD.addRow(new Object[]{data.getIdHoaDon(), data.getIdKH(), data.getIdBan(), data.getNgayHD(), df.format(data.getTienMonAn()) + "đ", df.format(data.getTienGiam()) + "đ", df.format(data.getTongtien()) + "đ"});
+        for (ModelPNK data : list) {
+            tablePNK.addRow(new Object[]{data.getIdNK(),data.getIdNV(),data.getNgayNK(),df.format(data.getTongTien())+"đ"});
         }
-        tableHD.repaint();
-        tableHD.revalidate();
+        tablePNK.repaint();
+        tablePNK.revalidate();
     }
 
     @SuppressWarnings("unchecked")
@@ -110,19 +110,19 @@ public class ImportStatistic_Form extends javax.swing.JPanel {
         lbCus = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableHD = new RTDRestaurant.View.Swing.Table();
+        tablePNK = new RTDRestaurant.View.Swing.Table();
         lbDate = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         filter = new javax.swing.JComboBox<>();
-        cmdCTHD = new RTDRestaurant.View.Swing.Button();
+        cmdCTNK = new RTDRestaurant.View.Swing.Button();
         cmdExcel = new RTDRestaurant.View.Swing.Button();
 
         setBackground(new java.awt.Color(247, 247, 247));
 
         lbTitle.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         lbTitle.setForeground(new java.awt.Color(108, 91, 123));
-        lbTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/bill (1).png"))); // NOI18N
-        lbTitle.setText("Thông tin Hóa Đơn");
+        lbTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/inventory.png"))); // NOI18N
+        lbTitle.setText("Thống kê Nhập Kho");
         lbTitle.setIconTextGap(10);
 
         txtSearch.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/loupe (1).png"))); // NOI18N
@@ -134,7 +134,7 @@ public class ImportStatistic_Form extends javax.swing.JPanel {
 
         lbprofit.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lbprofit.setForeground(new java.awt.Color(89, 89, 89));
-        lbprofit.setText("Doanh thu Hóa Đơn trong ngày");
+        lbprofit.setText("Chi phí Nhập Kho trong ngày");
 
         txtprofit.setEditable(false);
         txtprofit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -143,36 +143,34 @@ public class ImportStatistic_Form extends javax.swing.JPanel {
         lbCus.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lbCus.setForeground(new java.awt.Color(89, 89, 89));
         lbCus.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lbCus.setText("Danh sách Hóa Đơn");
+        lbCus.setText("Danh sách Phiếu Nhập Kho");
 
         jSeparator2.setBackground(new java.awt.Color(76, 76, 76));
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        tableHD.setModel(new javax.swing.table.DefaultTableModel(
+        tablePNK.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Mã HĐ", "Mã KH", "Mã Bàn", "Ngày Hóa Đơn", "Tiền món ăn", "Tiền giảm", "Tổng tiền"
+                "Mã NK", "Mã NV", "Ngày Nhập Kho", "Tổng tiền"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tableHD);
-        if (tableHD.getColumnModel().getColumnCount() > 0) {
-            tableHD.getColumnModel().getColumn(0).setMinWidth(120);
-            tableHD.getColumnModel().getColumn(0).setMaxWidth(120);
-            tableHD.getColumnModel().getColumn(1).setMinWidth(120);
-            tableHD.getColumnModel().getColumn(1).setMaxWidth(120);
-            tableHD.getColumnModel().getColumn(2).setMinWidth(120);
-            tableHD.getColumnModel().getColumn(2).setMaxWidth(120);
+        jScrollPane1.setViewportView(tablePNK);
+        if (tablePNK.getColumnModel().getColumnCount() > 0) {
+            tablePNK.getColumnModel().getColumn(0).setMinWidth(200);
+            tablePNK.getColumnModel().getColumn(0).setMaxWidth(200);
+            tablePNK.getColumnModel().getColumn(1).setMinWidth(200);
+            tablePNK.getColumnModel().getColumn(1).setMaxWidth(200);
         }
 
         lbDate.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -188,7 +186,7 @@ public class ImportStatistic_Form extends javax.swing.JPanel {
         filter.setEditable(true);
         filter.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         filter.setForeground(new java.awt.Color(108, 91, 123));
-        filter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Trong ngày", "Trong tháng", "Trong năm" }));
+        filter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Hôm nay", "Tháng này", "Năm này" }));
         filter.setToolTipText("Sắp xếp");
         filter.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(164, 145, 145), 2));
         filter.setFocusable(false);
@@ -198,15 +196,15 @@ public class ImportStatistic_Form extends javax.swing.JPanel {
             }
         });
 
-        cmdCTHD.setBackground(new java.awt.Color(108, 91, 123));
-        cmdCTHD.setForeground(new java.awt.Color(255, 255, 255));
-        cmdCTHD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/clipboard.png"))); // NOI18N
-        cmdCTHD.setText("XEM CTHĐ");
-        cmdCTHD.setFocusable(false);
-        cmdCTHD.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cmdCTHD.addActionListener(new java.awt.event.ActionListener() {
+        cmdCTNK.setBackground(new java.awt.Color(108, 91, 123));
+        cmdCTNK.setForeground(new java.awt.Color(255, 255, 255));
+        cmdCTNK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/clipboard.png"))); // NOI18N
+        cmdCTNK.setText("XEM CTNK");
+        cmdCTNK.setFocusable(false);
+        cmdCTNK.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cmdCTNK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdCTHDActionPerformed(evt);
+                cmdCTNKActionPerformed(evt);
             }
         });
 
@@ -243,7 +241,7 @@ public class ImportStatistic_Form extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cmdExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
-                        .addComponent(cmdCTHD, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cmdCTNK, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lbprofit)
                         .addGap(50, 50, 50)
@@ -280,7 +278,7 @@ public class ImportStatistic_Form extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmdCTHD, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmdCTNK, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmdExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -300,10 +298,10 @@ public class ImportStatistic_Form extends javax.swing.JPanel {
         //Xuất danh sách Hóa Đơn ra file Excel
         try {
             ExcelDocument workbook = new ExcelDocument(1);
-            workbook.easy_getSheetAt(0).setSheetName("Danh sách Hóa Đơn");
+            workbook.easy_getSheetAt(0).setSheetName("Danh sách Phiếu Nhập Kho");
             ExcelTable xlsTable = ((ExcelWorksheet) workbook.easy_getSheetAt(0)).easy_getExcelTable();
             //Them data cho header
-            DefaultTableModel model = (DefaultTableModel) tableHD.getModel();
+            DefaultTableModel model = (DefaultTableModel) tablePNK.getModel();
             for (int col = 0; col < model.getColumnCount(); col++) {
                 xlsTable.easy_getCell(0, col).setValue(model.getColumnName(col));
                 xlsTable.easy_getCell(0, col).setDataType(DataType.STRING);
@@ -316,8 +314,8 @@ public class ImportStatistic_Form extends javax.swing.JPanel {
                     xlsTable.easy_getCell(row+1, col).setDataType(DataType.STRING);
                 }
             }
-            workbook.easy_WriteXLSXFile(".\\src\\ExportFile_Excel\\DanhsachHoaDon_" + simpleDateFormat.format(new Date()) + ".xlsx");
-            File file=new File("src\\ExportFile_Excel\\DanhsachHoaDon_" + simpleDateFormat.format(new Date()) + ".xlsx");
+            workbook.easy_WriteXLSXFile(".\\src\\ExportFile_Excel\\DanhsachPNK_" + simpleDateFormat.format(new Date()) + ".xlsx");
+            File file=new File("src\\ExportFile_Excel\\DanhsachPNK_" + simpleDateFormat.format(new Date()) + ".xlsx");
             String path=file.getAbsolutePath();
             System.out.println(path);
             obj.ExportFileSuccess(path);
@@ -327,21 +325,21 @@ public class ImportStatistic_Form extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_cmdExcelActionPerformed
 
-    private void cmdCTHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCTHDActionPerformed
-        int idHD=tableHD.getFirstCol_RowSelected(tableHD.getSelectedRow());
-        ModelHoaDon bill=null;
-        for(ModelHoaDon data:list){
-            if(data.getIdHoaDon()==idHD){
+    private void cmdCTNKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCTNKActionPerformed
+        int idNK=tablePNK.getFirstCol_RowSelected(tablePNK.getSelectedRow());
+        ModelPNK bill=null;
+        for(ModelPNK data:list){
+            if(data.getIdNK()==idNK){
                 bill=data;
                 break;
             }
         }
-        main.showForm(new CTHD_Form(bill,main));
-    }//GEN-LAST:event_cmdCTHDActionPerformed
+        main.showForm(new CTNK_Form(bill, main));
+    }//GEN-LAST:event_cmdCTNKActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private RTDRestaurant.View.Swing.Button cmdCTHD;
+    private RTDRestaurant.View.Swing.Button cmdCTNK;
     private RTDRestaurant.View.Swing.Button cmdExcel;
     private javax.swing.JComboBox<String> filter;
     private javax.swing.JLabel jLabel1;
@@ -351,7 +349,7 @@ public class ImportStatistic_Form extends javax.swing.JPanel {
     private javax.swing.JLabel lbDate;
     private javax.swing.JLabel lbTitle;
     private javax.swing.JLabel lbprofit;
-    private RTDRestaurant.View.Swing.Table tableHD;
+    private RTDRestaurant.View.Swing.Table tablePNK;
     private RTDRestaurant.View.Swing.MyTextField txtSearch;
     private RTDRestaurant.View.Swing.MyTextField txtprofit;
     // End of variables declaration//GEN-END:variables

@@ -21,33 +21,31 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" pref="788" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="838" max="32767" attributes="0"/>
                   <Component id="jSeparator2" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="txtSearch" min="-2" pref="400" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="cmdAdd" min="-2" pref="120" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                      <Component id="cmdCT" min="-2" pref="120" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="cmdReturn" min="-2" pref="45" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="txtSearch" alignment="0" min="-2" pref="400" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Component id="lbSL" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                              <Component id="txtslPXK" min="-2" pref="200" max="-2" attributes="0"/>
+                              <Component id="lbidNK" min="-2" pref="191" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="txtidPN" min="-2" pref="200" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="lbPXK" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbPNK" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="lbTitle" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="lbDate" min="-2" pref="250" max="-2" attributes="0"/>
+                      <Component id="lbDate" min="-2" pref="260" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -58,27 +56,25 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="cmdReturn" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lbTitle" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                   <Component id="lbDate" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lbSL" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
-                  <Component id="txtslPXK" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbidNK" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                  <Component id="txtidPN" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jSeparator2" min="-2" pref="1" max="-2" attributes="0"/>
-              <EmptySpace pref="20" max="32767" attributes="0"/>
-              <Component id="lbPXK" min="-2" pref="49" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtSearch" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cmdAdd" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
-                  <Component id="cmdCT" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
-              </Group>
+              <EmptySpace type="unrelated" max="32767" attributes="0"/>
+              <Component id="lbPNK" min="-2" pref="50" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="474" max="-2" attributes="0"/>
+              <Component id="txtSearch" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="414" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -94,9 +90,9 @@
           <Color blue="7b" green="5b" red="6c" type="rgb"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Icons/export.png"/>
+          <Image iconType="3" name="/Icons/file.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Qua&#x309;n ly&#x301; Xu&#xe2;&#x301;t Kho"/>
+        <Property name="text" type="java.lang.String" value="Chi ti&#xea;&#x301;t Phi&#xea;&#x301;u Nh&#xe2;&#x323;p Kho"/>
         <Property name="iconTextGap" type="int" value="10"/>
       </Properties>
     </Component>
@@ -107,11 +103,10 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtSearchMouseEntered"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtSearchActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="lbSL">
+    <Component class="javax.swing.JLabel" name="lbidNK">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="1"/>
@@ -119,10 +114,10 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="59" green="59" red="59" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="S&#xf4;&#x301; Phi&#xea;&#x301;u xu&#xe2;&#x301;t kho h&#xf4;m nay"/>
+        <Property name="text" type="java.lang.String" value="Ma&#x303; Phi&#xea;&#x301;u Nh&#xe2;&#x323;p"/>
       </Properties>
     </Component>
-    <Component class="RTDRestaurant.View.Swing.MyTextField" name="txtslPXK">
+    <Component class="RTDRestaurant.View.Swing.MyTextField" name="txtidPN">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
         <Property name="horizontalAlignment" type="int" value="0"/>
@@ -131,7 +126,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lbPXK">
+    <Component class="javax.swing.JLabel" name="lbPNK">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="1"/>
@@ -140,7 +135,7 @@
           <Color blue="59" green="59" red="59" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="Danh sa&#x301;ch Phi&#xea;&#x301;u Xu&#xe2;&#x301;t Kho"/>
+        <Property name="text" type="java.lang.String" value="Danh sa&#x301;ch nguy&#xea;n li&#xea;&#x323;u"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator2">
@@ -160,28 +155,40 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="RTDRestaurant.View.Swing.Table" name="tablePXK">
+        <Component class="RTDRestaurant.View.Swing.Table" name="tableCTNK">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="3" rowCount="0">
-                <Column editable="false" title="Ma&#x303; XK" type="java.lang.Object"/>
-                <Column editable="false" title="Ma&#x303; NV" type="java.lang.Object"/>
-                <Column editable="false" title="Nga&#x300;y XK" type="java.lang.Object"/>
+              <Table columnCount="5" rowCount="0">
+                <Column editable="false" title="Ma&#x303; NL" type="java.lang.Object"/>
+                <Column editable="false" title="T&#xea;n NL" type="java.lang.Object"/>
+                <Column editable="false" title="&#x110;&#x1a1;n vi&#x323; ti&#x301;nh" type="java.lang.Object"/>
+                <Column editable="false" title="S&#xf4;&#x301; l&#x1b0;&#x1a1;&#x323;ng" type="java.lang.Object"/>
+                <Column editable="false" title="Tha&#x300;nh ti&#xea;&#x300;n" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
+                <Column maxWidth="150" minWidth="150" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="200" minWidth="200" prefWidth="30" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="150" minWidth="150" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="30" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="100" resizable="true">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
@@ -195,36 +202,6 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="RTDRestaurant.View.Swing.Button" name="cmdAdd">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="7b" green="5b" red="6c" type="rgb"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="ff" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Th&#xea;m PXK"/>
-        <Property name="focusable" type="boolean" value="false"/>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="14" style="1"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="RTDRestaurant.View.Swing.Button" name="cmdCT">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="7b" green="5b" red="6c" type="rgb"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="ff" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Chi ti&#xea;&#x301;t PXK"/>
-        <Property name="focusable" type="boolean" value="false"/>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="14" style="1"/>
-        </Property>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="lbDate">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -239,6 +216,17 @@
         <Property name="text" type="java.lang.String" value="Nga&#x300;y hi&#xea;&#x323;n ta&#x323;i"/>
         <Property name="iconTextGap" type="int" value="20"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="cmdReturn">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Icons/back.png"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cmdReturnMouseClicked"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

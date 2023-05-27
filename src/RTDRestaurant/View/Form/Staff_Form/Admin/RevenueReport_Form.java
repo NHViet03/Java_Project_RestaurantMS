@@ -1,17 +1,24 @@
 package RTDRestaurant.View.Form.Staff_Form.Admin;
 
+import RTDRestaurant.Controller.Service.ServiceAdmin;
 import RTDRestaurant.Model.ModelCard;
 import RTDRestaurant.Model.ModelChart;
 import java.awt.Color;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 public class RevenueReport_Form extends javax.swing.JPanel {
 
+    private ServiceAdmin service;
     private DecimalFormat df;
     private SimpleDateFormat simpleDateFormat;
+    private ArrayList<ModelChart> list;
 
     public RevenueReport_Form() {
         initComponents();
@@ -19,31 +26,80 @@ public class RevenueReport_Form extends javax.swing.JPanel {
     }
 
     public void init() {
+        service = new ServiceAdmin();
         df = new DecimalFormat("##,###,###");
         setCurrentDate();
         //Thêm data cho Card
-        initCard();
+        initCard("Hôm nay");
         //Thêm data cho Biểu đồ
         initChart();
 
     }
 
-    public void initCard() {
-        Crevenue.setData(new ModelCard(new ImageIcon(getClass().getResource("/Icons/revenue.png")), "Doanh Thu", df.format(10000000) + "đ", "..."));
-        Cexpenses.setData(new ModelCard(new ImageIcon(getClass().getResource("/Icons/expenses.png")), "Chi Phí", df.format(8000000) + "đ", "..."));
-        Cprofit.setData(new ModelCard(new ImageIcon(getClass().getResource("/Icons/profit.png")), "Lợi Nhuận", df.format(2000000) + "đ", "..."));
+    public void initCard(String filter) {
+        try {
+            int revenue = 0;
+            int expenses = 0;
+            int profit = 0;
+            int pre_revenue = 0;
+            int pre_expenses = 0;
+            int pre_profit = 0;
+            String descR = ". . .";
+            String descE = ". . .";
+            String descP = ". . .";
+
+            revenue = service.getRevenueHD(filter);
+            expenses = service.getCostNK(filter);
+            profit = revenue - expenses;
+
+            if (filter.equals("Tháng này")) {
+                pre_revenue = service.getPreMonthRevenueHD();
+                pre_expenses = service.getPreMonthCostNK();
+                pre_profit = pre_revenue - pre_expenses;
+                if (revenue > pre_revenue) {
+                    descR = "Tăng " + (Math.round((((double) revenue - pre_revenue) / pre_revenue) * 100) + "% so với tháng trước");
+                } else {
+                    descR = "Giảm " + (Math.round((((double) pre_revenue - revenue) / pre_revenue) * 100) + "% so với tháng trước");
+                }
+
+                if (expenses > pre_expenses) {
+                    descE = "Tăng " + (Math.round((((double) expenses - pre_expenses) / pre_expenses) * 100) + "% so với tháng trước");
+                } else {
+                    descE = "Giảm " + (Math.round((((double) expenses - pre_expenses) / pre_expenses) * 100) + "% so với tháng trước");
+                }
+
+                if (profit > pre_profit) {
+                    descP = "Tăng " + (Math.round((((double) profit - pre_profit) / pre_profit) * 100) + "% so với tháng trước");
+                } else {
+                    descP = "Giảm " + (Math.round((((double) profit - pre_profit) / pre_profit) * 100) + "% so với tháng trước");
+                }
+            }
+            Crevenue.setData(new ModelCard(new ImageIcon(getClass().getResource("/Icons/revenue.png")), "Doanh Thu", df.format(revenue) + "đ", descR));
+            Cexpenses.setData(new ModelCard(new ImageIcon(getClass().getResource("/Icons/expenses.png")), "Chi Phí", df.format(expenses) + "đ", descE));
+            Cprofit.setData(new ModelCard(new ImageIcon(getClass().getResource("/Icons/profit.png")), "Lợi Nhuận", df.format(profit) + "đ", descP));
+
+            Crevenue.repaint();
+            Cexpenses.repaint();
+            Cprofit.repaint();
+        } catch (SQLException ex) {
+            Logger.getLogger(RevenueReport_Form.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     public void initChart() {
-        lineChart.addLegend("Doanh thu", new Color(12, 84, 175), new Color(0, 108, 247));
-        lineChart.addLegend("Chi Phí", new Color(54, 4, 143), new Color(104, 49, 200));
-        lineChart.addLegend("Lợi nhuận", new Color(5, 125, 0), new Color(95, 209, 69));
-        lineChart.addData(new ModelChart("January", new double[]{500, 200, 80}));
-        lineChart.addData(new ModelChart("February", new double[]{600, 750, 90}));
-        lineChart.addData(new ModelChart("March", new double[]{200, 350, 460}));
-        lineChart.addData(new ModelChart("April", new double[]{480, 150, 750}));
-        lineChart.addData(new ModelChart("May", new double[]{350, 540, 300}));
-        lineChart.addData(new ModelChart("June", new double[]{190, 280, 81}));
+        lineChart.addLegend("Doanh thu", new Color(101, 78, 163), new Color(101, 78, 163));
+        lineChart.addLegend("Chi Phí", new Color(109,222,202), new Color(109,222,202));
+        lineChart.addLegend("Lợi nhuận", new Color(35,49,64), new Color(35,49,64));
+        try {
+            list = service.getRevenueCostProfit_byMonth();
+            for (ModelChart data : list) {
+                lineChart.addData(data);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RevenueReport_Form.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         lineChart.start();
     }
 
@@ -87,12 +143,12 @@ public class RevenueReport_Form extends javax.swing.JPanel {
         Crevenue.setColor2(new java.awt.Color(234, 175, 200));
         panelCard.add(Crevenue);
 
-        Cexpenses.setColor1(new java.awt.Color(100, 209, 189));
-        Cexpenses.setColor2(new java.awt.Color(171, 198, 229));
+        Cexpenses.setColor1(new java.awt.Color(109, 222, 202));
+        Cexpenses.setColor2(new java.awt.Color(137, 168, 203));
         panelCard.add(Cexpenses);
 
-        Cprofit.setColor1(new java.awt.Color(44, 62, 80));
-        Cprofit.setColor2(new java.awt.Color(76, 161, 175));
+        Cprofit.setColor1(new java.awt.Color(35, 49, 64));
+        Cprofit.setColor2(new java.awt.Color(61, 133, 144));
         panelCard.add(Cprofit);
 
         lbDate.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -142,7 +198,7 @@ public class RevenueReport_Form extends javax.swing.JPanel {
                             .addComponent(lbchart, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbprofit, javax.swing.GroupLayout.Alignment.LEADING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(filter, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(filter, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -155,9 +211,9 @@ public class RevenueReport_Form extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 1, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbprofit, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(filter, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(filter, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(lbprofit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
@@ -171,7 +227,7 @@ public class RevenueReport_Form extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void filterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterActionPerformed
-        
+        initCard(filter.getSelectedItem().toString());
     }//GEN-LAST:event_filterActionPerformed
 
 

@@ -227,14 +227,25 @@ public class ServiceCustomer {
         Trạng thái Hóa đơn mặc định là Chưa thanh toán
      */
     public void InsertHoaDon(ModelBan table, ModelKhachHang customer) throws SQLException {
+        //Tìm ID_HD tiếp theo
+        int idHD=0;
+        PreparedStatement p_ID=con.prepareStatement("SELECT MAX(ID_HoaDon) +1 FROM HoaDon");
+        ResultSet r_id=p_ID.executeQuery();
+        if(r_id.next()){
+            idHD=r_id.getInt(1);
+        }
+       
         //Thêm Hoá Đơn mới
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-YYYY");
-        String sql = "INSERT INTO HoaDon(ID_KH,ID_Ban,NgayHD,TienMonAn,TienGiam,Trangthai)"
-                + " VALUES (?,?,to_date(?, 'dd-mm-yyyy'),0,0,'Chua thanh toan')";
+        String sql = "INSERT INTO HoaDon(ID_HoaDon,ID_KH,ID_Ban,NgayHD,TienMonAn,TienGiam,Trangthai)"
+                + " VALUES (?,?,?,to_date(?, 'dd-mm-yyyy'),0,0,'Chua thanh toan')";
         PreparedStatement p = con.prepareStatement(sql);
-        p.setInt(1, customer.getID_KH());
-        p.setInt(2, table.getID());
-        p.setString(3, simpleDateFormat.format(new Date()));
+        p.setInt(1, idHD);
+        p.setInt(2, customer.getID_KH());
+        p.setInt(3, table.getID());
+        p.setString(4, simpleDateFormat.format(new Date()));
+        p_ID.close();
+        r_id.close();
         p.execute();
         p.close();
 

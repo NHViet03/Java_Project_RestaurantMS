@@ -270,7 +270,7 @@ insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(89,'CHIYO:Sashim
 --Tao bang Ban
 --drop table Ban;
 create table Ban(
-    ID_Ban NUMBER(8,0) GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
+    ID_Ban NUMBER(8,0),
     TenBan varchar2(50), 
     Vitri varchar2(50), 
     Trangthai varchar2(50)
@@ -289,44 +289,44 @@ alter table Ban
 
 --Them data cho Ban
 --Tang 1
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T1.1','Tang 1','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T1.2','Tang 1','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T1.3','Tang 1','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T1.4','Tang 1','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T1.5','Tang 1','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T1.6','Tang 1','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T1.7','Tang 1','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T1.8','Tang 1','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T1.9','Tang 1','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T1.10','Tang 1','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T1.11','Tang 1','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T1.12','Tang 1','Con trong');
+insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(100,'Ban T1.1','Tang 1','Con trong');
+insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(101,'Ban T1.2','Tang 1','Con trong');
+insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(102,'Ban T1.3','Tang 1','Con trong');
+insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(103,'Ban T1.4','Tang 1','Con trong');
+insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(104,'Ban T1.5','Tang 1','Con trong');
+insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(105,'Ban T1.6','Tang 1','Con trong');
+insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(106,'Ban T1.7','Tang 1','Con trong');
+insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(107,'Ban T1.8','Tang 1','Con trong');
+insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(108,'Ban T1.9','Tang 1','Con trong');
+insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(109,'Ban T1.10','Tang 1','Con trong');
+insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(110,'Ban T1.11','Tang 1','Con trong');
+insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(111,'Ban T1.12','Tang 1','Con trong');
 --Tang 2
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T2.1','Tang 2','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T2.2','Tang 2','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T2.3','Tang 2','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T2.4','Tang 2','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T2.5','Tang 2','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T2.6','Tang 2','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T2.7','Tang 2','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T2.8','Tang 2','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T2.9','Tang 2','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T2.10','Tang 2','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T2.11','Tang 2','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T2.12','Tang 2','Con trong');
+insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(112,'Ban T2.1','Tang 2','Con trong');
+insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(113,'Ban T2.2','Tang 2','Con trong');
+insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(114,'Ban T2.3','Tang 2','Con trong');
+insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(115,'Ban T2.4','Tang 2','Con trong');
+insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(116,'Ban T2.5','Tang 2','Con trong');
+insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(117,'Ban T2.6','Tang 2','Con trong');
+insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(118,'Ban T2.7','Tang 2','Con trong');
+insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(119,'Ban T2.8','Tang 2','Con trong');
+insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(120,'Ban T2.9','Tang 2','Con trong');
+insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(121,'Ban T2.10','Tang 2','Con trong');
+insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(122,'Ban T2.11','Tang 2','Con trong');
+insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(123,'Ban T2.12','Tang 2','Con trong');
 --Tang 3
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T3.1','Tang 3','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T3.1','Tang 3','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T3.1','Tang 3','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T3.1','Tang 3','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T3.1','Tang 3','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T3.1','Tang 3','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T3.1','Tang 3','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T3.1','Tang 3','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T3.1','Tang 3','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T3.1','Tang 3','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T3.1','Tang 3','Con trong');
-insert into Ban(TenBan,Vitri,Trangthai) values('Ban T3.1','Tang 3','Con trong');
+insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(124,'Ban T3.1','Tang 3','Con trong');
+insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(125,'Ban T3.1','Tang 3','Con trong');
+insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(126,'Ban T3.1','Tang 3','Con trong');
+insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(127,'Ban T3.1','Tang 3','Con trong');
+insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(128,'Ban T3.1','Tang 3','Con trong');
+insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(129,'Ban T3.1','Tang 3','Con trong');
+insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(130,'Ban T3.1','Tang 3','Con trong');
+insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(131,'Ban T3.1','Tang 3','Con trong');
+insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(132,'Ban T3.1','Tang 3','Con trong');
+insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(133,'Ban T3.1','Tang 3','Con trong');
+insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(134,'Ban T3.1','Tang 3','Con trong');
+insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(135,'Ban T3.1','Tang 3','Con trong');
 
 
 --Tao bang Voucher
@@ -372,7 +372,7 @@ insert into Voucher(Code_Voucher, Phantram,LoaiMA,SoLuong,Diem) values ('GTsC','
 --drop table HoaDon;
 
 create table HoaDon(
-    ID_HoaDon NUMBER(8,0) GENERATED ALWAYS as IDENTITY(START with 100 INCREMENT by 1),
+    ID_HoaDon NUMBER(8,0),
     ID_KH number(8,0),
     ID_Ban number(8,0),
     NgayHD date,
@@ -398,7 +398,7 @@ ALTER TABLE HoaDon
  ADD CONSTRAINT HD_fk_idBan FOREIGN KEY 
  (ID_Ban) REFERENCES Ban(ID_Ban);
  
- 
+
 --Tao bang CTHD
 --drop table CTHD;
 create table CTHD(
@@ -421,7 +421,7 @@ ALTER TABLE CTHD
  (ID_HoaDon) REFERENCES HoaDon(ID_HoaDon)
  ADD CONSTRAINT CTHD_fk_idMonAn FOREIGN KEY 
  (ID_MonAn) REFERENCES MonAn(ID_MonAn);
- 
+
  
 --Tao bang Nguyenlieu
 --drop table NguyenLieu;
@@ -865,12 +865,78 @@ BEGIN
 END;
  
  
-
---Them data cho PhieuNK
+--Them data
 ALTER SESSION SET NLS_DATE_FORMAT = 'dd-MM-YYYY';
-INSERT INTO PhieuNK(ID_NK,ID_NV,NgayNK) VALUES (100,102,'10-05-2023');
-INSERT INTO PhieuNK(ID_NK,ID_NV,NgayNK) VALUES (101,102,'11-05-2023');
-INSERT INTO PhieuNK(ID_NK,ID_NV,NgayNK) VALUES (102,102,'12-05-2023');
+--Them data cho HoaDon
+INSERT INTO HoaDon(ID_HoaDon,ID_KH,ID_Ban,NgayHD,TienMonAn,TienGiam,Trangthai) VALUES (101,100,100,'10-1-2023',0,0,'Chua thanh toan');
+INSERT INTO HoaDon(ID_HoaDon,ID_KH,ID_Ban,NgayHD,TienMonAn,TienGiam,Trangthai) VALUES (102,104,102,'15-1-2023',0,0,'Chua thanh toan');
+INSERT INTO HoaDon(ID_HoaDon,ID_KH,ID_Ban,NgayHD,TienMonAn,TienGiam,Trangthai) VALUES (103,105,103,'20-1-2023',0,0,'Chua thanh toan');
+INSERT INTO HoaDon(ID_HoaDon,ID_KH,ID_Ban,NgayHD,TienMonAn,TienGiam,Trangthai) VALUES (104,101,101,'13-2-2023',0,0,'Chua thanh toan');
+INSERT INTO HoaDon(ID_HoaDon,ID_KH,ID_Ban,NgayHD,TienMonAn,TienGiam,Trangthai) VALUES (105,103,120,'12-2-2023',0,0,'Chua thanh toan');
+INSERT INTO HoaDon(ID_HoaDon,ID_KH,ID_Ban,NgayHD,TienMonAn,TienGiam,Trangthai) VALUES (106,104,100,'16-3-2023',0,0,'Chua thanh toan');
+INSERT INTO HoaDon(ID_HoaDon,ID_KH,ID_Ban,NgayHD,TienMonAn,TienGiam,Trangthai) VALUES (107,107,103,'20-3-2023',0,0,'Chua thanh toan');
+INSERT INTO HoaDon(ID_HoaDon,ID_KH,ID_Ban,NgayHD,TienMonAn,TienGiam,Trangthai) VALUES (108,108,101,'10-4-2023',0,0,'Chua thanh toan');
+INSERT INTO HoaDon(ID_HoaDon,ID_KH,ID_Ban,NgayHD,TienMonAn,TienGiam,Trangthai) VALUES (109,100,100,'20-4-2023',0,0,'Chua thanh toan');
+INSERT INTO HoaDon(ID_HoaDon,ID_KH,ID_Ban,NgayHD,TienMonAn,TienGiam,Trangthai) VALUES (110,103,101,'5-5-2023',0,0,'Chua thanh toan');
+INSERT INTO HoaDon(ID_HoaDon,ID_KH,ID_Ban,NgayHD,TienMonAn,TienGiam,Trangthai) VALUES (111,106,102,'10-5-2023',0,0,'Chua thanh toan');
+INSERT INTO HoaDon(ID_HoaDon,ID_KH,ID_Ban,NgayHD,TienMonAn,TienGiam,Trangthai) VALUES (112,108,103,'15-5-2023',0,0,'Chua thanh toan');
+INSERT INTO HoaDon(ID_HoaDon,ID_KH,ID_Ban,NgayHD,TienMonAn,TienGiam,Trangthai) VALUES (113,106,102,'20-5-2023',0,0,'Chua thanh toan');
+INSERT INTO HoaDon(ID_HoaDon,ID_KH,ID_Ban,NgayHD,TienMonAn,TienGiam,Trangthai) VALUES (114,108,103,'5-6-2023',0,0,'Chua thanh toan');
+INSERT INTO HoaDon(ID_HoaDon,ID_KH,ID_Ban,NgayHD,TienMonAn,TienGiam,Trangthai) VALUES (115,109,104,'7-6-2023',0,0,'Chua thanh toan');
+INSERT INTO HoaDon(ID_HoaDon,ID_KH,ID_Ban,NgayHD,TienMonAn,TienGiam,Trangthai) VALUES (116,100,105,'7-6-2023',0,0,'Chua thanh toan');
+INSERT INTO HoaDon(ID_HoaDon,ID_KH,ID_Ban,NgayHD,TienMonAn,TienGiam,Trangthai) VALUES (117,106,106,'10-6-2023',0,0,'Chua thanh toan');
+
+--Them data cho CTHD
+INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (101,1,2);
+INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (101,3,1);
+INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (101,10,3);
+INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (102,1,2);
+INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (102,2,1);
+INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (102,4,2);
+INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (103,12,2);
+INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (104,30,3);
+INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (104,59,4);
+INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (105,28,1);
+INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (105,88,2);
+INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (106,70,3);
+INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (106,75,2);
+INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (106,78,4);
+INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (107,32,2);
+INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (107,12,5);
+INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (108,12,1);
+INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (108,40,4);
+INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (109,45,4);
+INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (110,34,2);
+INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (110,43,4);
+INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (111,65,2);
+INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (111,47,4);
+INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (112,49,3);
+INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (112,80,2);
+INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (112,31,5);
+INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (113,80,2);
+INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (113,80,2);
+INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (114,30,2);
+INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (114,32,3);
+INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (115,80,2);
+INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (116,57,2);
+INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (116,34,1);
+INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (117,67,2);
+INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (117,66,3);
+
+UPDATE HOADON SET TrangThai='Da thanh toan';
+--Them data cho PhieuNK
+
+INSERT INTO PhieuNK(ID_NK,ID_NV,NgayNK) VALUES (100,102,'10-01-2023');
+INSERT INTO PhieuNK(ID_NK,ID_NV,NgayNK) VALUES (101,102,'11-02-2023');
+INSERT INTO PhieuNK(ID_NK,ID_NV,NgayNK) VALUES (102,102,'12-02-2023');
+INSERT INTO PhieuNK(ID_NK,ID_NV,NgayNK) VALUES (103,102,'12-03-2023');
+INSERT INTO PhieuNK(ID_NK,ID_NV,NgayNK) VALUES (104,102,'15-03-2023');
+INSERT INTO PhieuNK(ID_NK,ID_NV,NgayNK) VALUES (105,102,'12-04-2023');
+INSERT INTO PhieuNK(ID_NK,ID_NV,NgayNK) VALUES (106,102,'15-04-2023');
+INSERT INTO PhieuNK(ID_NK,ID_NV,NgayNK) VALUES (107,102,'12-05-2023');
+INSERT INTO PhieuNK(ID_NK,ID_NV,NgayNK) VALUES (108,102,'15-05-2023');
+INSERT INTO PhieuNK(ID_NK,ID_NV,NgayNK) VALUES (109,102,'5-06-2023');
+INSERT INTO PhieuNK(ID_NK,ID_NV,NgayNK) VALUES (110,102,'7-06-2023');
 
 --Them data cho CTNK
 INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (100,100,10);
@@ -888,12 +954,40 @@ INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (102,110,20);
 INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (102,112,15);
 INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (102,113,15);
 INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (102,114,15);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (103,112,15);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (103,113,15);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (103,114,15);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (104,112,15);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (104,113,15);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (105,110,15);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (106,102,25);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (106,115,25);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (107,110,35);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (107,105,25);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (108,104,25);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (108,103,15);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (108,106,30);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (109,112,15);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (109,113,15);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (109,114,15);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (110,102,15);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (110,106,25);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (110,107,15);
+INSERT INTO CTNK(ID_NK,ID_NL,SoLuong) VALUES (110,110,20);
 
 --Them data cho PhieuXK
-INSERT INTO PhieuXK(ID_XK,ID_NV,NgayXK) VALUES (100,102,'10-05-2023');
-INSERT INTO PhieuXK(ID_XK,ID_NV,NgayXK) VALUES (101,102,'11-05-2023');
-INSERT INTO PhieuXK(ID_XK,ID_NV,NgayXK) VALUES (102,102,'12-05-2023');
- 
+INSERT INTO PhieuXK(ID_XK,ID_NV,NgayXK) VALUES (100,102,'10-01-2023');
+INSERT INTO PhieuXK(ID_XK,ID_NV,NgayXK) VALUES (101,102,'11-02-2023');
+INSERT INTO PhieuXK(ID_XK,ID_NV,NgayXK) VALUES (102,102,'12-03-2023');
+INSERT INTO PhieuXK(ID_XK,ID_NV,NgayXK) VALUES (103,102,'13-03-2023');
+INSERT INTO PhieuXK(ID_XK,ID_NV,NgayXK) VALUES (104,102,'12-04-2023');
+INSERT INTO PhieuXK(ID_XK,ID_NV,NgayXK) VALUES (105,102,'13-04-2023');
+INSERT INTO PhieuXK(ID_XK,ID_NV,NgayXK) VALUES (106,102,'12-05-2023');
+INSERT INTO PhieuXK(ID_XK,ID_NV,NgayXK) VALUES (107,102,'15-05-2023');
+INSERT INTO PhieuXK(ID_XK,ID_NV,NgayXK) VALUES (108,102,'20-05-2023');
+INSERT INTO PhieuXK(ID_XK,ID_NV,NgayXK) VALUES (109,102,'5-06-2023');
+INSERT INTO PhieuXK(ID_XK,ID_NV,NgayXK) VALUES (110,102,'10-06-2023');
+
 --Them data cho CTXK
 INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (100,100,5);
 INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (100,101,5);
@@ -908,7 +1002,19 @@ INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (102,110,5);
 INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (102,112,10);
 INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (102,113,8);
 INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (102,114,5);
-
-SELECT MIN(ID_NV) +1 FROM NhanVien WHERE ID_NV + 1 NOT IN (SELECT ID_NV FROM NhanVien);
- 
- 
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (103,114,5);
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (103,104,5);
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (104,101,5);
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (104,112,5);
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (105,113,5);
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (105,102,5);
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (106,103,5);
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (106,114,5);
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (107,105,5);
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (107,106,5);
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (108,115,5);
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (108,110,5);
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (109,110,5);
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (109,112,5);
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (110,113,5);
+INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (110,114,5);

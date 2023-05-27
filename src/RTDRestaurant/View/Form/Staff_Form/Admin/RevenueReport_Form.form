@@ -39,7 +39,7 @@
                           <Component id="lbprofit" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="filter" min="-2" pref="120" max="-2" attributes="0"/>
+                      <Component id="filter" min="-2" pref="140" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -57,9 +57,9 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jSeparator2" min="-2" pref="1" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lbprofit" min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="filter" min="-2" pref="35" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="filter" pref="35" max="32767" attributes="0"/>
+                  <Component id="lbprofit" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="panelCard" min="-2" max="-2" attributes="0"/>
@@ -122,20 +122,20 @@
         <Component class="RTDRestaurant.View.Component.Admin_Component.Card" name="Cexpenses">
           <Properties>
             <Property name="color1" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="bd" green="d1" red="64" type="rgb"/>
+              <Color blue="ca" green="de" red="6d" type="rgb"/>
             </Property>
             <Property name="color2" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="e5" green="c6" red="ab" type="rgb"/>
+              <Color blue="cb" green="a8" red="89" type="rgb"/>
             </Property>
           </Properties>
         </Component>
         <Component class="RTDRestaurant.View.Component.Admin_Component.Card" name="Cprofit">
           <Properties>
             <Property name="color1" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="50" green="3e" red="2c" type="rgb"/>
+              <Color blue="40" green="31" red="23" type="rgb"/>
             </Property>
             <Property name="color2" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="af" green="a1" red="4c" type="rgb"/>
+              <Color blue="90" green="85" red="3d" type="rgb"/>
             </Property>
           </Properties>
         </Component>

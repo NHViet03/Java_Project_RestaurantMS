@@ -40,7 +40,7 @@
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="cmdExcel" min="-2" pref="150" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                      <Component id="cmdCTHD" min="-2" pref="150" max="-2" attributes="0"/>
+                      <Component id="cmdCTNK" min="-2" pref="150" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="lbprofit" min="-2" max="-2" attributes="0"/>
@@ -89,7 +89,7 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txtSearch" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cmdCTHD" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                  <Component id="cmdCTNK" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                   <Component id="cmdExcel" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -109,9 +109,9 @@
           <Color blue="7b" green="5b" red="6c" type="rgb"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Icons/bill (1).png"/>
+          <Image iconType="3" name="/Icons/inventory.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Th&#xf4;ng tin Ho&#x301;a &#x110;&#x1a1;n"/>
+        <Property name="text" type="java.lang.String" value="Th&#xf4;&#x301;ng k&#xea; Nh&#xe2;&#x323;p Kho"/>
         <Property name="iconTextGap" type="int" value="10"/>
       </Properties>
     </Component>
@@ -133,7 +133,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="59" green="59" red="59" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Doanh thu Ho&#x301;a &#x110;&#x1a1;n trong nga&#x300;y"/>
+        <Property name="text" type="java.lang.String" value="Chi phi&#x301; Nh&#xe2;&#x323;p Kho trong nga&#x300;y"/>
       </Properties>
     </Component>
     <Component class="RTDRestaurant.View.Swing.MyTextField" name="txtprofit">
@@ -154,7 +154,7 @@
           <Color blue="59" green="59" red="59" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="Danh sa&#x301;ch Ho&#x301;a &#x110;&#x1a1;n"/>
+        <Property name="text" type="java.lang.String" value="Danh sa&#x301;ch Phi&#xea;&#x301;u Nh&#xe2;&#x323;p Kho"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator2">
@@ -174,42 +174,24 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="RTDRestaurant.View.Swing.Table" name="tableHD">
+        <Component class="RTDRestaurant.View.Swing.Table" name="tablePNK">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="7" rowCount="0">
-                <Column editable="false" title="Ma&#x303; H&#x110;" type="java.lang.Object"/>
-                <Column editable="false" title="Ma&#x303; KH" type="java.lang.Object"/>
-                <Column editable="false" title="Ma&#x303; Ba&#x300;n" type="java.lang.Object"/>
-                <Column editable="false" title="Nga&#x300;y Ho&#x301;a &#x110;&#x1a1;n" type="java.lang.Object"/>
-                <Column editable="false" title="Ti&#xea;&#x300;n mo&#x301;n &#x103;n" type="java.lang.Object"/>
-                <Column editable="false" title="Ti&#xea;&#x300;n gia&#x309;m" type="java.lang.Object"/>
+              <Table columnCount="4" rowCount="0">
+                <Column editable="false" title="Ma&#x303; NK" type="java.lang.Object"/>
+                <Column editable="false" title="Ma&#x303; NV" type="java.lang.Object"/>
+                <Column editable="false" title="Nga&#x300;y Nh&#xe2;&#x323;p Kho" type="java.lang.Object"/>
                 <Column editable="false" title="T&#xf4;&#x309;ng ti&#xea;&#x300;n" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
-                <Column maxWidth="120" minWidth="120" prefWidth="-1" resizable="true">
+                <Column maxWidth="200" minWidth="200" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="120" minWidth="120" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="120" minWidth="120" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                <Column maxWidth="200" minWidth="200" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
@@ -271,9 +253,9 @@
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
             <StringItem index="0" value="T&#xe2;&#x301;t ca&#x309;"/>
-            <StringItem index="1" value="Trong nga&#x300;y"/>
-            <StringItem index="2" value="Trong tha&#x301;ng"/>
-            <StringItem index="3" value="Trong n&#x103;m"/>
+            <StringItem index="1" value="H&#xf4;m nay"/>
+            <StringItem index="2" value="Tha&#x301;ng na&#x300;y"/>
+            <StringItem index="3" value="N&#x103;m na&#x300;y"/>
           </StringArray>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="S&#x103;&#x301;p x&#xea;&#x301;p"/>
@@ -293,7 +275,7 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="RTDRestaurant.View.Swing.Button" name="cmdCTHD">
+    <Component class="RTDRestaurant.View.Swing.Button" name="cmdCTNK">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="7b" green="5b" red="6c" type="rgb"/>
@@ -304,14 +286,14 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/Icons/clipboard.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="XEM CTH&#x110;"/>
+        <Property name="text" type="java.lang.String" value="XEM CTNK"/>
         <Property name="focusable" type="boolean" value="false"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="14" style="0"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdCTHDActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdCTNKActionPerformed"/>
       </Events>
     </Component>
     <Component class="RTDRestaurant.View.Swing.Button" name="cmdExcel">

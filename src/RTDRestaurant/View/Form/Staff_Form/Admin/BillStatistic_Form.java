@@ -45,13 +45,13 @@ public class BillStatistic_Form extends javax.swing.JPanel {
         obj=new MS_Success(Main_Admin_Frame.getFrames()[0], true);
         //Thêm data cho Menu
         initTable();
-        getProfit();
+        getRevenue();
         setCurrentDate();
     }
-
-    public void getProfit() {
+    //Lấy doanh thu hóa đơn trong ngày
+    public void getRevenue() {
         try {
-            txtprofit.setText(df.format(serviceA.getProfitHD()) + "đ");
+            txtprofit.setText(df.format(serviceA.getRevenueHD("Hôm nay")) + "đ");
         } catch (SQLException ex) {
             Logger.getLogger(BillStatistic_Form.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -64,7 +64,7 @@ public class BillStatistic_Form extends javax.swing.JPanel {
 
     public void initTable() {
         try {
-            list = serviceA.getListHD();
+            list = serviceA.getListHDIn("Tất cả");
             for (ModelHoaDon data : list) {
                 tableHD.addRow(new Object[]{data.getIdHoaDon(), data.getIdKH(), data.getIdBan(), data.getNgayHD(), df.format(data.getTienMonAn()) + "đ", df.format(data.getTienGiam()) + "đ", df.format(data.getTongtien()) + "đ"});
             }
@@ -122,7 +122,7 @@ public class BillStatistic_Form extends javax.swing.JPanel {
         lbTitle.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         lbTitle.setForeground(new java.awt.Color(108, 91, 123));
         lbTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/bill (1).png"))); // NOI18N
-        lbTitle.setText("Thông tin Hóa Đơn");
+        lbTitle.setText("Thống kê Hóa Đơn");
         lbTitle.setIconTextGap(10);
 
         txtSearch.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/loupe (1).png"))); // NOI18N
@@ -188,7 +188,7 @@ public class BillStatistic_Form extends javax.swing.JPanel {
         filter.setEditable(true);
         filter.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         filter.setForeground(new java.awt.Color(108, 91, 123));
-        filter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Trong ngày", "Trong tháng", "Trong năm" }));
+        filter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Hôm nay", "Tháng này", "Năm này" }));
         filter.setToolTipText("Sắp xếp");
         filter.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(164, 145, 145), 2));
         filter.setFocusable(false);
