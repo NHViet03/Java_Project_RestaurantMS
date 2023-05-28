@@ -76,7 +76,7 @@ public class MS_Success extends javax.swing.JDialog {
         lbTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lbTitle.setForeground(new java.awt.Color(108, 91, 123));
         lbTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbTitle.setText("XUẤT FILE EXCEL THÀNH CÔNG !!!");
+        lbTitle.setText("XUẤT FILE THÀNH CÔNG !!!");
 
         lbIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/test.png"))); // NOI18N
 

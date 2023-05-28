@@ -724,18 +724,13 @@ END;
 
 CREATE OR REPLACE TRIGGER Tg_TrangthaiBan
 AFTER INSERT OR UPDATE OF Trangthai ON HoaDon
+FOR EACH ROW
 BEGIN
-    FOR cur IN (
-        SELECT ID_Ban,Trangthai  
-        FROM HoaDon
-    )    
-    LOOP
-        IF(cur.Trangthai='Chua thanh toan') THEN 
-            UPDATE Ban SET Trangthai='Dang dung bua' WHERE ID_Ban=cur.ID_Ban;
-        ELSE 
-            UPDATE Ban SET Trangthai='Con trong' WHERE ID_Ban=cur.ID_Ban;
-        END IF;
-    END LOOP; 
+    IF(:new.Trangthai='Chua thanh toan') THEN 
+        UPDATE Ban SET Trangthai='Dang dung bua' WHERE ID_Ban=:new.ID_Ban;
+    ELSE 
+        UPDATE Ban SET Trangthai='Con trong' WHERE ID_Ban=:new.ID_Ban;
+    END IF; 
 END;
 
 --  Trigger Thanh tien o CTNK bang SoLuong x Dongia cua nguyen lieu do
@@ -813,8 +808,16 @@ END;
 CREATE OR REPLACE TRIGGER Kho_ThemNL
 AFTER INSERT ON NguyenLieu
 FOR EACH ROW
+DECLARE 
+    v_count number;
 BEGIN
-    INSERT INTO Kho(ID_NL) VALUES(:new.ID_NL);
+    SELECT COUNT(*)
+    INTO v_count
+    FROM NguyenLieu
+    WHERE ID_NL=:new.ID_NL;
+    IF(v_count>0) THEN
+        INSERT INTO Kho(ID_NL) VALUES(:new.ID_NL);
+    END IF;
 END;
 
 

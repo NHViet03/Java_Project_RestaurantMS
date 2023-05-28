@@ -65,13 +65,13 @@ public class RevenueReport_Form extends javax.swing.JPanel {
                 if (expenses > pre_expenses) {
                     descE = "Tăng " + (Math.round((((double) expenses - pre_expenses) / pre_expenses) * 100) + "% so với tháng trước");
                 } else {
-                    descE = "Giảm " + (Math.round((((double) expenses - pre_expenses) / pre_expenses) * 100) + "% so với tháng trước");
+                    descE = "Giảm " + (Math.round((((double) pre_expenses - expenses) / pre_expenses) * 100) + "% so với tháng trước");
                 }
 
                 if (profit > pre_profit) {
                     descP = "Tăng " + (Math.round((((double) profit - pre_profit) / pre_profit) * 100) + "% so với tháng trước");
                 } else {
-                    descP = "Giảm " + (Math.round((((double) profit - pre_profit) / pre_profit) * 100) + "% so với tháng trước");
+                    descP = "Giảm " + (Math.round((((double) pre_profit - profit) / pre_profit) * 100) + "% so với tháng trước");
                 }
             }
             Crevenue.setData(new ModelCard(new ImageIcon(getClass().getResource("/Icons/revenue.png")), "Doanh Thu", df.format(revenue) + "đ", descR));
@@ -89,8 +89,8 @@ public class RevenueReport_Form extends javax.swing.JPanel {
 
     public void initChart() {
         lineChart.addLegend("Doanh thu", new Color(101, 78, 163), new Color(101, 78, 163));
-        lineChart.addLegend("Chi Phí", new Color(109,222,202), new Color(109,222,202));
-        lineChart.addLegend("Lợi nhuận", new Color(35,49,64), new Color(35,49,64));
+        lineChart.addLegend("Chi Phí", new Color(109, 222, 202), new Color(109, 222, 202));
+        lineChart.addLegend("Lợi nhuận", new Color(35, 49, 64), new Color(35, 49, 64));
         try {
             list = service.getRevenueCostProfit_byMonth();
             for (ModelChart data : list) {

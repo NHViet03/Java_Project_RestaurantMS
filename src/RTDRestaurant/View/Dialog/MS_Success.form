@@ -103,7 +103,7 @@
               <Color blue="7b" green="5b" red="6c" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="XU&#xc2;&#x301;T FILE EXCEL THA&#x300;NH C&#xd4;NG !!!"/>
+            <Property name="text" type="java.lang.String" value="XU&#xc2;&#x301;T FILE THA&#x300;NH C&#xd4;NG !!!"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lbIcon">

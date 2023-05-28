@@ -454,4 +454,18 @@ public class ServiceStaff {
         p.execute();
         p.close();
     }
+    //Lấy tên khách hàng từ Mã KH
+    public String getTenKH(int idKH) throws SQLException{
+        String name="";
+        String sql="SELECT TenKH From KhachHang WHERE ID_KH=?";
+        PreparedStatement p=con.prepareStatement(sql);
+        p.setInt(1, idKH);
+        ResultSet r=p.executeQuery();
+        if(r.next()){
+            name=r.getString(1);
+        }
+        p.close();
+        r.close();
+        return name;
+    }
 }

@@ -7,15 +7,26 @@ import RTDRestaurant.Model.ModelCTHD;
 import RTDRestaurant.Model.ModelHoaDon;
 import RTDRestaurant.Model.ModelNguoiDung;
 import RTDRestaurant.Model.ModelNhanVien;
+import RTDRestaurant.View.Dialog.MS_Success;
 import RTDRestaurant.View.Form.MainForm;
+import RTDRestaurant.View.Main_Frame.Main_Admin_Frame;
 import RTDRestaurant.View.Swing.CustomScrollBar.ScrollBarCustom;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDFont;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 public class BillS_Form extends javax.swing.JPanel {
 
@@ -28,13 +39,13 @@ public class BillS_Form extends javax.swing.JPanel {
     private final MainForm main;
     private ArrayList<ModelCTHD> cthd;
     private DecimalFormat df;
-    
-    
-    public BillS_Form(ModelNguoiDung user,ModelNhanVien staff,ModelBan table,ModelHoaDon bill,MainForm main) {
-        this.user=user;
-        this.staff=staff;
-        this.table=table;
-        this.bill=bill;
+    private MS_Success obj;
+
+    public BillS_Form(ModelNguoiDung user, ModelNhanVien staff, ModelBan table, ModelHoaDon bill, MainForm main) {
+        this.user = user;
+        this.staff = staff;
+        this.table = table;
+        this.bill = bill;
         this.main = main;
         initComponents();
         init();
@@ -45,32 +56,36 @@ public class BillS_Form extends javax.swing.JPanel {
         serviceC = new ServiceCustomer();
         jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
         jScrollPane1.getViewport().setBackground(Color.WHITE);
-        df = new DecimalFormat("##,###,###");    
+        df = new DecimalFormat("##,###,###");
+        obj=new MS_Success(Main_Admin_Frame.getFrames()[0], true);
         //Thêm data cho CTHD 
         initTable();
         //Thêm data cho Tiền hóa đơn
         initCash();
-        
-        txtidHD.setText(bill.getIdHoaDon()+"");
-        txtidKH.setText(bill.getIdKH()+"");
-        lbNgHD.setText("Ngày: "+bill.getNgayHD());
+
+        txtidHD.setText(bill.getIdHoaDon() + "");
+        txtidKH.setText(bill.getIdKH() + "");
+        lbNgHD.setText("Ngày: " + bill.getNgayHD());
     }
-    public void initTable(){
+
+    public void initTable() {
         try {
             //Lấy danh sách CTHD từ mã hóa đơn
-            cthd=serviceC.getCTHD(bill.getIdHoaDon());
-            for (ModelCTHD data:cthd){
-                tableCTHD.addRow(new Object[]{data.getTenMonAn(),data.getSoluong(),df.format(data.getThanhTien())+"đ"});
+            cthd = serviceC.getCTHD(bill.getIdHoaDon());
+            for (ModelCTHD data : cthd) {
+                tableCTHD.addRow(new Object[]{data.getTenMonAn(), data.getSoluong(), df.format(data.getThanhTien()) + "d"});
             }
         } catch (SQLException ex) {
             Logger.getLogger(BillS_Form.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void initCash(){
-        txtTienmonan.setText(df.format(bill.getTienMonAn())+"đ");
-        txtTiengiam.setText(df.format(bill.getTienGiam())+"đ");
-        txtTongtien.setText(df.format(bill.getTongtien())+"đ");
+
+    public void initCash() {
+        txtTienmonan.setText(df.format(bill.getTienMonAn()) + "d");
+        txtTiengiam.setText(df.format(bill.getTienGiam()) + "d");
+        txtTongtien.setText(df.format(bill.getTongtien()) + "d");
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -156,13 +171,18 @@ public class BillS_Form extends javax.swing.JPanel {
         cmdExportBill.setText("XUẤT HÓA ĐƠN");
         cmdExportBill.setFocusable(false);
         cmdExportBill.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cmdExportBill.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdExportBillActionPerformed(evt);
+            }
+        });
 
         tableCTHD.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Món Ăn", "Số lượng", "Thành tiền"
+                "Mon An", "So luong", "Thanh tien"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -389,12 +409,152 @@ public class BillS_Form extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTienKHKeyTyped
 
     private void txtTienKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTienKHActionPerformed
-        txtTientra.setText(df.format(Integer.parseInt(txtTienKH.getText())-bill.getTongtien())+"đ");
+        txtTientra.setText(df.format(Integer.parseInt(txtTienKH.getText()) - bill.getTongtien()) + "d");
     }//GEN-LAST:event_txtTienKHActionPerformed
 
     private void txtTienKHFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTienKHFocusLost
-       txtTientra.setText(df.format(Integer.parseInt(txtTienKH.getText())-bill.getTongtien())+"đ");
+        txtTientra.setText(df.format(Integer.parseInt(txtTienKH.getText()) - bill.getTongtien()) + "d");
     }//GEN-LAST:event_txtTienKHFocusLost
+
+    private void cmdExportBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdExportBillActionPerformed
+        //Tạo Document
+        PDDocument invc = new PDDocument();
+        //Tạo trang trống
+        PDPage newpage = new PDPage();
+        //Thêm trang trống
+        invc.addPage(newpage);
+        String title = "Royal TheDreamers Restaurant";
+        String subtitle = "HOA DON THANH TOAN";
+        String footer="THANK YOU FOR YOU PURCHASE";
+        String tenKH = "";
+        try {
+            tenKH = serviceS.getTenKH(bill.getIdKH());
+        } catch (SQLException ex) {
+            Logger.getLogger(BillS_Form.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        DefaultTableModel model = (DefaultTableModel) tableCTHD.getModel();
+        PDFont font = PDType1Font.TIMES_ROMAN;
+        //Thêm dữ liệu vào file pdf
+        PDPage mypage = invc.getPage(0);
+        try {
+            PDPageContentStream cs = new PDPageContentStream(invc, mypage);
+            //Viết tiêu đề Hóa đơn
+            cs.beginText();
+            cs.setFont(PDType1Font.TIMES_BOLD, 22);
+            cs.newLineAtOffset(165, 750);
+            cs.showText(title);
+            cs.endText();
+
+            cs.beginText();
+            cs.setFont(font, 18);
+            cs.newLineAtOffset(220, 690);
+            cs.showText(subtitle);
+            cs.endText();
+            //Thêm thông tin khách hàng
+            cs.beginText();
+            cs.setFont(font, 14);
+            cs.setLeading(20f);
+            cs.newLineAtOffset(60, 610);
+            cs.showText("Ma Hoa Don: ");
+            cs.newLine();
+            cs.showText("Ngay: ");
+            cs.newLine();
+            cs.showText("Khach Hang: ");
+            cs.endText();
+
+            cs.beginText();
+            cs.setFont(font, 14);
+            cs.setLeading(20f);
+            cs.newLineAtOffset(170, 610);
+            cs.showText(bill.getIdHoaDon() + "");
+            cs.newLine();
+            cs.showText(bill.getNgayHD());
+            cs.newLine();
+            cs.showText(tenKH);
+            cs.endText();
+
+            //Thêm CTHD
+            //Cột
+            int x = 80;
+            for (int col = 0; col < model.getColumnCount(); col++) {
+                cs.beginText();
+                cs.setFont(font, 14);
+                cs.newLineAtOffset(x, 520);
+                cs.showText(model.getColumnName(col));
+                cs.endText();
+                if (col == 0) {
+                    x += 200;
+                } else {
+                    x += 120;
+                }
+            }
+            //Hàng
+            x = 80;
+            for (int col = 0; col < model.getColumnCount(); col++) {
+                cs.beginText();
+                cs.setFont(font, 14);
+                cs.setLeading(20f);
+                cs.newLineAtOffset(x, 500);
+                for (int row = 0; row < model.getRowCount(); row++) {
+                    cs.showText(model.getValueAt(row, col).toString());
+                    cs.newLine();
+                }
+                cs.endText();
+                if (col == 0) {
+                    x += 200;
+                } else {
+                    x += 120;
+                }
+
+            }
+            //Thêm dữ liệu phần thanh toán
+            cs.beginText();
+            cs.setFont(font, 14);
+            cs.setLeading(20f);
+            cs.newLineAtOffset(280, 480 - (model.getRowCount() * 20));
+            cs.showText("Tien mon an: ");
+            cs.newLine();
+            cs.showText("Tien giam gia: ");
+            cs.newLine();
+            cs.showText("Tong tien: ");
+            cs.newLine();
+            cs.showText("Tien khach dua: ");
+            cs.newLine();
+            cs.showText("Tien tra lai: ");
+            cs.endText();
+
+            cs.beginText();
+            cs.setFont(font, 14);
+            cs.setLeading(20f);
+            cs.newLineAtOffset(400, 480 - (model.getRowCount() * 20));
+            cs.showText(txtTienmonan.getText());
+            cs.newLine();
+            cs.showText(txtTiengiam.getText());
+            cs.newLine();
+            cs.showText(txtTongtien.getText());
+            cs.newLine();
+            cs.showText(df.format(Integer.parseInt(txtTienKH.getText())) + "d");
+            cs.newLine();
+            cs.showText(txtTientra.getText());
+            cs.endText();
+            //Cuối Hóa đơn
+            cs.beginText();
+            cs.setFont(PDType1Font.TIMES_BOLD, 20);
+            cs.newLineAtOffset(150, 350 - (model.getRowCount() * 20));
+            cs.showText(footer);
+            cs.endText();
+            //Đóng file
+            cs.close();
+            //Lưu file
+            invc.save(".\\src\\ExportBill\\HoaDon_ID-" + bill.getIdHoaDon() + ".pdf");
+            File file=new File("src\\ExportBill\\HoaDon_ID-" + bill.getIdHoaDon() + ".pdf");
+            String path=file.getAbsolutePath();
+            obj.ExportFileSuccess(path);
+
+        } catch (IOException ex) {
+            Logger.getLogger(BillS_Form.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cmdExportBillActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
