@@ -4,6 +4,7 @@ import RTDRestaurant.Model.ModelHoaDon;
 import RTDRestaurant.Model.ModelMonAn;
 import RTDRestaurant.View.Dialog.MS_ConfirmOrderFood;
 import RTDRestaurant.View.Main_Frame.Main_Customer_Frame;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -11,18 +12,19 @@ import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
-import javax.swing.Action;
 
 public class CardMonAn extends javax.swing.JPanel {
 
-    private final ModelMonAn data;
+    private  ModelMonAn data;
     private MS_ConfirmOrderFood obj;
-    private final ModelHoaDon HoaDon;
+    private ModelHoaDon HoaDon;
+   
     public CardMonAn(ModelMonAn data,ModelHoaDon HoaDon) {
         this.HoaDon=HoaDon;
         this.data = data;
         initComponents();
         init();
+        setOpaque(false);
     }
 
     public void init() {
@@ -153,9 +155,10 @@ public class CardMonAn extends javax.swing.JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setColor(getBackground());
-        g2.fillRoundRect(0, 0, getWidth(), getHeight(), 20, 20);
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.fillRoundRect(0, 0, getWidth(), getHeight(), 20,20);
+        
         super.paintComponent(g);
     }
 

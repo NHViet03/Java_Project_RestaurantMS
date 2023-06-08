@@ -18,25 +18,6 @@ alter table NguoiDung
 alter table NguoiDung
     add constraint NguoiDung_PK PRIMARY KEY (ID_ND);
     
---Them data cho Bang NguoiDung
---Nhan vien
-INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (100,'NVHoangViet@gmail.com','123','Verified','Quan Ly');
-INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (101,'NVHoangPhuc@gmail.com','123','Verified','Nhan Vien');
-INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (102,'NVAnhHong@gmail.com','123','Verified','Nhan Vien Kho');
-INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (103,'NVQuangDinh@gmail.com','123','Verified','Nhan Vien');
---Khach Hang
-INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (104,'KHThaoDuong@gmail.com','123','Verified','Khach Hang');
-INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (105,'KHTanHieu@gmail.com','123','Verified','Khach Hang');
-INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (106,'KHQuocThinh@gmail.com','123','Verified','Khach Hang');
-INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (107,'KHNhuMai@gmail.com','123','Verified','Khach Hang');
-INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (108,'KHBichHao@gmail.com','123','Verified','Khach Hang');
-INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (109,'KHMaiQuynh@gmail.com','123','Verified','Khach Hang');
-INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (110,'KHMinhQuang@gmail.com','123','Verified','Khach Hang');
-INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (111,'KHThanhHang@gmail.com','123','Verified','Khach Hang');
-INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (112,'KHThanhNhan@gmail.com','123','Verified','Khach Hang');
-INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (113,'KHPhucNguyen@gmail.com','123','Verified','Khach Hang');
-
-
 --Tao bang NhanVien
 --drop table NhanVien;
 create table NhanVien(
@@ -70,25 +51,8 @@ ALTER TABLE NhanVien
  (ID_NQL) REFERENCES NhanVien(ID_NV);
  
 
---Them data cho bang Nhan Vien
-ALTER SESSION SET NLS_DATE_FORMAT = 'dd-MM-YYYY';
---Co tai khoan
-INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_ND,ID_NQL,Tinhtrang) VALUES (100,'Nguyen Hoang Viet','10/05/2023','0848044725','Quan ly',100,100,'Dang lam viec');
-INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_ND,ID_NQL,Tinhtrang) VALUES (101,'Nguyen Hoang Phuc','20/05/2023','0838033334','Tiep tan',101,100,'Dang lam viec');
-INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_ND,ID_NQL,Tinhtrang) VALUES (102,'Le Thi Anh Hong','19/05/2023','0838033234','Kho',102,100,'Dang lam viec');
-INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_ND,ID_NQL,Tinhtrang) VALUES (103,'Ho Quang Dinh','19/05/2023','0838033234','Tiep tan',103,100,'Dang lam viec');
---Khong co tai khoan
-INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_NQL,Tinhtrang) VALUES (104,'Ha Thao Duong','10/05/2023','0838033232','Phuc vu',100,'Dang lam viec');
-INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_NQL,Tinhtrang) VALUES (105,'Nguyen Quoc Thinh','11/05/2023','0838033734','Phuc vu',100,'Dang lam viec');
-INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_NQL,Tinhtrang) VALUES (106,'Truong Tan Hieu','12/05/2023','0838033834','Phuc vu',100,'Dang lam viec');
-INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_NQL,Tinhtrang) VALUES (107,'Nguyen Thai Bao','10/05/2023','0838093234','Phuc vu',100,'Dang lam viec');
-INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_NQL,Tinhtrang) VALUES (108,'Tran Nhat Khang','11/05/2023','0838133234','Thu ngan',100,'Dang lam viec');
-INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_NQL,Tinhtrang) VALUES (109,'Nguyen Ngoc Luong','12/05/2023','0834033234','Bep',100,'Dang lam viec');
-
-
 --Tao bang KhachHang
 --drop table KhachHang;
-ALTER SESSION SET NLS_DATE_FORMAT = 'dd-MM-YYYY';
 create table KhachHang(
     ID_KH NUMBER(8,0),
     TenKH varchar2(50), 
@@ -114,20 +78,6 @@ ALTER TABLE KhachHang
  ADD CONSTRAINT KH_fk_idND FOREIGN KEY 
  (ID_ND) REFERENCES NguoiDung(ID_ND);
 
---Them data cho bang KhachHang
-INSERT INTO KhachHang(ID_KH,TenKH,Ngaythamgia,ID_ND) VALUES (100,'Ha Thao Duong','10/05/2023',104);
-INSERT INTO KhachHang(ID_KH,TenKH,Ngaythamgia,ID_ND) VALUES (101,'Truong Tan Hieu','10/05/2023',105);
-INSERT INTO KhachHang(ID_KH,TenKH,Ngaythamgia,ID_ND) VALUES (102,'Nguyen Quoc Thinh','10/05/2023',106);
-INSERT INTO KhachHang(ID_KH,TenKH,Ngaythamgia,ID_ND) VALUES (103,'Tran Nhu Mai','10/05/2023',107);
-INSERT INTO KhachHang(ID_KH,TenKH,Ngaythamgia,ID_ND) VALUES (104,'Nguyen Thi Bich Hao','10/05/2023',108);
-INSERT INTO KhachHang(ID_KH,TenKH,Ngaythamgia,ID_ND) VALUES (105,'Nguyen Mai Quynh','11/05/2023',109);
-INSERT INTO KhachHang(ID_KH,TenKH,Ngaythamgia,ID_ND) VALUES (106,'Hoang Minh Quang','11/05/2023',110);
-INSERT INTO KhachHang(ID_KH,TenKH,Ngaythamgia,ID_ND) VALUES (107,'Nguyen Thanh Hang','12/05/2023',111);
-INSERT INTO KhachHang(ID_KH,TenKH,Ngaythamgia,ID_ND) VALUES (108,'Nguyen Ngoc Thanh Nhan','11/05/2023',112);
-INSERT INTO KhachHang(ID_KH,TenKH,Ngaythamgia,ID_ND) VALUES (109,'Hoang Thi Phuc Nguyen','12/05/2023',113);
-
-
-
 --Tao bang MonAn
 --drop table MonAn;
 create table MonAn(
@@ -150,7 +100,872 @@ alter table MonAn
     add constraint MonAn_PK PRIMARY KEY (ID_MonAn);
 
 
+--Tao bang Ban
+--drop table Ban;
+create table Ban(
+    ID_Ban NUMBER(8,0),
+    TenBan varchar2(50), 
+    Vitri varchar2(50), 
+    Trangthai varchar2(50)
+);
+--Them Check Constraint
+alter table Ban
+    add constraint Ban_TenBan_NNULL check ('TenBan' is not null)
+    add constraint Ban_Vitri_NNULL check ('Vitri' is not null)
+    add constraint Ban_Trangthai_Ten check (Trangthai in ('Con trong','Dang dung bua','Da dat truoc'));
+
+
+--Them khoa chinh
+alter table Ban
+    add constraint Ban_PK PRIMARY KEY (ID_Ban);
+
+
+--Tao bang Voucher
+
+--Tao bang Voucher
+--drop table Voucher;
+
+create table Voucher(
+    Code_Voucher varchar2(10),
+    Mota varchar2(50),
+    Phantram number(3,0),
+    LoaiMA varchar2(50),
+    SoLuong number(3,0),
+    Diem number(8,0)
+);
+--Them Check Constraint
+alter table Voucher
+    add constraint V_Code_NNULL check ('Code_Voucher' is not null)
+    add constraint V_Mota_NNULL check ('Mota' is not null)
+    add constraint V_Phantram_NNULL check (Phantram > 0 AND Phantram <= 100)
+    add constraint V_LoaiMA_Thuoc check (LoaiMA in ('All','Aries','Taurus','Gemini','Cancer','Leo','Virgo'
+                                                 ,'Libra','Scorpio','Sagittarius','Capricorn','Aquarius','Pisces'));
+
+---Them khoa chinh
+alter table Voucher
+    add constraint Voucher_PK PRIMARY KEY (Code_Voucher);
+    
+--Tao bang HoaDon
+--drop table HoaDon;
+
+create table HoaDon(
+    ID_HoaDon NUMBER(8,0),
+    ID_KH number(8,0),
+    ID_Ban number(8,0),
+    NgayHD date,
+    TienMonAn number(8,0),
+    Code_Voucher varchar2(10),
+    TienGiam number(8,0),
+    Tongtien number(10,0),
+    Trangthai varchar2(50)
+);
+
+--Them Check Constraint
+alter table HoaDon
+    add constraint HD_NgayHD_NNULL check ('TenMon' is not null)
+    add constraint HD_TrangThai check (Trangthai in ('Chua thanh toan','Da thanh toan'));
+
+--Them khoa chinh
+alter table HoaDon
+    add constraint HD_PK PRIMARY KEY (ID_HoaDon);
+
+ALTER TABLE HoaDon
+ ADD CONSTRAINT HD_fk_idKH FOREIGN KEY 
+ (ID_KH) REFERENCES KhachHang(ID_KH)
+ ADD CONSTRAINT HD_fk_idBan FOREIGN KEY 
+ (ID_Ban) REFERENCES Ban(ID_Ban);
+ 
+
+--Tao bang CTHD
+--drop table CTHD;
+create table CTHD(
+    ID_HoaDon NUMBER(8,0),
+    ID_MonAn number(8,0),
+    SoLuong number(3,0),
+    Thanhtien number(10,0)
+);
+
+--Them Check Constraint
+alter table CTHD
+    add constraint CTHD_SoLuong_NNULL check ('SoLuong' is not null);
+
+--Them khoa chinh
+alter table CTHD
+    add constraint CTHD_PK PRIMARY KEY (ID_HoaDon,ID_MonAn);
+
+ALTER TABLE CTHD
+ ADD CONSTRAINT CTHD_fk_idHD FOREIGN KEY 
+ (ID_HoaDon) REFERENCES HoaDon(ID_HoaDon)
+ ADD CONSTRAINT CTHD_fk_idMonAn FOREIGN KEY 
+ (ID_MonAn) REFERENCES MonAn(ID_MonAn);
+
+ 
+--Tao bang Nguyenlieu
+--drop table NguyenLieu;
+create table NguyenLieu(
+    ID_NL NUMBER(8,0),
+    TenNL VARCHAR2(50), 
+    Dongia NUMBER(8,0), 
+    Donvitinh VARCHAR2(50)
+);
+--Them Check Constraint
+alter table NguyenLieu
+    add constraint NL_TenNL_NNULL check ('TenNL' is not null)
+    add constraint NL_Dongia_NNULL check ('Dongia' is not null)
+    add constraint NL_DVT_Thuoc check (Donvitinh in ('g','kg','ml','l'));
+
+--Them khoa chinh
+alter table NguyenLieu
+    add constraint NL_PK PRIMARY KEY (ID_NL);
+
+--Tao bang Kho
+--drop table Kho;
+create table Kho(
+    ID_NL NUMBER(8,0),
+    SLTon NUMBER(3,0) DEFAULT 0
+);
+--Them Check Constraint
+
+
+--Them khoa chinh
+ALTER TABLE Kho
+    ADD CONSTRAINT Kho_pk PRIMARY KEY (ID_NL);
+
+--Them khoa ngoai
+ALTER TABLE Kho
+ ADD CONSTRAINT Kho_fk_idNL FOREIGN KEY 
+ (ID_NL) REFERENCES NguyenLieu(ID_NL);
+
+--Tao bang PhieuNK
+--drop table PhieuNK;
+create table PhieuNK(
+    ID_NK NUMBER(8,0),
+    ID_NV number(8,0),
+    NgayNK date,
+    Tongtien number(10,0) DEFAULT 0
+);
+
+--Them Check Constraint
+alter table PhieuNK
+    add constraint PNK_NgayNK_NNULL check ('NgayNK' is not null);
+
+--Them khoa chinh
+alter table PhieuNK
+    add constraint PNK_PK PRIMARY KEY (ID_NK);
+
+ALTER TABLE PhieuNK
+ ADD CONSTRAINT PNK_fk_idNV FOREIGN KEY 
+ (ID_NV) REFERENCES NhanVien(ID_NV);
+
+
+--Them bang CTNK
+--drop table CTNK;
+create table CTNK(
+    ID_NK NUMBER(8,0),
+    ID_NL number(8,0),
+    SoLuong number(3,0),
+    Thanhtien number(10,0)
+);
+
+--Them Check Constraint
+alter table CTNK
+    add constraint CTNK_SL_NNULL check ('SoLuong' is not null);
+
+--Them khoa chinh
+alter table CTNK
+    add constraint CTNK_PK PRIMARY KEY (ID_NK,ID_NL);
+    
+--Them khoa ngoai
+ALTER TABLE CTNK
+ ADD CONSTRAINT CTNK_fk_idNK FOREIGN KEY 
+ (ID_NK) REFERENCES PhieuNK(ID_NK)
+ ADD CONSTRAINT CTNK_fk_idNL FOREIGN KEY 
+ (ID_NL) REFERENCES NguyenLieu(ID_NL);
+
+
+--Tao bang PhieuXK
+--drop table PhieuXK;
+create table PhieuXK(
+    ID_XK NUMBER(8,0),
+    ID_NV number(8,0),
+    NgayXK date
+);
+
+--Them Check Constraint
+alter table PhieuXK
+    add constraint PXK_NgayXK_NNULL check ('NgayXK' is not null);
+
+--Them khoa chinh
+alter table PhieuXK
+    add constraint PXK_PK PRIMARY KEY (ID_XK);
+
+ALTER TABLE PhieuXK
+ ADD CONSTRAINT PXK_fk_idNV FOREIGN KEY 
+ (ID_NV) REFERENCES NhanVien(ID_NV);
+
+
+--Them bang CTXK
+--drop table CTXK;
+create table CTXK(
+    ID_XK NUMBER(8,0),
+    ID_NL number(8,0),
+    SoLuong number(3,0)
+);
+
+--Them Check Constraint
+alter table CTXK
+    add constraint CTXK_SL_NNULL check ('SoLuong' is not null);
+
+--Them khoa chinh
+alter table CTXK
+    add constraint CTXK_PK PRIMARY KEY (ID_XK,ID_NL);
+
+--Them khoa ngoai
+ALTER TABLE CTXK
+ ADD CONSTRAINT CTNK_fk_idXK FOREIGN KEY 
+ (ID_XK) REFERENCES PhieuXK(ID_XK)
+ ADD CONSTRAINT CTXK_fk_idNL FOREIGN KEY 
+ (ID_NL) REFERENCES NguyenLieu(ID_NL);
+
+
+--- Tao Trigger
+
+--Khach hang chi duoc co toi da mot hoa don co trang thai Chua thanh toan
+CREATE OR REPLACE TRIGGER Tg_SLHD_CTT
+BEFORE INSERT OR UPDATE OF ID_KH,TrangThai ON HoaDon
+FOR EACH ROW
+DECLARE 
+    v_count NUMBER;
+BEGIN
+    SELECT COUNT(*)
+    FROM HoaDon
+    WHERE ID_KH=:new.ID_KH AND TrangThai='Chua thanh toan';
+    
+    IF v_count>1 THEN
+     RAISE_APPLICATION_ERROR(-20000,'Moi khach hang chi duoc co toi da mot hoa don co trang thai
+     chua thanh toan');
+    END IF;
+END;
+/
+--  Trigger Thanh tien o CTHD bang SoLuong x Dongia cua mon an do
+
+CREATE OR REPLACE TRIGGER Tg_CTHD_Thanhtien
+BEFORE INSERT OR UPDATE OF SoLuong ON CTHD
+FOR EACH ROW
+DECLARE 
+    gia MonAn.DonGia%TYPE;
+BEGIN
+    SELECT DonGia
+    INTO gia
+    FROM MonAn
+    WHERE MonAn.ID_MonAn = :new.ID_MonAn;
+    
+    :new.ThanhTien := :new.SoLuong * gia;
+END;
+/
+--- Trigger Tien mon an o Hoa Don bang tong thanh tien o CTHD
+CREATE OR REPLACE TRIGGER Tg_HD_TienMonAn
+AFTER INSERT OR UPDATE OR DELETE ON CTHD
+FOR EACH ROW
+BEGIN
+    IF INSERTING THEN    
+        UPDATE HoaDon SET TienMonAn = TienMonAn + :new.ThanhTien WHERE HoaDon.ID_HoaDon=:new.ID_HoaDon;
+    END IF;
+    
+    IF UPDATING THEN    
+        UPDATE HoaDon SET TienMonAn = TienMonAn + :new.ThanhTien - :old.ThanhTien WHERE HoaDon.ID_HoaDon=:new.ID_HoaDon;
+    END IF;
+    
+    IF DELETING THEN    
+        UPDATE HoaDon SET TienMonAn = TienMonAn - :old.ThanhTien WHERE HoaDon.ID_HoaDon=:old.ID_HoaDon;
+    END IF;
+END;
+/
+--Trigger Tien giam o Hoa Don = tong thanh tien cua mon An duoc giam  x Phantram
+CREATE OR REPLACE TRIGGER Tg_HD_TienGiam
+AFTER INSERT OR UPDATE OR DELETE ON CTHD
+FOR EACH ROW
+DECLARE 
+    v_code HoaDon.Code_Voucher%TYPE;
+    v_loaiMA Voucher.LoaiMA%TYPE;
+    MA_Loai MonAn.Loai%TYPE;
+BEGIN
+    v_code:=NULL;
+--Tim Code Voucher, Loai mon an duoc Ap dung Voucher tu bang Voucher
+    IF (INSERTING OR UPDATING) THEN
+        SELECT HoaDon.Code_Voucher,Voucher.LoaiMA 
+        INTO v_code,v_LoaiMA
+        FROM HoaDon
+        LEFT JOIN Voucher ON Voucher.Code_Voucher = HoaDon.Code_Voucher
+        WHERE ID_HoaDon=:new.ID_HoaDon;
+    --Tim loai mon an cua Mon an vua duoc them vao CTHD   
+        SELECT Loai
+        INTO MA_Loai
+        FROM MonAn 
+        WHERE ID_MonAn = :new.ID_MonAn;
+    END IF;
+    
+    IF (DELETING) THEN
+        SELECT HoaDon.Code_Voucher,Voucher.LoaiMA 
+        INTO v_code,v_LoaiMA
+        FROM HoaDon
+        LEFT JOIN Voucher ON Voucher.Code_Voucher = HoaDon.Code_Voucher
+        WHERE ID_HoaDon=:old.ID_HoaDon;
+    --Tim loai mon an cua Mon an vua duoc xoa khoi CTHD   
+        SELECT Loai
+        INTO MA_Loai
+        FROM MonAn 
+        WHERE ID_MonAn = :old.ID_MonAn;
+    END IF;
+    
+    IF(v_code IS NOT NULL) THEN
+        IF(v_LoaiMA='All' OR v_LoaiMA=MA_Loai) THEN 
+            IF INSERTING THEN    
+                UPDATE HoaDon SET TienGiam = TienGiam + Tinhtiengiam(:new.ThanhTien,v_code) WHERE HoaDon.ID_HoaDon=:new.ID_HoaDon;
+            END IF;
+            
+            IF UPDATING THEN    
+                UPDATE HoaDon SET TienGiam = TienGiam + Tinhtiengiam(:new.ThanhTien,v_code) - Tinhtiengiam(:old.ThanhTien,v_code) WHERE HoaDon.ID_HoaDon=:new.ID_HoaDon;
+            END IF;
+            
+            IF DELETING THEN    
+                UPDATE HoaDon SET TienGiam = TienGiam - Tinhtiengiam(:old.ThanhTien,v_code) WHERE HoaDon.ID_HoaDon=:old.ID_HoaDon;
+            END IF;
+        END IF;
+    END IF;
+END;
+/
+-- Tong tien o Hoa Don = Tien mon an - Tien giam
+CREATE OR REPLACE TRIGGER Tg_HD_Tongtien
+AFTER INSERT OR UPDATE OF TienMonAn,TienGiam ON HoaDon
+BEGIN
+    UPDATE HoaDon SET Tongtien= TienMonAn - TienGiam;
+END;
+/
+-- Khi cap nhat Code_Voucher o HoaDon, Tinh tien giam theo thong tin cua Voucher do va giam Diem tich luy cua KH
+CREATE OR REPLACE TRIGGER Tg_HD_DoiVoucher
+BEFORE UPDATE OF Code_Voucher ON HoaDon
+FOR EACH ROW
+DECLARE 
+    TongtienLoaiMonAnduocgiam number(8,0);
+    v_Diemdoi number;
+    v_Phantram number;
+    v_LoaiMA Voucher.LoaiMA%TYPE;
+BEGIN
+    IF(:new.Code_Voucher is not null) THEN
+        SELECT Diem,Phantram,LoaiMA
+        INTO v_Diemdoi,v_Phantram,v_LoaiMA
+        FROM Voucher
+        WHERE Code_Voucher=:new.Code_Voucher;
+        
+        KH_TruDTL(:new.ID_KH,v_diemdoi);
+        Voucher_GiamSL(:new.Code_Voucher);
+        
+        IF(v_LoaiMA='All') THEN
+            TongtienLoaiMonAnduocgiam := :new.TienMonAn;
+        ELSE 
+            SELECT SUM(Thanhtien)
+            INTO TongtienLoaiMonAnduocgiam
+            FROM CTHD 
+            JOIN MonAn ON MonAn.ID_MonAn = CTHD.ID_MonAn
+            WHERE ID_HoaDon = :new.ID_HoaDon AND LOAI = v_LoaiMA;
+        END IF;
+        
+        :new.Tiengiam := ROUND(TongtienLoaiMonAnduocgiam*v_Phantram/100);
+        :new.Tongtien := :new.Tienmonan-:new.Tiengiam;
+    ELSE
+        RAISE_APPLICATION_ERROR(-20000,'Voucher khong ton tai');
+    END IF;
+END;
+/
+--Trigger Doanh so cua Khach hang bang tong tien cua tat ca hoa don co trang thai 'Da thanh toan' 
+--cua khach hang do
+-- Diem tich luy cua Khach hang duoc tinh bang 0.005% Tong tien cua hoa don (1.000.000d tuong duong 50 diem)
+CREATE OR REPLACE TRIGGER Tg_KH_DoanhsovaDTL
+AFTER UPDATE OF Trangthai ON HoaDon
+FOR EACH ROW
+BEGIN
+    IF :new.Trangthai='Da thanh toan' THEN
+        UPDATE KhachHang SET Doanhso = Doanhso + :new.Tongtien WHERE ID_KH=:new.ID_KH;
+        UPDATE KhachHang SET Diemtichluy = Diemtichluy + ROUND(:new.Tongtien*0.00005)
+        WHERE ID_KH=:new.ID_KH;
+    END IF;
+END;
+/
+--Trigger khi khach hang them hoa don moi, trang thai ban chuyen tu 'Con trong' sang 'Dang dung bua'
+-- Khi trang thai don hang tro thanh 'Da thanh toan' trang thai ban chuyen tu 'Dang dung bua' sang 'Con trong'
+
+CREATE OR REPLACE TRIGGER Tg_TrangthaiBan
+AFTER INSERT OR UPDATE OF Trangthai ON HoaDon
+FOR EACH ROW
+BEGIN
+    IF(:new.Trangthai='Chua thanh toan') THEN 
+        UPDATE Ban SET Trangthai='Dang dung bua' WHERE ID_Ban=:new.ID_Ban;
+    ELSE 
+        UPDATE Ban SET Trangthai='Con trong' WHERE ID_Ban=:new.ID_Ban;
+    END IF; 
+END;
+/
+--  Trigger Thanh tien o CTNK bang SoLuong x Dongia cua nguyen lieu do
+
+CREATE OR REPLACE TRIGGER Tg_CTNK_Thanhtien
+BEFORE INSERT OR UPDATE OF SoLuong ON CTNK
+FOR EACH ROW
+DECLARE 
+    gia NguyenLieu.DonGia%TYPE;
+BEGIN
+    SELECT DonGia
+    INTO gia
+    FROM NguyenLieu
+    WHERE NguyenLieu.ID_NL = :new.ID_NL;
+    
+    :new.ThanhTien := :new.SoLuong * gia;
+    
+END;
+/
+--Trigger Tong tien o PhieuNK bang tong thanh tien cua CTNK
+CREATE OR REPLACE TRIGGER Tg_PNK_Tongtien
+AFTER INSERT OR UPDATE OR DELETE ON CTNK
+FOR EACH ROW
+BEGIN
+    IF INSERTING THEN    
+        UPDATE PhieuNK SET Tongtien = Tongtien + :new.ThanhTien WHERE PhieuNK.ID_NK = :new.ID_NK;
+    END IF;
+    
+    IF UPDATING THEN    
+        UPDATE PhieuNK SET Tongtien = Tongtien + :new.ThanhTien - :old.ThanhTien WHERE PhieuNK.ID_NK = :new.ID_NK;
+    END IF;
+    
+    IF DELETING THEN    
+        UPDATE PhieuNK SET Tongtien = Tongtien - :old.ThanhTien WHERE PhieuNK.ID_NK = :old.ID_NK;
+    END IF;
+END;
+/
+--Trigger khi them CTNK tang So luong ton cua nguyen lieu trong kho
+CREATE OR REPLACE TRIGGER Tg_Kho_ThemSLTon
+AFTER INSERT OR DELETE OR UPDATE OF SoLuong ON CTNK
+FOR EACH ROW
+BEGIN
+    IF INSERTING THEN    
+        UPDATE Kho SET SLTon = SLTon + :new.SoLuong WHERE Kho.ID_NL = :new.ID_NL;
+    END IF;
+    
+    IF UPDATING THEN    
+        UPDATE Kho SET SLTon = SLTon + :new.SoLuong - :old.SoLuong WHERE Kho.ID_NL = :new.ID_NL;
+    END IF;
+    
+    IF DELETING THEN    
+        UPDATE Kho SET SLTon = SLTon - :old.SoLuong WHERE Kho.ID_NL = :old.ID_NL;
+    END IF;
+END;
+/
+--Trigger khi them CTXK giam So luong ton cua nguyen lieu trong kho
+CREATE OR REPLACE TRIGGER Tg_Kho_GiamSLTon
+AFTER INSERT OR DELETE OR UPDATE OF SoLuong ON CTXK
+FOR EACH ROW
+BEGIN
+    IF INSERTING THEN    
+        UPDATE Kho SET SLTon = SLTon - :new.SoLuong WHERE Kho.ID_NL = :new.ID_NL;
+    END IF;
+    
+    IF UPDATING THEN    
+        UPDATE Kho SET SLTon = SLTon - :new.SoLuong + :old.SoLuong WHERE Kho.ID_NL = :new.ID_NL;
+    END IF;
+    
+    IF DELETING THEN    
+        UPDATE Kho SET SLTon = SLTon + :old.SoLuong WHERE Kho.ID_NL = :old.ID_NL;
+    END IF;
+END;
+/
+--Trigger khi them mot Nguyen Lieu moi, them NL do vao Kho
+CREATE OR REPLACE TRIGGER Tg_Kho_ThemNL
+AFTER INSERT ON NguyenLieu
+FOR EACH ROW
+BEGIN
+    INSERT INTO Kho(ID_NL) VALUES(:new.ID_NL);
+END;
+/
+
+--Procedure
+--Procudure them mot khach hang moi voi cac thong tin tenKH , NgayTG va ID_ND
+CREATE OR REPLACE PROCEDURE KH_ThemKH(tenKH KHACHHANG.TenKH%TYPE, NgayTG KHACHHANG.Ngaythamgia%TYPE,
+ID_ND KHACHHANG.ID_ND%TYPE)
+IS
+    v_ID_KH KHACHHANG.ID_KH%TYPE;
+IS 
+BEGIN
+    --Them ma KH tiep theo
+    SELECT MIN(ID_KH)+1
+    INTO v_ID_KH
+    FROM KHACHHANG
+    WHERE ID_KH + 1 NOT IN(SELECT ID_KH FROM KHACHHANG);
+    
+    INSERT INTO KhachHang(ID_KH,TenKH,Ngaythamgia,ID_ND) VALUES (v_ID_KH,tenKH,TO_DATE(NgayTG,'dd-MM-YYYY'),ID_ND);
+    EXCEPTION WHEN NO_DATA_FOUND THEN
+        RAISE_APPLICATION_ERROR('Thong tin khong hop le');
+END;
+/
+--Procudure them mot nhan vien moi voi cac thong tin tenNV, NgayVL, SDT, Chucvu, ID_NQL, Tinhtrang
+CREATE OR REPLACE PROCEDURE NV_ThemNV(tenNV NHANVIEN.TenNV%TYPE, NgayVL NHANVIEN.NgayVL%TYPE, SDT NHANVIEN.SDT%TYPE,
+Chucvu NHANVIEN.Chucvu%TYPE,ID_NQL NHANVIEN.ID_NQL%TYPE, Tinhtrang NHANVIEN.Tinhtrang%TYPE)
+IS
+    v_ID_NV NHANVIEN.ID_NV%TYPE;
+IS 
+BEGIN
+    --Them ma KH tiep theo
+    SELECT MIN(ID_NV)+1
+    INTO v_ID_NV
+    FROM NHANVIEN
+    WHERE ID_NV + 1 NOT IN(SELECT ID_NV FROM NHANVIEN);
+    
+    INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_NQL,Tinhtrang) 
+    VALUES (v_ID_NV,tenNV,TO_DATE(NgayVL,'dd-MM-YYYY'),SDT,Chucvu,ID_NQL,Tinhtrang);
+    EXCEPTION WHEN NO_DATA_FOUND THEN
+        RAISE_APPLICATION_ERROR('Thong tin khong hop le');
+END;
+/
+-- Procudure xoa mot NHANVIEN voi idNV
+CREATE OR REPLACE PROCEDURE NV_XoaNV(idNV NHANVIEN.ID_NV%TYPE)
+IS
+    v_count NUMBER;
+    idNQL NHANVIEN.ID_NQL%TYPE;
+BEGIN 
+    SELECT COUNT(ID_NV),ID_NQL
+    INTO v_count,ID_NQL
+    FROM NHANVIEN
+    WHERE ID_NV=idNV;
+    
+    IF(v_count>0) THEN
+        IF (id_NV = idNQL) THEN
+            RAISE_APPLICATION_ERROR(-20000,'Khong the xoa QUAN LY');
+        ELSE
+            FOR cur IN (SELECT ID_NK FROM PHIEUNK
+            WHERE ID_NV=idNV
+            )
+            LOOP
+                DELETE FROM CTNK WHERE ID_NK=cur.ID_NK;
+            END LOOP;
+            
+            FOR cur IN (SELECT ID_XK FROM PHIEUXK
+            WHERE ID_NV=idNV
+            )
+            LOOP
+                DELETE FROM CTXK WHERE ID_XK=cur.ID_XK;
+            END LOOP;
+            
+            DELETE FROM PHIEUNK WHERE ID_NV=idNV;
+            DELETE FROM PHIEUNK WHERE ID_NV=idNV;
+            DELETE FROM NHANVIEN WHERE ID_NV=idNV;
+        END IF;
+    ELSE 
+        RAISE_APPLICATION_ERROR(-20000,'Nhan vien khong ton tai');
+    END IF;
+END;
+/
+-- Procudure xoa mot KHACHHANG voi idKH
+CREATE OR REPLACE PROCEDURE KH_XoaKH(idKH KHACHHANG.ID_KH%TYPE)
+IS
+    v_count NUMBER;
+BEGIN 
+    SELECT COUNT(*)
+    INTO v_count
+    FROM KHACHHANG
+    WHERE ID_KH=idKH;
+    
+    IF(v_count>0) THEN
+        FOR cur IN (SELECT ID_HoaDon FROM HOADON 
+        WHERE ID_KH=idKH
+        )
+        LOOP
+            DELETE FROM CTHD WHERE ID_HoaDon=cur.ID_HoaDon;
+        END LOOP;
+        DELETE FROM HOADON WHERE ID_KH=idKH;
+        DELETE FROM KHACHHANG WHERE ID_KH=idKH;
+    ELSE 
+        RAISE_APPLICATION_ERROR(-20000,'Khach hang khong ton tai');
+    END IF;
+END;
+/
+
+-- Procedure xem thong tin KHACHHANG voi thong tin idKH
+CREATE OR REPLACE PROCEDURE KH_XemTT(idKH KHACHHANG.ID_KH%TYPE)
+IS
+BEGIN 
+    FOR cur IN (SELECT TenKH,Ngaythamgia,Doanhso,Diemtichluy,ID_ND
+    FROM KHACHHANG WHERE ID_KH=idKH;
+    )
+    LOOP
+        DBMS_OUTPUT.PUT_LINE('Ma khach hang: '||idKH);
+        DBMS_OUTPUT.PUT_LINE('Ten khach hang: '||cur.TenKH);
+        DBMS_OUTPUT.PUT_LINE('Ngay tham gia: '||TO_CHAR(cur.Ngaythamgia,'dd-MM-YYYY');
+        DBMS_OUTPUT.PUT_LINE('Doanh so: '||cur.Doanhso);
+        DBMS_OUTPUT.PUT_LINE('Diemtichluy: '||cur.Diemtichluy);
+        DBMS_OUTPUT.PUT_LINE('Ma nguoi dung: '||cur.ID_ND);
+        
+        EXCEPTION WHEN NO_DATA_FOUND THEN
+             RAISE_APPLICATION_ERROR(-20000,'Khach hang khong ton tai');
+    END LOOP;
+END;
+/
+-- Procedure xem thong tin NHANVIEN voi thong tin idNV
+CREATE OR REPLACE PROCEDURE NV_XemTT(idNV NHANVIEN.ID_NV%TYPE)
+IS
+BEGIN 
+    FOR cur IN (SELECT TenKH,NgayVL,SDT,Chucvu,ID_NQL   
+    FROM NHANVIEN WHERE ID_NV=idNV;
+    )
+    LOOP
+        DBMS_OUTPUT.PUT_LINE('Ma nhan vien: '||idNV);
+        DBMS_OUTPUT.PUT_LINE('Ten nhan vien: '||cur.TenNV);
+        DBMS_OUTPUT.PUT_LINE('Ngay vao lam: '||TO_CHAR(cur.NgayVL,'dd-MM-YYYY');
+        DBMS_OUTPUT.PUT_LINE('Chuc vu: '||cur.Chucvu);
+        DBMS_OUTPUT.PUT_LINE('Ma nguoi quan ly: '||cur.ID_NQL);
+        
+        EXCEPTION WHEN NO_DATA_FOUND THEN
+             RAISE_APPLICATION_ERROR(-20000,'Nhan vien khong ton tai');
+    END LOOP;
+END;
+/
+
+-- Procedure liet ke danh sach hoa don tu ngay A den ngay B
+CREATE OR REPLACE PROCEDURE DS_HoaDon_tuAdenB(fromA DATE, toB DATE)
+IS
+BEGIN 
+    FOR cur IN (SELECT ID_HOADON,ID_KH,ID_BAN,NGAYHD,TIENMONAN,TIENGIAM,TONGTIEN,TRANGTHAI   
+    FROM HOADON WHERE NGAYHD BETWEEN fromA AND (toB +1);
+    )
+    LOOP
+        DBMS_OUTPUT.PUT_LINE('Ma hoa don: '||cur.ID_HOADON);
+        DBMS_OUTPUT.PUT_LINE('Ma khach hang: '||cur.ID_KH);
+        DBMS_OUTPUT.PUT_LINE('Ma ban: '||cur.ID_BAN);
+        DBMS_OUTPUT.PUT_LINE('Ngay hoa don: '||TO_CHAR(cur.NgayHD,'dd-MM-YYYY');
+        DBMS_OUTPUT.PUT_LINE('Tien mon an: '||cur.TIENMONAN);
+        DBMS_OUTPUT.PUT_LINE('Tien giam: '||cur.TIENGIAM);
+        DBMS_OUTPUT.PUT_LINE('Tong tien: '||cur.TONGTIEN);
+        DBMS_OUTPUT.PUT_LINE('Trang thai: '||cur.TRANGTHAI);
+        
+        EXCEPTION WHEN NO_DATA_FOUND THEN
+             RAISE_APPLICATION_ERROR(-20000,'Khong co hoa don nao');
+    END LOOP;
+END;
+/
+-- Procedure liet ke danh sach phieu nhap kho tu ngay A den ngay B
+CREATE OR REPLACE PROCEDURE DS_PhieuNK_tuAdenB(fromA DATE, toB DATE)
+IS
+BEGIN 
+    FOR cur IN (SELECT ID_NK,ID_NV,NGAYNK,TONGTIEN  
+    FROM PHIEUNK WHERE NGAYNK BETWEEN fromA AND (toB +1);
+    )
+    LOOP
+        DBMS_OUTPUT.PUT_LINE('Ma nhap kho: '||cur.ID_NK);
+        DBMS_OUTPUT.PUT_LINE('Ma nhan vien: '||cur.ID_NV);
+        DBMS_OUTPUT.PUT_LINE('Ngay nhap kho: '||TO_CHAR(cur.NGAYNK,'dd-MM-YYYY');
+        DBMS_OUTPUT.PUT_LINE('Tong tien: '||cur.TONGTIEN);
+        
+        EXCEPTION WHEN NO_DATA_FOUND THEN
+             RAISE_APPLICATION_ERROR(-20000,'Khong co hoa don nao');
+    END LOOP;
+END;
+/
+
+-- Procedure liet ke danh sach phieu xuat kho tu ngay A den ngay B
+CREATE OR REPLACE PROCEDURE DS_PhieuXK_tuAdenB(fromA DATE, toB DATE)
+IS
+BEGIN 
+    FOR cur IN (SELECT ID_XK,ID_NV,NGAYXK
+    FROM PHIEUXK WHERE NGAYXK BETWEEN fromA AND (toB +1);
+    )
+    LOOP
+        DBMS_OUTPUT.PUT_LINE('Ma xuat kho: '||cur.ID_XK);
+        DBMS_OUTPUT.PUT_LINE('Ma nhan vien: '||cur.ID_NV);
+        DBMS_OUTPUT.PUT_LINE('Ngay xuat kho: '||TO_CHAR(cur.NGAYXK,'dd-MM-YYYY');
+        
+        EXCEPTION WHEN NO_DATA_FOUND THEN
+             RAISE_APPLICATION_ERROR(-20000,'Khong co hoa don nao');
+    END LOOP;
+END;
+/
+-- Procedure xem chi tiet hoa don cua 1 hoa don
+CREATE OR REPLACE PROCEDURE HD_XemCTHD(idHD HOADON.ID_HOADON%TYPE)
+IS
+BEGIN 
+    FOR cur IN (SELECT ID_MONAN,SOLUONG,THANHTIEN
+    FROM CTHD WHERE ID_HOADON=idHD;
+    )
+    LOOP
+        DBMS_OUTPUT.PUT_LINE('Ma mon an: '||cur.ID_MONAN);
+        DBMS_OUTPUT.PUT_LINE('So luong: '||cur.SOLUONG);
+        DBMS_OUTPUT.PUT_LINE('Thanh tien: '||cur.THANHTIEN);
+        
+        EXCEPTION WHEN NO_DATA_FOUND THEN
+             RAISE_APPLICATION_ERROR(-20000,'Khong co chi tiet hoa don nao');
+    END LOOP;
+END;
+/
+-- Procedure giam So Luong cua Voucher di 1 khi KH doi Voucher
+CREATE OR REPLACE PROCEDURE Voucher_GiamSL(code Voucher.Code_Voucher%TYPE)
+IS
+    v_count NUMBER;
+BEGIN
+    SELECT COUNT(*)
+    INTO v_count
+    FROM Voucher
+    WHERE Code_Voucher=code;
+    IF(v_count>0) THEN
+        UPDATE Voucher SET SoLuong = SoLuong - 1 WHERE Code_Voucher=code;
+    ELSE 
+        RAISE_APPLICATION_ERROR(-20000,'Voucher khong ton tai');
+    END IF;
+END;
+/
+
+-- Procedure giam Diem tich luy cua KH khi doi Voucher
+CREATE OR REPLACE PROCEDURE KH_TruDTL(ID KHACHHANG.ID_KH%TYPE,diemdoi NUMBER)
+IS
+    v_count NUMBER;
+BEGIN 
+    SELECT COUNT(*)
+    INTO v_count
+    FROM KHACHHANG
+    WHERE ID_KH=ID;
+    IF(v_count>0) THEN
+        UPDATE KHACHHANG SET Diemtichluy = Diemtichluy - diemdoi WHERE ID_KH=ID;
+    ELSE 
+        RAISE_APPLICATION_ERROR(-20000,'Khach hang khong ton tai');
+    END IF;
+END;
+/
+
+--Fuction 
+--Fuction Tinh doanh thu hoa don theo ngay
+CREATE OR REPLACE FUNCTION DoanhThuHD_theoNgay (ngHD DATE)
+RETURN NUMBER
+IS 
+    v_Doanhthu NUMBER;
+BEGIN
+    SELECT SUM(Tongtien)
+    INTO v_Doanhthu
+    FROM HOADON 
+    WHERE NGAYHD=ngHD;
+    
+    v_Doanhthu := NVL(v_Doanhthu,0);
+    RETURN v_Doanhthu;
+END;
+/
+--Fuction Tinh chi phi nhap kho theo ngay
+CREATE OR REPLACE FUNCTION ChiPhiNK_theoNgay (ngNK DATE)
+RETURN NUMBER
+IS 
+    v_Chiphi NUMBER;
+BEGIN
+    SELECT SUM(Tongtien)
+    INTO v_Chiphi
+    FROM PHIEUNK 
+    WHERE NGAYNK=ngNK;
+    
+    v_Chiphi := NVL(v_Chiphi,0);
+    RETURN v_Chiphi;
+END;
+/
+--Fuction Tinh doanh so trung binh cua x KHACHHANG co doanh so cao nhat
+CREATE OR REPLACE FUNCTION DoanhsoTB_TOPxKH(x INT)
+RETURN DECIMAL
+IS 
+   v_avg DECIMAL;
+BEGIN
+    SELECT AVG(Doanhso)
+    INTO v_avg
+    FROM (
+        SELECT Doanhso 
+        FROM KHACHHANG
+        ORDER BY Doanhso DESC
+        FETCH FIRST x ROWS ONLY
+        );
+    RETURN v_avg;
+END;
+/
+
+--Fuction Tinh so luong KHACHANG moi trong thang chi dinh cua nam co it nhat mot hoa don co tri gia tren x vnd
+CREATE OR REPLACE FUNCTION SL_KH_Moi(thang NUMBER, nam NUMBER, trigiaHD NUMBER)
+RETURN NUMBER
+IS 
+   v_count NUMBER;
+BEGIN
+    SELECT COUNT(ID_KH)
+    INTO v_count;
+    FROM KHACHHANG
+    WHERE EXTRACT(MONTH FROM Ngaythamgia)=thang AND EXTRACT(YEAR FROM Ngaythamgia)
+    AND EXISTS(SELECT *
+               FROM HOADON 
+               WHERE HOADON.ID_KH=KHACHHANG.ID_KH AND TONGTIEN>trigiaHD
+               );
+    RETURN v_count;          
+END;
+/
+    
+--Fuction Tinh tien mon an duoc giam khi them mot CTHD moi
+CREATE OR REPLACE FUNCTION CTHD_Tinhtiengiam(Tongtien Number,Code Voucher.Code_Voucher%TYPE)
+RETURN NUMBER
+IS 
+    Tiengiam NUMBER;
+    v_phantram NUMBER;
+BEGIN
+    SELECT Phantram
+    INTO v_Phantram
+    FROM Voucher
+    WHERE Code_Voucher=Code;
+    Tiengiam := ROUND(Tongtien*v_Phantram/100);
+    RETURN Tiengiam;
+END;
+/
 --Them data
+ALTER SESSION SET NLS_DATE_FORMAT = 'dd-MM-YYYY';
+--Them data cho Bang NguoiDung
+--Nhan vien
+INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (100,'NVHoangViet@gmail.com','123','Verified','Quan Ly');
+INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (101,'NVHoangPhuc@gmail.com','123','Verified','Nhan Vien');
+INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (102,'NVAnhHong@gmail.com','123','Verified','Nhan Vien Kho');
+INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (103,'NVQuangDinh@gmail.com','123','Verified','Nhan Vien');
+--Khach Hang
+INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (104,'KHThaoDuong@gmail.com','123','Verified','Khach Hang');
+INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (105,'KHTanHieu@gmail.com','123','Verified','Khach Hang');
+INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (106,'KHQuocThinh@gmail.com','123','Verified','Khach Hang');
+INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (107,'KHNhuMai@gmail.com','123','Verified','Khach Hang');
+INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (108,'KHBichHao@gmail.com','123','Verified','Khach Hang');
+INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (109,'KHMaiQuynh@gmail.com','123','Verified','Khach Hang');
+INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (110,'KHMinhQuang@gmail.com','123','Verified','Khach Hang');
+INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (111,'KHThanhHang@gmail.com','123','Verified','Khach Hang');
+INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (112,'KHThanhNhan@gmail.com','123','Verified','Khach Hang');
+INSERT INTO NguoiDung(ID_ND,Email,MatKhau,Trangthai,Vaitro) VALUES (113,'KHPhucNguyen@gmail.com','123','Verified','Khach Hang');
+
+--Them data cho bang Nhan Vien
+ALTER SESSION SET NLS_DATE_FORMAT = 'dd-MM-YYYY';
+--Co tai khoan
+INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_ND,ID_NQL,Tinhtrang) VALUES (100,'Nguyen Hoang Viet','10/05/2023','0848044725','Quan ly',100,100,'Dang lam viec');
+INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_ND,ID_NQL,Tinhtrang) VALUES (101,'Nguyen Hoang Phuc','20/05/2023','0838033334','Tiep tan',101,100,'Dang lam viec');
+INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_ND,ID_NQL,Tinhtrang) VALUES (102,'Le Thi Anh Hong','19/05/2023','0838033234','Kho',102,100,'Dang lam viec');
+INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_ND,ID_NQL,Tinhtrang) VALUES (103,'Ho Quang Dinh','19/05/2023','0838033234','Tiep tan',103,100,'Dang lam viec');
+--Khong co tai khoan
+INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_NQL,Tinhtrang) VALUES (104,'Ha Thao Duong','10/05/2023','0838033232','Phuc vu',100,'Dang lam viec');
+INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_NQL,Tinhtrang) VALUES (105,'Nguyen Quoc Thinh','11/05/2023','0838033734','Phuc vu',100,'Dang lam viec');
+INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_NQL,Tinhtrang) VALUES (106,'Truong Tan Hieu','12/05/2023','0838033834','Phuc vu',100,'Dang lam viec');
+INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_NQL,Tinhtrang) VALUES (107,'Nguyen Thai Bao','10/05/2023','0838093234','Phuc vu',100,'Dang lam viec');
+INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_NQL,Tinhtrang) VALUES (108,'Tran Nhat Khang','11/05/2023','0838133234','Thu ngan',100,'Dang lam viec');
+INSERT INTO NhanVien(ID_NV,TenNV,NgayVL,SDT,Chucvu,ID_NQL,Tinhtrang) VALUES (109,'Nguyen Ngoc Luong','12/05/2023','0834033234','Bep',100,'Dang lam viec');
+
+--Them data cho bang KhachHang
+INSERT INTO KhachHang(ID_KH,TenKH,Ngaythamgia,ID_ND) VALUES (100,'Ha Thao Duong','10/05/2023',104);
+INSERT INTO KhachHang(ID_KH,TenKH,Ngaythamgia,ID_ND) VALUES (101,'Truong Tan Hieu','10/05/2023',105);
+INSERT INTO KhachHang(ID_KH,TenKH,Ngaythamgia,ID_ND) VALUES (102,'Nguyen Quoc Thinh','10/05/2023',106);
+INSERT INTO KhachHang(ID_KH,TenKH,Ngaythamgia,ID_ND) VALUES (103,'Tran Nhu Mai','10/05/2023',107);
+INSERT INTO KhachHang(ID_KH,TenKH,Ngaythamgia,ID_ND) VALUES (104,'Nguyen Thi Bich Hao','10/05/2023',108);
+INSERT INTO KhachHang(ID_KH,TenKH,Ngaythamgia,ID_ND) VALUES (105,'Nguyen Mai Quynh','11/05/2023',109);
+INSERT INTO KhachHang(ID_KH,TenKH,Ngaythamgia,ID_ND) VALUES (106,'Hoang Minh Quang','11/05/2023',110);
+INSERT INTO KhachHang(ID_KH,TenKH,Ngaythamgia,ID_ND) VALUES (107,'Nguyen Thanh Hang','12/05/2023',111);
+INSERT INTO KhachHang(ID_KH,TenKH,Ngaythamgia,ID_ND) VALUES (108,'Nguyen Ngoc Thanh Nhan','11/05/2023',112);
+INSERT INTO KhachHang(ID_KH,TenKH,Ngaythamgia,ID_ND) VALUES (109,'Hoang Thi Phuc Nguyen','12/05/2023',113);
+
+--Them data cho bang MonAn
 --Aries
 insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(1,'DUI CUU NUONG XE NHO', 250000,'Aries','Dang kinh doanh');
 insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(2,'BE SUON CUU NUONG GIAY BAC MONG CO', 230000,'Aries','Dang kinh doanh');
@@ -264,30 +1079,7 @@ insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(87,'KARIN:Sashim
 insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(88,'KEIKO:Sashimi Ca Hoi', 199000,'Pisces','Dang kinh doanh');
 insert into MonAn(ID_MonAn,TenMon,Dongia,Loai,TrangThai) values(89,'CHIYO:Sashimi Bung Ca Hoi', 219000,'Pisces','Dang kinh doanh');
 
-
-
-
---Tao bang Ban
---drop table Ban;
-create table Ban(
-    ID_Ban NUMBER(8,0),
-    TenBan varchar2(50), 
-    Vitri varchar2(50), 
-    Trangthai varchar2(50)
-);
---Them Check Constraint
-alter table Ban
-    add constraint Ban_TenBan_NNULL check ('TenBan' is not null)
-    add constraint Ban_Vitri_NNULL check ('Vitri' is not null)
-    add constraint Ban_Trangthai_Ten check (Trangthai in ('Con trong','Dang dung bua','Da dat truoc'));
-
-
---Them khoa chinh
-alter table Ban
-    add constraint Ban_PK PRIMARY KEY (ID_Ban);
-
-
---Them data cho Ban
+--Them data cho bang Ban
 --Tang 1
 insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(100,'Ban T1.1','Tang 1','Con trong');
 insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(101,'Ban T1.2','Tang 1','Con trong');
@@ -328,32 +1120,7 @@ insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(133,'Ban T3.1','Tang 3','C
 insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(134,'Ban T3.1','Tang 3','Con trong');
 insert into Ban(ID_Ban,TenBan,Vitri,Trangthai) values(135,'Ban T3.1','Tang 3','Con trong');
 
-
---Tao bang Voucher
-
---Tao bang Voucher
---drop table Voucher;
-
-create table Voucher(
-    Code_Voucher varchar2(10),
-    Mota varchar2(50),
-    Phantram number(3,0),
-    LoaiMA varchar2(50),
-    SoLuong number(3,0),
-    Diem number(8,0)
-);
---Them Check Constraint
-alter table Voucher
-    add constraint V_Code_NNULL check ('Code_Voucher' is not null)
-    add constraint V_Mota_NNULL check ('Mota' is not null)
-    add constraint V_Phantram_NNULL check (Phantram > 0 AND Phantram <= 100)
-    add constraint V_LoaiMA_Thuoc check (LoaiMA in ('All','Aries','Taurus','Gemini','Cancer','Leo','Virgo'
-                                                 ,'Libra','Scorpio','Sagittarius','Capricorn','Aquarius','Pisces'));
-
----Them khoa chinh
-alter table Voucher
-    add constraint Voucher_PK PRIMARY KEY (Code_Voucher);
-    
+--Them data cho bang Voucher
 insert into Voucher(Code_Voucher, Phantram,LoaiMA,SoLuong,Diem) values ('loQy','20% off for Aries Menu',20,'Aries',10,200);
 insert into Voucher(Code_Voucher, Phantram,LoaiMA,SoLuong,Diem) values ('pCfI','30% off for Taurus Menu',30,'Taurus',5,300);
 insert into Voucher(Code_Voucher, Phantram,LoaiMA,SoLuong,Diem) values ('pApo','20% off for Gemini Menu',20,'Gemini',10,200);
@@ -368,509 +1135,7 @@ insert into Voucher(Code_Voucher, Phantram,LoaiMA,SoLuong,Diem) values ('WHLm','
 insert into Voucher(Code_Voucher, Phantram,LoaiMA,SoLuong,Diem) values ('GTsC','20% off for Leo Menu',20,'Leo',0,200);
 
 
---Tao bang HoaDon
---drop table HoaDon;
-
-create table HoaDon(
-    ID_HoaDon NUMBER(8,0),
-    ID_KH number(8,0),
-    ID_Ban number(8,0),
-    NgayHD date,
-    TienMonAn number(8,0),
-    Code_Voucher varchar2(10),
-    TienGiam number(8,0),
-    Tongtien number(10,0),
-    Trangthai varchar2(50)
-);
-
---Them Check Constraint
-alter table HoaDon
-    add constraint HD_NgayHD_NNULL check ('TenMon' is not null)
-    add constraint HD_TrangThai check (Trangthai in ('Chua thanh toan','Da thanh toan'));
-
---Them khoa chinh
-alter table HoaDon
-    add constraint HD_PK PRIMARY KEY (ID_HoaDon);
-
-ALTER TABLE HoaDon
- ADD CONSTRAINT HD_fk_idKH FOREIGN KEY 
- (ID_KH) REFERENCES KhachHang(ID_KH)
- ADD CONSTRAINT HD_fk_idBan FOREIGN KEY 
- (ID_Ban) REFERENCES Ban(ID_Ban);
- 
-
---Tao bang CTHD
---drop table CTHD;
-create table CTHD(
-    ID_HoaDon NUMBER(8,0),
-    ID_MonAn number(8,0),
-    SoLuong number(3,0),
-    Thanhtien number(10,0)
-);
-
---Them Check Constraint
-alter table CTHD
-    add constraint CTHD_SoLuong_NNULL check ('SoLuong' is not null);
-
---Them khoa chinh
-alter table CTHD
-    add constraint CTHD_PK PRIMARY KEY (ID_HoaDon,ID_MonAn);
-
-ALTER TABLE CTHD
- ADD CONSTRAINT CTHD_fk_idHD FOREIGN KEY 
- (ID_HoaDon) REFERENCES HoaDon(ID_HoaDon)
- ADD CONSTRAINT CTHD_fk_idMonAn FOREIGN KEY 
- (ID_MonAn) REFERENCES MonAn(ID_MonAn);
-
- 
---Tao bang Nguyenlieu
---drop table NguyenLieu;
-create table NguyenLieu(
-    ID_NL NUMBER(8,0),
-    TenNL VARCHAR2(50), 
-    Dongia NUMBER(8,0), 
-    Donvitinh VARCHAR2(50)
-);
---Them Check Constraint
-alter table NguyenLieu
-    add constraint NL_TenNL_NNULL check ('TenNL' is not null)
-    add constraint NL_Dongia_NNULL check ('Dongia' is not null)
-    add constraint NL_DVT_Thuoc check (Donvitinh in ('g','kg','ml','l'));
-
---Them khoa chinh
-alter table NguyenLieu
-    add constraint NL_PK PRIMARY KEY (ID_NL);
-
---Them data
-INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(100,'Thit ga',40000,'kg');
-INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(101,'Thit heo',50000,'kg');
-INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(102,'Thit bo',80000,'kg');
-INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(103,'Tom',100000,'kg');
-INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(104,'Ca hoi',500000,'kg');
-INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(105,'Gao',40000,'kg');
-INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(106,'Sua tuoi',40000,'l');
-INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(107,'Bot mi',20000,'kg');
-INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(108,'Dau ca hoi',1000000,'l');
-INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(109,'Dau dau nanh',150000,'l');
-INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(110,'Muoi',20000,'kg');
-INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(111,'Duong',20000,'kg');
-INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(112,'Hanh tay',50000,'kg');
-INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(113,'Toi',30000,'kg');
-INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(114,'Dam',50000,'l');
-INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(115,'Thit de',130000,'kg');
---Tao bang Kho
---drop table Kho;
-create table Kho(
-    ID_NL NUMBER(8,0),
-    SLTon NUMBER(3,0) DEFAULT 0
-);
---Them Check Constraint
-
-
---Them khoa chinh
-ALTER TABLE Kho
-    ADD CONSTRAINT Kho_pk PRIMARY KEY (ID_NL);
-
---Them khoa ngoai
-ALTER TABLE Kho
- ADD CONSTRAINT Kho_fk_idNL FOREIGN KEY 
- (ID_NL) REFERENCES NguyenLieu(ID_NL);
- 
---Khoi tao du lieu ban dau cho kho
-BEGIN
-    Kho_Khoitao();
-END;
-
---Tao bang PhieuNK
---drop table PhieuNK;
-create table PhieuNK(
-    ID_NK NUMBER(8,0),
-    ID_NV number(8,0),
-    NgayNK date,
-    Tongtien number(10,0) DEFAULT 0
-);
-
---Them Check Constraint
-alter table PhieuNK
-    add constraint PNK_NgayNK_NNULL check ('NgayNK' is not null);
-
---Them khoa chinh
-alter table PhieuNK
-    add constraint PNK_PK PRIMARY KEY (ID_NK);
-
-ALTER TABLE PhieuNK
- ADD CONSTRAINT PNK_fk_idNV FOREIGN KEY 
- (ID_NV) REFERENCES NhanVien(ID_NV);
-
-
---Them bang CTNK
---drop table CTNK;
-create table CTNK(
-    ID_NK NUMBER(8,0),
-    ID_NL number(8,0),
-    SoLuong number(3,0),
-    Thanhtien number(10,0)
-);
-
---Them Check Constraint
-alter table CTNK
-    add constraint CTNK_SL_NNULL check ('SoLuong' is not null);
-
---Them khoa chinh
-alter table CTNK
-    add constraint CTNK_PK PRIMARY KEY (ID_NK,ID_NL);
-    
---Them khoa ngoai
-ALTER TABLE CTNK
- ADD CONSTRAINT CTNK_fk_idNK FOREIGN KEY 
- (ID_NK) REFERENCES PhieuNK(ID_NK)
- ADD CONSTRAINT CTNK_fk_idNL FOREIGN KEY 
- (ID_NL) REFERENCES NguyenLieu(ID_NL);
-
-
---Tao bang PhieuXK
---drop table PhieuXK;
-create table PhieuXK(
-    ID_XK NUMBER(8,0),
-    ID_NV number(8,0),
-    NgayXK date
-);
-
---Them Check Constraint
-alter table PhieuXK
-    add constraint PXK_NgayXK_NNULL check ('NgayXK' is not null);
-
---Them khoa chinh
-alter table PhieuXK
-    add constraint PXK_PK PRIMARY KEY (ID_XK);
-
-ALTER TABLE PhieuXK
- ADD CONSTRAINT PXK_fk_idNV FOREIGN KEY 
- (ID_NV) REFERENCES NhanVien(ID_NV);
-
-
---Them bang CTXK
---drop table CTXK;
-create table CTXK(
-    ID_XK NUMBER(8,0),
-    ID_NL number(8,0),
-    SoLuong number(3,0)
-);
-
---Them Check Constraint
-alter table CTXK
-    add constraint CTXK_SL_NNULL check ('SoLuong' is not null);
-
---Them khoa chinh
-alter table CTXK
-    add constraint CTXK_PK PRIMARY KEY (ID_XK,ID_NL);
-
---Them khoa ngoai
-ALTER TABLE CTXK
- ADD CONSTRAINT CTNK_fk_idXK FOREIGN KEY 
- (ID_XK) REFERENCES PhieuXK(ID_XK)
- ADD CONSTRAINT CTXK_fk_idNL FOREIGN KEY 
- (ID_NL) REFERENCES NguyenLieu(ID_NL);
-
-
---- Tao Trigger
-
---  Trigger Thanh tien o CTHD bang SoLuong x Dongia cua mon an do
-
-CREATE OR REPLACE TRIGGER CTHD_Thanhtien
-BEFORE INSERT OR UPDATE OF SoLuong ON CTHD
-FOR EACH ROW
-DECLARE 
-    gia MonAn.DonGia%TYPE;
-BEGIN
-    SELECT DonGia
-    INTO gia
-    FROM MonAn
-    WHERE MonAn.ID_MonAn = :new.ID_MonAn;
-    
-    :new.ThanhTien := :new.SoLuong * gia;
-END;
-
---- Trigger Tien mon an o Hoa Don bang tong thanh tien o CTHD
-CREATE OR REPLACE TRIGGER HD_TienMonAn
-AFTER INSERT OR UPDATE OR DELETE ON CTHD
-FOR EACH ROW
-BEGIN
-    IF INSERTING THEN    
-        UPDATE HoaDon SET TienMonAn = TienMonAn + :new.ThanhTien WHERE HoaDon.ID_HoaDon=:new.ID_HoaDon;
-    END IF;
-    
-    IF UPDATING THEN    
-        UPDATE HoaDon SET TienMonAn = TienMonAn + :new.ThanhTien - :old.ThanhTien WHERE HoaDon.ID_HoaDon=:new.ID_HoaDon;
-    END IF;
-    
-    IF DELETING THEN    
-        UPDATE HoaDon SET TienMonAn = TienMonAn - :old.ThanhTien WHERE HoaDon.ID_HoaDon=:old.ID_HoaDon;
-    END IF;
-END;
-
---Trigger Tien giam o Hoa Don = tong thanh tien cua mon An duoc giam  x Phantram
-CREATE OR REPLACE TRIGGER HD_TienGiam
-AFTER INSERT OR UPDATE OR DELETE ON CTHD
-FOR EACH ROW
-DECLARE 
-    v_code HoaDon.Code_Voucher%TYPE;
-    v_loaiMA Voucher.LoaiMA%TYPE;
-    MA_Loai MonAn.Loai%TYPE;
-BEGIN
-    v_code:=NULL;
---Tim Code Voucher, Loai mon an duoc Ap dung Voucher tu bang Voucher
-    IF (INSERTING OR UPDATING) THEN
-        SELECT HoaDon.Code_Voucher,Voucher.LoaiMA 
-        INTO v_code,v_LoaiMA
-        FROM HoaDon
-        LEFT JOIN Voucher ON Voucher.Code_Voucher = HoaDon.Code_Voucher
-        WHERE ID_HoaDon=:new.ID_HoaDon;
-    --Tim loai mon an cua Mon an vua duoc them vao CTHD   
-        SELECT Loai
-        INTO MA_Loai
-        FROM MonAn 
-        WHERE ID_MonAn = :new.ID_MonAn;
-    END IF;
-    
-    IF (DELETING) THEN
-        SELECT HoaDon.Code_Voucher,Voucher.LoaiMA 
-        INTO v_code,v_LoaiMA
-        FROM HoaDon
-        LEFT JOIN Voucher ON Voucher.Code_Voucher = HoaDon.Code_Voucher
-        WHERE ID_HoaDon=:old.ID_HoaDon;
-    --Tim loai mon an cua Mon an vua duoc them vao CTHD   
-        SELECT Loai
-        INTO MA_Loai
-        FROM MonAn 
-        WHERE ID_MonAn = :old.ID_MonAn;
-    END IF;
-    
-    IF(v_code IS NOT NULL) THEN
-        IF(v_LoaiMA='All' OR v_LoaiMA=MA_Loai) THEN 
-            IF INSERTING THEN    
-                UPDATE HoaDon SET TienGiam = TienGiam + Tinhtiengiam(:new.ThanhTien,v_code) WHERE HoaDon.ID_HoaDon=:new.ID_HoaDon;
-            END IF;
-            
-            IF UPDATING THEN    
-                UPDATE HoaDon SET TienGiam = TienGiam + Tinhtiengiam(:new.ThanhTien,v_code) - Tinhtiengiam(:old.ThanhTien,v_code) WHERE HoaDon.ID_HoaDon=:new.ID_HoaDon;
-            END IF;
-            
-            IF DELETING THEN    
-                UPDATE HoaDon SET TienGiam = TienGiam - Tinhtiengiam(:old.ThanhTien,v_code) WHERE HoaDon.ID_HoaDon=:old.ID_HoaDon;
-            END IF;
-        END IF;
-    END IF;
-END;
-
-
--- Tong tien o Hoa Don = Tien mon an - Tien giam
-CREATE OR REPLACE TRIGGER HD_Tongtien
-AFTER INSERT OR UPDATE OF TienMonAn,TienGiam ON HoaDon
-BEGIN
-    UPDATE HoaDon SET Tongtien= TienMonAn - TienGiam;
-END;
-
-
--- Khi cap nhat Code_Voucher o HoaDon, Tinh tien giam theo thong tin cua Voucher do va giam Diem tich luy cua KH
-CREATE OR REPLACE TRIGGER HD_DoiVoucher
-BEFORE UPDATE OF Code_Voucher ON HoaDon
-FOR EACH ROW
-DECLARE 
-    TongtienLoaiMonAnduocgiam number(8,0);
-    v_Diemdoi number;
-    v_Phantram number;
-    v_LoaiMA Voucher.LoaiMA%TYPE;
-    
-BEGIN
-    IF(:new.Code_Voucher is not null) THEN
-        SELECT Diem,Phantram,LoaiMA
-        INTO v_Diemdoi,v_Phantram,v_LoaiMA
-        FROM Voucher
-        WHERE Code_Voucher=:new.Code_Voucher;
-        
-        KH_TruDTL(:new.ID_KH,v_diemdoi);
-        Voucher_GiamSL(:new.Code_Voucher);
-        
-        IF(v_LoaiMA='All') THEN
-            TongtienLoaiMonAnduocgiam := :new.TienMonAn;
-        ELSE 
-            SELECT SUM(Thanhtien)
-            INTO TongtienLoaiMonAnduocgiam
-            FROM CTHD 
-            JOIN MonAn ON MonAn.ID_MonAn = CTHD.ID_MonAn
-            WHERE ID_HoaDon = :new.ID_HoaDon AND LOAI = v_LoaiMA;
-        END IF;
-        
-        :new.Tiengiam := ROUND(TongtienLoaiMonAnduocgiam*v_Phantram/100);
-    ELSE
-        :new.Tiengiam := 0;
-    END IF;
-END;
-
---Trigger Doanh so cua Khach hang bang tong tien cua tat ca hoa don co trang thai 'Da thanh toan' 
---cua khach hang do
--- Diem tich luy cua Khach hang duoc tinh bang 0.005% Tong tien cua hoa don (1.000.000d tuong duong 50 diem)
-CREATE OR REPLACE TRIGGER KH_DoanhsovaDTL
-AFTER UPDATE OF Trangthai ON HoaDon
-FOR EACH ROW
-BEGIN
-    UPDATE KhachHang SET Doanhso = Doanhso + :new.Tongtien WHERE ID_KH=:new.ID_KH;
-    UPDATE KhachHang SET Diemtichluy = Diemtichluy + ROUND(:new.Tongtien*0.00005) WHERE ID_KH=:new.ID_KH;
-END;
-
---Trigger khi khach hang them hoa don moi, trang thai ban chuyen tu 'Con trong' sang 'Dang dung bua'
--- Khi trang thai don hang tro thanh 'Da thanh toan' trang thai ban chuyen tu 'Dang dung bua' sang 'Con trong'
-
-CREATE OR REPLACE TRIGGER Tg_TrangthaiBan
-AFTER INSERT OR UPDATE OF Trangthai ON HoaDon
-FOR EACH ROW
-BEGIN
-    IF(:new.Trangthai='Chua thanh toan') THEN 
-        UPDATE Ban SET Trangthai='Dang dung bua' WHERE ID_Ban=:new.ID_Ban;
-    ELSE 
-        UPDATE Ban SET Trangthai='Con trong' WHERE ID_Ban=:new.ID_Ban;
-    END IF; 
-END;
-
---  Trigger Thanh tien o CTNK bang SoLuong x Dongia cua nguyen lieu do
-
-CREATE OR REPLACE TRIGGER CTNK_Thanhtien
-BEFORE INSERT OR UPDATE OF SoLuong ON CTNK
-FOR EACH ROW
-DECLARE 
-    gia NguyenLieu.DonGia%TYPE;
-BEGIN
-    SELECT DonGia
-    INTO gia
-    FROM NguyenLieu
-    WHERE NguyenLieu.ID_NL = :new.ID_NL;
-    
-    :new.ThanhTien := :new.SoLuong * gia;
-    
-END;
-
---Trigger Tong tien o PhieuNK bang tong thanh tien cua CTNK
-CREATE OR REPLACE TRIGGER PNK_Tongtien
-AFTER INSERT OR UPDATE OR DELETE ON CTNK
-FOR EACH ROW
-BEGIN
-    IF INSERTING THEN    
-        UPDATE PhieuNK SET Tongtien = Tongtien + :new.ThanhTien WHERE PhieuNK.ID_NK = :new.ID_NK;
-    END IF;
-    
-    IF UPDATING THEN    
-        UPDATE PhieuNK SET Tongtien = Tongtien + :new.ThanhTien - :old.ThanhTien WHERE PhieuNK.ID_NK = :new.ID_NK;
-    END IF;
-    
-    IF DELETING THEN    
-        UPDATE PhieuNK SET Tongtien = Tongtien - :old.ThanhTien WHERE PhieuNK.ID_NK = :old.ID_NK;
-    END IF;
-END;
-
---Trigger khi them CTNK tang So luong ton cua nguyen lieu trong kho
-CREATE OR REPLACE TRIGGER Kho_ThemSLTon
-AFTER INSERT OR DELETE OR UPDATE OF SoLuong ON CTNK
-FOR EACH ROW
-BEGIN
-    IF INSERTING THEN    
-        UPDATE Kho SET SLTon = SLTon + :new.SoLuong WHERE Kho.ID_NL = :new.ID_NL;
-    END IF;
-    
-    IF UPDATING THEN    
-        UPDATE Kho SET SLTon = SLTon + :new.SoLuong - :old.SoLuong WHERE Kho.ID_NL = :new.ID_NL;
-    END IF;
-    
-    IF DELETING THEN    
-        UPDATE Kho SET SLTon = SLTon - :old.SoLuong WHERE Kho.ID_NL = :old.ID_NL;
-    END IF;
-END;
-
---Trigger khi them CTXK giam So luong ton cua nguyen lieu trong kho
-CREATE OR REPLACE TRIGGER Kho_GiamSLTon
-AFTER INSERT OR DELETE OR UPDATE OF SoLuong ON CTXK
-FOR EACH ROW
-BEGIN
-    IF INSERTING THEN    
-        UPDATE Kho SET SLTon = SLTon - :new.SoLuong WHERE Kho.ID_NL = :new.ID_NL;
-    END IF;
-    
-    IF UPDATING THEN    
-        UPDATE Kho SET SLTon = SLTon - :new.SoLuong + :old.SoLuong WHERE Kho.ID_NL = :new.ID_NL;
-    END IF;
-    
-    IF DELETING THEN    
-        UPDATE Kho SET SLTon = SLTon + :old.SoLuong WHERE Kho.ID_NL = :old.ID_NL;
-    END IF;
-END;
-
---Trigger khi them mot Nguyen Lieu moi, them NL do vao Kho
-CREATE OR REPLACE TRIGGER Kho_ThemNL
-AFTER INSERT ON NguyenLieu
-FOR EACH ROW
-DECLARE 
-    v_count number;
-BEGIN
-    SELECT COUNT(*)
-    INTO v_count
-    FROM NguyenLieu
-    WHERE ID_NL=:new.ID_NL;
-    IF(v_count>0) THEN
-        INSERT INTO Kho(ID_NL) VALUES(:new.ID_NL);
-    END IF;
-END;
-
-
---Procedure
--- Procedure giam Diem tich luy cua KH khi doi Voucher
-
-CREATE OR REPLACE PROCEDURE KH_TruDTL(ID KHACHHANG.ID_KH%TYPE,diemdoi NUMBER)
-IS 
-BEGIN 
-    UPDATE KHACHHANG SET Diemtichluy = Diemtichluy - diemdoi WHERE ID_KH=ID;
-END;
-
--- Procedure giam So Luong cua Voucher di 1 khi KH doi Voucher
-
-CREATE OR REPLACE PROCEDURE Voucher_GiamSL(code Voucher.Code_Voucher%TYPE)
-IS 
-BEGIN 
-    UPDATE Voucher SET SoLuong = SoLuong - 1 WHERE Code_Voucher=code;
-END;
-
---Procedure khoi tao du lieu ban dau cho Kho
-CREATE OR REPLACE PROCEDURE Kho_Khoitao
-IS 
-BEGIN 
-    FOR cur IN (
-        SELECT ID_NL 
-        FROM NguyenLieu
-    )    
-    LOOP
-        INSERT INTO Kho(ID_NL) VALUES (cur.ID_NL);
-    END LOOP;
-END;
-
---Fuction 
---Fuction Tinh tien mon an duoc giam khi them mot CTHD moi
-CREATE OR REPLACE FUNCTION Tinhtiengiam (Tongtien number,Code Voucher.Code_Voucher%TYPE)
-RETURN NUMBER
-IS 
-    Tiengiam number;
-    v_Phantram number;
-BEGIN
-    SELECT Phantram
-    INTO v_Phantram
-    FROM Voucher
-    WHERE Code_Voucher=Code;
-    Tiengiam := ROUND(Tongtien*v_Phantram/100);
-    RETURN Tiengiam;
-END;
- 
- 
---Them data
-ALTER SESSION SET NLS_DATE_FORMAT = 'dd-MM-YYYY';
---Them data cho HoaDon
+--Them data cho bang HoaDon
 INSERT INTO HoaDon(ID_HoaDon,ID_KH,ID_Ban,NgayHD,TienMonAn,TienGiam,Trangthai) VALUES (101,100,100,'10-1-2023',0,0,'Chua thanh toan');
 INSERT INTO HoaDon(ID_HoaDon,ID_KH,ID_Ban,NgayHD,TienMonAn,TienGiam,Trangthai) VALUES (102,104,102,'15-1-2023',0,0,'Chua thanh toan');
 INSERT INTO HoaDon(ID_HoaDon,ID_KH,ID_Ban,NgayHD,TienMonAn,TienGiam,Trangthai) VALUES (103,105,103,'20-1-2023',0,0,'Chua thanh toan');
@@ -893,6 +1158,7 @@ INSERT INTO HoaDon(ID_HoaDon,ID_KH,ID_Ban,NgayHD,TienMonAn,TienGiam,Trangthai) V
 INSERT INTO HoaDon(ID_HoaDon,ID_KH,ID_Ban,NgayHD,TienMonAn,TienGiam,Trangthai) VALUES (120,104,106,'10-4-2023',0,0,'Chua thanh toan');
 INSERT INTO HoaDon(ID_HoaDon,ID_KH,ID_Ban,NgayHD,TienMonAn,TienGiam,Trangthai) VALUES (121,105,106,'12-4-2023',0,0,'Chua thanh toan');
 INSERT INTO HoaDon(ID_HoaDon,ID_KH,ID_Ban,NgayHD,TienMonAn,TienGiam,Trangthai) VALUES (122,107,106,'12-5-2023',0,0,'Chua thanh toan');
+
 --Them data cho CTHD
 INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (101,1,2);
 INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (101,3,1);
@@ -940,8 +1206,26 @@ INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (121,31,4);
 INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (122,33,5);
 INSERT INTO CTHD(ID_HoaDon,ID_MonAn,SoLuong) VALUES (122,34,6);
 UPDATE HOADON SET TrangThai='Da thanh toan';
---Them data cho PhieuNK
 
+--Them data cho bang NguyenLieu
+INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(100,'Thit ga',40000,'kg');
+INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(101,'Thit heo',50000,'kg');
+INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(102,'Thit bo',80000,'kg');
+INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(103,'Tom',100000,'kg');
+INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(104,'Ca hoi',500000,'kg');
+INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(105,'Gao',40000,'kg');
+INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(106,'Sua tuoi',40000,'l');
+INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(107,'Bot mi',20000,'kg');
+INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(108,'Dau ca hoi',1000000,'l');
+INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(109,'Dau dau nanh',150000,'l');
+INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(110,'Muoi',20000,'kg');
+INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(111,'Duong',20000,'kg');
+INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(112,'Hanh tay',50000,'kg');
+INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(113,'Toi',30000,'kg');
+INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(114,'Dam',50000,'l');
+INSERT INTO NguyenLieu(ID_NL,TenNL,Dongia,Donvitinh) VALUES(115,'Thit de',130000,'kg');
+
+--Them data cho PhieuNK
 INSERT INTO PhieuNK(ID_NK,ID_NV,NgayNK) VALUES (100,102,'10-01-2023');
 INSERT INTO PhieuNK(ID_NK,ID_NV,NgayNK) VALUES (101,102,'11-02-2023');
 INSERT INTO PhieuNK(ID_NK,ID_NV,NgayNK) VALUES (102,102,'12-02-2023');
@@ -1035,12 +1319,5 @@ INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (109,112,5);
 INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (110,113,5);
 INSERT INTO CTXK(ID_XK,ID_NL,SoLuong) VALUES (110,114,5);
 
-
-
-
-
-SELECT EXTRACT(MONTH FROM NgayHD) as Thang, SUM(TONGTIEN) FROM HoaDon WHERE EXTRACT(YEAR FROM NgayHD)=EXTRACT(YEAR FROM CURRENT_DATE) GROUP BY EXTRACT(MONTH FROM NgayHD) ORDER BY Thang;
-
-SELECT EXTRACT(MONTH FROM NgayNK) as Thang, SUM(TONGTIEN) FROM PhieuNK WHERE EXTRACT(YEAR FROM NgayNK)=EXTRACT(YEAR FROM CURRENT_DATE) GROUP BY EXTRACT(MONTH FROM NgayNK) ORDER BY Thang;
 
 

@@ -1,6 +1,7 @@
 package RTDRestaurant.View.Dialog;
 
 import RTDRestaurant.Controller.Service.ServiceCustomer;
+import RTDRestaurant.Controller.Service.ServiceStaff;
 import RTDRestaurant.Model.ModelKhachHang;
 import RTDRestaurant.Model.ModelNhanVien;
 import RTDRestaurant.View.Form.Customer_Form.AccountC_Form;
@@ -20,16 +21,18 @@ import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 
 public class MS_ConfirmRename extends javax.swing.JDialog {
-
+    
     private final Animator animator;
     private boolean show = true;
     private Frame frame;
     private ServiceCustomer service;
+    private ServiceStaff serviceS;
 
     public MS_ConfirmRename(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         service = new ServiceCustomer();
+        serviceS = new ServiceStaff();
         this.frame = parent;
         setOpacity(0f);
         getContentPane().setBackground(Color.WHITE);
@@ -42,45 +45,56 @@ public class MS_ConfirmRename extends javax.swing.JDialog {
                     setOpacity(1f - fraction);
                 }
             }
-
+            
             @Override
             public void end() {
                 if (show == false) {
                     setVisible(false);
                 }
             }
-
+            
         };
         animator = new Animator(200, target);
         animator.setResolution(0);
         animator.setAcceleration(0.5f);
     }
-
-    public void reNameCustomer(String newName, Object data) {
+    
+    public void ConfirmReName(String newName, Object data) {
         setLocationRelativeTo(frame);
-        if(data instanceof ModelKhachHang){   
-        ModelKhachHang cus=(ModelKhachHang)data;
-        lbMessage.setText("Bạn có chắc đổi tên KH thành " + newName + " không ?");
+        lbMessage.setText("Bạn có chắc đổi tên thành " + newName + " không ?");
         animator.start();
-        cmdOK.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    cus.setName(newName);
-                    service.reNameCustomer(cus);
-                } catch (SQLException ex) {
-                    Logger.getLogger(AccountC_Form.class.getName()).log(Level.SEVERE, null, ex);
+        if (data instanceof ModelKhachHang) {            
+            ModelKhachHang cus = (ModelKhachHang) data;
+            cmdOK.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        cus.setName(newName);
+                        service.reNameCustomer(cus);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(AccountC_Form.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
-            }
-
-        });
-        }else if(data instanceof ModelNhanVien){
-            
+                
+            });
+        } else if (data instanceof ModelNhanVien) {
+            ModelNhanVien staff = (ModelNhanVien) data;
+            cmdOK.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    staff.setTenNV(newName);
+                    try {
+                        serviceS.reNameStaff(staff);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(MS_ConfirmRename.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
         }
         
         setVisible(true);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -103,7 +117,7 @@ public class MS_ConfirmRename extends javax.swing.JDialog {
         lbTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lbTitle.setForeground(new java.awt.Color(108, 91, 123));
         lbTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbTitle.setText("BẠN ĐÃ CHẮC CHƯA ?\n");
+        lbTitle.setText("XÁC NHẬN ĐỔI TÊN !!! ");
 
         cmdOK.setBackground(new java.awt.Color(17, 153, 142));
         cmdOK.setForeground(new java.awt.Color(108, 91, 123));
@@ -132,7 +146,7 @@ public class MS_ConfirmRename extends javax.swing.JDialog {
         lbMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbMessage.setText("Message");
 
-        lbIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/warning (1).png"))); // NOI18N
+        lbIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/rename.png"))); // NOI18N
 
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
@@ -170,24 +184,24 @@ public class MS_ConfirmRename extends javax.swing.JDialog {
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmdOK, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmdCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -200,7 +214,7 @@ public class MS_ConfirmRename extends javax.swing.JDialog {
     private void cmdCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCancelActionPerformed
         closeMenu();
     }//GEN-LAST:event_cmdCancelActionPerformed
-
+    
     private void closeMenu() {
         if (animator.isRunning()) {
             animator.stop();
@@ -208,7 +222,7 @@ public class MS_ConfirmRename extends javax.swing.JDialog {
         show = false;
         animator.start();
     }
-
+    
     public void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);

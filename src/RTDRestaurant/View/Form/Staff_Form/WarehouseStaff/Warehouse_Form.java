@@ -88,7 +88,7 @@ public class Warehouse_Form extends javax.swing.JPanel {
         lbTitle.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         lbTitle.setForeground(new java.awt.Color(108, 91, 123));
         lbTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/warehouse (2).png"))); // NOI18N
-        lbTitle.setText("Quản lý Kho");
+        lbTitle.setText("Thông tin Kho");
         lbTitle.setIconTextGap(10);
 
         txtSearch.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/loupe (1).png"))); // NOI18N

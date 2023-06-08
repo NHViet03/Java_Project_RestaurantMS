@@ -3,8 +3,9 @@ package RTDRestaurant.View.Form.Staff_Form.WarehouseStaff;
 
 import RTDRestaurant.Controller.Service.ServiceStaff;
 import RTDRestaurant.Model.ModelNguyenLieu;
-import RTDRestaurant.Model.ModelNguoiDung;
+import RTDRestaurant.View.Dialog.MS_Confirm;
 import RTDRestaurant.View.Form.MainForm;
+import RTDRestaurant.View.Main_Frame.Main_WarehouseStaff_Frame;
 import RTDRestaurant.View.Swing.CustomScrollBar.ScrollBarCustom;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -14,6 +15,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 
 public class Ingredient_Form extends javax.swing.JPanel {
@@ -21,8 +23,9 @@ public class Ingredient_Form extends javax.swing.JPanel {
     private ServiceStaff service;
     private ArrayList<ModelNguyenLieu> list;
     private final MainForm main;
+    private MS_Confirm obj;
     DecimalFormat df;
-
+    
     public Ingredient_Form(MainForm main) {
         this.main=main;
         service=new ServiceStaff();
@@ -31,6 +34,7 @@ public class Ingredient_Form extends javax.swing.JPanel {
     }
 
     public void init(){
+        obj = new MS_Confirm(Main_WarehouseStaff_Frame.getFrames()[0], true);
         txtSearch.setHint("Tìm kiếm Nguyên Liệu . . .");
         jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
         jScrollPane1.getViewport().setBackground(Color.WHITE);
@@ -45,7 +49,26 @@ public class Ingredient_Form extends javax.swing.JPanel {
                 main.showForm(new InsertAndUpdate_Ingredient_Form(main,null));
             }
         });
-        
+        //Them event cho Button XoaNL
+        cmdDelete.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    int row=tableNL.getSelectedRow();
+                    ModelNguyenLieu data=service.getNLbyID(tableNL.getFirstCol_RowSelected(row));
+                    boolean delete=obj.Staff_ConfirmDelete(data);
+                    if(delete==true){
+                        DefaultTableModel model=(DefaultTableModel) tableNL.getModel();
+                        model.removeRow(row);
+                        tableNL.repaint();
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(Ingredient_Form.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            }
+        });
+        //Them event cho Button SuaNL
         cmdUpdate.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -97,6 +120,7 @@ public class Ingredient_Form extends javax.swing.JPanel {
         tableNL = new RTDRestaurant.View.Swing.Table();
         cmdAdd = new RTDRestaurant.View.Swing.Button();
         cmdUpdate = new RTDRestaurant.View.Swing.Button();
+        cmdDelete = new RTDRestaurant.View.Swing.Button();
 
         setBackground(new java.awt.Color(247, 247, 247));
 
@@ -177,6 +201,14 @@ public class Ingredient_Form extends javax.swing.JPanel {
         cmdUpdate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cmdUpdate.setIconTextGap(10);
 
+        cmdDelete.setBackground(new java.awt.Color(108, 91, 123));
+        cmdDelete.setForeground(new java.awt.Color(255, 255, 255));
+        cmdDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/bin (1).png"))); // NOI18N
+        cmdDelete.setText("XÓA NLIỆU");
+        cmdDelete.setFocusable(false);
+        cmdDelete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        cmdDelete.setIconTextGap(10);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -184,7 +216,7 @@ public class Ingredient_Form extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 840, Short.MAX_VALUE)
                     .addComponent(jSeparator2)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,11 +228,13 @@ public class Ingredient_Form extends javax.swing.JPanel {
                             .addComponent(lbNL))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cmdAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(cmdUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                        .addComponent(cmdAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(cmdDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(cmdUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -220,7 +254,8 @@ public class Ingredient_Form extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmdAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmdUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmdUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmdDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
                 .addContainerGap())
@@ -240,6 +275,7 @@ public class Ingredient_Form extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RTDRestaurant.View.Swing.Button cmdAdd;
+    private RTDRestaurant.View.Swing.Button cmdDelete;
     private RTDRestaurant.View.Swing.Button cmdUpdate;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator2;

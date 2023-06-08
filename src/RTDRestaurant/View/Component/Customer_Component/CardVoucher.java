@@ -50,6 +50,7 @@ public class CardVoucher extends javax.swing.JPanel {
                 }
             }
         });
+        setOpaque(false);
     }
     
     public void init(){

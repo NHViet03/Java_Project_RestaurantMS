@@ -3,8 +3,10 @@ package RTDRestaurant.View.Form.Staff_Form;
 import RTDRestaurant.Controller.Service.ServiceStaff;
 import RTDRestaurant.Model.ModelNhanVien;
 import RTDRestaurant.Model.ModelNguoiDung;
+import RTDRestaurant.View.Dialog.MS_ChangePassword;
 import RTDRestaurant.View.Dialog.MS_ConfirmRename;
 import RTDRestaurant.View.Main_Frame.Main_Customer_Frame;
+import RTDRestaurant.View.Main_Frame.Main_Staff_Frame;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,7 +21,7 @@ public class AccountS_Form extends javax.swing.JPanel {
     private Icon hide;
     private Icon show;
     private char def;
-
+private MS_ChangePassword changepass;
     public AccountS_Form() {
         service = new ServiceStaff();
         initComponents();
@@ -33,6 +35,7 @@ public class AccountS_Form extends javax.swing.JPanel {
 
     public void init() {
         service = new ServiceStaff();
+        changepass = new MS_ChangePassword(Main_Staff_Frame.getFrames()[0], true);
         hide = new ImageIcon(getClass().getResource("/Icons/hide.png"));
         show = new ImageIcon(getClass().getResource("/Icons/view.png"));
         def = txtmatkhau.getEchoChar();
@@ -64,8 +67,8 @@ public class AccountS_Form extends javax.swing.JPanel {
     }
 
     private void confirmRename(String message) {
-        MS_ConfirmRename obj = new MS_ConfirmRename(Main_Customer_Frame.getFrames()[0], true);
-        obj.reNameCustomer(message, staff);
+        MS_ConfirmRename obj = new MS_ConfirmRename(Main_Staff_Frame.getFrames()[0], true);
+        obj.ConfirmReName(message, staff);
     }
 
     @SuppressWarnings("unchecked")
@@ -203,6 +206,11 @@ public class AccountS_Form extends javax.swing.JPanel {
         cmdDMK.setText("Đổi mật khẩu");
         cmdDMK.setFocusable(false);
         cmdDMK.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        cmdDMK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdDMKActionPerformed(evt);
+            }
+        });
 
         lbRole.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lbRole.setForeground(new java.awt.Color(89, 89, 89));
@@ -384,6 +392,11 @@ public class AccountS_Form extends javax.swing.JPanel {
     private void txtSDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSDTActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSDTActionPerformed
+
+    private void cmdDMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDMKActionPerformed
+        changepass.ChangePassword(user);
+        txtmatkhau.setText(user.getPassword());
+    }//GEN-LAST:event_cmdDMKActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

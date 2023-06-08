@@ -2,7 +2,7 @@ package RTDRestaurant.View.Component.Customer_Component;
 
 import RTDRestaurant.Model.ModelKhachHang;
 import RTDRestaurant.Model.ModelBan;
-import RTDRestaurant.View.Dialog.MS_ConfirmBook;
+import RTDRestaurant.View.Dialog.MS_Confirm;
 import RTDRestaurant.View.Main_Frame.Main_Customer_Frame;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -16,17 +16,18 @@ public class CardBan extends javax.swing.JPanel {
 
     private final ModelBan data;
     private final ModelKhachHang customer;
-    private MS_ConfirmBook obj;
+    private MS_Confirm obj;
    
     public CardBan(ModelBan data,ModelKhachHang customer) {
         this.data = data;
         this.customer=customer;
         initComponents();
         init();
+        setOpaque(false);
     }
     
     public void init(){
-        MS_ConfirmBook obj = new MS_ConfirmBook(Main_Customer_Frame.getFrames()[0], true);
+        MS_Confirm obj = new MS_Confirm(Main_Customer_Frame.getFrames()[0], true);
         setPreferredSize(new Dimension(300, 325));
         lbTitle.setText("Mã bàn: "+data.getID()+" - "+data.getName());
         lbValue.setText(data.getStatus());
@@ -37,7 +38,7 @@ public class CardBan extends javax.swing.JPanel {
                 cmdBook.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                       obj.ConfirmBook(data,customer);
+                       obj.Cus_ConfirmBook(data,customer);
                     }
                 });
             }

@@ -409,14 +409,10 @@
               <Color blue="65" green="62" red="5d" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="focusable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="sansserif" size="16" style="0"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtmatkhauMouseClicked"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator2">
           <Properties>
@@ -444,6 +440,9 @@
               <Font name="Segoe UI" size="18" style="1"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdDMKActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbRole">
           <Properties>

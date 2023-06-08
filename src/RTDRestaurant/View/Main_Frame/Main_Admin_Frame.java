@@ -68,10 +68,10 @@ public class Main_Admin_Frame extends javax.swing.JFrame {
                     case 5 -> {
                         main.showForm(new CusInformation_Form(main));
                     }
-                    case 8 -> {
+                    case 9 -> {
                         main.showForm(new AccountS_Form(user));
                     }
-                    case 9 -> {
+                    case 10 -> {
                         dispose();
                         Main_LoginAndRegister.main();
                     }

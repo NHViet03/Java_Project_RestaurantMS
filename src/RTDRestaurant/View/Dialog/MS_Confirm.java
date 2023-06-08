@@ -1,8 +1,10 @@
 package RTDRestaurant.View.Dialog;
 
 import RTDRestaurant.Controller.Service.ServiceCustomer;
+import RTDRestaurant.Controller.Service.ServiceStaff;
 import RTDRestaurant.Model.ModelKhachHang;
 import RTDRestaurant.Model.ModelBan;
+import RTDRestaurant.Model.ModelNguyenLieu;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.GradientPaint;
@@ -14,21 +16,24 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 
-public class MS_ConfirmBook extends javax.swing.JDialog {
+public class MS_Confirm extends javax.swing.JDialog {
 
     private final Animator animator;
     private boolean show = true;
     private Frame frame;
     private ServiceCustomer service;
-
-    public MS_ConfirmBook(java.awt.Frame parent, boolean modal) {
+    private ServiceStaff serviceS;
+    boolean delete;
+    public MS_Confirm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         service = new ServiceCustomer();
+        serviceS = new ServiceStaff();
         this.frame = parent;
         setOpacity(0f);
         getContentPane().setBackground(Color.WHITE);
@@ -54,9 +59,10 @@ public class MS_ConfirmBook extends javax.swing.JDialog {
         animator.setResolution(0);
         animator.setAcceleration(0.5f);
     }
-
-    public void ConfirmBook(ModelBan table, ModelKhachHang customer) {
+    //Xác nhận đặt bàn ở Khách Hàng
+    public void Cus_ConfirmBook(ModelBan table, ModelKhachHang customer) {
         setLocationRelativeTo(frame);
+        lbTitle.setText("XÁC NHẬN ĐẶT BÀN");
         lbMessage.setText("Bạn có chắc đặt bàn " + table.getName() + " không ?");
         animator.start();
         cmdOK.addActionListener(new ActionListener() {
@@ -65,12 +71,34 @@ public class MS_ConfirmBook extends javax.swing.JDialog {
                 try {
                     service.InsertHoaDon(table, customer);
                 } catch (SQLException ex) {
-                    Logger.getLogger(MS_ConfirmBook.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(MS_Confirm.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
 
         });
         setVisible(true);
+    }
+    //Xác nhận xóa nguyên liệu ở nhân viên kho
+    public boolean Staff_ConfirmDelete(ModelNguyenLieu data ){
+        setLocationRelativeTo(frame);
+        delete=false;
+        lbIcon.setIcon(new ImageIcon(getClass().getResource("/Icons/remove.png")));
+        lbTitle.setText("XÁC NHẬN XÓA NGUYÊN LIỆU");
+        lbMessage.setText("Bạn có chắc xóa nguyên liệu " + data.getTenNL() + " không ?");
+        animator.start();
+        cmdOK.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    delete=true;
+                    serviceS.DeleteNL(data);
+                } catch (SQLException ex) {
+                    Logger.getLogger(MS_Confirm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        setVisible(true);
+        return delete;
     }
 
     @SuppressWarnings("unchecked")
@@ -162,7 +190,7 @@ public class MS_ConfirmBook extends javax.swing.JDialog {
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmdOK, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmdCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -170,16 +198,16 @@ public class MS_ConfirmBook extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 492, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();

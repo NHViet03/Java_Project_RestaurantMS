@@ -7,6 +7,7 @@ import RTDRestaurant.Model.ModelCTHD;
 import RTDRestaurant.Model.ModelHoaDon;
 import RTDRestaurant.Model.ModelNguoiDung;
 import RTDRestaurant.Model.ModelNhanVien;
+import RTDRestaurant.View.Dialog.MS_PaymentSuccess;
 import RTDRestaurant.View.Dialog.MS_Success;
 import RTDRestaurant.View.Form.MainForm;
 import RTDRestaurant.View.Main_Frame.Main_Admin_Frame;
@@ -18,7 +19,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -40,6 +40,7 @@ public class BillS_Form extends javax.swing.JPanel {
     private ArrayList<ModelCTHD> cthd;
     private DecimalFormat df;
     private MS_Success obj;
+    private MS_PaymentSuccess conf;
 
     public BillS_Form(ModelNguoiDung user, ModelNhanVien staff, ModelBan table, ModelHoaDon bill, MainForm main) {
         this.user = user;
@@ -58,6 +59,7 @@ public class BillS_Form extends javax.swing.JPanel {
         jScrollPane1.getViewport().setBackground(Color.WHITE);
         df = new DecimalFormat("##,###,###");
         obj=new MS_Success(Main_Admin_Frame.getFrames()[0], true);
+        conf=new MS_PaymentSuccess(Main_Admin_Frame.getFrames()[0], true);
         //Thêm data cho CTHD 
         initTable();
         //Thêm data cho Tiền hóa đơn
@@ -388,7 +390,9 @@ public class BillS_Form extends javax.swing.JPanel {
         try {
             //Khi NV bấm xác nhận thanh toán, thay đổi trạng thái hóa đơn từ Chưa thanh toán thành đã thanh toán
             serviceS.UpdateHoaDonStatus(bill.getIdHoaDon());
+            conf.ConfirmPaymentSuccess(bill.getIdHoaDon());
             main.showForm(new TableMenuS_Form("Tang 1", user, main));
+            
         } catch (SQLException ex) {
             Logger.getLogger(BillS_Form.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -184,4 +184,13 @@ public class ServiceUser {
         p.close();
         return verify;
     }
+    //Thay đổi mật khẩu tài khoản
+    public void changePassword(int userID,String newPass) throws SQLException{
+        String sql="UPDATE NguoiDung SET MatKhau = ? WHERE ID_ND = ?";
+        PreparedStatement p=con.prepareStatement(sql);
+        p.setString(1, newPass);
+        p.setInt(2, userID);
+        p.execute();
+        p.close();
+    }
 }

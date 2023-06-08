@@ -3,8 +3,11 @@ package RTDRestaurant.View.Form.Customer_Form;
 import RTDRestaurant.Controller.Service.ServiceCustomer;
 import RTDRestaurant.Model.ModelKhachHang;
 import RTDRestaurant.Model.ModelNguoiDung;
+import RTDRestaurant.View.Dialog.MS_ChangePassword;
 import RTDRestaurant.View.Dialog.MS_ConfirmRename;
 import RTDRestaurant.View.Main_Frame.Main_Customer_Frame;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,7 +22,7 @@ public class AccountC_Form extends javax.swing.JPanel {
     private Icon hide;
     private Icon show;
     private char def;
-
+    private MS_ChangePassword changepass;
     public AccountC_Form() {
         service = new ServiceCustomer();
         initComponents();
@@ -34,11 +37,26 @@ public class AccountC_Form extends javax.swing.JPanel {
 
     public void init() {
         service = new ServiceCustomer();
+        changepass = new MS_ChangePassword(Main_Customer_Frame.getFrames()[0], true);
         hide = new ImageIcon(getClass().getResource("/Icons/hide.png"));
         show = new ImageIcon(getClass().getResource("/Icons/view.png"));
         def = txtmatkhau.getEchoChar();
         initUser_information();
         initCustomer_information();
+        txtmatkhau.addMouseListener(new MouseAdapter() {
+         
+            public void mouseClicked(MouseEvent e) {
+                if (txtmatkhau.getSuffixIcon().equals(hide)) {
+                    txtmatkhau.setSuffixIcon(show);
+                    txtmatkhau.setEchoChar((char) 0);
+
+                } else {
+                    txtmatkhau.setSuffixIcon(hide);
+                    txtmatkhau.setEchoChar(def);
+                }
+            }
+
+        });
     }
 
     public void initUser_information() {
@@ -63,9 +81,9 @@ public class AccountC_Form extends javax.swing.JPanel {
 
     private void confirmRename(String message) {
         MS_ConfirmRename obj = new MS_ConfirmRename(Main_Customer_Frame.getFrames()[0], true);
-        obj.reNameCustomer(message, customer);
+        obj.ConfirmReName(message, customer);
     }
-
+   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -189,13 +207,7 @@ public class AccountC_Form extends javax.swing.JPanel {
         txtmatkhau.setEditable(false);
         txtmatkhau.setForeground(new java.awt.Color(93, 98, 101));
         txtmatkhau.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtmatkhau.setFocusable(false);
         txtmatkhau.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
-        txtmatkhau.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtmatkhauMouseClicked(evt);
-            }
-        });
 
         jSeparator2.setBackground(new java.awt.Color(76, 76, 76));
 
@@ -205,6 +217,11 @@ public class AccountC_Form extends javax.swing.JPanel {
         cmdDMK.setText("Đổi mật khẩu");
         cmdDMK.setFocusable(false);
         cmdDMK.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        cmdDMK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdDMKActionPerformed(evt);
+            }
+        });
 
         lbRole.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lbRole.setForeground(new java.awt.Color(89, 89, 89));
@@ -340,21 +357,14 @@ public class AccountC_Form extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtmatkhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtmatkhauMouseClicked
-        if (txtmatkhau.getSuffixIcon().equals(hide)) {
-            txtmatkhau.setSuffixIcon(show);
-            txtmatkhau.setEchoChar((char) 0);
-
-        } else {
-            txtmatkhau.setSuffixIcon(hide);
-            txtmatkhau.setEchoChar(def);
-        }
-
-    }//GEN-LAST:event_txtmatkhauMouseClicked
-
     private void txttenKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttenKHActionPerformed
         confirmRename(txttenKH.getText().trim());
     }//GEN-LAST:event_txttenKHActionPerformed
+
+    private void cmdDMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDMKActionPerformed
+        changepass.ChangePassword(user);
+        txtmatkhau.setText(user.getPassword());
+    }//GEN-LAST:event_cmdDMKActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
