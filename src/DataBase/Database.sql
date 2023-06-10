@@ -894,7 +894,7 @@ BEGIN
     SELECT COUNT(ID_KH)
     INTO v_count;
     FROM KHACHHANG
-    WHERE EXTRACT(MONTH FROM Ngaythamgia)=thang AND EXTRACT(YEAR FROM Ngaythamgia)
+    WHERE EXTRACT(MONTH FROM Ngaythamgia)=thang AND EXTRACT(YEAR FROM Ngaythamgia) = nam
     AND EXISTS(SELECT *
                FROM HOADON 
                WHERE HOADON.ID_KH=KHACHHANG.ID_KH AND TONGTIEN>trigiaHD
