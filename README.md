@@ -1,9 +1,6 @@
-﻿
-# Hệ thống quản lý nhà hàng - Royal The Dreamers Restaurant
-
+﻿# Hệ thống quản lý nhà hàng - Royal The Dreamers Restaurant
 
 ![Logo](./src/Icons/logo_register.png)
-
 
 ## Lời cảm ơn
 
@@ -16,17 +13,7 @@ Nhà hàng là một phần không thể thiếu trong đời sống con ngườ
 ## Mục tiêu của đề tài
 Xây dựng hệ thống Quản lý Nhà Hàng một cách chuyên nghiệp, linh hoạt, có thể quản lý và lưu trữ được một lượng dữ liệu lớn. Hệ thống giúp người dùng dễ dàng hơn trong việc tổ chức, quản lý dữ liệu Khách hàng, quản lý Đặt bàn, quản lý Thực đơn,… và nhiều hơn thế nữa.
 
-Các tính năng chính của phần mềm bao gồm:
-*	Quản lý thông tin khách hàng
-*	Quản lý đặt bàn
-*	Quản lý nhập kho
-*	Quản lý nhân viên
-*	Cập nhật, thay đổi thực đơn, các món ăn mới
-*	Thống kê, báo cáo doanh thu
-*	Tra cứu thông tin chi tiết của khách hàng, nhân viên, hóa đơn,… 
-
-## Nhóm The Dreamers
-
+## Nhóm Thực Hiện : The Dreamers
 
 | MSSV | Họ tên   | Facebook | Đánh giá %               |
 | :-------- | :------- | :------------------------- |:-------|
@@ -37,7 +24,9 @@ Các tính năng chính của phần mềm bao gồm:
  
 
 ## Mô hình ERD
+
 ![ERD](./src/Icons/ERD.png "ERD")
+
 ## Các chức năng chính trong ứng dụng
 ----------------
 ### Chức năng chính cho khách hàng
@@ -63,6 +52,7 @@ Các tính năng chính của phần mềm bao gồm:
 
 ## Demo Sản Phẩm
 -  Đăng Ký & Đăng Nhập:
+----------------
 >* Đăng Ký
 
 ![SignUp](./src/Demo/SignUp.png)
@@ -72,6 +62,7 @@ Các tính năng chính của phần mềm bao gồm:
 ![SignIn](./src/Demo/SignIn.png)
 
 -  Khách Hàng:
+----------------
 >* Đặt Món
 
 ![OrderFood](./src/Demo/Customer/OrderFood.png)
@@ -85,6 +76,7 @@ Các tính năng chính của phần mềm bao gồm:
 ![Profile](./src/Demo/Customer/Profile.png)
 
 -  Admin:
+----------------
 >* Quản Lý Thực Đơn
 
 ![MenuManage](./src/Demo/Admin/Manage_Food.png)  
@@ -96,7 +88,6 @@ Các tính năng chính của phần mềm bao gồm:
 >* Báo cáo & Thống Kê
 
 ![Statistic](./src/Demo/Admin/Statistic.png)
-
 
 ## Các ngôn ngữ, công nghệ sử dụng
 > * Ngôn ngữ sử dụng: `Java`
@@ -117,13 +108,11 @@ Các tính năng chính của phần mềm bao gồm:
 > * **Bước 3:** Thêm tất cả các thư viện cần thiết trong mục src/External_Library.
 > * **Bước 4:** Trong src/DataBase có file Database.sql. Tiến hành vào Oracle tạo user mới với Username là `Doan` và Password là `123`, sau đó chạy toàn bộ file Database.sql.
 > * **Bước 5:** Tiến hành chạy run file src/RTDRestaurant/View/Main_Frame/Main_LoginAndRegister.java để chạy chương trình
->* ***Note:** Xem file hướng dẫn cài đặt dưới đây để hiểu rõ thêm: [File hướng dẫn chi tiết](https://docs.google.com/document/d/10h0v1Bf-x-AGbSoLZw1hegSK2QQK_oClz71aKmKWJ04/edit#)*
+>* ***Note:** Xem file hướng dẫn cài đặt dưới đây để hiểu rõ thêm: [File hướng dẫn chi tiết](https://docs.google.com/document/d/10h0v1Bf-x-AGbSoLZw1hegSK2QQK_oClz71aKmKWJ04/edit?usp=sharing)*
 
 ## Tài liệu tham khảo
 
  - [Java Swing UI Design - Register and Verify Code With Email](https://github.com/DJ-Raven/java-swing-login-ui-001)
  - [Java Swing UI Design - School Management Dashboard](https://github.com/DJ-Raven/java-swing-school-management-dashboard)
  - [Java UI Design - Dashboard Desktop Application](https://github.com/DJ-Raven/java-ui-dashboard-008)
-
-
 
